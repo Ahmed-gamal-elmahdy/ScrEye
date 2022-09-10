@@ -1,18 +1,21 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertest/home_screen.dart';
+import 'package:flutterfire_ui/auth.dart';
 
-import 'login_screen.dart';
+import 'app.dart';
+import 'firebase_options.dart';
 
-void main() {
-  runApp(Myapp());
-}
 
-class Myapp extends StatelessWidget{
-  @override
-  Widget build(BuildContext context)
-  {
-      return MaterialApp(
-        home:LoginScreen(),
-      );
-  }
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  FlutterFireUIAuth.configureProviders([
+    const EmailProviderConfiguration(),
+
+  ]);
+
+  runApp(const MyApp());
 }
