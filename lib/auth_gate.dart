@@ -13,13 +13,36 @@ class AuthGate extends StatelessWidget {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return SignInScreen(
-            providerConfigs: const [
-              EmailProviderConfiguration(),
-            ],
-          );
+          return
+            MaterialApp(
+              theme: ThemeData(
+                inputDecorationTheme: InputDecorationTheme(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+
+              ),
+              home: Center(
+                child: SignInScreen(
+                    resizeToAvoidBottomInset:true,
+                providerConfigs: const [
+                  EmailProviderConfiguration(),
+                ],
+                headerBuilder: (context,constrains,_){
+                  return CircleAvatar(
+                    radius: 25,
+                  );
+                },
+                  footerBuilder: (context,Action){
+                  return Text("Testastastt");
+                  },
+
+          ),
+              ),
+            );
         }
-        return const HomeScreen();
+        return HomeScreen(user: snapshot.data!);
       },
     );
   }
