@@ -109,11 +109,7 @@ class _CameraScreenState extends State<CameraScreen> {
                                     ),
                                   ))
                                       .then((value) async {
-                                    
-                                    var result=await ImageGallerySaver.saveImage(value);
-                                    print(result);
-                                    cubit.uploadImg(result["filePath"]);
-                                    //ShowCapturedWidget(context, value);
+                                    ShowCapturedWidget(context, value);
                                   });
                                 },
                                 child: Row(
