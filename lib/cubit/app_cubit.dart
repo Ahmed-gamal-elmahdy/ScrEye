@@ -2,17 +2,18 @@ import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:camera/camera.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:flutter/material.dart';
-
 part 'app_state.dart';
 
 class AppCubit extends Cubit<AppState> {
   AppCubit() : super(AppInitial());
-
+  final storageRef = FirebaseStorage.instance.ref().child("imgs");
   static AppCubit get(context) => BlocProvider.of(context);
-
+  var user;
   int tabIndex = 0;
   bool cameraInitiated = false;
   late List<CameraDescription> cameras;
@@ -86,4 +87,14 @@ double sliderVal=1.0;
     zoomLevel = minZoom;
     maxZoom = await controller.getMaxZoomLevel();
   }
+  void uploadImg(var img){
+    print(img);
+    storageRef.child("$user.uid").putFile(img);
+
+  }
+
+  void setUser(User){
+    user = User;
+  }
+
 }

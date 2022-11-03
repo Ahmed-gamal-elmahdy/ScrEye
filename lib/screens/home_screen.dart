@@ -34,6 +34,7 @@ class HomeScreen extends StatelessWidget {
           var cubit = AppCubit.get(context);
           if(!cubit.cameraInitiated){
             cubit.startCamera();
+            cubit.user=user;
           }
           return Scaffold(
             appBar: AppBar(actions: [

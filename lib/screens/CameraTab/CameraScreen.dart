@@ -108,9 +108,12 @@ class _CameraScreenState extends State<CameraScreen> {
                                       ),
                                     ),
                                   ))
-                                      .then((value) {
-                                    //ImageGallerySaver.saveImage(value);
-                                    ShowCapturedWidget(context, value);
+                                      .then((value) async {
+                                    
+                                    var result=await ImageGallerySaver.saveImage(value);
+                                    print(result);
+                                    cubit.uploadImg(result["filePath"]);
+                                    //ShowCapturedWidget(context, value);
                                   });
                                 },
                                 child: Row(
@@ -180,7 +183,7 @@ Future<dynamic> ShowCapturedWidget(
                   width: 120.h,
                   child: ElevatedButton(
                       onPressed: () async {
-                        await ImageGallerySaver.saveImage(capturedImage);
+                       await ImageGallerySaver.saveImage(capturedImage);
                         Navigator.pop(context);
                       },
                       child: Row(
