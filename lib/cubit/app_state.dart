@@ -14,3 +14,5 @@ class CameraStarted extends AppState{}
 class ZoomOut extends AppState{}
 class ZoomIn extends AppState{}
 class ZoomLevelChanged extends AppState{}
+
+class TestDone extends AppState{}
