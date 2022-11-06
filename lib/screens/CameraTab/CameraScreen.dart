@@ -6,10 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertest/cubit/app_cubit.dart';
-
+import 'package:image_picker/image_picker.dart';
 import 'package:fluttertest/widgets/custom_path.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:screenshot/screenshot.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:intl/intl.dart';
+import 'dart:io';
 
 class CameraScreen extends StatefulWidget {
   CameraScreen({Key? key}) : super(key: key);
@@ -110,6 +114,8 @@ class _CameraScreenState extends State<CameraScreen> {
                                   ))
                                       .then((value) async {
                                     ShowCapturedWidget(context, value);
+
+
                                   });
                                 },
                                 child: Row(
@@ -155,44 +161,33 @@ Future<dynamic> ShowCapturedWidget(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                SizedBox(
-                  width: 120.h,
-                  child: ElevatedButton(
-                      onPressed: () async {
-                        Navigator.pop(context);
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.delete),
-                          SizedBox(
-                            width: 10.h,
-                          ),
-                          Text("Discard")
-                        ],
-                      )),
+                ElevatedButton.icon(
+                    onPressed: () async {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(Icons.delete),
+                    label: Text('Discard'),
                 ),
-                SizedBox(
-                  width: 50.w,
+                ElevatedButton.icon(
+                    onPressed: () async {
+                      await ImageGallerySaver.saveImage(capturedImage);
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(Icons.save_alt),
+                    label: Text("Save"),
                 ),
-                SizedBox(
-                  width: 120.h,
-                  child: ElevatedButton(
-                      onPressed: () async {
-                       await ImageGallerySaver.saveImage(capturedImage);
-                        Navigator.pop(context);
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.save_alt),
-                          SizedBox(
-                            width: 10.h,
-                          ),
-                          Text("Save")
-                        ],
-                      )),
-                ),
+                ElevatedButton.icon(label: Text('Upload'), icon:Icon(Icons.upload), onPressed: () async {
+                  uploadImage(capturedImage).then((data){
+                    const startWord = "token=";
+                    final startIndex = data[0].indexOf(startWord);
+                    final endIndex = data[0].length;
+                    final String token = data[0].substring(startIndex + startWord.length, endIndex);
+                    final name = data[1];
+                    print('token = ${token}');
+                    print('name = ${name}');
+                    Navigator.pop(context);
+                  });
+                },),
               ],
             ),
           )
@@ -200,4 +195,24 @@ Future<dynamic> ShowCapturedWidget(
       )),
     ),
   );
+}
+
+Future<List> uploadImage(image) async {
+  final _firebaseStorage = FirebaseStorage.instance;
+  final tempDir = await getTemporaryDirectory();
+  var now = DateTime.now();
+  var name = '${DateFormat('dd-MM-yy').format(now)}-${DateFormat('kk-mm').format(now)}';
+  File file = await File('${tempDir.path}/image.jpg').create();
+  file.writeAsBytesSync(image);
+  if (image != null){
+    //Upload to Firebase
+    file = File(file.path);
+    var snapshot = await _firebaseStorage.ref()
+        .child('images/${name}')
+        .putFile(file);
+    var downloadUrl = await snapshot.ref.getDownloadURL();
+    return [downloadUrl, name];
+  }
+  return ["no url","no name"];
+
 }

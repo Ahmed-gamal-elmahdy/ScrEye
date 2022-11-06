@@ -13,7 +13,7 @@ class AppCubit extends Cubit<AppState> {
   AppCubit() : super(AppInitial());
   final storageRef = FirebaseStorage.instance.ref().child("imgs");
   static AppCubit get(context) => BlocProvider.of(context);
-  var user;
+  dynamic user;
   int tabIndex = 0;
   bool cameraInitiated = false;
   late List<CameraDescription> cameras;
