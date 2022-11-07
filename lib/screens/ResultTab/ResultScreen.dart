@@ -17,45 +17,53 @@ class ResultScreen extends StatelessWidget {
         // TODO: implement listener
       },
       builder: (context, state) {
+        print(state.toString());
         var cubit=AppCubit.get(context);
-        return Scaffold(
-            body: Container(
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(
-                      "https://phito.be/wp-content/uploads/2020/01/placeholder.png"),
-                  fit: BoxFit.fitWidth,
+        if(cubit.isTestDone){
+          return Text(cubit.test_result);
+        }
+        else{
+          return Scaffold(
+              body: Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(
+                        "https://phito.be/wp-content/uploads/2020/01/placeholder.png"),
+                    fit: BoxFit.fitWidth,
+                  ),
                 ),
-              ),
-              child: Center(
-                child: Container(child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text("Upload a Saved Image",
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontFamily: 'roboto',
-                        fontWeight: FontWeight.w300,
+                child: Center(
+                  child: Container(child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Upload img",
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontFamily: 'roboto',
+                          fontWeight: FontWeight.w300,
 
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                    ElevatedButton.icon(label: Text('Upload'),
-                      icon: Icon(Icons.upload),
-                      onPressed: () async {
-                        final _imagePicker = ImagePicker();
-                        var image = (await _imagePicker.pickImage(source:ImageSource.gallery))!;
-                        print('LOOK!');
-                        print(image);
-                        cubit.pickImage(image).then((value) => print(value));
-                      },),
-                  ],
-                )
+                      ElevatedButton.icon(label: Text('Upload'),
+                        icon: Icon(Icons.upload),
+                        onPressed: () async {
+                          final _imagePicker = ImagePicker();
+                          var image = (await _imagePicker.pickImage(source:ImageSource.gallery))!;
+                          print('LOOK!');
+                          print(image);
+                          cubit.uploadImage(image).then((value) {
+                            cubit.testGet(imgname:value[0],token: value[1] );
+                          });
+                        },),
+                    ],
+                  )
+                  ),
                 ),
-              ),
 
-            )
-        );
+              )
+          );
+        }
       },
     );
   }

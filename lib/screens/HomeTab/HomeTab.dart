@@ -17,12 +17,7 @@ class HomeTab extends StatelessWidget {
         var cubit=AppCubit.get(context);
         return Column(
           children: [
-            IconButton(onPressed: (){
-              cubit.testGet();
-            }, icon: Icon(Icons.icecream_outlined)),
-            Container(
-              child:Text(cubit.test_result)
-            ),
+            Text(cubit.test_result)
           ],
         );
       },
