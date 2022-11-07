@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterfire_ui/auth.dart';
 import 'package:fluttertest/cubit/app_cubit.dart';
 import 'package:fluttertest/screens/CameraTab/CameraScreen.dart';
+import 'package:fluttertest/screens/HomeTab/HomeTab.dart';
 import 'package:fluttertest/screens/ResultTab/ResultScreen.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -27,7 +28,7 @@ class HomeScreen extends StatelessWidget {
             "Results",
           ];
           List tabScreens = [
-            Text("home"),
+           HomeTab(),
             CameraScreen(),
             ResultScreen()
           ];
