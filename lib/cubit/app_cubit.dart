@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:camera/camera.dart';
+import 'package:crop_your_image/crop_your_image.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meta/meta.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
@@ -13,11 +15,9 @@ import 'dart:typed_data';
 
 part 'app_state.dart';
 
-
-
-
 class AppCubit extends Cubit<AppState> {
   AppCubit() : super(AppInitial());
+
   static AppCubit get(context) => BlocProvider.of(context);
   dynamic user;
   int tabIndex = 0;
@@ -70,14 +70,16 @@ class AppCubit extends Cubit<AppState> {
   void setUser(User) {
     user = User;
   }
+
   void testGet({required String imgname, required String token}) async {
-    tabIndex=2;
+    tabIndex = 2;
     emit(WaitingResult());
     test_result = await getApi(imgname: imgname, token: token);
     emit(TestDone());
   }
 
-  Future<String> getApi({required String imgname, required String token}) async {
+  Future<String> getApi(
+      {required String imgname, required String token}) async {
     var url =
         "https://flaskapitestgemy.herokuapp.com/api/v1/?id=${imgname}&token=${token}";
     print(url);
@@ -87,6 +89,7 @@ class AppCubit extends Cubit<AppState> {
     return resp.data;
   }
 
+  //Currently not in use
   Future<dynamic> ShowCapturedWidget(
       BuildContext context, Uint8List capturedImage) {
     return showDialog(
@@ -139,16 +142,82 @@ class AppCubit extends Cubit<AppState> {
     );
   }
 
+  Future<dynamic> ShowCropWidget(
+      BuildContext context, Uint8List capturedImage) {
+    final _controller = CropController();
+    Uint8List outputimg = capturedImage;
+    return showDialog(
+      useSafeArea: false,
+      context: context,
+      builder: (context) => Scaffold(
+        appBar: AppBar(
+          title: Text("Captured widget screenshot"),
+        ),
+        body: Stack(
+          children: [
+            Crop(
+                fixArea: true,
+                initialAreaBuilder: (rect) => Rect.fromLTRB(rect.left + 110.w,
+                    rect.top + 160.h, rect.right - 110.w, rect.bottom - 370.h),
+                controller: _controller,
+                image: capturedImage,
+                onCropped: (crop) {
+                  outputimg = crop;
+                }),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ElevatedButton.icon(
+                    onPressed: () async {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(Icons.delete),
+                    label: Text('Discard'),
+                  ),
+                  ElevatedButton.icon(
+                    onPressed: () async {
+                      _controller.crop();
+                      Future.delayed(Duration(milliseconds: 1500), () async {
+                        await ImageGallerySaver.saveImage(outputimg);
+                        Navigator.pop(context);
+                      });
+                    },
+                    icon: Icon(Icons.save_alt),
+                    label: Text("Save"),
+                  ),
+                  ElevatedButton.icon(
+                    label: Text('Upload'),
+                    icon: Icon(Icons.upload),
+                    onPressed: () async {
+                      _controller.crop();
+                      Future.delayed(Duration(milliseconds: 1500), () {
+                        uploadImage(outputimg).then((data) async {
+                          testGet(imgname: data[0], token: data[1]);
+                          Navigator.pop(context);
+                        });
+                      });
+                    },
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
   Future<List> uploadImage(image) async {
     final tempDir = await getTemporaryDirectory();
     var now = DateTime.now();
     var name =
         '${DateFormat('dd-MM-yy').format(now)}-${DateFormat('kk-mm').format(now)}';
     File file = await File('${tempDir.path}/image.jpg').create();
-    if (image.runtimeType ==XFile){
-      file=File(image.path);
-    }
-    else{
+    if (image.runtimeType == XFile) {
+      file = File(image.path);
+    } else {
       file.writeAsBytesSync(image);
     }
     if (image != null) {
@@ -157,16 +226,14 @@ class AppCubit extends Cubit<AppState> {
           await _firebaseStorage.ref().child('images/${name}').putFile(file);
       var downloadUrl = await snapshot.ref.getDownloadURL();
       const startWord = "token=";
-      final startIndex =   downloadUrl.indexOf(startWord);
-      final endIndex =   downloadUrl.length;
-      final String token =  downloadUrl
-          .substring(startIndex + startWord.length, endIndex);
+      final startIndex = downloadUrl.indexOf(startWord);
+      final endIndex = downloadUrl.length;
+      final String token =
+          downloadUrl.substring(startIndex + startWord.length, endIndex);
       print('token = ${token}');
       print('name = ${name}');
-      return[name,token];
+      return [name, token];
     }
     return ["name", "token"];
   }
 }
-
-
