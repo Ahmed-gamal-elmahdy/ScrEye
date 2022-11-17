@@ -14,7 +14,12 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-            primarySwatch: Colors.blue,
+            appBarTheme: AppBarTheme(
+              backgroundColor: Colors.deepOrange
+            ),
+            bottomNavigationBarTheme: BottomNavigationBarThemeData(
+              selectedItemColor: Colors.deepOrange
+            )
           ),
           home: child,
         );

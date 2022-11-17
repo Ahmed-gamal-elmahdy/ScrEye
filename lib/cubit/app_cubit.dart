@@ -13,6 +13,9 @@ import 'dart:typed_data';
 
 part 'app_state.dart';
 
+
+
+
 class AppCubit extends Cubit<AppState> {
   AppCubit() : super(AppInitial());
   static AppCubit get(context) => BlocProvider.of(context);
@@ -24,41 +27,11 @@ class AppCubit extends Cubit<AppState> {
   late CameraController controller;
   final _firebaseStorage = FirebaseStorage.instance;
   String test_result = "";
-bool isTestDone=false;
   double sliderVal = 1.0;
-  void resultTab() {
-    tabIndex = 2;
-    emit(ViewResult());
-  }
-
-  void cameraTab() {
-    tabIndex = 1;
-    emit(ViewCamera());
-  }
-
-  void homeTab() {
-    tabIndex = 0;
-    emit(ViewHome());
-  }
 
   void ChangeTabIndex(idx) {
     tabIndex = idx;
-    isTestDone=false;
     emit(ChangedTabIndex());
-  }
-
-  void zoomIn() {
-    if (zoomLevel + 1.0 <= maxZoom) {
-      zoomLevel += 1.0;
-      updateZoomLevel(zoomLevel);
-    }
-  }
-
-  void zoomOut() {
-    if (zoomLevel - 1.0 >= minZoom) {
-      zoomLevel -= 1.0;
-      updateZoomLevel(zoomLevel);
-    }
   }
 
   void updateZoomLevel(val) async {
@@ -97,10 +70,10 @@ bool isTestDone=false;
   void setUser(User) {
     user = User;
   }
-
   void testGet({required String imgname, required String token}) async {
+    tabIndex=2;
+    emit(WaitingResult());
     test_result = await getApi(imgname: imgname, token: token);
-    isTestDone=true;
     emit(TestDone());
   }
 
@@ -152,7 +125,6 @@ bool isTestDone=false;
                     icon: Icon(Icons.upload),
                     onPressed: () async {
                       uploadImage(capturedImage).then((data) async {
-                        ChangeTabIndex(2);
                         testGet(imgname: data[0], token: data[1]);
                         Navigator.pop(context);
                       });
@@ -196,3 +168,5 @@ bool isTestDone=false;
     return ["name", "token"];
   }
 }
+
+
