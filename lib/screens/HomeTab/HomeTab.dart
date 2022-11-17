@@ -17,7 +17,7 @@ class HomeTab extends StatelessWidget {
         var cubit=AppCubit.get(context);
         return Column(
           children: [
-            Text(cubit.test_result)
+            Text("TODO")
           ],
         );
       },

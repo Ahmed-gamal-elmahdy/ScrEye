@@ -12,7 +12,7 @@ import 'package:screenshot/screenshot.dart';
 
 
 class CameraScreen extends StatefulWidget {
-  CameraScreen({Key? key}) : super(key: key);
+    CameraScreen({Key? key}) : super(key: key);
 
   @override
   State<CameraScreen> createState() => _CameraScreenState();
@@ -39,7 +39,7 @@ class _CameraScreenState extends State<CameraScreen> {
           children: [
             Stack(
               children: [
-                Container(
+                SizedBox(
                   height: 517.h,
                   child: new OverflowBox(
                     alignment: Alignment.center,
@@ -47,82 +47,64 @@ class _CameraScreenState extends State<CameraScreen> {
                   ),
                 ),
                 Guideline_Widget(width: size.width.w),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      height: 465.h,
-                      width: 51.w,
-                      child: Column(
-                        children: [
-                          IconButton(
-                              onPressed: () {
-                               cubit.zoomIn();
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  left: 0,
+                  child: Container(
+                    height: 51.9.h,
+                    color: Colors.black.withOpacity(0.5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.zoom_in_outlined,color: Colors.blue),
+                        cubit.cameraInitiated?Slider.adaptive(
+                            min:cubit.minZoom,
+                            max: cubit.maxZoom,
+                            value: cubit.sliderVal,onChanged: (value){
+                          cubit.updateZoomLevel(value);
+                        }):Container(),
+                        SizedBox(
+                          width: 120.h,
+                          child: ElevatedButton(
+                              onPressed: () async {
+                                XFile picture = await cubit.controller.takePicture();
+                                screenshotController
+                                    .captureFromWidget(Center(
+                                  child: ClipPath(
+                                    clipper: MyClipper(),
+                                    child: Stack(
+                                      children: [
+                                        Container(
+                                          width: size.width.w,
+                                          height: 515.h,
+                                          child: Image.file(File(picture.path)),
+                                        ),
+                                        //Guideline_Widget(width: size.width)
+                                      ],
+                                    ),
+                                  ),
+                                ))
+                                    .then((value) async {
+                                  cubit.ShowCapturedWidget(context, value);
+                                });
                               },
-                              icon: Icon(Icons.zoom_in),
-                          ),
-                          IconButton(
-                              onPressed: () {
-                                cubit.zoomOut();
-                              },
-                              icon: Icon(Icons.zoom_out))
-                        ],
-                      ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.camera),
+                                  SizedBox(
+                                    width: 10.h,
+                                  ),
+                                  Text("Capture")
+                                ],
+                              )),
+                        ),
+                      ],
                     ),
-                    Container(
-                      height: 51.9.h,
-                      color: Colors.black.withOpacity(0.5),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.zoom_in_outlined,color: Colors.blue),
-                          cubit.cameraInitiated?Slider.adaptive(
-                              min:cubit.minZoom,
-                              max: cubit.maxZoom,
-                              value: cubit.sliderVal,onChanged: (value){
-                                    cubit.updateZoomLevel(value);
-                          }):Container(),
-                          SizedBox(
-                            width: 120.h,
-                            child: ElevatedButton(
-                                onPressed: () async {
-                                  XFile picture = await cubit.controller.takePicture();
-                                  screenshotController
-                                      .captureFromWidget(Center(
-                                    child: ClipPath(
-                                      clipper: MyClipper(),
-                                      child: Stack(
-                                        children: [
-                                          Container(
-                                            width: size.width.w,
-                                            height: 515.h,
-                                            child: Image.file(File(picture.path)),
-                                          ),
-                                          //Guideline_Widget(width: size.width)
-                                        ],
-                                      ),
-                                    ),
-                                  ))
-                                      .then((value) async {
-                                    cubit.ShowCapturedWidget(context, value);
-                                  });
-                                },
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(Icons.camera),
-                                    SizedBox(
-                                      width: 10.h,
-                                    ),
-                                    Text("Capture")
-                                  ],
-                                )),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+                  ),
+                )
+
               ],
             ),
           ],
