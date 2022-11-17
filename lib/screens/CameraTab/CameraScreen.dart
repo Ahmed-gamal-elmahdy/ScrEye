@@ -10,7 +10,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:fluttertest/widgets/custom_path.dart';
 import 'package:screenshot/screenshot.dart';
 
-
 class CameraScreen extends StatefulWidget {
     CameraScreen({Key? key}) : super(key: key);
 
@@ -86,7 +85,8 @@ class _CameraScreenState extends State<CameraScreen> {
                                   ),
                                 ))
                                     .then((value) async {
-                                  cubit.ShowCapturedWidget(context, value);
+                                  cubit.ShowCropWidget(context,value);
+                                  //cubit.ShowCapturedWidget(context, value);
                                 });
                               },
                               child: Row(
