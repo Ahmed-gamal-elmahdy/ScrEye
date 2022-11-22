@@ -256,8 +256,10 @@ class AppCubit extends Cubit<AppState> {
           downloadUrl.substring(startIndex + startWord.length, endIndex);
       print('token = ${token}');
       print('name = ${name}');
+      doneUploading();
       return [name, token];
     }
+    doneUploading();
     return ["name", "token"];
   }
 
