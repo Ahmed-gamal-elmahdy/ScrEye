@@ -47,6 +47,7 @@ class AppCubit extends Cubit<AppState> {
     controller.initialize().then((_) {
       cameraInitiated = true;
       _setZooms();
+      controller.setFlashMode(FlashMode.off);
     }).catchError((Object e) {
       if (e is CameraException) {
         switch (e.code) {
@@ -88,59 +89,6 @@ class AppCubit extends Cubit<AppState> {
     print(resp.data);
     return resp.data;
   }
-
-  //Currently not in use
-  // Future<dynamic> ShowCapturedWidget(
-  //     BuildContext context, Uint8List capturedImage) {
-  //   return showDialog(
-  //     useSafeArea: false,
-  //     context: context,
-  //     builder: (context) => Scaffold(
-  //       appBar: AppBar(
-  //         title: Text("Your Image"),
-  //       ),
-  //       body: Center(
-  //           child: Stack(
-  //         children: [
-  //           capturedImage != null ? Image.memory(capturedImage) : Container(),
-  //           Align(
-  //             alignment: Alignment.bottomCenter,
-  //             child: Row(
-  //               mainAxisAlignment: MainAxisAlignment.spaceAround,
-  //               children: [
-  //                 OutlinedButton.icon(
-  //                   onPressed: () async {
-  //                     Navigator.pop(context);
-  //                   },
-  //                   icon: Icon(Icons.delete),
-  //                   label: Text('Discard'),
-  //                 ),
-  //                 OutlinedButton.icon(
-  //                   onPressed: () async {
-  //                     await ImageGallerySaver.saveImage(capturedImage);
-  //                     Navigator.pop(context);
-  //                   },
-  //                   icon: Icon(Icons.save_alt),
-  //                   label: Text("Save"),
-  //                 ),
-  //                 OutlinedButton.icon(
-  //                   label: Text('Upload'),
-  //                   icon: Icon(Icons.upload),
-  //                   onPressed: () async {
-  //                     uploadImage(capturedImage).then((data) async {
-  //                       testGet(imgname: data[0], token: data[1]);
-  //                       Navigator.pop(context);
-  //                     });
-  //                   },
-  //                 ),
-  //               ],
-  //             ),
-  //           )
-  //         ],
-  //       )),
-  //     ),
-  //   );
-  // }
 
   Future<dynamic> ShowCropWidget(
       BuildContext context, Uint8List capturedImage) {
