@@ -30,7 +30,6 @@ class _CameraScreenState extends State<CameraScreen> {
         final size = MediaQuery.of(context).size;
         final deviceRatio = size.width / size.height;
         if (!cubit.controller.value.isInitialized) {
-          cubit.controller.setFlashMode(FlashMode.off);
           return Container(
             child: Text("please wait"),
           );
@@ -120,7 +119,7 @@ class _CameraScreenState extends State<CameraScreen> {
                                         LoadingAnimationWidget
                                             .threeArchedCircle(
                                                 color: Color(0xFFF05454),
-                                                size: 20),
+                                                size: 10),
                                         SizedBox(
                                           width: 10.h,
                                         ),
