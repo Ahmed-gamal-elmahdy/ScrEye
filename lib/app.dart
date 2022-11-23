@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             appBarTheme: AppBarTheme(
-              foregroundColor: Color(0xFF90CBF0),
+              foregroundColor: Colors.white,
               backgroundColor: Color(0xFF3177A3),
               iconTheme: IconThemeData(
                 color: Color(0xFFF05454),
@@ -24,10 +24,10 @@ class MyApp extends StatelessWidget {
             ),
             bottomNavigationBarTheme: BottomNavigationBarThemeData(
               backgroundColor: Color(0xFF3177A3),
-              unselectedItemColor: Color(0xFF90CBF0),
+              unselectedItemColor: Colors.white,
               selectedItemColor: Color(0xFFF05454),
             ),
-              canvasColor: Color(0xFF90CBF0),
+              canvasColor: Colors.white,
             textButtonTheme: TextButtonThemeData(
               style: TextButton.styleFrom(
                 foregroundColor: Color(0xFF225270), // Text Color
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10.0))),
                 foregroundColor:
                 MaterialStateProperty.all<Color>(Color(0xFF225270)),
-                backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF90CBF0)),
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
                 side: MaterialStateProperty.all(BorderSide(
                   color: Color(0xFF225270),
                 )),
@@ -48,7 +48,6 @@ class MyApp extends StatelessWidget {
             textTheme: Theme.of(context).textTheme.apply(
               bodyColor: Color(0xFF225270),
             ),
-            scaffoldBackgroundColor: const Color(0xFF90CBF0),
           ),
 
           home: child,

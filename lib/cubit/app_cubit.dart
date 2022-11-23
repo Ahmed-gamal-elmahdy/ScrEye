@@ -82,7 +82,7 @@ class AppCubit extends Cubit<AppState> {
   Future<String> getApi(
       {required String imgname, required String token}) async {
     var url =
-        "https://flaskapitestgemy.herokuapp.com/api/v1/?id=${imgname}&token=${token}";
+        "https://flyflut.fly.dev/api/v1/?id=${imgname}&token=${token}";
     print(url);
     var dio = Dio();
     var resp = await dio.get(url);
