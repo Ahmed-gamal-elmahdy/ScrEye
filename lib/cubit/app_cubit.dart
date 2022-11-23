@@ -12,7 +12,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:intl/intl.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'dart:typed_data';
-
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 part 'app_state.dart';
 
 class AppCubit extends Cubit<AppState> {
@@ -90,73 +90,75 @@ class AppCubit extends Cubit<AppState> {
   }
 
   //Currently not in use
-  Future<dynamic> ShowCapturedWidget(
-      BuildContext context, Uint8List capturedImage) {
-    return showDialog(
-      useSafeArea: false,
-      context: context,
-      builder: (context) => Scaffold(
-        appBar: AppBar(
-          title: Text("Captured widget screenshot"),
-        ),
-        body: Center(
-            child: Stack(
-          children: [
-            capturedImage != null ? Image.memory(capturedImage) : Container(),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  ElevatedButton.icon(
-                    onPressed: () async {
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(Icons.delete),
-                    label: Text('Discard'),
-                  ),
-                  ElevatedButton.icon(
-                    onPressed: () async {
-                      await ImageGallerySaver.saveImage(capturedImage);
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(Icons.save_alt),
-                    label: Text("Save"),
-                  ),
-                  ElevatedButton.icon(
-                    label: Text('Upload'),
-                    icon: Icon(Icons.upload),
-                    onPressed: () async {
-                      uploadImage(capturedImage).then((data) async {
-                        testGet(imgname: data[0], token: data[1]);
-                        Navigator.pop(context);
-                      });
-                    },
-                  ),
-                ],
-              ),
-            )
-          ],
-        )),
-      ),
-    );
-  }
+  // Future<dynamic> ShowCapturedWidget(
+  //     BuildContext context, Uint8List capturedImage) {
+  //   return showDialog(
+  //     useSafeArea: false,
+  //     context: context,
+  //     builder: (context) => Scaffold(
+  //       appBar: AppBar(
+  //         title: Text("Your Image"),
+  //       ),
+  //       body: Center(
+  //           child: Stack(
+  //         children: [
+  //           capturedImage != null ? Image.memory(capturedImage) : Container(),
+  //           Align(
+  //             alignment: Alignment.bottomCenter,
+  //             child: Row(
+  //               mainAxisAlignment: MainAxisAlignment.spaceAround,
+  //               children: [
+  //                 OutlinedButton.icon(
+  //                   onPressed: () async {
+  //                     Navigator.pop(context);
+  //                   },
+  //                   icon: Icon(Icons.delete),
+  //                   label: Text('Discard'),
+  //                 ),
+  //                 OutlinedButton.icon(
+  //                   onPressed: () async {
+  //                     await ImageGallerySaver.saveImage(capturedImage);
+  //                     Navigator.pop(context);
+  //                   },
+  //                   icon: Icon(Icons.save_alt),
+  //                   label: Text("Save"),
+  //                 ),
+  //                 OutlinedButton.icon(
+  //                   label: Text('Upload'),
+  //                   icon: Icon(Icons.upload),
+  //                   onPressed: () async {
+  //                     uploadImage(capturedImage).then((data) async {
+  //                       testGet(imgname: data[0], token: data[1]);
+  //                       Navigator.pop(context);
+  //                     });
+  //                   },
+  //                 ),
+  //               ],
+  //             ),
+  //           )
+  //         ],
+  //       )),
+  //     ),
+  //   );
+  // }
 
   Future<dynamic> ShowCropWidget(
       BuildContext context, Uint8List capturedImage) {
     final _controller = CropController();
     Uint8List outputimg = capturedImage;
+    notLoading();
     return showDialog(
       useSafeArea: false,
       context: context,
       builder: (context) => Scaffold(
         appBar: AppBar(
-          title: Text("Captured widget screenshot"),
+          title: Text("Your Image"),
         ),
         body: Stack(
           children: [
             Crop(
                 fixArea: true,
+                baseColor: Color(0xFF90CBF0),
                 initialAreaBuilder: (rect) => Rect.fromLTRB(rect.left + 110.w,
                     rect.top + 160.h, rect.right - 110.w, rect.bottom - 370.h),
                 controller: _controller,
@@ -169,25 +171,33 @@ class AppCubit extends Cubit<AppState> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  ElevatedButton.icon(
+                  OutlinedButton.icon(
                     onPressed: () async {
                       Navigator.pop(context);
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        backgroundColor: Color(0xFFCE772F),
+                        content: Text('Image Discarded'),
+                      ));
                     },
                     icon: Icon(Icons.delete),
                     label: Text('Discard'),
                   ),
-                  ElevatedButton.icon(
+                  OutlinedButton.icon(
                     onPressed: () async {
                       _controller.crop();
                       Future.delayed(Duration(milliseconds: 1500), () async {
                         await ImageGallerySaver.saveImage(outputimg);
                         Navigator.pop(context);
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          backgroundColor: Color(0xFF29C469),
+                          content: Text('Image saved for later use'),
+                        ));
                       });
                     },
                     icon: Icon(Icons.save_alt),
                     label: Text("Save"),
                   ),
-                  ElevatedButton.icon(
+                  state is !Uploading? OutlinedButton.icon(
                     label: Text('Upload'),
                     icon: Icon(Icons.upload),
                     onPressed: () async {
@@ -199,6 +209,18 @@ class AppCubit extends Cubit<AppState> {
                         });
                       });
                     },
+                  ): OutlinedButton(
+                    onPressed: null,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        LoadingAnimationWidget.threeArchedCircle(color: Color(0xFFF05454), size: 20),
+                        SizedBox(
+                          width: 10.h,
+                        ),
+                        Text("Uploading...")
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -210,6 +232,8 @@ class AppCubit extends Cubit<AppState> {
   }
 
   Future<List> uploadImage(image) async {
+    notLoading();
+    uploading();
     final tempDir = await getTemporaryDirectory();
     var now = DateTime.now();
     var name =
@@ -232,8 +256,25 @@ class AppCubit extends Cubit<AppState> {
           downloadUrl.substring(startIndex + startWord.length, endIndex);
       print('token = ${token}');
       print('name = ${name}');
+      doneUploading();
       return [name, token];
     }
+    doneUploading();
     return ["name", "token"];
   }
+
+  void loading() async {
+    emit(Loading());
+  }
+  void notLoading() async {
+    emit(NotLoading());
+  }
+
+  void uploading() async {
+    emit(Uploading());
+  }
+  void doneUploading() async {
+    emit(DoneUploading());
+  }
+
 }

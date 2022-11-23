@@ -51,6 +51,7 @@ class HomeScreen extends StatelessWidget {
               currentIndex: cubit.tabIndex,
               items: [
                 BottomNavigationBarItem(
+
                     label: "Home",
                     icon: IconButton(
                         icon: Icon(Icons.home),
