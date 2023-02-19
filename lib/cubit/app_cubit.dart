@@ -79,7 +79,7 @@ class AppCubit extends Cubit<AppState> {
     emit(TestDone());
   }
 
-  Future<String> getApi(
+  Future<String> getApi(//New API endpoint
       {required String imgname, required String token}) async {
     var apiHerku =
         "https://flaskapitestgemy.herokuapp.com/api/v1/?id=${imgname}&token=${token}";
