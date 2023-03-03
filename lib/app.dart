@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'screens/auth_gate.dart';
+//import 'screens/auth_gate.dart';
+import 'screens/auth_gateV2.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
