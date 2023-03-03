@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
         builder: (context, state) {
           List tabNames = [
             "Home",
-            "Camera",
+            "Align Clipper with Conjunctiva",
             "Results",
           ];
           List tabScreens = [
