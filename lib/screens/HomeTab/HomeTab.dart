@@ -26,7 +26,6 @@ class HomeTab extends StatelessWidget {
         List bodyScreens = [UploadScreen(), CameraScreen(), ResultScreen()];
         return Scaffold(
           drawer: SidebarX(
-
             headerBuilder: (context, extended) {
               return SizedBox(
                 height: 100,

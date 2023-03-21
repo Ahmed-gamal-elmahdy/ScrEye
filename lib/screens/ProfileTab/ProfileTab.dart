@@ -20,6 +20,8 @@ class ProfileTab extends StatelessWidget {
 
         return Scaffold(
           drawer: SidebarX(
+            theme: SidebarXTheme(
+            ),
             controller: cubit.sideBar_controller,
             items: [
               SidebarXItem(
@@ -46,6 +48,12 @@ class ProfileTab extends StatelessWidget {
                   onTap: () {
                     cubit.ChangeTabIndex(3);
                   }),
+              SidebarXItem(
+                  icon: Icons.power_settings_new,
+                  label: 'Logout',
+                  onTap: () {
+                    FirebaseUIAuth.signOut();
+                  }),
             ],
           ),
           appBar: AppBar(actions: [
@@ -63,13 +71,13 @@ class ProfileTab extends StatelessWidget {
                 Row(
                   children: [
                     Text("Name : "),
-                    Text(cubit.user.displayName),
+
                   ],
                 ),
                 Row(
                   children: [
                     Text("Email : "),
-                    Text(cubit.user.email),
+
                   ],
                 ),
               ],
