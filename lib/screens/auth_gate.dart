@@ -1,9 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart' hide EmailAuthProvider;
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'home_screen.dart';
 
+
+var dbRef = FirebaseDatabase.instance.ref().child('users');
 class AuthGate extends StatelessWidget {
   const AuthGate({super.key});
   @override
@@ -19,6 +22,20 @@ class AuthGate extends StatelessWidget {
                 : '/sign-in',
             routes: {
               '/register': (context) => RegisterScreen(
+                actions: [
+                  AuthStateChangeAction<UserCreated>((context, state) {
+                    Map<String,String?> user={
+                      //'name':state.credential.user?.displayName,
+                      'name':"",
+                      "age":"",
+                      'gender':"Male",
+                      'email':state.credential.user?.email,
+                      'uid':state.credential.user?.uid,
+                      //'phoneNumber':state.credential.user?.phoneNumber
+                    };
+                    dbRef.push().set(user);
+                  }),
+                ],
                 showAuthActionSwitch: false,
                 resizeToAvoidBottomInset: true,
                 //providers: providers,

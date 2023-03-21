@@ -61,6 +61,7 @@ dependencies:
   crop_your_image: ^0.7.3
   animated_text_kit: ^4.2.2
   loading_animation_widget:
+  sidebarx: ^0.15.0
 dev_dependencies:
   flutter_launcher_icons: ^0.12.0
   flutter_test:

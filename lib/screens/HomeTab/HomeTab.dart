@@ -1,9 +1,11 @@
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertest/cubit/app_cubit.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:sidebarx/sidebarx.dart';
+import 'CameraBody/CameraScreen.dart';
+import 'ResultBody/ResultScreen.dart';
+import 'UploadBody/UploadScreen.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({Key? key}) : super(key: key);
@@ -15,57 +17,90 @@ class HomeTab extends StatelessWidget {
         // TODO: implement listener
       },
       builder: (context, state) {
-        var cubit=AppCubit.get(context);
-        return Center(
-          child: Container(
-            decoration: BoxDecoration(image: DecorationImage(
-              image: AssetImage('assets/homec.png'),
-            )
-            ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Upload A Taken Image",
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontFamily: 'roboto',
-                      fontWeight: FontWeight.w300,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  state is !Loading ?
-                  OutlinedButton.icon(
-                    label: Text('Upload',/*style: TextStyle(color: Color(0xFFF05454),*/),
-                    icon: Icon(Icons.upload,/*color: Color(0xFFF05454)*/),
-                    onPressed: () async {
-                      final _imagePicker = ImagePicker();
-                      var image = (await _imagePicker.pickImage(
-                          source: ImageSource.gallery))!;
-                      cubit.uploadImage(image).then((value) {
-                        cubit.testGet(imgname: value[0], token: value[1]);
-                      });
-                    },
-                  ): OutlinedButton(
-                    onPressed: null,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        LoadingAnimationWidget.threeArchedCircle(color: Color(0xFFF05454), size: 20),
-                        SizedBox(
-                          width: 10.h,
-                        ),
-                        Text("Loading...")
-                      ],
-                    ),
-                  ),
-                ],
-              )),
+        var cubit = AppCubit.get(context);
+        List bodyNames = [
+          "Upload",
+          "Align Clipper with Conjunctiva",
+          "Results",
+        ];
+        List bodyScreens = [UploadScreen(), CameraScreen(), ResultScreen()];
+        return Scaffold(
+          drawer: SidebarX(
+
+            headerBuilder: (context, extended) {
+              return SizedBox(
+                height: 100,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+
+                ),
+              );
+            },
+            controller: cubit.sideBar_controller,
+            items: [
+              SidebarXItem(
+                  icon: Icons.home,
+                  label: 'Home',
+                  onTap: () {
+                    cubit.ChangeTabIndex(0);
+                  }),
+              SidebarXItem(
+                  icon: Icons.person_sharp,
+                  label: 'Profile',
+                  onTap: () {
+                    cubit.ChangeTabIndex(1);
+                  }),
+              SidebarXItem(
+                  icon: Icons.photo_library_outlined,
+                  label: 'History',
+                  onTap: () {
+                    cubit.ChangeTabIndex(2);
+                  }),
+              SidebarXItem(
+                  icon: Icons.settings,
+                  label: 'Settings',
+                  onTap: () {
+                    cubit.ChangeTabIndex(3);
+                  }),
+            ],
+          ),
+          appBar: AppBar(actions: [
+            IconButton(
+                tooltip: "Logout",
+                onPressed: () {
+                  FirebaseUIAuth.signOut();
+                },
+                icon: Icon(Icons.power_settings_new_rounded))
+          ], title: Text(bodyNames[cubit.bodyIndex])),
+          body: bodyScreens[cubit.bodyIndex],
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: cubit.bodyIndex,
+            items: [
+              BottomNavigationBarItem(
+                  label: "Upload",
+                  icon: IconButton(
+                      icon: Icon(Icons.upload),
+                      onPressed: () {
+                        cubit.ChangeBodyIndex(0);
+                      })),
+              BottomNavigationBarItem(
+                  label: "Camera",
+                  icon: IconButton(
+                      icon: Icon(Icons.camera_alt_outlined),
+                      onPressed: () {
+                        cubit.ChangeBodyIndex(1);
+                      })),
+              BottomNavigationBarItem(
+                  label: "Result",
+                  icon: IconButton(
+                      icon: Icon(Icons.insert_drive_file_outlined),
+                      onPressed: () {
+                        cubit.ChangeBodyIndex(2);
+                      }))
+            ],
+          ),
         );
       },
     );
   }
 }
-
-
-

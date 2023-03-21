@@ -13,6 +13,8 @@ import 'package:intl/intl.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'dart:typed_data';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:sidebarx/sidebarx.dart';
+
 part 'app_state.dart';
 
 class AppCubit extends Cubit<AppState> {
@@ -20,7 +22,7 @@ class AppCubit extends Cubit<AppState> {
 
   static AppCubit get(context) => BlocProvider.of(context);
   dynamic user;
-  int tabIndex = 0;
+  int bodyIndex = 0;
   bool cameraInitiated = false;
   late List<CameraDescription> cameras;
   late double maxZoom, minZoom, zoomLevel;
@@ -29,9 +31,9 @@ class AppCubit extends Cubit<AppState> {
   String test_result = "";
   double sliderVal = 1.0;
 
-  void ChangeTabIndex(idx) {
-    tabIndex = idx;
-    emit(ChangedTabIndex());
+  void ChangeBodyIndex(idx) {
+    bodyIndex = idx;
+    emit(ChangedBodyIndex());
   }
 
   void updateZoomLevel(val) async {
@@ -73,14 +75,16 @@ class AppCubit extends Cubit<AppState> {
   }
 
   void testGet({required String imgname, required String token}) async {
-    tabIndex = 2;
+    bodyIndex = 2;
     emit(WaitingResult());
     test_result = await getApi(imgname: imgname, token: token);
     emit(TestDone());
   }
 
-  Future<String> getApi(//New API endpoint
-      {required String imgname, required String token}) async {
+  Future<String> getApi(
+      //New API endpoint
+      {required String imgname,
+      required String token}) async {
     var apiHerku =
         "https://flaskapitestgemy.herokuapp.com/api/v1/?id=${imgname}&token=${token}";
     var apiAzure =
@@ -147,31 +151,34 @@ class AppCubit extends Cubit<AppState> {
                     icon: Icon(Icons.save_alt),
                     label: Text("Save"),
                   ),
-                  state is !Uploading? OutlinedButton.icon(
-                    label: Text('Upload'),
-                    icon: Icon(Icons.upload),
-                    onPressed: () async {
-                      _controller.crop();
-                      Future.delayed(Duration(milliseconds: 1500), () {
-                        uploadImage(outputimg).then((data) async {
-                          testGet(imgname: data[0], token: data[1]);
-                          Navigator.pop(context);
-                        });
-                      });
-                    },
-                  ): OutlinedButton(
-                    onPressed: null,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        LoadingAnimationWidget.threeArchedCircle(color: Color(0xFFF05454), size: 20),
-                        SizedBox(
-                          width: 10.h,
+                  state is! Uploading
+                      ? OutlinedButton.icon(
+                          label: Text('Upload'),
+                          icon: Icon(Icons.upload),
+                          onPressed: () async {
+                            _controller.crop();
+                            Future.delayed(Duration(milliseconds: 1500), () {
+                              uploadImage(outputimg).then((data) async {
+                                testGet(imgname: data[0], token: data[1]);
+                                Navigator.pop(context);
+                              });
+                            });
+                          },
+                        )
+                      : OutlinedButton(
+                          onPressed: null,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              LoadingAnimationWidget.threeArchedCircle(
+                                  color: Color(0xFFF05454), size: 20),
+                              SizedBox(
+                                width: 10.h,
+                              ),
+                              Text("Uploading...")
+                            ],
+                          ),
                         ),
-                        Text("Uploading...")
-                      ],
-                    ),
-                  ),
                 ],
               ),
             )
@@ -216,6 +223,7 @@ class AppCubit extends Cubit<AppState> {
   void loading() async {
     emit(Loading());
   }
+
   void notLoading() async {
     emit(NotLoading());
   }
@@ -223,8 +231,19 @@ class AppCubit extends Cubit<AppState> {
   void uploading() async {
     emit(Uploading());
   }
+
   void doneUploading() async {
     emit(DoneUploading());
   }
 
+  int tabIndex = 0;
+  final sideBar_controller =
+      SidebarXController(selectedIndex: 0, extended: true);
+
+  void ChangeTabIndex(idx) {
+    tabIndex = idx;
+    print(tabIndex);
+    //sideBar_controller.selectIndex(idx);
+    emit(ChangedTabIndex());
+  }
 }
