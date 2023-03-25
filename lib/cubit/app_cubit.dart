@@ -1,18 +1,20 @@
 import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:bloc/bloc.dart';
 import 'package:camera/camera.dart';
 import 'package:crop_your_image/crop_your_image.dart';
+import 'package:dio/dio.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:meta/meta.dart';
-import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:intl/intl.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'dart:typed_data';
+import 'package:intl/intl.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:meta/meta.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:sidebarx/sidebarx.dart';
 
 part 'app_state.dart';
@@ -28,6 +30,8 @@ class AppCubit extends Cubit<AppState> {
   late double maxZoom, minZoom, zoomLevel;
   late CameraController controller;
   final _firebaseStorage = FirebaseStorage.instance;
+  final dbRef = FirebaseDatabase.instance.ref().child('users');
+
   String test_result = "";
   double sliderVal = 1.0;
 
@@ -72,28 +76,6 @@ class AppCubit extends Cubit<AppState> {
 
   void setUser(User) {
     user = User;
-  }
-
-  void testGet({required String imgname, required String token}) async {
-    bodyIndex = 2;
-    emit(WaitingResult());
-    test_result = await getApi(imgname: imgname, token: token);
-    emit(TestDone());
-  }
-
-  Future<String> getApi(
-      //New API endpoint
-      {required String imgname,
-      required String token}) async {
-    var apiHerku =
-        "https://flaskapitestgemy.herokuapp.com/api/v1/?id=${imgname}&token=${token}";
-    var apiAzure =
-        "https://screyeapi.azurewebsites.net/api/screyeapiv1?id=${imgname}&token=${token}";
-    print(apiHerku);
-    var dio = Dio();
-    var resp = await dio.get(apiHerku);
-    print(resp.data);
-    return resp.data;
   }
 
   Future<dynamic> ShowCropWidget(
@@ -158,8 +140,11 @@ class AppCubit extends Cubit<AppState> {
                           onPressed: () async {
                             _controller.crop();
                             Future.delayed(Duration(milliseconds: 1500), () {
-                              uploadImage(outputimg).then((data) async {
-                                testGet(imgname: data[0], token: data[1]);
+                              uploadImage2(outputimg).then((data) async {
+                                testGet2(
+                                    imgname: data[0],
+                                    token: data[1],
+                                    url: data[2]);
                                 Navigator.pop(context);
                               });
                             });
@@ -188,38 +173,6 @@ class AppCubit extends Cubit<AppState> {
     );
   }
 
-  Future<List> uploadImage(image) async {
-    notLoading();
-    uploading();
-    final tempDir = await getTemporaryDirectory();
-    var now = DateTime.now();
-    var name =
-        '${DateFormat('dd-MM-yy').format(now)}-${DateFormat('kk-mm').format(now)}';
-    File file = await File('${tempDir.path}/image.jpg').create();
-    if (image.runtimeType == XFile) {
-      file = File(image.path);
-    } else {
-      file.writeAsBytesSync(image);
-    }
-    if (image != null) {
-      //Upload to Firebase
-      var snapshot =
-          await _firebaseStorage.ref().child('images/${name}').putFile(file);
-      var downloadUrl = await snapshot.ref.getDownloadURL();
-      const startWord = "token=";
-      final startIndex = downloadUrl.indexOf(startWord);
-      final endIndex = downloadUrl.length;
-      final String token =
-          downloadUrl.substring(startIndex + startWord.length, endIndex);
-      print('token = ${token}');
-      print('name = ${name}');
-      doneUploading();
-      return [name, token];
-    }
-    doneUploading();
-    return ["name", "token"];
-  }
-
   void loading() async {
     emit(Loading());
   }
@@ -245,5 +198,72 @@ class AppCubit extends Cubit<AppState> {
     print(tabIndex);
     //sideBar_controller.selectIndex(idx);
     emit(ChangedTabIndex());
+  }
+
+  Future<List> uploadImage2(image) async {
+    notLoading();
+    uploading();
+    final tempDir = await getTemporaryDirectory();
+    var now = DateTime.now();
+    var name =
+        '${DateFormat('dd-MM-yy').format(now)}-${DateFormat('kk-mm').format(now)}';
+    File file = await File('${tempDir.path}/image.jpg').create();
+    if (image.runtimeType == XFile) {
+      file = File(image.path);
+    } else {
+      file.writeAsBytesSync(image);
+    }
+    if (image != null) {
+      //Upload to Firebase
+      var snapshot = await _firebaseStorage
+          .ref()
+          .child('images/${user.uid}/${name}')
+          .putFile(file);
+      var downloadUrl = await snapshot.ref.getDownloadURL();
+      const startWord = "token=";
+      final startIndex = downloadUrl.indexOf(startWord);
+      final endIndex = downloadUrl.length;
+      final String token =
+          downloadUrl.substring(startIndex + startWord.length, endIndex);
+      print('url= ${downloadUrl}');
+      doneUploading();
+      return [name, token, downloadUrl];
+    }
+    doneUploading();
+    return ["name", "token"];
+  }
+
+  void testGet2(
+      {required String imgname,
+      required String token,
+      required String url}) async {
+    bodyIndex = 2;
+    emit(WaitingResult());
+    await getApi2(imgname: imgname, token: token).then((res) {
+      test_result = res;
+      Map<String, dynamic> imageData = {
+        'name': imgname,
+        'url': url,
+        //'createdAt': FieldValue.serverTimestamp(),
+        'result': res
+      };
+      dbRef.child(user.uid).child("images").child(imgname).set(imageData);
+    });
+    emit(TestDone());
+  }
+
+  Future<String> getApi2(
+      //New API endpoint
+      {required String imgname,
+      required String token}) async {
+    var apiHerku =
+        "https://flaskapitestgemy.herokuapp.com/api/v2/?id=${imgname}&token=${token}&uid=${user.uid}";
+    var apiAzure =
+        "https://screyeapi.azurewebsites.net/api/screyeapiv1?id=${imgname}&token=${token}";
+    print(apiHerku);
+    var dio = Dio();
+    var resp = await dio.get(apiHerku);
+    print(resp.data);
+    return resp.data;
   }
 }

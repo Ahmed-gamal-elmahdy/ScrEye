@@ -25,7 +25,7 @@ class UploadScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     "Upload A Taken Image",
                     style: TextStyle(
                       fontSize: 24,
@@ -36,14 +36,14 @@ class UploadScreen extends StatelessWidget {
                   ),
                   state is !Loading ?
                   OutlinedButton.icon(
-                    label: Text('Upload',/*style: TextStyle(color: Color(0xFFF05454),*/),
-                    icon: Icon(Icons.upload,/*color: Color(0xFFF05454)*/),
+                    label: const Text('Upload',/*style: TextStyle(color: Color(0xFFF05454),*/),
+                    icon: const Icon(Icons.upload,/*color: Color(0xFFF05454)*/),
                     onPressed: () async {
                       final _imagePicker = ImagePicker();
                       var image = (await _imagePicker.pickImage(
                           source: ImageSource.gallery))!;
-                      cubit.uploadImage(image).then((value) {
-                        cubit.testGet(imgname: value[0], token: value[1]);
+                      cubit.uploadImage2(image).then((value) {
+                        cubit.testGet2(imgname: value[0], token: value[1],url: value[2]);
                       });
                     },
                   ): OutlinedButton(

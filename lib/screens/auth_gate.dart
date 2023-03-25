@@ -33,7 +33,14 @@ class AuthGate extends StatelessWidget {
                       'uid':state.credential.user?.uid,
                       //'phoneNumber':state.credential.user?.phoneNumber
                     };
-                    dbRef.push().set(user);
+                    if(state.credential.user?.uid != null)
+                      {
+
+                        var uid= state.credential.user?.uid;
+                        dbRef.child(uid!).set(user);
+                      }
+
+
                   }),
                 ],
                 showAuthActionSwitch: false,
