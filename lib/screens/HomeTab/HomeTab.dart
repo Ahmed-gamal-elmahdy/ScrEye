@@ -6,6 +6,7 @@ import 'package:sidebarx/sidebarx.dart';
 import 'CameraBody/CameraScreen.dart';
 import 'ResultBody/ResultScreen.dart';
 import 'UploadBody/UploadScreen.dart';
+import '../../../generated/l10n.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({Key? key}) : super(key: key);
@@ -19,9 +20,9 @@ class HomeTab extends StatelessWidget {
       builder: (context, state) {
         var cubit = AppCubit.get(context);
         List bodyNames = [
-          "Upload",
-          "Align Clipper with Conjunctiva",
-          "Results",
+          S.of(context).upload,
+          S.of(context).align_clipper,
+          S.of(context).result,
         ];
         List bodyScreens = [UploadScreen(), CameraScreen(), ResultScreen()];
         return Scaffold(
@@ -39,25 +40,25 @@ class HomeTab extends StatelessWidget {
             items: [
               SidebarXItem(
                   icon: Icons.home,
-                  label: 'Home',
+                  label: S.of(context).navbar_home,
                   onTap: () {
                     cubit.ChangeTabIndex(0);
                   }),
               SidebarXItem(
                   icon: Icons.person_sharp,
-                  label: 'Profile',
+                  label: S.of(context).navbar_profile,
                   onTap: () {
                     cubit.ChangeTabIndex(1);
                   }),
               SidebarXItem(
                   icon: Icons.photo_library_outlined,
-                  label: 'History',
+                  label: S.of(context).navbar_history,
                   onTap: () {
                     cubit.ChangeTabIndex(2);
                   }),
               SidebarXItem(
                   icon: Icons.settings,
-                  label: 'Settings',
+                  label: S.of(context).navbar_settings,
                   onTap: () {
                     cubit.ChangeTabIndex(3);
                   }),
@@ -76,21 +77,21 @@ class HomeTab extends StatelessWidget {
             currentIndex: cubit.bodyIndex,
             items: [
               BottomNavigationBarItem(
-                  label: "Upload",
+                  label: S.of(context).upload,
                   icon: IconButton(
                       icon: Icon(Icons.upload),
                       onPressed: () {
                         cubit.ChangeBodyIndex(0);
                       })),
               BottomNavigationBarItem(
-                  label: "Camera",
+                  label: S.of(context).camera,
                   icon: IconButton(
                       icon: Icon(Icons.camera_alt_outlined),
                       onPressed: () {
                         cubit.ChangeBodyIndex(1);
                       })),
               BottomNavigationBarItem(
-                  label: "Result",
+                  label: S.of(context).result,
                   icon: IconButton(
                       icon: Icon(Icons.insert_drive_file_outlined),
                       onPressed: () {

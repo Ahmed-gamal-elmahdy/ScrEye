@@ -17,3 +17,4 @@ class Uploading extends AppState{}
 class DoneUploading extends AppState{}
 
 class ChangedTabIndex extends AppState{}
+class ChangedLanguage extends AppState{}

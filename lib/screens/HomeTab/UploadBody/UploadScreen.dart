@@ -5,6 +5,8 @@ import 'package:fluttertest/cubit/app_cubit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
+import '../../../generated/l10n.dart';
+
 class UploadScreen extends StatelessWidget {
   const UploadScreen({Key? key}) : super(key: key);
 
@@ -25,8 +27,8 @@ class UploadScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
-                    "Upload A Taken Image",
+                   Text(
+                    S.of(context).taken_photo_upload,
                     style: TextStyle(
                       fontSize: 24,
                       fontFamily: 'roboto',
@@ -36,7 +38,7 @@ class UploadScreen extends StatelessWidget {
                   ),
                   state is !Loading ?
                   OutlinedButton.icon(
-                    label: const Text('Upload',/*style: TextStyle(color: Color(0xFFF05454),*/),
+                    label:  Text(S.of(context).upload,/*style: TextStyle(color: Color(0xFFF05454),*/),
                     icon: const Icon(Icons.upload,/*color: Color(0xFFF05454)*/),
                     onPressed: () async {
                       final _imagePicker = ImagePicker();
@@ -55,7 +57,7 @@ class UploadScreen extends StatelessWidget {
                         SizedBox(
                           width: 10.h,
                         ),
-                        Text("Loading...")
+                        Text(S.of(context).loading)
                       ],
                     ),
                   ),

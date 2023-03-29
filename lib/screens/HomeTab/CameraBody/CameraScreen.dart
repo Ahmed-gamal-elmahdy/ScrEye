@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:fluttertest/widgets/custom_path.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:screenshot/screenshot.dart';
+import '../../../generated/l10n.dart';
 
 class CameraScreen extends StatefulWidget {
   CameraScreen({Key? key}) : super(key: key);
@@ -30,7 +31,7 @@ class _CameraScreenState extends State<CameraScreen> {
         final deviceRatio = size.width / size.height;
         if (!cubit.controller.value.isInitialized) {
           return Container(
-            child: Text("please wait"),
+            child: Text(S.of(context).pls_wait),
           );
         } else {
           return Column(
@@ -106,7 +107,7 @@ class _CameraScreenState extends State<CameraScreen> {
                                         SizedBox(
                                           width: 10.h,
                                         ),
-                                        Text("Capture")
+                                        Text(S.of(context).capture)
                                       ],
                                     ))
                                 : OutlinedButton(
@@ -122,7 +123,7 @@ class _CameraScreenState extends State<CameraScreen> {
                                         SizedBox(
                                           width: 10.h,
                                         ),
-                                        Text("Capturing...")
+                                        Text(S.of(context).capturing)
                                       ],
                                     ),
                                   ),

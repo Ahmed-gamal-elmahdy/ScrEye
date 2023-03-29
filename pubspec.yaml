@@ -31,7 +31,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  flutter_localizations:
+    sdk: flutter
+  firebase_ui_localizations: ^1.2.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -62,6 +64,7 @@ dependencies:
   animated_text_kit: ^4.2.2
   loading_animation_widget:
   sidebarx: ^0.15.0
+  intl: ^0.17.0
 dev_dependencies:
   flutter_launcher_icons: ^0.12.0
   flutter_test:
@@ -111,3 +114,5 @@ flutter:
 flutter_icons:
   android: "launcher_icon"
   image_path: "assets/Icon.png"
+flutter_intl:
+  enabled: true

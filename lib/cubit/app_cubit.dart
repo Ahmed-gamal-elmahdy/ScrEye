@@ -16,6 +16,8 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:meta/meta.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sidebarx/sidebarx.dart';
+import '../../../generated/l10n.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 part 'app_state.dart';
 
@@ -88,7 +90,7 @@ class AppCubit extends Cubit<AppState> {
       context: context,
       builder: (context) => Scaffold(
         appBar: AppBar(
-          title: Text("Your Image"),
+          title: Text(S.of(context).your_img),
         ),
         body: Stack(
           children: [
@@ -112,11 +114,11 @@ class AppCubit extends Cubit<AppState> {
                       Navigator.pop(context);
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         backgroundColor: Color(0xFFCE772F),
-                        content: Text('Image Discarded'),
+                        content: Text(S.of(context).img_discarded),
                       ));
                     },
                     icon: Icon(Icons.delete),
-                    label: Text('Discard'),
+                    label: Text(S.of(context).discard),
                   ),
                   OutlinedButton.icon(
                     onPressed: () async {
@@ -126,16 +128,16 @@ class AppCubit extends Cubit<AppState> {
                         Navigator.pop(context);
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           backgroundColor: Color(0xFF29C469),
-                          content: Text('Image saved for later use'),
+                          content: Text(S.of(context).img_saved_later),
                         ));
                       });
                     },
                     icon: Icon(Icons.save_alt),
-                    label: Text("Save"),
+                    label: Text(S.of(context).save),
                   ),
                   state is! Uploading
                       ? OutlinedButton.icon(
-                          label: Text('Upload'),
+                          label: Text(S.of(context).upload),
                           icon: Icon(Icons.upload),
                           onPressed: () async {
                             _controller.crop();
@@ -160,7 +162,7 @@ class AppCubit extends Cubit<AppState> {
                               SizedBox(
                                 width: 10.h,
                               ),
-                              Text("Uploading...")
+                              Text(S.of(context).loading)
                             ],
                           ),
                         ),
@@ -205,8 +207,7 @@ class AppCubit extends Cubit<AppState> {
     uploading();
     final tempDir = await getTemporaryDirectory();
     var now = DateTime.now();
-    var name =
-        '${DateFormat('dd-MM-yy').format(now)}-${DateFormat('kk-mm').format(now)}';
+    var name = '${now.day}-${now.month}-${now.year}-${now.hour}-${now.minute}-${now.second}';
     File file = await File('${tempDir.path}/image.jpg').create();
     if (image.runtimeType == XFile) {
       file = File(image.path);
@@ -265,5 +266,16 @@ class AppCubit extends Cubit<AppState> {
     var resp = await dio.get(apiHerku);
     print(resp.data);
     return resp.data;
+  }
+
+  void ChangeLanguage({required String lang}) {
+    if (lang == "en"){
+      S.load(Locale('en', ''));
+    }
+    else{
+      S.load(Locale('ar', ''));
+    }
+    print("Loaded lang");
+    emit(ChangedLanguage());
   }
 }
