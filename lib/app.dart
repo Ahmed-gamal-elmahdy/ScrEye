@@ -1,6 +1,10 @@
+import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'generated/l10n.dart';
 import 'screens/auth_gate.dart';
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -12,6 +16,16 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (BuildContext context, child) {
         return MaterialApp(
+          localizationsDelegates: [
+            // Creates an instance of FirebaseUILocalizationDelegate with overridden labels
+            // Delegates below take care of built-in flutter widgets
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            // This delegate is required to provide the labels that are not overridden by LabelOverrides
+            FirebaseUILocalizations.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             appBarTheme: AppBarTheme(

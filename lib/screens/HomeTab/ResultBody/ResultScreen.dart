@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertest/cubit/app_cubit.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import '../../../generated/l10n.dart';
 
 class ResultScreen extends StatelessWidget {
   const ResultScreen({Key? key}) : super(key: key);
@@ -15,6 +16,7 @@ class ResultScreen extends StatelessWidget {
       },
       builder: (context, state) {
         var cubit = AppCubit.get(context);
+        String res = S.of(context).anemic;
         Color color;
         if (state is TestDone) {
           if (cubit.test_result == 'Anemic'){
@@ -22,6 +24,7 @@ class ResultScreen extends StatelessWidget {
           }
           else {
              color = Color(0xFF29C469);
+             res = S.of(context).not_anemic;
           }
           return TweenAnimationBuilder<double>(
               tween: Tween<double>(begin: 0.0, end: 1.0),
@@ -35,11 +38,11 @@ class ResultScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "You are:",
+                            S.of(context).you_are,
                             style: TextStyle(fontSize: 35),
                           ),
                           Text(
-                            cubit.test_result,
+                            res,
                             style: TextStyle(fontSize: 50,color:color),
                           ),
                         ],
@@ -61,7 +64,7 @@ class ResultScreen extends StatelessWidget {
                     height: 5.h,
                   ),
                   Text(
-                    "Please wait...",
+                    S.of(context).pls_wait,
                     style: TextStyle(fontSize: 35,color: Color(0xFF3177A3),),
                   ),
                 ],
@@ -72,9 +75,9 @@ class ResultScreen extends StatelessWidget {
               image: AssetImage('assets/resultc.png'),
             )
             ),
-            child: const Center(
+            child:  Center(
               child: Text(
-                  "Take a test first to \n see your result!",
+                  S.of(context).take_test_first,
                   style: TextStyle(
                     fontSize: 20,
                     fontFamily: 'roboto',

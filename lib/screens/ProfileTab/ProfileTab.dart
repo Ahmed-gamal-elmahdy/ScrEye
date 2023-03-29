@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertest/cubit/app_cubit.dart';
 import 'package:sidebarx/sidebarx.dart';
-
+import '../../../generated/l10n.dart';
 
 class ProfileTab extends StatelessWidget {
   const ProfileTab({Key? key}) : super(key: key);
@@ -20,39 +20,40 @@ class ProfileTab extends StatelessWidget {
 
         return Scaffold(
           drawer: SidebarX(
-            theme: SidebarXTheme(
-            ),
+            headerBuilder: (context, extended) {
+              return SizedBox(
+                height: 100,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+
+                ),
+              );
+            },
             controller: cubit.sideBar_controller,
             items: [
               SidebarXItem(
                   icon: Icons.home,
-                  label: 'Home',
+                  label: S.of(context).navbar_home,
                   onTap: () {
                     cubit.ChangeTabIndex(0);
                   }),
               SidebarXItem(
                   icon: Icons.person_sharp,
-                  label: 'Profile',
+                  label: S.of(context).navbar_profile,
                   onTap: () {
                     cubit.ChangeTabIndex(1);
                   }),
               SidebarXItem(
                   icon: Icons.photo_library_outlined,
-                  label: 'History',
+                  label: S.of(context).navbar_history,
                   onTap: () {
                     cubit.ChangeTabIndex(2);
                   }),
               SidebarXItem(
                   icon: Icons.settings,
-                  label: 'Settings',
+                  label: S.of(context).navbar_settings,
                   onTap: () {
                     cubit.ChangeTabIndex(3);
-                  }),
-              SidebarXItem(
-                  icon: Icons.power_settings_new,
-                  label: 'Logout',
-                  onTap: () {
-                    FirebaseUIAuth.signOut();
                   }),
             ],
           ),
@@ -63,7 +64,7 @@ class ProfileTab extends StatelessWidget {
                   FirebaseUIAuth.signOut();
                 },
                 icon: Icon(Icons.power_settings_new_rounded))
-          ], title: Text("Profile"),
+          ], title: Text(S.of(context).navbar_profile),
           ),
           body: Center(
             child: Column(
