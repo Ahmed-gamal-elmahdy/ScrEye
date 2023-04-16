@@ -141,7 +141,7 @@ class AppCubit extends Cubit<AppState> {
                           icon: Icon(Icons.upload),
                           onPressed: () async {
                             _controller.crop();
-                            Future.delayed(Duration(milliseconds: 1500), () {
+                            Future.delayed(Duration(milliseconds: 1000), () {
                               uploadImage2(outputimg).then((data) async {
                                 testGet2(
                                     imgname: data[0],
@@ -242,13 +242,15 @@ class AppCubit extends Cubit<AppState> {
     emit(WaitingResult());
     await getApi2(imgname: imgname, token: token).then((res) {
       test_result = res;
+      var now = DateTime.now().millisecondsSinceEpoch;
+
       Map<String, dynamic> imageData = {
         'name': imgname,
         'url': url,
-        //'createdAt': FieldValue.serverTimestamp(),
-        'result': res
+        'result': res,
+        'time':now,
       };
-      dbRef.child(user.uid).child("images").child(imgname).set(imageData);
+      dbRef.child(user.uid).child("images").child(now.toString()).set(imageData);
     });
     emit(TestDone());
   }
@@ -278,4 +280,5 @@ class AppCubit extends Cubit<AppState> {
     print("Loaded lang");
     emit(ChangedLanguage());
   }
+
 }
