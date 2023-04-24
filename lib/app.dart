@@ -1,9 +1,9 @@
-import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertest/screens/myAuthGate.dart';
 import 'generated/l10n.dart';
-import 'screens/auth_gate.dart';
 
 
 class MyApp extends StatelessWidget {
@@ -23,7 +23,6 @@ class MyApp extends StatelessWidget {
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             // This delegate is required to provide the labels that are not overridden by LabelOverrides
-            FirebaseUILocalizations.delegate,
           ],
           supportedLocales: S.delegate.supportedLocales,
           debugShowCheckedModeBanner: false,
@@ -67,7 +66,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: const AuthGate(),
+      child: const myAuthGate(),
     );
   }
 }

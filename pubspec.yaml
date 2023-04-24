@@ -65,6 +65,7 @@ dependencies:
   loading_animation_widget:
   sidebarx: ^0.15.0
   intl: ^0.17.0
+  email_validator: ^2.1.17
 dev_dependencies:
   flutter_launcher_icons: ^0.12.0
   flutter_test:

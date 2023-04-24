@@ -14,6 +14,5 @@ void main() async {
   FirebaseUIAuth.configureProviders([
     EmailAuthProvider(),
   ]);
-
   runApp(const MyApp());
 }
