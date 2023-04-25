@@ -3,8 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertest/screens/AuthTab/authenticationCubit/authentication_cubit.dart';
+import 'package:flag/flag.dart';
+
+import '../../../generated/l10n.dart';
+
+
 
 class LoginForm extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -35,8 +41,8 @@ class LoginForm extends StatelessWidget {
                           style: TextStyle(color: Colors.red),
                         );
                       } else if (state is LoginSuccess) {
-                        return Text(
-                          'Login successful!',
+                        return const Text(
+                          "Success",
                           style: TextStyle(color: Colors.green),
                         );
                       } else {
@@ -44,11 +50,35 @@ class LoginForm extends StatelessWidget {
                       }
                     },
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      DropdownButton<Language>(
+                        hint: Text(S.of(context).lang),
+                        value: authenticationCubit.selectedLanguage,
+                        onChanged: (Language? newValue) {
+                          authenticationCubit.languageChanged(newValue);
+                        },
+                        items: authenticationCubit.languages.map((Language lang) {
+                          return DropdownMenuItem<Language>(
+                            value: lang,
+                            child: Row(
+                              children: [
+                                Flag.fromString(lang.code,height: 25.h, width: 50.w,),
+                                SizedBox(width: 8.w),
+                                Text(lang.lang),
+                              ],
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ],
+                  ),
                   Padding(
                     padding: EdgeInsets.all(8.w),
                     child: Row(
                       children: [
-                        Text("Login", style: TextStyle(fontSize: 30.sp)),
+                        Text(S.of(context).signInText, style: TextStyle(fontSize: 30.sp)),
                       ],
                     ),
                   ),
@@ -56,7 +86,7 @@ class LoginForm extends StatelessWidget {
                     padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
                     child: TextFormField(
                       decoration: InputDecoration(
-                        labelText: 'Email',
+                        labelText: S.of(context).emailInputLabel,
                       ),
                       onChanged: (value) {
                         authenticationCubit.emailChangedLogin(value);
@@ -67,7 +97,7 @@ class LoginForm extends StatelessWidget {
                     padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
                     child: TextFormField(
                       decoration: InputDecoration(
-                          labelText: 'Password',
+                          labelText: S.of(context).passwordInputLabel,
                           suffixIcon: IconButton(
                               onPressed: () {
                                 authenticationCubit.visibilityChanged();
@@ -90,13 +120,13 @@ class LoginForm extends StatelessWidget {
                               left: 10.w, right: 10.w, top: 5.h),
                           child: RichText(
                             text: TextSpan(
-                              text: "New to ScrEye?",
+                              text: S.of(context).new_to_screye,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Color(0xFF3177A3)),
                               children: [
                                 TextSpan(
-                                  text: ' Register',
+                                  text: S.of(context).registerText,
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Color(0xFFF05454),
@@ -118,9 +148,9 @@ class LoginForm extends StatelessWidget {
                     padding: EdgeInsets.all(0.w),
                     child: ElevatedButton(
                       onPressed: () {
-                        authenticationCubit.submitLogin();
+                        authenticationCubit.submitLogin(context);
                       },
-                      child: const Text('Login'),
+                      child:  Text(S.of(context).signInText),
                     ),
                   ),
                   Container(
@@ -133,7 +163,7 @@ class LoginForm extends StatelessWidget {
                             text: TextSpan(
                               children: [
                                 TextSpan(
-                                  text: 'Reset Password?',
+                                  text: S.of(context).resetPasswordButtonLabel,
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Color(0xFFF05454),

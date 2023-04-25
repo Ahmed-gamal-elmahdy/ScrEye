@@ -14,6 +14,7 @@ class AuthenticationFailure extends AuthenticationState {
   AuthenticationFailure(this.errorMessage);
 }
 
+class LanguageChanged extends AuthenticationState {}
 //Register
 class RegistrationInitial extends AuthenticationState {}
 
