@@ -64,14 +64,17 @@ class HomeTab extends StatelessWidget {
                   }),
             ],
           ),
-          appBar: AppBar(actions: [
-            IconButton(
-                tooltip: "Logout",
-                onPressed: () {
-                  FirebaseUIAuth.signOut();
-                },
-                icon: Icon(Icons.power_settings_new_rounded))
-          ], title: Text(bodyNames[cubit.bodyIndex])),
+          appBar:AppBar(
+            actions: [
+              IconButton(
+                  tooltip: "Logout",
+                  onPressed: () {
+                    FirebaseUIAuth.signOut();
+                  },
+                  icon: Icon(Icons.power_settings_new_rounded))
+            ],
+            title: Text(S.of(context).navbar_home),
+          ),
           body: bodyScreens[cubit.bodyIndex],
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: cubit.bodyIndex,
