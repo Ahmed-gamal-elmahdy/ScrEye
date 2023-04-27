@@ -11,7 +11,6 @@ import 'home_screen.dart';
 
 class myAuthGate extends StatelessWidget {
   const myAuthGate({super.key});
-
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(

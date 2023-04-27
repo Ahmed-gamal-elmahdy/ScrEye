@@ -1,44 +1,50 @@
-import 'dart:ui';
+
 
 import 'package:bloc/bloc.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:meta/meta.dart';
-import 'package:intl/intl.dart';
+
 import '../../../generated/l10n.dart';
-import 'package:flag/flag.dart';
+import '../../../widgets/Language.dart';
+
 
 part 'authentication_state.dart';
 
-class Language {
-  final String lang;
-  final String code;
 
-  Language({required this.lang, required this.code});
-}
 
 class AuthenticationCubit extends Cubit<AuthenticationState> {
-  AuthenticationCubit() : super(AuthenticationInitial());
+
+// AuthenticationCubit([Language? language])
+//     : selectedLanguage = language ?? Language(lang: "English", code: "US"),
+//       super(AuthenticationWithLanguage(language ?? Language(lang: "English", code: "US")));
+
+  AuthenticationCubit() :super(AuthenticationInitial());
 
   String _email = '';
   String _password = '';
   String _passwordConfirm = '';
   bool isVisible = false;
   List<Language> languages = [
-    Language(lang: "English", code: "US"),
-    Language(lang: "العربية", code: "EG"),
+    const Language(name: "English", code: "US"),
+    const Language(name: "العربية", code: "EG"),
   ];
   Language? selectedLanguage;
+  TextDirection? layoutDirection;
+
+
 
   void languageChanged(newLang){
     selectedLanguage = newLang;
     if(newLang.lang == "English"){
-      S.load(Locale('en', ''));
+      S.load(const Locale('en', ''));
+      layoutDirection = TextDirection.ltr;
     }
     else{
-      S.load(Locale('ar', ''));
+      S.load(const Locale('ar', ''));
+      layoutDirection = TextDirection.rtl;
+
     }
     emit(LanguageChanged());
   }
@@ -157,3 +163,5 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     }
   }
 }
+
+
