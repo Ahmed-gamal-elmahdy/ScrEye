@@ -79,6 +79,9 @@ class LoginForm extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.all(8.w),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.w),
                       child: Row(
                         children: [
                           Text(S.of(context).signInText,
@@ -127,13 +130,13 @@ class LoginForm extends StatelessWidget {
                             child: RichText(
                               text: TextSpan(
                                 text: S.of(context).new_to_screye,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Color(0xFF3177A3)),
                                 children: [
                                   TextSpan(
                                     text: S.of(context).registerText,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Color(0xFFF05454),
                                     ),
@@ -152,7 +155,7 @@ class LoginForm extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.all(0.w),
-                      child: ElevatedButton(
+                      child: OutlinedButton(
                         onPressed: () {
                           authenticationCubit.submitLogin(context);
                         },

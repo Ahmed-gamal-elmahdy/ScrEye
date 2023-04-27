@@ -383,7 +383,7 @@ class S {
   /// `Align Clipper with Conjunctiva`
   String get align_clipper {
     return Intl.message(
-      'Align Clipper with Conjunctiva',
+      'Put Clipper on Conjunctiva',
       name: 'align_clipper',
       desc: '',
       args: [],

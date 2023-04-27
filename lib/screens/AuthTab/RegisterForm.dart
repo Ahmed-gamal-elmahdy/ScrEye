@@ -27,7 +27,7 @@ class RegistrationForm extends StatelessWidget {
                       padding: EdgeInsets.all(8.w),
                       child: Container(
                           height: MediaQuery.of(context).size.height * 0.25,
-                          width: MediaQuery.of(context).size.width,
+                          width: MediaQuery.of(context).size.width * 0.8,
                           child: Image.asset('assets/logo_2.png')),
                     ),
                     BlocBuilder<AuthenticationCubit, AuthenticationState>(
@@ -160,7 +160,7 @@ class RegistrationForm extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.all(20.w),
-                      child: ElevatedButton(
+                      child: OutlinedButton(
                         onPressed: () {
                           authenticationCubit.submitRegistration(context);
                         },

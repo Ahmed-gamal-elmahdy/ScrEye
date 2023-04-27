@@ -33,7 +33,7 @@
 "camera": "Camera",
 "result": "Result",
 "capture": "Capture",
-"align_clipper": "Align Clipper with Conjunctiva",
+"align_clipper": "Put Clipper on Conjunctiva",
 "result": "Result",
 "take_test_first": "Take a test first to see your result!",
 "navbar_home": "Home",
@@ -51,6 +51,6 @@
 "discard": "Discard",
 "img_discarded": "Image Discarded",
 "your_img": "Your Image",
-"new_to_screye": "New to ScrEye?",
-"already_user":"Already a ScrEye user?"
+"new_to_screye": "New to ScrEye? ",
+"already_user":"Already a ScrEye user? "
 }
