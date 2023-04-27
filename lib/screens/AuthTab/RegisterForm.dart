@@ -24,7 +24,7 @@ class RegistrationForm extends StatelessWidget {
                       padding: EdgeInsets.all(8.w),
                       child: Container(
                           height: MediaQuery.of(context).size.height * 0.25,
-                          width: MediaQuery.of(context).size.width,
+                          width: MediaQuery.of(context).size.width * 0.8,
                           child: Image.asset('assets/logo_2.png')),
                     ),
                   ),
@@ -48,11 +48,15 @@ class RegistrationForm extends StatelessWidget {
                     },
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                           DropdownButton<Language>(
                             hint: Text(S.of(context).lang),
                             value: authenticationCubit.selectedLanguage,
+                            icon: Icon(
+                              Icons.arrow_drop_down,
+                              color: Color(0xFFF05454),
+                            ),
                             onChanged: (Language? newValue) {
                               authenticationCubit.languageChanged(newValue);
                             },
@@ -152,7 +156,7 @@ class RegistrationForm extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.all(20.w),
-                    child: ElevatedButton(
+                    child: OutlinedButton(
                       onPressed: () {
                         authenticationCubit.submitRegistration(context);
                       },

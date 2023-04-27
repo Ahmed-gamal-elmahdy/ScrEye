@@ -62,7 +62,7 @@ class AuthGate extends StatelessWidget {
                     padding: EdgeInsets.fromLTRB(0, 10, 10, 10),
                     child: RichText(
                       text: TextSpan(
-                        text: "Already a ScrEye user?",
+                        text: "Already a ScrEye user? ",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Color(0xFF3177A3)),
@@ -105,7 +105,7 @@ class AuthGate extends StatelessWidget {
                       padding: EdgeInsets.fromLTRB(0, 10, 10, 10),
                       child: RichText(
                         text: TextSpan(
-                          text: "New to ScrEye?",
+                          text: "New to ScrEye? ",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Color(0xFF3177A3)),
