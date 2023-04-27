@@ -30,6 +30,8 @@ class AppCubit extends Cubit<AppState> {
   late CameraController controller;
   final _firebaseStorage = FirebaseStorage.instance;
   final dbRef = FirebaseDatabase.instance.ref().child('users');
+  final String apiHeroku = "https://flaskapitestgemy.herokuapp.com/api/v2/";
+  final String apiAzure = "https://screyeapi.azurewebsites.net/api/screyeapiv1/";
 
   String test_result = "";
   double sliderVal = 1.0;
@@ -139,8 +141,8 @@ class AppCubit extends Cubit<AppState> {
                           onPressed: () async {
                             _controller.crop();
                             Future.delayed(Duration(milliseconds: 1000), () {
-                              uploadImage2(outputimg).then((data) async {
-                                testGet2(
+                              uploadImage(image: outputimg).then((data) async {
+                                getTest(
                                     imgname: data[0],
                                     token: data[1],
                                     url: data[2]);
@@ -199,72 +201,119 @@ class AppCubit extends Cubit<AppState> {
     emit(ChangedTabIndex());
   }
 
-  Future<List> uploadImage2(image) async {
+  Future<List> uploadImage({
+    required dynamic image,
+  }) async {
     notLoading();
     uploading();
-    final tempDir = await getTemporaryDirectory();
-    var now = DateTime.now();
-    var name = '${now.day}-${now.month}-${now.year}-${now.hour}-${now.minute}-${now.second}';
-    File file = await File('${tempDir.path}/image.jpg').create();
-    if (image.runtimeType == XFile) {
-      file = File(image.path);
-    } else {
-      file.writeAsBytesSync(image);
-    }
-    if (image != null) {
-      //Upload to Firebase
-      var snapshot = await _firebaseStorage
-          .ref()
-          .child('images/${user.uid}/${name}')
-          .putFile(file);
-      var downloadUrl = await snapshot.ref.getDownloadURL();
-      const startWord = "token=";
-      final startIndex = downloadUrl.indexOf(startWord);
-      final endIndex = downloadUrl.length;
-      final String token =
-          downloadUrl.substring(startIndex + startWord.length, endIndex);
-      print('url= ${downloadUrl}');
+
+    try {
+      final tempDir = await getTemporaryDirectory();
+      final now = DateTime.now();
+      final name = '${now.day}-${now.month}-${now.year}-${now.hour}-${now.minute}-${now.second}';
+      File file = await File('${tempDir.path}/image.jpg').create();
+
+      if (image.runtimeType == XFile) {
+        file = File(image.path);
+      } else {
+        file.writeAsBytesSync(image);
+      }
+
+      if (image != null) {
+        final snapshot = await uploadFileToFirebase(file, name);
+        final downloadUrl = await getDownloadUrl(snapshot);
+        final token = parseTokenFromUrl(downloadUrl);
+
+        print('url= $downloadUrl');
+        doneUploading();
+        return [name, token, downloadUrl];
+      }
+
       doneUploading();
-      return [name, token, downloadUrl];
+      return ["name", "token"];
+    } catch (e) {
+      print(e.toString());
+      doneUploading();
+      return ["name", "token"];
     }
-    doneUploading();
-    return ["name", "token"];
   }
 
-  void testGet2(
-      {required String imgname,
-      required String token,
-      required String url}) async {
+  Future<dynamic> uploadFileToFirebase(File file, String name) async {
+    return await _firebaseStorage
+        .ref()
+        .child('images/${user.uid}/${name}')
+        .putFile(file);
+  }
+
+  Future<String> getDownloadUrl(dynamic snapshot) async {
+    return await snapshot.ref.getDownloadURL();
+  }
+
+  String parseTokenFromUrl(String downloadUrl) {
+    const startWord = "token=";
+    final startIndex = downloadUrl.indexOf(startWord);
+    final endIndex = downloadUrl.length;
+    return downloadUrl.substring(startIndex + startWord.length, endIndex);
+  }
+
+  void getTest({
+    required String imgname,
+    required String token,
+    required String url,
+  }) async {
     bodyIndex = 2;
     emit(WaitingResult());
-    await getApi2(imgname: imgname, token: token).then((res) {
-      test_result = res;
-      var now = DateTime.now().millisecondsSinceEpoch;
 
-      Map<String, dynamic> imageData = {
+    try {
+      final res = await getApiRequest(imgname: imgname, token: token);
+      test_result = res;
+      final now = DateTime.now().millisecondsSinceEpoch;
+
+      final imageData = {
         'name': imgname,
         'url': url,
         'result': res,
-        'time':now,
+        'time': now,
       };
-      dbRef.child(user.uid).child("images").child(now.toString()).set(imageData);
-    });
-    emit(TestDone());
+      await writeImageDataToDatabase(imageData, now.toString());
+
+      emit(TestDone());
+    } catch (e) {
+      print(e.toString());
+      emit(TestError());
+    }
   }
 
-  Future<String> getApi2(
-      //New API endpoint
-      {required String imgname,
-      required String token}) async {
-    var apiHerku =
-        "https://flaskapitestgemy.herokuapp.com/api/v2/?id=${imgname}&token=${token}&uid=${user.uid}";
-    var apiAzure =
-        "https://screyeapi.azurewebsites.net/api/screyeapiv1?id=${imgname}&token=${token}";
-    print(apiHerku);
-    var dio = Dio();
-    var resp = await dio.get(apiHerku);
-    print(resp.data);
-    return resp.data;
+  Future<void> writeImageDataToDatabase(Map<String, dynamic> imageData, String key) async {
+    await dbRef.child(user.uid).child("images").child(key).set(imageData);
+  }
+
+  String buildUrl({
+    required String baseUrl,
+    required String imgname,
+    required String token,
+    required String uid,
+  }) => "$baseUrl?id=$imgname&token=$token&uid=$uid";
+
+  Future<String> getApiRequest({
+    required String imgname,
+    required String token,
+  }) async {
+    final String url = buildUrl(
+      baseUrl: apiHeroku,
+      imgname: imgname,
+      token: token,
+      uid: user.uid,
+    );
+    final dio = Dio();
+    try {
+      final response = await dio.get(url);
+      print(response.data);
+      return response.data;
+    } on DioError catch (e) {
+      print(e.message);
+      throw e;
+    }
   }
 
   void ChangeLanguage({required String lang}) {
