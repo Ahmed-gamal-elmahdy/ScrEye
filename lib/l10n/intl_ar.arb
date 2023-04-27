@@ -1,5 +1,6 @@
 {
 "@@locale": "ar",
+"lang":"العربية",
 "emailInputLabel" : "البريد الإلكتروني",
 "passwordInputLabel" : "كلمة المرور",
 "signInActionText" : "تسجيل الدخول",
@@ -24,6 +25,9 @@
 "forgotPasswordButtonLabel" : "نسيت كلمة المرور؟",
 "forgotPasswordViewTitle" : "استرجاع كلمة المرور المنسية",
 "resetPasswordButtonLabel" : "إعادة تعيين كلمة المرور",
+"passwordTooShort": "كلمة المرور يجب ان تكون اكثر من 6 احرف",
+"passwordTooWeak": "كلمة السر ضعيفة جدا",
+"unknownError": "خطأ غير معروف",
 "upload" : "أرفاق",
 "taken_photo_upload" : "ارفق صورة من الجهاز",
 "camera": "كاميرا",
@@ -46,5 +50,7 @@
 "img_saved_later": "تم حفظ الصورة على الجهاز",
 "discard": "حذف",
 "img_discarded": "تم حذف الصورة",
-"your_img": "الصورة"
+"your_img": "الصورة",
+"new_to_screye": "مستخدم جديد؟",
+"already_user":"لديك حساب؟"
 }

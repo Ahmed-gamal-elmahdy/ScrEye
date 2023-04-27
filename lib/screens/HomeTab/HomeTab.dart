@@ -24,7 +24,7 @@ class HomeTab extends StatelessWidget {
           S.of(context).align_clipper,
           S.of(context).result,
         ];
-        List bodyScreens = [UploadScreen(), CameraScreen(), ResultScreen()];
+        List bodyScreens = [const UploadScreen(), CameraScreen(), const ResultScreen()];
         return Scaffold(
           drawer: SidebarX(
             headerBuilder: (context, extended) {
@@ -64,14 +64,17 @@ class HomeTab extends StatelessWidget {
                   }),
             ],
           ),
-          appBar: AppBar(actions: [
-            IconButton(
-                tooltip: "Logout",
-                onPressed: () {
-                  FirebaseUIAuth.signOut();
-                },
-                icon: Icon(Icons.power_settings_new_rounded))
-          ], title: Text(bodyNames[cubit.bodyIndex])),
+          appBar:AppBar(
+            actions: [
+              IconButton(
+                  tooltip: "Logout",
+                  onPressed: () {
+                    FirebaseUIAuth.signOut();
+                  },
+                  icon: const Icon(Icons.power_settings_new_rounded))
+            ],
+            title: Text(bodyNames[cubit.bodyIndex]),
+          ),
           body: bodyScreens[cubit.bodyIndex],
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: cubit.bodyIndex,
@@ -79,21 +82,21 @@ class HomeTab extends StatelessWidget {
               BottomNavigationBarItem(
                   label: S.of(context).upload,
                   icon: IconButton(
-                      icon: Icon(Icons.upload),
+                      icon: const Icon(Icons.upload),
                       onPressed: () {
                         cubit.ChangeBodyIndex(0);
                       })),
               BottomNavigationBarItem(
                   label: S.of(context).camera,
                   icon: IconButton(
-                      icon: Icon(Icons.camera_alt_outlined),
+                      icon: const Icon(Icons.camera_alt_outlined),
                       onPressed: () {
                         cubit.ChangeBodyIndex(1);
                       })),
               BottomNavigationBarItem(
                   label: S.of(context).result,
                   icon: IconButton(
-                      icon: Icon(Icons.insert_drive_file_outlined),
+                      icon: const Icon(Icons.insert_drive_file_outlined),
                       onPressed: () {
                         cubit.ChangeBodyIndex(2);
                       }))

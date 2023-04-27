@@ -57,14 +57,16 @@ class SettingsTab extends StatelessWidget {
                     }),
               ],
             ),
-          appBar: AppBar(actions: [
-            IconButton(
-                tooltip: "Logout",
-                onPressed: () {
-                  FirebaseUIAuth.signOut();
-                },
-                icon: Icon(Icons.power_settings_new_rounded))
-          ], title: Text(S.of(context).navbar_settings),
+          appBar: AppBar(
+            actions: [
+              IconButton(
+                  tooltip: "Logout",
+                  onPressed: () {
+                    FirebaseUIAuth.signOut();
+                  },
+                  icon: Icon(Icons.power_settings_new_rounded))
+            ],
+            title: Text(S.of(context).navbar_settings),
           ),
           body: Center(
               child: Column(

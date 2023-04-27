@@ -23,71 +23,81 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accessDisabledErrorText": MessageLookupByLibrary.simpleMessage(
-            "تم تعطيل الوصول إلى هذا الحساب مؤقتًا"),
+            "Access to this account has been temporarily disabled"),
         "align_clipper": MessageLookupByLibrary.simpleMessage(
             "Align Clipper with Conjunctiva"),
+        "already_user":
+            MessageLookupByLibrary.simpleMessage("Already a ScrEye user?"),
         "anemic": MessageLookupByLibrary.simpleMessage("Anemic"),
         "camera": MessageLookupByLibrary.simpleMessage("Camera"),
         "capture": MessageLookupByLibrary.simpleMessage("Capture"),
         "capturing": MessageLookupByLibrary.simpleMessage("Capturing.."),
         "confirmPasswordDoesNotMatchErrorText":
             MessageLookupByLibrary.simpleMessage(
-                "كلمات المرور المدخلة غير متطابقة"),
+                "The entered passwords do not match"),
         "confirmPasswordInputLabel":
-            MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
+            MessageLookupByLibrary.simpleMessage("Confirm Password"),
         "confirmPasswordIsRequiredErrorText":
-            MessageLookupByLibrary.simpleMessage("قم بتأكيد كلمة مرورك"),
+            MessageLookupByLibrary.simpleMessage("Confirm your password"),
         "discard": MessageLookupByLibrary.simpleMessage("Discard"),
         "emailInputLabel": MessageLookupByLibrary.simpleMessage("Email"),
         "emailIsRequiredErrorText":
-            MessageLookupByLibrary.simpleMessage("البريد الإلكتروني مطلوب"),
-        "emailTakenErrorText": MessageLookupByLibrary.simpleMessage(
-            "هذا البريد الإلكتروني مستخدم مسبقاً"),
+            MessageLookupByLibrary.simpleMessage("Email is required"),
+        "emailTakenErrorText":
+            MessageLookupByLibrary.simpleMessage("This email is already used"),
         "forgotPasswordButtonLabel":
-            MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
+            MessageLookupByLibrary.simpleMessage("Forgot your password?"),
         "forgotPasswordViewTitle":
-            MessageLookupByLibrary.simpleMessage("استرجاع كلمة المرور المنسية"),
+            MessageLookupByLibrary.simpleMessage("Forgotten password recovery"),
         "img_discarded":
             MessageLookupByLibrary.simpleMessage("Image Discarded"),
         "img_saved_later":
             MessageLookupByLibrary.simpleMessage("Image saved for later use"),
-        "isNotAValidEmailErrorText": MessageLookupByLibrary.simpleMessage(
-            "رجاء قم بإدخال بريد إلكتروني صالح"),
+        "isNotAValidEmailErrorText":
+            MessageLookupByLibrary.simpleMessage("Please enter a valid email"),
+        "lang": MessageLookupByLibrary.simpleMessage("English"),
         "loading": MessageLookupByLibrary.simpleMessage("Loading..."),
         "navbar_history": MessageLookupByLibrary.simpleMessage("History"),
         "navbar_home": MessageLookupByLibrary.simpleMessage("Home"),
         "navbar_profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "navbar_settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "new_to_screye": MessageLookupByLibrary.simpleMessage("New to ScrEye?"),
         "not_anemic": MessageLookupByLibrary.simpleMessage("Not Anemic"),
         "passwordInputLabel": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordIsRequiredErrorText":
-            MessageLookupByLibrary.simpleMessage("كلمة المرور مطلوبة"),
+            MessageLookupByLibrary.simpleMessage("Password is required"),
+        "passwordTooShort": MessageLookupByLibrary.simpleMessage(
+            "Please enter a password with at least 6 characters"),
+        "passwordTooWeak": MessageLookupByLibrary.simpleMessage(
+            "The password provided is too weak."),
         "pls_wait": MessageLookupByLibrary.simpleMessage("Please Wait.."),
         "registerActionText": MessageLookupByLibrary.simpleMessage("Register"),
         "registerButtonText": MessageLookupByLibrary.simpleMessage("Register"),
-        "registerHintText":
-            MessageLookupByLibrary.simpleMessage("ليس لديك حساب مسبقا؟"),
-        "registerText": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
+        "registerHintText": MessageLookupByLibrary.simpleMessage(
+            "You don\'t already have an account?"),
+        "registerText":
+            MessageLookupByLibrary.simpleMessage("Create an account"),
         "resetPasswordButtonLabel":
-            MessageLookupByLibrary.simpleMessage("إعادة تعيين كلمة المرور"),
+            MessageLookupByLibrary.simpleMessage("Reset Password"),
         "result": MessageLookupByLibrary.simpleMessage("Result"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "signInActionText": MessageLookupByLibrary.simpleMessage("Sign in"),
         "signInButtonText": MessageLookupByLibrary.simpleMessage("Sign in"),
         "signInHintText":
-            MessageLookupByLibrary.simpleMessage("لديك حساب مسبقا؟"),
-        "signInText": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
-        "signOutButtonText":
-            MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
+            MessageLookupByLibrary.simpleMessage("Already have an account?"),
+        "signInText": MessageLookupByLibrary.simpleMessage("Sign In"),
+        "signOutButtonText": MessageLookupByLibrary.simpleMessage("Sign Out"),
         "take_test_first": MessageLookupByLibrary.simpleMessage(
             "Take a test first to see your result!"),
         "taken_photo_upload":
             MessageLookupByLibrary.simpleMessage("Upload A Taken Image"),
+        "unknownError":
+            MessageLookupByLibrary.simpleMessage("An unknown error occurred"),
         "upload": MessageLookupByLibrary.simpleMessage("Upload"),
         "userNotFoundErrorText":
-            MessageLookupByLibrary.simpleMessage("هذا الحساب غير موجود"),
+            MessageLookupByLibrary.simpleMessage("This account does not exist"),
         "wrongOrNoPasswordErrorText": MessageLookupByLibrary.simpleMessage(
-            "كلمة المرور غير صالحة أو أن هذا المستخدم ليس لديه كلمة مرور"),
+            "The password is invalid or this user does not have a password"),
         "you_are": MessageLookupByLibrary.simpleMessage("You are:"),
         "your_img": MessageLookupByLibrary.simpleMessage("Your Image")
       };

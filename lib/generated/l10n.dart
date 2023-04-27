@@ -50,6 +50,16 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `English`
+  String get lang {
+    return Intl.message(
+      'English',
+      name: 'lang',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Email`
   String get emailInputLabel {
     return Intl.message(
@@ -110,181 +120,211 @@ class S {
     );
   }
 
-  /// `البريد الإلكتروني مطلوب`
+  /// `Email is required`
   String get emailIsRequiredErrorText {
     return Intl.message(
-      'البريد الإلكتروني مطلوب',
+      'Email is required',
       name: 'emailIsRequiredErrorText',
       desc: '',
       args: [],
     );
   }
 
-  /// `رجاء قم بإدخال بريد إلكتروني صالح`
+  /// `Please enter a valid email`
   String get isNotAValidEmailErrorText {
     return Intl.message(
-      'رجاء قم بإدخال بريد إلكتروني صالح',
+      'Please enter a valid email',
       name: 'isNotAValidEmailErrorText',
       desc: '',
       args: [],
     );
   }
 
-  /// `هذا الحساب غير موجود`
+  /// `This account does not exist`
   String get userNotFoundErrorText {
     return Intl.message(
-      'هذا الحساب غير موجود',
+      'This account does not exist',
       name: 'userNotFoundErrorText',
       desc: '',
       args: [],
     );
   }
 
-  /// `هذا البريد الإلكتروني مستخدم مسبقاً`
+  /// `This email is already used`
   String get emailTakenErrorText {
     return Intl.message(
-      'هذا البريد الإلكتروني مستخدم مسبقاً',
+      'This email is already used',
       name: 'emailTakenErrorText',
       desc: '',
       args: [],
     );
   }
 
-  /// `تم تعطيل الوصول إلى هذا الحساب مؤقتًا`
+  /// `Access to this account has been temporarily disabled`
   String get accessDisabledErrorText {
     return Intl.message(
-      'تم تعطيل الوصول إلى هذا الحساب مؤقتًا',
+      'Access to this account has been temporarily disabled',
       name: 'accessDisabledErrorText',
       desc: '',
       args: [],
     );
   }
 
-  /// `كلمة المرور غير صالحة أو أن هذا المستخدم ليس لديه كلمة مرور`
+  /// `The password is invalid or this user does not have a password`
   String get wrongOrNoPasswordErrorText {
     return Intl.message(
-      'كلمة المرور غير صالحة أو أن هذا المستخدم ليس لديه كلمة مرور',
+      'The password is invalid or this user does not have a password',
       name: 'wrongOrNoPasswordErrorText',
       desc: '',
       args: [],
     );
   }
 
-  /// `تسجيل الدخول`
+  /// `Sign In`
   String get signInText {
     return Intl.message(
-      'تسجيل الدخول',
+      'Sign In',
       name: 'signInText',
       desc: '',
       args: [],
     );
   }
 
-  /// `إنشاء حساب`
+  /// `Create an account`
   String get registerText {
     return Intl.message(
-      'إنشاء حساب',
+      'Create an account',
       name: 'registerText',
       desc: '',
       args: [],
     );
   }
 
-  /// `ليس لديك حساب مسبقا؟`
+  /// `You don't already have an account?`
   String get registerHintText {
     return Intl.message(
-      'ليس لديك حساب مسبقا؟',
+      'You don\'t already have an account?',
       name: 'registerHintText',
       desc: '',
       args: [],
     );
   }
 
-  /// `لديك حساب مسبقا؟`
+  /// `Already have an account?`
   String get signInHintText {
     return Intl.message(
-      'لديك حساب مسبقا؟',
+      'Already have an account?',
       name: 'signInHintText',
       desc: '',
       args: [],
     );
   }
 
-  /// `تسجيل الخروج`
+  /// `Sign Out`
   String get signOutButtonText {
     return Intl.message(
-      'تسجيل الخروج',
+      'Sign Out',
       name: 'signOutButtonText',
       desc: '',
       args: [],
     );
   }
 
-  /// `كلمة المرور مطلوبة`
+  /// `Password is required`
   String get passwordIsRequiredErrorText {
     return Intl.message(
-      'كلمة المرور مطلوبة',
+      'Password is required',
       name: 'passwordIsRequiredErrorText',
       desc: '',
       args: [],
     );
   }
 
-  /// `قم بتأكيد كلمة مرورك`
+  /// `Confirm your password`
   String get confirmPasswordIsRequiredErrorText {
     return Intl.message(
-      'قم بتأكيد كلمة مرورك',
+      'Confirm your password',
       name: 'confirmPasswordIsRequiredErrorText',
       desc: '',
       args: [],
     );
   }
 
-  /// `كلمات المرور المدخلة غير متطابقة`
+  /// `The entered passwords do not match`
   String get confirmPasswordDoesNotMatchErrorText {
     return Intl.message(
-      'كلمات المرور المدخلة غير متطابقة',
+      'The entered passwords do not match',
       name: 'confirmPasswordDoesNotMatchErrorText',
       desc: '',
       args: [],
     );
   }
 
-  /// `تأكيد كلمة المرور`
+  /// `Confirm Password`
   String get confirmPasswordInputLabel {
     return Intl.message(
-      'تأكيد كلمة المرور',
+      'Confirm Password',
       name: 'confirmPasswordInputLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `نسيت كلمة المرور؟`
+  /// `Forgot your password?`
   String get forgotPasswordButtonLabel {
     return Intl.message(
-      'نسيت كلمة المرور؟',
+      'Forgot your password?',
       name: 'forgotPasswordButtonLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `استرجاع كلمة المرور المنسية`
+  /// `Forgotten password recovery`
   String get forgotPasswordViewTitle {
     return Intl.message(
-      'استرجاع كلمة المرور المنسية',
+      'Forgotten password recovery',
       name: 'forgotPasswordViewTitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `إعادة تعيين كلمة المرور`
+  /// `Reset Password`
   String get resetPasswordButtonLabel {
     return Intl.message(
-      'إعادة تعيين كلمة المرور',
+      'Reset Password',
       name: 'resetPasswordButtonLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a password with at least 6 characters`
+  String get passwordTooShort {
+    return Intl.message(
+      'Please enter a password with at least 6 characters',
+      name: 'passwordTooShort',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The password provided is too weak.`
+  String get passwordTooWeak {
+    return Intl.message(
+      'The password provided is too weak.',
+      name: 'passwordTooWeak',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `An unknown error occurred`
+  String get unknownError {
+    return Intl.message(
+      'An unknown error occurred',
+      name: 'unknownError',
       desc: '',
       args: [],
     );
@@ -505,6 +545,26 @@ class S {
     return Intl.message(
       'Your Image',
       name: 'your_img',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New to ScrEye?`
+  String get new_to_screye {
+    return Intl.message(
+      'New to ScrEye?',
+      name: 'new_to_screye',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Already a ScrEye user?`
+  String get already_user {
+    return Intl.message(
+      'Already a ScrEye user?',
+      name: 'already_user',
       desc: '',
       args: [],
     );

@@ -57,14 +57,16 @@ class ProfileTab extends StatelessWidget {
                   }),
             ],
           ),
-          appBar: AppBar(actions: [
-            IconButton(
-                tooltip: "Logout",
-                onPressed: () {
-                  FirebaseUIAuth.signOut();
-                },
-                icon: Icon(Icons.power_settings_new_rounded))
-          ], title: Text(S.of(context).navbar_profile),
+          appBar: AppBar(
+            actions: [
+              IconButton(
+                  tooltip: "Logout",
+                  onPressed: () {
+                    FirebaseUIAuth.signOut();
+                  },
+                  icon: Icon(Icons.power_settings_new_rounded))
+            ],
+            title: Text(S.of(context).navbar_profile),
           ),
           body: Center(
             child: Column(
