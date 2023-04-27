@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:bloc/bloc.dart';
+
 import 'package:camera/camera.dart';
 import 'package:crop_your_image/crop_your_image.dart';
 import 'package:dio/dio.dart';
@@ -12,7 +12,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:meta/meta.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sidebarx/sidebarx.dart';
 import '../../../generated/l10n.dart';
@@ -58,10 +57,10 @@ class AppCubit extends Cubit<AppState> {
       if (e is CameraException) {
         switch (e.code) {
           case 'CameraAccessDenied':
-            print('User denied camera access.');
+            debugPrint('User denied camera access.');
             break;
           default:
-            print('Handle other errors.');
+            debugPrint('Handle other errors.');
             break;
         }
       }
@@ -94,7 +93,7 @@ class AppCubit extends Cubit<AppState> {
           children: [
             Crop(
                 fixArea: true,
-                baseColor: Color(0xFF90CBF0),
+                baseColor: const Color(0xFF90CBF0),
                 initialAreaBuilder: (rect) => Rect.fromLTRB(rect.left + 110.w,
                     rect.top + 160.h, rect.right - 110.w, rect.bottom - 370.h),
                 controller: _controller,

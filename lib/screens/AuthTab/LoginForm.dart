@@ -1,17 +1,14 @@
+import 'package:flag/flag.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertest/screens/AuthTab/authenticationCubit/authentication_cubit.dart';
-import 'package:flag/flag.dart';
 
 import '../../../generated/l10n.dart';
 import '../../widgets/Language.dart';
 
-
-
 class LoginForm extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -21,7 +18,8 @@ class LoginForm extends StatelessWidget {
           final authenticationCubit = context.watch<AuthenticationCubit>();
           return Scaffold(
             body: Directionality(
-              textDirection: authenticationCubit.layoutDirection ?? TextDirection.ltr,
+              textDirection:
+                  authenticationCubit.layoutDirection ?? TextDirection.ltr,
               child: SingleChildScrollView(
                 child: Column(
                   children: [
@@ -59,13 +57,17 @@ class LoginForm extends StatelessWidget {
                         DropdownButton<Language>(
                           hint: Text(S.of(context).lang),
                           value: authenticationCubit.selectedLanguage,
-                          onChanged: authenticationCubit.languageChanged,
-                          items: authenticationCubit.languages.map(( language) {
+                          onChanged: (Language? newValue) {
+                            authenticationCubit.languageChanged(newValue);
+                          },
+                          items: authenticationCubit.languages.map((language) {
                             return DropdownMenuItem<Language>(
                               value: language,
+                              // Use a unique identifier as the value
                               child: Row(
                                 children: [
-                                  Flag.fromString(language.code, height: 25.h, width: 50.w),
+                                  Flag.fromString(language.code,
+                                      height: 25.h, width: 50.w),
                                   SizedBox(width: 8.w),
                                   Text(language.name),
                                 ],
@@ -79,12 +81,14 @@ class LoginForm extends StatelessWidget {
                       padding: EdgeInsets.all(8.w),
                       child: Row(
                         children: [
-                          Text(S.of(context).signInText, style: TextStyle(fontSize: 30.sp)),
+                          Text(S.of(context).signInText,
+                              style: TextStyle(fontSize: 30.sp)),
                         ],
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
+                      padding:
+                          EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
                       child: TextFormField(
                         decoration: InputDecoration(
                           labelText: S.of(context).emailInputLabel,
@@ -95,7 +99,8 @@ class LoginForm extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
+                      padding:
+                          EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
                       child: TextFormField(
                         decoration: InputDecoration(
                             labelText: S.of(context).passwordInputLabel,
@@ -136,7 +141,6 @@ class LoginForm extends StatelessWidget {
                                       ..onTap = () {
                                         Navigator.of(context)
                                             .popAndPushNamed('/register');
-
                                       },
                                   ),
                                 ],
@@ -152,7 +156,7 @@ class LoginForm extends StatelessWidget {
                         onPressed: () {
                           authenticationCubit.submitLogin(context);
                         },
-                        child:  Text(S.of(context).signInText),
+                        child: Text(S.of(context).signInText),
                       ),
                     ),
                     Container(
@@ -165,7 +169,8 @@ class LoginForm extends StatelessWidget {
                               text: TextSpan(
                                 children: [
                                   TextSpan(
-                                    text: S.of(context).resetPasswordButtonLabel,
+                                    text:
+                                        S.of(context).resetPasswordButtonLabel,
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Color(0xFFF05454),

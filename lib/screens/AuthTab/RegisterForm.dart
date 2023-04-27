@@ -1,4 +1,3 @@
-
 import 'package:flag/flag.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +7,7 @@ import 'package:fluttertest/screens/AuthTab/authenticationCubit/authentication_c
 
 import '../../../generated/l10n.dart';
 import '../../widgets/Language.dart';
+
 class RegistrationForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,8 @@ class RegistrationForm extends StatelessWidget {
           final authenticationCubit = context.watch<AuthenticationCubit>();
           return Scaffold(
             body: Directionality(
-              textDirection: authenticationCubit.layoutDirection ?? TextDirection.ltr,
+              textDirection:
+                  authenticationCubit.layoutDirection ?? TextDirection.ltr,
               child: SingleChildScrollView(
                 child: Column(
                   children: [
@@ -32,7 +33,7 @@ class RegistrationForm extends StatelessWidget {
                     BlocBuilder<AuthenticationCubit, AuthenticationState>(
                       builder: (context, state) {
                         if (state is RegistrationLoading) {
-                          return CircularProgressIndicator();
+                          return const CircularProgressIndicator();
                         } else if (state is AuthenticationFailure) {
                           return Text(
                             state.errorMessage,
@@ -54,15 +55,19 @@ class RegistrationForm extends StatelessWidget {
                         DropdownButton<Language>(
                           hint: Text(S.of(context).lang),
                           value: authenticationCubit.selectedLanguage,
-                          onChanged: authenticationCubit.languageChanged,
-                          items: authenticationCubit.languages.map((Language lang) {
+                          onChanged: (Language? newValue) {
+                            authenticationCubit.languageChanged(newValue);
+                          },
+                          items: authenticationCubit.languages.map((language) {
                             return DropdownMenuItem<Language>(
-                              value: lang,
+                              value: language,
+                              // Use a unique identifier as the value
                               child: Row(
                                 children: [
-                                  Flag.fromString(lang.code, height: 25.h, width: 50.w),
+                                  Flag.fromString(language.code,
+                                      height: 25.h, width: 50.w),
                                   SizedBox(width: 8.w),
-                                  Text(lang.name),
+                                  Text(language.name),
                                 ],
                               ),
                             );
@@ -74,12 +79,14 @@ class RegistrationForm extends StatelessWidget {
                       padding: EdgeInsets.all(8.w),
                       child: Row(
                         children: [
-                          Text(S.of(context).registerButtonText, style: TextStyle(fontSize: 30.sp)),
+                          Text(S.of(context).registerButtonText,
+                              style: TextStyle(fontSize: 30.sp)),
                         ],
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
+                      padding:
+                          EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
                       child: TextFormField(
                         decoration: InputDecoration(
                           labelText: S.of(context).emailInputLabel,
@@ -90,7 +97,8 @@ class RegistrationForm extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
+                      padding:
+                          EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
                       child: TextFormField(
                         decoration: InputDecoration(
                             labelText: S.of(context).passwordInputLabel,
@@ -108,7 +116,8 @@ class RegistrationForm extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
+                      padding:
+                          EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
                       child: TextFormField(
                         decoration: InputDecoration(
                           labelText: S.of(context).confirmPasswordInputLabel,
