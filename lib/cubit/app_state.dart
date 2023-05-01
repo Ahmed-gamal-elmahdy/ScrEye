@@ -11,6 +11,7 @@ class CameraStarted extends AppState{}
 class ZoomLevelChanged extends AppState{}
 class WaitingResult extends AppState{}
 class TestDone extends AppState{}
+class TestError extends AppState{}
 class Loading extends AppState{}
 class NotLoading extends AppState{}
 class Uploading extends AppState{}

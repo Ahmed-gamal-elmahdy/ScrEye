@@ -6,7 +6,11 @@ abstract class AuthenticationState {}
 //Global authentication
 class AuthenticationInitial extends AuthenticationState {}
 
-class PasswordVisibilityChanged extends AuthenticationState {}
+class AuthenticationWithLanguage extends AuthenticationState {
+  final Language language;
+
+  AuthenticationWithLanguage(this.language);
+}
 
 class AuthenticationFailure extends AuthenticationState {
   final String errorMessage;
@@ -15,6 +19,9 @@ class AuthenticationFailure extends AuthenticationState {
 }
 
 class LanguageChanged extends AuthenticationState {}
+
+class PasswordVisibilityChanged extends AuthenticationState {}
+
 //Register
 class RegistrationInitial extends AuthenticationState {}
 
@@ -63,7 +70,7 @@ class LoginEmailChanged extends AuthenticationEvent {
 }
 
 class LoginPasswordChanged extends AuthenticationEvent {
-  final String password;
+  final Language lang;
 
-  LoginPasswordChanged(this.password);
+  LoginPasswordChanged(this.lang);
 }

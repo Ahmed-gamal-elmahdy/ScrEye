@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyTheme {
   static ThemeData originalTheme(context) {
@@ -76,6 +77,14 @@ class MyTheme {
       textTheme: Theme.of(context).textTheme.apply(
             bodyColor: Color(0xFF225270),
           ),
+      drawerTheme: DrawerThemeData(
+        width: ScreenUtil().screenWidth * 0.6,
+        scrimColor: Colors.blue.withOpacity(0.25),
+    ),
+      listTileTheme: ListTileThemeData(
+        iconColor: Color(0xFF3177A3),
+        textColor: Color(0xFF3177A3),
+      ),
     );
   }
 }

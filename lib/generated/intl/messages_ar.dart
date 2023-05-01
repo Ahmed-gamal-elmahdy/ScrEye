@@ -55,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "isNotAValidEmailErrorText": MessageLookupByLibrary.simpleMessage(
             "رجاء قم بإدخال بريد إلكتروني صالح"),
         "lang": MessageLookupByLibrary.simpleMessage("العربية"),
+        "language": MessageLookupByLibrary.simpleMessage("اللغة"),
         "loading": MessageLookupByLibrary.simpleMessage("جارى التحميل"),
         "navbar_history": MessageLookupByLibrary.simpleMessage("السجلات"),
         "navbar_home": MessageLookupByLibrary.simpleMessage("الرئيسية"),

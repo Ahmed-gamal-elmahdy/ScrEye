@@ -44,8 +44,8 @@ class UploadScreen extends StatelessWidget {
                       final _imagePicker = ImagePicker();
                       var image = (await _imagePicker.pickImage(
                           source: ImageSource.gallery))!;
-                      cubit.uploadImage2(image).then((value) {
-                        cubit.testGet2(imgname: value[0], token: value[1],url: value[2]);
+                      cubit.uploadImage(image: image).then((value) {
+                        cubit.getTest(imgname: value[0], token: value[1],url: value[2]);
                       });
                     },
                   ): OutlinedButton(

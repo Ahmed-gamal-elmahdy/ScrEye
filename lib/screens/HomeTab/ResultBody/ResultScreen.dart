@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertest/cubit/app_cubit.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+
 import '../../../generated/l10n.dart';
 
 class ResultScreen extends StatelessWidget {

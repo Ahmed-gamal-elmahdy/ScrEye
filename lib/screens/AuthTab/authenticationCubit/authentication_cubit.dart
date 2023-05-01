@@ -1,44 +1,45 @@
-import 'dart:ui';
-
 import 'package:bloc/bloc.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:meta/meta.dart';
-import 'package:intl/intl.dart';
+
 import '../../../generated/l10n.dart';
-import 'package:flag/flag.dart';
+import '../../../widgets/Language.dart';
 
 part 'authentication_state.dart';
 
-class Language {
-  final String lang;
-  final String code;
-
-  Language({required this.lang, required this.code});
-}
-
 class AuthenticationCubit extends Cubit<AuthenticationState> {
-  AuthenticationCubit() : super(AuthenticationInitial());
-
   String _email = '';
   String _password = '';
   String _passwordConfirm = '';
   bool isVisible = false;
   List<Language> languages = [
-    Language(lang: "English", code: "US"),
-    Language(lang: "العربية", code: "EG"),
+    const Language(name: "English", code: "US"),
+    const Language(name: "العربية", code: "EG"),
   ];
   Language? selectedLanguage;
+  TextDirection? layoutDirection;
 
-  void languageChanged(newLang){
-    selectedLanguage = newLang;
-    if(newLang.lang == "English"){
-      S.load(Locale('en', ''));
+  AuthenticationCubit() : super(AuthenticationInitial()) {
+    if (S.current.lang == "English") {
+      selectedLanguage = languages[0];
+      layoutDirection = TextDirection.ltr;
+    } else {
+      selectedLanguage = languages[1];
+      layoutDirection = TextDirection.rtl;
     }
-    else{
-      S.load(Locale('ar', ''));
+  }
+
+  void languageChanged(newLang) {
+    if (newLang.name == "English") {
+      S.load(const Locale('en', ''));
+      selectedLanguage = languages[0];
+      layoutDirection = TextDirection.ltr;
+    } else {
+      S.load(const Locale('ar', ''));
+      selectedLanguage = languages[1];
+      layoutDirection = TextDirection.rtl;
     }
     emit(LanguageChanged());
   }
@@ -71,13 +72,13 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     }
 
     if (_password.isEmpty || _password.length < 6) {
-      emit(AuthenticationFailure(
-          S.of(context).passwordTooShort));
+      emit(AuthenticationFailure(S.of(context).passwordTooShort));
       return;
     }
 
     if (_password != _passwordConfirm) {
-      emit(AuthenticationFailure(S.of(context).confirmPasswordDoesNotMatchErrorText));
+      emit(AuthenticationFailure(
+          S.of(context).confirmPasswordDoesNotMatchErrorText));
       return;
     }
 
@@ -106,8 +107,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       if (e.code == 'weak-password') {
         emit(AuthenticationFailure(S.of(context).passwordTooWeak));
       } else if (e.code == 'email-already-in-use') {
-        emit(AuthenticationFailure(
-            S.of(context).emailTakenErrorText));
+        emit(AuthenticationFailure(S.of(context).emailTakenErrorText));
       }
     } catch (e) {
       emit(AuthenticationFailure(S.of(context).unknownError));
@@ -132,8 +132,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     }
 
     if (_password.isEmpty || _password.length < 6) {
-      emit(AuthenticationFailure(
-          S.of(context).wrongOrNoPasswordErrorText));
+      emit(AuthenticationFailure(S.of(context).wrongOrNoPasswordErrorText));
       return;
     }
 

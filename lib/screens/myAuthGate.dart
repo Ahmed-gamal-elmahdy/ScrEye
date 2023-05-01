@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart' hide EmailAuthProvider;
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,7 +11,6 @@ import 'home_screen.dart';
 
 class myAuthGate extends StatelessWidget {
   const myAuthGate({super.key});
-
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
