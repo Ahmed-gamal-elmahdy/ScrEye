@@ -1,13 +1,13 @@
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertest/cubit/app_cubit.dart';
-import 'package:sidebarx/sidebarx.dart';
+
+import '../../../generated/l10n.dart';
+import '../../widgets/MyDrawer.dart';
 import 'CameraBody/CameraScreen.dart';
 import 'ResultBody/ResultScreen.dart';
 import 'UploadBody/UploadScreen.dart';
-import '../../../generated/l10n.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({Key? key}) : super(key: key);
@@ -25,45 +25,9 @@ class HomeTab extends StatelessWidget {
           S.of(context).align_clipper,
           S.of(context).result,
         ];
-        List bodyScreens = [const UploadScreen(), CameraScreen(), const ResultScreen()];
+        List bodyScreens = [ UploadScreen(), CameraScreen(), const ResultScreen()];
         return Scaffold(
-          drawer: Drawer(
-            child: ListView(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Container(
-                      height: MediaQuery.of(context).size.height * 0.10,
-                      width: MediaQuery.of(context).size.width * 0.10,
-                      child: Image.asset('assets/logo_3.png')),
-                ),
-                ListTile(
-                    leading: Icon(Icons.home),
-                    title: Text(S.of(context).navbar_home),
-                    onTap: () {
-                      cubit.ChangeTabIndex(0);
-                    }),
-                ListTile(
-                    leading: Icon(Icons.person_sharp),
-                    title: Text(S.of(context).navbar_profile),
-                    onTap: () {
-                      cubit.ChangeTabIndex(1);
-                    }),
-                ListTile(
-                    leading: Icon(Icons.photo_library_outlined),
-                    title: Text(S.of(context).navbar_history),
-                    onTap: () {
-                      cubit.ChangeTabIndex(2);
-                    }),
-                ListTile(
-                    leading: Icon(Icons.settings),
-                    title: Text(S.of(context).navbar_settings),
-                    onTap: () {
-                      cubit.ChangeTabIndex(3);
-                    }),
-              ],
-            ),
-          ),
+          drawer: myDrawer(context, cubit),
           appBar:AppBar(
             actions: [
               IconButton(

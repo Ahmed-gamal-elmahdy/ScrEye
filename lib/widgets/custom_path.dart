@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 // Path to be cropped
 Path clipPath({required double width, required double height}) {
+
   Path path = Path();
   path.moveTo(width * 0.3283333, height * 0.4925000);
   path.cubicTo(width * 0.4100000, height * 0.6243750, width * 0.4116667,
@@ -47,13 +48,13 @@ class Guideline_Painter extends CustomPainter {
     Path path0 = clipPath(width: size.width, height: size.height);
     canvas.drawPath(path0, paint0);
 
-    Paint paint1 = Paint()
-      ..color = const Color.fromARGB(255, 33, 150, 243)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1;
-
-    Path path1 = circlePath(width: size.width, height: size.height);
-    canvas.drawPath(path1, paint1);
+    // Paint paint1 = Paint()
+    //   ..color = const Color.fromARGB(255, 33, 150, 243)
+    //   ..style = PaintingStyle.stroke
+    //   ..strokeWidth = 1;
+    //
+    // Path path1 = circlePath(width: size.width, height: size.height);
+    // canvas.drawPath(path1, paint1);
   }
 
   @override

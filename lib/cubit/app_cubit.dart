@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-
 import 'package:camera/camera.dart';
 import 'package:crop_your_image/crop_your_image.dart';
 import 'package:dio/dio.dart';
@@ -14,12 +13,22 @@ import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sidebarx/sidebarx.dart';
+
 import '../../../generated/l10n.dart';
+import '../widgets/Language.dart';
 
 part 'app_state.dart';
 
 class AppCubit extends Cubit<AppState> {
-  AppCubit() : super(AppInitial());
+  AppCubit() : super(AppInitial()){
+    if (S.current.lang == "English") {
+      selectedLanguage = languages[0];
+      layoutDirection = TextDirection.ltr;
+    } else {
+      selectedLanguage = languages[1];
+      layoutDirection = TextDirection.rtl;
+    }
+  }
 
   static AppCubit get(context) => BlocProvider.of(context);
   dynamic user;
@@ -30,9 +39,14 @@ class AppCubit extends Cubit<AppState> {
   late CameraController controller;
   final _firebaseStorage = FirebaseStorage.instance;
   final dbRef = FirebaseDatabase.instance.ref().child('users');
-  final String apiHeroku = "https://flaskapitestgemy.herokuapp.com/api/v2/";
+  final String apiHeroku = "https://screye.herokuapp.com/api/v3/";
   final String apiAzure = "https://screyeapi.azurewebsites.net/api/screyeapiv1/";
-
+  List<Language> languages = [
+    const Language(name: "English", code: "US"),
+    const Language(name: "العربية", code: "EG"),
+  ];
+  Language? selectedLanguage;
+  TextDirection? layoutDirection;
   String test_result = "";
   double sliderVal = 1.0;
 
@@ -112,11 +126,11 @@ class AppCubit extends Cubit<AppState> {
                     onPressed: () async {
                       Navigator.pop(context);
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        backgroundColor: Color(0xFFCE772F),
+                        backgroundColor: const Color(0xFFCE772F),
                         content: Text(S.of(context).img_discarded),
                       ));
                     },
-                    icon: Icon(Icons.delete),
+                    icon: const Icon(Icons.delete),
                     label: Text(S.of(context).discard),
                   ),
                   OutlinedButton.icon(
@@ -305,6 +319,7 @@ class AppCubit extends Cubit<AppState> {
       token: token,
       uid: user.uid,
     );
+    print("api url=:$url");
     final dio = Dio();
     try {
       final response = await dio.get(url);
@@ -316,14 +331,16 @@ class AppCubit extends Cubit<AppState> {
     }
   }
 
-  void ChangeLanguage({required String lang}) {
-    if (lang == "en"){
-      S.load(Locale('en', ''));
+  void languageChanged({required  newLang}) {
+    if (newLang.name == "English") {
+      S.load(const Locale('en', ''));
+      selectedLanguage = languages[0];
+      layoutDirection = TextDirection.ltr;
+    } else {
+      S.load(const Locale('ar', ''));
+      selectedLanguage = languages[1];
+      layoutDirection = TextDirection.rtl;
     }
-    else{
-      S.load(Locale('ar', ''));
-    }
-    print("Loaded lang");
     emit(ChangedLanguage());
   }
 

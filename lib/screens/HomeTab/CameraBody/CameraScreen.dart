@@ -1,18 +1,19 @@
 import 'dart:io';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertest/cubit/app_cubit.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:fluttertest/widgets/custom_path.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:screenshot/screenshot.dart';
+
 import '../../../generated/l10n.dart';
 
 class CameraScreen extends StatefulWidget {
   CameraScreen({Key? key}) : super(key: key);
-
   @override
   State<CameraScreen> createState() => _CameraScreenState();
 }
@@ -40,7 +41,7 @@ class _CameraScreenState extends State<CameraScreen> {
                 children: [
                   SizedBox(
                     height: 517.h,
-                    child: new OverflowBox(
+                    child:  OverflowBox(
                       alignment: Alignment.center,
                       child: CameraPreview(cubit.controller),
                     ),

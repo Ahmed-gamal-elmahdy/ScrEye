@@ -380,7 +380,7 @@ class S {
     );
   }
 
-  /// `Align Clipper with Conjunctiva`
+  /// `Put Clipper on Conjunctiva`
   String get align_clipper {
     return Intl.message(
       'Put Clipper on Conjunctiva',
@@ -550,21 +550,31 @@ class S {
     );
   }
 
-  /// `New to ScrEye?`
+  /// `New to ScrEye? `
   String get new_to_screye {
     return Intl.message(
-      'New to ScrEye?',
+      'New to ScrEye? ',
       name: 'new_to_screye',
       desc: '',
       args: [],
     );
   }
 
-  /// `Already a ScrEye user?`
+  /// `Already a ScrEye user? `
   String get already_user {
     return Intl.message(
-      'Already a ScrEye user?',
+      'Already a ScrEye user? ',
       name: 'already_user',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message(
+      'Language',
+      name: 'language',
       desc: '',
       args: [],
     );

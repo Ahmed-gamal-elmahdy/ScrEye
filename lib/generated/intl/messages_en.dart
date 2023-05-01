@@ -24,10 +24,10 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accessDisabledErrorText": MessageLookupByLibrary.simpleMessage(
             "Access to this account has been temporarily disabled"),
-        "align_clipper": MessageLookupByLibrary.simpleMessage(
-            "Align Clipper with Conjunctiva"),
+        "align_clipper":
+            MessageLookupByLibrary.simpleMessage("Put Clipper on Conjunctiva"),
         "already_user":
-            MessageLookupByLibrary.simpleMessage("Already a ScrEye user?"),
+            MessageLookupByLibrary.simpleMessage("Already a ScrEye user? "),
         "anemic": MessageLookupByLibrary.simpleMessage("Anemic"),
         "camera": MessageLookupByLibrary.simpleMessage("Camera"),
         "capture": MessageLookupByLibrary.simpleMessage("Capture"),
@@ -56,12 +56,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "isNotAValidEmailErrorText":
             MessageLookupByLibrary.simpleMessage("Please enter a valid email"),
         "lang": MessageLookupByLibrary.simpleMessage("English"),
+        "language": MessageLookupByLibrary.simpleMessage("Language"),
         "loading": MessageLookupByLibrary.simpleMessage("Loading..."),
         "navbar_history": MessageLookupByLibrary.simpleMessage("History"),
         "navbar_home": MessageLookupByLibrary.simpleMessage("Home"),
         "navbar_profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "navbar_settings": MessageLookupByLibrary.simpleMessage("Settings"),
-        "new_to_screye": MessageLookupByLibrary.simpleMessage("New to ScrEye?"),
+        "new_to_screye":
+            MessageLookupByLibrary.simpleMessage("New to ScrEye? "),
         "not_anemic": MessageLookupByLibrary.simpleMessage("Not Anemic"),
         "passwordInputLabel": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordIsRequiredErrorText":

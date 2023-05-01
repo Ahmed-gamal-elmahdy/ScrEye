@@ -1,10 +1,14 @@
 
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+import 'package:flag/flag_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertest/cubit/app_cubit.dart';
-import 'package:sidebarx/sidebarx.dart';
+import 'package:fluttertest/widgets/MyDrawer.dart';
+
 import '../../../generated/l10n.dart';
+import '../../widgets/Language.dart';
 
 class SettingsTab extends StatelessWidget {
   const SettingsTab({Key? key}) : super(key: key);
@@ -17,45 +21,8 @@ class SettingsTab extends StatelessWidget {
       },
       builder: (context, state) {
         var cubit=AppCubit.get(context);
-
         return Scaffold(
-            drawer: Drawer(
-              child: ListView(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Container(
-                        height: MediaQuery.of(context).size.height * 0.16,
-                        width: MediaQuery.of(context).size.width * 0.16,
-                        child: Image.asset('assets/logo_3.png')),
-                  ),
-                  ListTile(
-                      leading: Icon(Icons.home),
-                      title: Text(S.of(context).navbar_home),
-                      onTap: () {
-                        cubit.ChangeTabIndex(0);
-                      }),
-                  ListTile(
-                      leading: Icon(Icons.person_sharp),
-                      title: Text(S.of(context).navbar_profile),
-                      onTap: () {
-                        cubit.ChangeTabIndex(1);
-                      }),
-                  ListTile(
-                      leading: Icon(Icons.photo_library_outlined),
-                      title: Text(S.of(context).navbar_history),
-                      onTap: () {
-                        cubit.ChangeTabIndex(2);
-                      }),
-                  ListTile(
-                      leading: Icon(Icons.settings),
-                      title: Text(S.of(context).navbar_settings),
-                      onTap: () {
-                        cubit.ChangeTabIndex(3);
-                      }),
-                ],
-              ),
-            ),
+            drawer: myDrawer(context, cubit),
           appBar: AppBar(
             actions: [
               IconButton(
@@ -67,29 +34,45 @@ class SettingsTab extends StatelessWidget {
             ],
             title: Text(S.of(context).navbar_settings),
           ),
-          body: Center(
-              child: Column(
-                children: [
-                  Row(
+          body: Directionality(
+            textDirection: cubit.layoutDirection ?? TextDirection.ltr,
+            child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
                     children: [
-                      Text("arbic : "),
-                      ElevatedButton(onPressed: (){
-                        cubit.ChangeLanguage(lang: "ar");
-                      }, child: Text("ar"))
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(S.of(context).language+":"),
+
+                          DropdownButton<Language>(
+                            hint: Text(S.of(context).lang),
+                            value: cubit.selectedLanguage,
+                            onChanged: (Language? value) {
+                              cubit.languageChanged( newLang: value);
+                            },
+                            items: cubit.languages.map((language) {
+                              return DropdownMenuItem<Language>(
+                                value: language,
+                                // Use a unique identifier as the value
+                                child: Row(
+                                  children: [
+                                    Flag.fromString(language.code,
+                                        height: 25.h, width: 50.w),
+                                    SizedBox(width: 8.w),
+                                    Text(language.name),
+                                  ],
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
-                  Row(
-                    children: [
-                      Text("eng : "),
-                      ElevatedButton(onPressed: (){
-                        cubit.ChangeLanguage(lang: "en");
-                      }, child: Text("en"))
-    
-                     
-                    ],
-                  ),
-                ],
-              )
+                )
+            ),
           ),
         );
       },
