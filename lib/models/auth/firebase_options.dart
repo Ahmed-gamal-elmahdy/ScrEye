@@ -16,12 +16,10 @@ import 'package:flutter/foundation.dart'
 /// ```
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
-
     // ignore: missing_enum_constant_in_switch
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
-    
     }
 
     throw UnsupportedError(
@@ -32,26 +30,13 @@ class DefaultFirebaseOptions {
   // TODO (codelab user): Replace with your Firebase credentials
   // Generate this file with credentials with the FlutterFire CLI
 
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCSajBC5FfUxTKRqxlx93wFvVDGHhBIKDo',
     appId: '1:970315434457:android:b2259c7dbbc9a353d471c8',
     messagingSenderId: '970315434457',
     projectId: 'fluttertest-24277',
-    databaseURL: 'https://fluttertest-24277-default-rtdb.europe-west1.firebasedatabase.app',
+    databaseURL:
+        'https://fluttertest-24277-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'fluttertest-24277.appspot.com',
   );
-
-
 }
-
-
-
-
-
-
-
-
-
-
-

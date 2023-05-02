@@ -25,10 +25,14 @@ class HomeTab extends StatelessWidget {
           S.of(context).align_clipper,
           S.of(context).result,
         ];
-        List bodyScreens = [ UploadScreen(), CameraScreen(), const ResultScreen()];
+        List bodyScreens = [
+          UploadScreen(),
+          CameraScreen(),
+          const ResultScreen()
+        ];
         return Scaffold(
           drawer: myDrawer(context, cubit),
-          appBar:AppBar(
+          appBar: AppBar(
             actions: [
               IconButton(
                   tooltip: "Logout",

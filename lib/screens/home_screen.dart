@@ -6,7 +6,7 @@ import 'package:fluttertest/screens/HistoryTab/HistoryTab.dart';
 import 'package:fluttertest/screens/HomeTab/HomeTab.dart';
 
 import 'ProfileTab/ProfileTab.dart';
-import 'SettingsTab/SettingsTab.dart';
+import 'SettingsTab/MySettingsScreen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
             HomeTab(),
             ProfileTab(),
             HistoryTab(),
-            SettingsTab()
+            SettingsScreen()
           ];
           var cubit = AppCubit.get(context);
           if (!cubit.cameraInitiated) {

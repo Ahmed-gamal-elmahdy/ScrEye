@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../generated/l10n.dart';
 
-Drawer myDrawer (context,cubit){
+Drawer myDrawer(context, cubit) {
   return Drawer(
     child: ListView(
       children: <Widget>[

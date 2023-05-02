@@ -17,17 +17,17 @@ class UploadScreen extends StatelessWidget {
         // TODO: implement listener
       },
       builder: (context, state) {
-        var cubit=AppCubit.get(context);
+        var cubit = AppCubit.get(context);
         return Center(
           child: Container(
-            decoration: BoxDecoration(image: DecorationImage(
-              image: AssetImage('assets/homec.png'),
-            )
-            ),
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                image: AssetImage('assets/homec.png'),
+              )),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                   Text(
+                  Text(
                     S.of(context).taken_photo_upload,
                     style: TextStyle(
                       fontSize: 24,
@@ -36,31 +36,42 @@ class UploadScreen extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  state is !Loading ?
-                  OutlinedButton.icon(
-                    label:  Text(S.of(context).upload,/*style: TextStyle(color: Color(0xFFF05454),*/),
-                    icon: const Icon(Icons.upload,/*color: Color(0xFFF05454)*/),
-                    onPressed: () async {
-                      final _imagePicker = ImagePicker();
-                      var image = (await _imagePicker.pickImage(
-                          source: ImageSource.gallery))!;
-                      cubit.uploadImage(image: image).then((value) {
-                        cubit.getTest(imgname: value[0], token: value[1],url: value[2]);
-                      });
-                    },
-                  ): OutlinedButton(
-                    onPressed: null,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        LoadingAnimationWidget.threeArchedCircle(color: Color(0xFFF05454), size: 20),
-                        SizedBox(
-                          width: 10.h,
+                  state is! Loading
+                      ? OutlinedButton.icon(
+                          label: Text(
+                            S
+                                .of(context)
+                                .upload, /*style: TextStyle(color: Color(0xFFF05454),*/
+                          ),
+                          icon: const Icon(
+                            Icons.upload, /*color: Color(0xFFF05454)*/
+                          ),
+                          onPressed: () async {
+                            final _imagePicker = ImagePicker();
+                            var image = (await _imagePicker.pickImage(
+                                source: ImageSource.gallery))!;
+                            cubit.uploadImage(image: image).then((value) {
+                              cubit.getTest(
+                                  imgname: value[0],
+                                  token: value[1],
+                                  url: value[2]);
+                            });
+                          },
+                        )
+                      : OutlinedButton(
+                          onPressed: null,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              LoadingAnimationWidget.threeArchedCircle(
+                                  color: Color(0xFFF05454), size: 20),
+                              SizedBox(
+                                width: 10.h,
+                              ),
+                              Text(S.of(context).loading)
+                            ],
+                          ),
                         ),
-                        Text(S.of(context).loading)
-                      ],
-                    ),
-                  ),
                 ],
               )),
         );
@@ -68,6 +79,3 @@ class UploadScreen extends StatelessWidget {
     );
   }
 }
-
-
-
