@@ -21,7 +21,6 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accessDisabledErrorText": MessageLookupByLibrary.simpleMessage(
             "تم تعطيل الوصول إلى هذا الحساب مؤقتًا"),
@@ -29,6 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("محاذاة الشكل مع الملتحمة"),
         "already_user": MessageLookupByLibrary.simpleMessage("لديك حساب؟"),
         "anemic": MessageLookupByLibrary.simpleMessage("لديك انيميا"),
+        "ar": MessageLookupByLibrary.simpleMessage("العربية"),
         "camera": MessageLookupByLibrary.simpleMessage("كاميرا"),
         "capture": MessageLookupByLibrary.simpleMessage("التقاط"),
         "capturing": MessageLookupByLibrary.simpleMessage("انتظر"),
@@ -46,6 +46,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("البريد الإلكتروني مطلوب"),
         "emailTakenErrorText": MessageLookupByLibrary.simpleMessage(
             "هذا البريد الإلكتروني مستخدم مسبقاً"),
+        "en": MessageLookupByLibrary.simpleMessage("English"),
         "forgotPasswordButtonLabel":
             MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
         "forgotPasswordViewTitle":

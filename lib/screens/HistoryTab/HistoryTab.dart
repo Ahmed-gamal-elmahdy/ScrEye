@@ -23,7 +23,7 @@ class HistoryTab extends StatelessWidget {
         final DatabaseReference _database =
             cubit.dbRef.child(cubit.user.uid).child("images");
         return Scaffold(
-            drawer: myDrawer(context, cubit),
+            drawer: myDrawer(context),
             appBar: AppBar(
               actions: [
                 IconButton(

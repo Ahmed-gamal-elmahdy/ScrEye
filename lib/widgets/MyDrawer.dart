@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../generated/l10n.dart';
 
-Drawer myDrawer(context, cubit) {
+Drawer myDrawer(context) {
   return Drawer(
     child: ListView(
       children: <Widget>[
@@ -17,25 +17,25 @@ Drawer myDrawer(context, cubit) {
             leading: Icon(Icons.home),
             title: Text(S.of(context).navbar_home),
             onTap: () {
-              cubit.ChangeTabIndex(0);
+              Navigator.popAndPushNamed(context, '/');
             }),
         ListTile(
             leading: Icon(Icons.person_sharp),
             title: Text(S.of(context).navbar_profile),
             onTap: () {
-              cubit.ChangeTabIndex(1);
+              Navigator.popAndPushNamed(context, '/profile');
             }),
         ListTile(
             leading: Icon(Icons.photo_library_outlined),
             title: Text(S.of(context).navbar_history),
             onTap: () {
-              cubit.ChangeTabIndex(2);
+              Navigator.popAndPushNamed(context, '/history');
             }),
         ListTile(
             leading: Icon(Icons.settings),
             title: Text(S.of(context).navbar_settings),
             onTap: () {
-              cubit.ChangeTabIndex(3);
+              Navigator.popAndPushNamed(context, '/settings');
             }),
       ],
     ),

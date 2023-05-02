@@ -21,7 +21,7 @@ class SettingsTab extends StatelessWidget {
       builder: (context, state) {
         var cubit = AppCubit.get(context);
         return Scaffold(
-          drawer: myDrawer(context, cubit),
+          drawer: myDrawer(context),
           appBar: AppBar(
             actions: [
               IconButton(

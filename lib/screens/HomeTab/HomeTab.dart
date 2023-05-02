@@ -31,7 +31,7 @@ class HomeTab extends StatelessWidget {
           const ResultScreen()
         ];
         return Scaffold(
-          drawer: myDrawer(context, cubit),
+          drawer: myDrawer(context),
           appBar: AppBar(
             actions: [
               IconButton(

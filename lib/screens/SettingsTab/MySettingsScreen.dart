@@ -1,9 +1,12 @@
+import 'package:flag/flag_widget.dart';
 import 'package:flutter/material.dart' hide ThemeMode;
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertest/cubit/AppSettingsCubit/app_settings_cubit.dart';
 import 'package:fluttertest/themes/MyTheme.dart' show ThemeMode;
 
 import '../../generated/l10n.dart';
+import '../../widgets/Language.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -51,17 +54,32 @@ class SettingsScreen extends StatelessWidget {
               style: Theme.of(context).textTheme.headline6,
             ),
           ),
-          DropdownButton<Locale>(
-            value: settingsCubit.state.locale,
-            items: S.delegate.supportedLocales
-                .map((locale) => DropdownMenuItem<Locale>(
-                      value: locale,
-                      child: Text(locale.languageCode),
-                    ))
-                .toList(),
-            onChanged: (value) {
-              settingsCubit.updateLocale(value!);
-            },
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                DropdownButton<Locale>(
+                  value: settingsCubit.state.locale,
+                  items: S.delegate.supportedLocales
+                      .map((locale) => DropdownMenuItem<Locale>(
+                            value: locale,
+                            child: Row(
+                              children: [
+                                Flag.fromString(locale.languageCode == 'ar'? 'EG':"US",
+                                    height: 25.h, width: 50.w),
+                                Text(locale.languageCode == 'ar'? appLocalizations.ar:appLocalizations.en),
+                              ],
+                            ),
+
+                          ))
+                      .toList(),
+                  onChanged: (value) {
+                    settingsCubit.updateLocale(value!);
+                  },
+                ),
+
+              ],
+            ),
           ),
         ],
       ),
