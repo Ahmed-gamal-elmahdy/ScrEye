@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertest/widgets/custom_path.dart';
 import 'package:screenshot/screenshot.dart';
 
-
-
 class ClipperScreen extends StatefulWidget {
   const ClipperScreen({Key? key}) : super(key: key);
 
@@ -65,19 +63,21 @@ class _ClipperScreenState extends State<ClipperScreen> {
             padding: EdgeInsets.all(5),
             height: 200,
             width: 300,
-            child: isClipped ? clippedImage : Image.network("https://findicons.com/files/icons/2396/emoji/200/emoji8.png"),
+            child: isClipped
+                ? clippedImage
+                : Image.network(
+                    "https://findicons.com/files/icons/2396/emoji/200/emoji8.png"),
           ),
           Container(
             child: ElevatedButton(
                 onPressed: () {
-
-                    screenshotController.capture().then((capImg) {
-                      clippedImage=Image.memory(capImg!);
-                    });
+                  screenshotController.capture().then((capImg) {
+                    clippedImage = Image.memory(capImg!);
+                  });
                 },
                 child: Text("Clip")),
           ),
-          FloatingActionButton(onPressed: (){
+          FloatingActionButton(onPressed: () {
             setState(() {
               isClipped = true;
               print("false");
@@ -88,8 +88,3 @@ class _ClipperScreenState extends State<ClipperScreen> {
     );
   }
 }
-
-
-
-
-

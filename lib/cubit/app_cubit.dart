@@ -20,7 +20,7 @@ import '../widgets/Language.dart';
 part 'app_state.dart';
 
 class AppCubit extends Cubit<AppState> {
-  AppCubit() : super(AppInitial()){
+  AppCubit() : super(AppInitial()) {
     if (S.current.lang == "English") {
       selectedLanguage = languages[0];
       layoutDirection = TextDirection.ltr;
@@ -40,7 +40,8 @@ class AppCubit extends Cubit<AppState> {
   final _firebaseStorage = FirebaseStorage.instance;
   final dbRef = FirebaseDatabase.instance.ref().child('users');
   final String apiHeroku = "https://screye.herokuapp.com/api/v3/";
-  final String apiAzure = "https://screyeapi.azurewebsites.net/api/screyeapiv1/";
+  final String apiAzure =
+      "https://screyeapi.azurewebsites.net/api/screyeapiv1/";
   List<Language> languages = [
     const Language(name: "English", code: "US"),
     const Language(name: "العربية", code: "EG"),
@@ -210,7 +211,6 @@ class AppCubit extends Cubit<AppState> {
 
   void ChangeTabIndex(idx) {
     tabIndex = idx;
-    print(tabIndex);
     //sideBar_controller.selectIndex(idx);
     emit(ChangedTabIndex());
   }
@@ -224,7 +224,8 @@ class AppCubit extends Cubit<AppState> {
     try {
       final tempDir = await getTemporaryDirectory();
       final now = DateTime.now();
-      final name = '${now.day}-${now.month}-${now.year}-${now.hour}-${now.minute}-${now.second}';
+      final name =
+          '${now.day}-${now.month}-${now.year}-${now.hour}-${now.minute}-${now.second}';
       File file = await File('${tempDir.path}/image.jpg').create();
 
       if (image.runtimeType == XFile) {
@@ -298,7 +299,8 @@ class AppCubit extends Cubit<AppState> {
     }
   }
 
-  Future<void> writeImageDataToDatabase(Map<String, dynamic> imageData, String key) async {
+  Future<void> writeImageDataToDatabase(
+      Map<String, dynamic> imageData, String key) async {
     await dbRef.child(user.uid).child("images").child(key).set(imageData);
   }
 
@@ -307,7 +309,8 @@ class AppCubit extends Cubit<AppState> {
     required String imgname,
     required String token,
     required String uid,
-  }) => "$baseUrl?id=$imgname&token=$token&uid=$uid";
+  }) =>
+      "$baseUrl?id=$imgname&token=$token&uid=$uid";
 
   Future<String> getApiRequest({
     required String imgname,
@@ -331,7 +334,7 @@ class AppCubit extends Cubit<AppState> {
     }
   }
 
-  void languageChanged({required  newLang}) {
+  void languageChanged({required newLang}) {
     if (newLang.name == "English") {
       S.load(const Locale('en', ''));
       selectedLanguage = languages[0];
@@ -343,5 +346,4 @@ class AppCubit extends Cubit<AppState> {
     }
     emit(ChangedLanguage());
   }
-
 }

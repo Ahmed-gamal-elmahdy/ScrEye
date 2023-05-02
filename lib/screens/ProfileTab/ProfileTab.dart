@@ -1,4 +1,3 @@
-
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,7 +16,7 @@ class ProfileTab extends StatelessWidget {
         // TODO: implement listener
       },
       builder: (context, state) {
-        var cubit=AppCubit.get(context);
+        var cubit = AppCubit.get(context);
 
         return Scaffold(
           drawer: myDrawer(context, cubit),
@@ -33,23 +32,20 @@ class ProfileTab extends StatelessWidget {
             title: Text(S.of(context).navbar_profile),
           ),
           body: Center(
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Text("Name : "),
-
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text("Email : "),
-
-                  ],
-                ),
-              ],
-            )
-          ),
+              child: Column(
+            children: [
+              Row(
+                children: [
+                  Text("Name : "),
+                ],
+              ),
+              Row(
+                children: [
+                  Text("Email : "),
+                ],
+              ),
+            ],
+          )),
         );
       },
     );

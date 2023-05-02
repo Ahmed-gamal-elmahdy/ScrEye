@@ -2,15 +2,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertest/app.dart';
 
 import '../generated/l10n.dart';
 import '../themes/MyTheme.dart';
 import 'AuthTab/LoginForm.dart';
 import 'AuthTab/RegisterForm.dart';
-import 'home_screen.dart';
 
 class myAuthGate extends StatelessWidget {
   const myAuthGate({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -37,10 +38,10 @@ class myAuthGate extends StatelessWidget {
                   '/register': (context) => RegistrationForm(),
                   '/login': (context) => LoginForm(),
                 },
-                theme: MyTheme.originalTheme(context),
+                theme: MyTheme.originalTheme(),
               );
             } else {
-              return HomeScreen(user: snapshot.data!);
+              return MyApp();
             }
           },
         );
