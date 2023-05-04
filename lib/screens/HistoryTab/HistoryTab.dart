@@ -72,26 +72,30 @@ class HistoryTab extends StatelessWidget {
                           res = S.of(context).not_anemic;
                         }
                         return ListTile(
-                          title: Text('$formattedDate $formattedTime'),
-                          subtitle: Text(
-                            res,
-                            style: TextStyle(fontSize: 15.w, color: color),
-                          ),
-                          trailing: Container(
-                            width: 100.w,
-                            height: 100.h,
-                            child: Image.network(
-                              value["url"],
-                              fit: BoxFit.scaleDown,
+                            trailing: cubit.dropDownIcon,
+                            title: Text('$formattedDate $formattedTime'),
+                            subtitle: Text(
+                              res,
+                              style: TextStyle(fontSize: 15.w, color: color),
                             ),
-                          ),
-                        );
+                            leading: Container(
+                              width: 50.w,
+                              height: 100.h,
+                              child: Image.network(
+                                value["url"],
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            onTap: () {
+                              print(ScreenUtil().screenWidth);
+                              cubit.pressedRecord();
+                            });
                       },
                       separatorBuilder: (BuildContext context, int index) {
                         return Divider(
-                          color: Colors.grey,
+                          color: Colors.white,
                           thickness: 2,
-                          height: 3,
+                          height: 10,
                         );
                       },
                     );

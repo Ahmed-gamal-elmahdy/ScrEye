@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 enum ThemeMode {
-  originalTheme,
   whiteTheme,
+  originalTheme,
 }
 
 class MyTheme {
@@ -52,6 +52,9 @@ class MyTheme {
         ),
         elevation: 0,
       ),
+      textTheme: TextTheme(
+        bodyText2: TextStyle(color: Color(0xFF225270)),
+      ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: Color(0xFF3177A3),
         unselectedItemColor: Colors.white,
@@ -74,13 +77,13 @@ class MyTheme {
           )),
         ),
       ),
-      // drawerTheme: DrawerThemeData(
-      //   width: ScreenUtil().screenWidth * 0.6,
-      //   scrimColor: Colors.blue.withOpacity(0.25),
-      // ),
+      drawerTheme: DrawerThemeData(
+        scrimColor: Colors.blue.withOpacity(0.25),
+      ),
       listTileTheme: ListTileThemeData(
         iconColor: Color(0xFF3177A3),
         textColor: Color(0xFF3177A3),
+        tileColor: Color(0xFFC7E4FA),
       ),
     );
   }

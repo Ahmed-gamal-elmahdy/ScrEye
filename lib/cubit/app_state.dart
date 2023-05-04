@@ -28,3 +28,5 @@ class DoneUploading extends AppState {}
 class ChangedTabIndex extends AppState {}
 
 class ChangedLanguage extends AppState {}
+
+class PressedRecord extends AppState {}

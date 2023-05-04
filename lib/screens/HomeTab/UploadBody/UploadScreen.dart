@@ -30,7 +30,7 @@ class UploadScreen extends StatelessWidget {
                   Text(
                     S.of(context).taken_photo_upload,
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 28,
                       fontFamily: 'roboto',
                       fontWeight: FontWeight.w300,
                     ),

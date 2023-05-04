@@ -13,30 +13,66 @@ Drawer myDrawer(context, cubit) {
               width: MediaQuery.of(context).size.width * 0.16,
               child: Image.asset('assets/logo_3.png')),
         ),
-        ListTile(
-            leading: Icon(Icons.home),
-            title: Text(S.of(context).navbar_home),
-            onTap: () {
-              cubit.ChangeTabIndex(0);
-            }),
-        ListTile(
-            leading: Icon(Icons.person_sharp),
-            title: Text(S.of(context).navbar_profile),
-            onTap: () {
-              cubit.ChangeTabIndex(1);
-            }),
-        ListTile(
-            leading: Icon(Icons.photo_library_outlined),
-            title: Text(S.of(context).navbar_history),
-            onTap: () {
-              cubit.ChangeTabIndex(2);
-            }),
-        ListTile(
-            leading: Icon(Icons.settings),
-            title: Text(S.of(context).navbar_settings),
-            onTap: () {
-              cubit.ChangeTabIndex(3);
-            }),
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(50.0),
+            border: Border.all(
+              color: Colors.white,
+              width: 15.0,
+            ),
+          ),
+          child: ListTile(
+              leading: Icon(Icons.home),
+              title: Text(S.of(context).navbar_home),
+              onTap: () {
+                cubit.ChangeTabIndex(0);
+              }),
+        ),
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(50.0),
+            border: Border.all(
+              color: Colors.white,
+              width: 15.0,
+            ),
+          ),
+          child: ListTile(
+              leading: Icon(Icons.person_sharp),
+              title: Text(S.of(context).navbar_profile),
+              onTap: () {
+                cubit.ChangeTabIndex(1);
+              }),
+        ),
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(50.0),
+            border: Border.all(
+              color: Colors.white,
+              width: 15.0,
+            ),
+          ),
+          child: ListTile(
+              leading: Icon(Icons.photo_library_outlined),
+              title: Text(S.of(context).navbar_history),
+              onTap: () {
+                cubit.ChangeTabIndex(2);
+              }),
+        ),
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(50.0),
+            border: Border.all(
+              color: Colors.white,
+              width: 15.0,
+            ),
+          ),
+          child: ListTile(
+              leading: Icon(Icons.settings),
+              title: Text(S.of(context).navbar_settings),
+              onTap: () {
+                cubit.ChangeTabIndex(3);
+              }),
+        ),
       ],
     ),
   );

@@ -80,7 +80,7 @@ class ResultScreen extends StatelessWidget {
               child: Text(
                 S.of(context).take_test_first,
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 28,
                   fontFamily: 'roboto',
                   fontWeight: FontWeight.w100,
                 ),

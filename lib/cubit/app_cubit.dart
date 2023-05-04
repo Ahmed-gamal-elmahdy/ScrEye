@@ -346,4 +346,18 @@ class AppCubit extends Cubit<AppState> {
     }
     emit(ChangedLanguage());
   }
+
+  Icon dropDownIcon = Icon(Icons.arrow_drop_down);
+  bool isDown = true;
+
+  void pressedRecord() {
+    if (isDown) {
+      dropDownIcon = Icon(Icons.arrow_drop_up);
+      isDown = false;
+    } else {
+      isDown = true;
+      dropDownIcon = Icon(Icons.arrow_drop_down);
+    }
+    emit(PressedRecord());
+  }
 }

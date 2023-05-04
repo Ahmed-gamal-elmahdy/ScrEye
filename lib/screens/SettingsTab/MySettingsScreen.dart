@@ -14,6 +14,7 @@ class SettingsScreen extends StatelessWidget {
     final appLocalizations = S.of(context);
 
     return Scaffold(
+      // drawer: myDrawer(context, cubit),
       appBar: AppBar(
         title: Text(appLocalizations.navbar_settings),
       ),
