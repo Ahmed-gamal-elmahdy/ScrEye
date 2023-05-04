@@ -9,8 +9,8 @@ import 'package:intl/intl.dart';
 
 import '../../../generated/l10n.dart';
 
-class HistoryTab extends StatelessWidget {
-  const HistoryTab({Key? key}) : super(key: key);
+class HistoryScreen extends StatelessWidget {
+  const HistoryScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class HistoryTab extends StatelessWidget {
         final DatabaseReference _database =
             cubit.dbRef.child(cubit.user.uid).child("images");
         return Scaffold(
-            drawer: myDrawer(context, cubit),
+            drawer: myDrawer(context),
             appBar: AppBar(
               actions: [
                 IconButton(

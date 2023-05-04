@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "already_user":
             MessageLookupByLibrary.simpleMessage("Already a ScrEye user? "),
         "anemic": MessageLookupByLibrary.simpleMessage("Anemic"),
+        "ar": MessageLookupByLibrary.simpleMessage("العربية"),
         "camera": MessageLookupByLibrary.simpleMessage("Camera"),
         "capture": MessageLookupByLibrary.simpleMessage("Capture"),
         "capturing": MessageLookupByLibrary.simpleMessage("Capturing.."),
@@ -46,6 +47,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Email is required"),
         "emailTakenErrorText":
             MessageLookupByLibrary.simpleMessage("This email is already used"),
+        "en": MessageLookupByLibrary.simpleMessage("English"),
         "forgotPasswordButtonLabel":
             MessageLookupByLibrary.simpleMessage("Forgot your password?"),
         "forgotPasswordViewTitle":

@@ -53,5 +53,7 @@
 "your_img": "Your Image",
 "new_to_screye": "New to ScrEye? ",
 "already_user":"Already a ScrEye user? ",
-"language":"Language"
+"language":"Language",
+"ar":"العربية",
+"en": "English"
 }
