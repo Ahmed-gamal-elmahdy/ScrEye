@@ -6,7 +6,6 @@ import 'package:fluttertest/cubit/AppSettingsCubit/app_settings_cubit.dart';
 import 'package:fluttertest/themes/MyTheme.dart' show ThemeMode;
 
 import '../../generated/l10n.dart';
-import '../../widgets/Language.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -65,19 +64,21 @@ class SettingsScreen extends StatelessWidget {
                             value: locale,
                             child: Row(
                               children: [
-                                Flag.fromString(locale.languageCode == 'ar'? 'EG':"US",
-                                    height: 25.h, width: 50.w),
-                                Text(locale.languageCode == 'ar'? appLocalizations.ar:appLocalizations.en),
+                                Flag.fromString(
+                                    locale.languageCode == 'ar' ? 'EG' : "US",
+                                    height: 25.h,
+                                    width: 50.w),
+                                Text(locale.languageCode == 'ar'
+                                    ? appLocalizations.ar
+                                    : appLocalizations.en),
                               ],
                             ),
-
                           ))
                       .toList(),
                   onChanged: (value) {
                     settingsCubit.updateLocale(value!);
                   },
                 ),
-
               ],
             ),
           ),

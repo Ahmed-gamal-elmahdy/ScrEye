@@ -1,15 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertest/screens/HistoryTab/HistoryTab.dart';
-import 'package:fluttertest/screens/ProfileTab/ProfileTab.dart';
-import 'package:fluttertest/screens/SettingsTab/MySettingsScreen.dart';
-import 'package:fluttertest/screens/SettingsTab/SettingsTab.dart';
-import 'package:fluttertest/screens/home_screen.dart';
-import 'package:fluttertest/screens/myAuthGate.dart';
+import 'package:fluttertest/screens/AuthGate.dart';
+import 'package:fluttertest/screens/HistoryScreen/HistoryScreen.dart';
+import 'package:fluttertest/screens/HomeScreen/HomeScreen.dart';
+import 'package:fluttertest/screens/ProfileScreen/ProfileScreen.dart';
+import 'package:fluttertest/screens/SettingsScreen/SettingsScreen.dart';
 
 import 'cubit/AppSettingsCubit/app_settings_cubit.dart';
 import 'cubit/app_cubit.dart';
@@ -62,7 +60,7 @@ class MyApp extends StatelessWidget {
                         splitScreenMode: true,
                         builder: (BuildContext context, Widget? child) {
                           return MaterialApp(
-                            localizationsDelegates:  const [
+                            localizationsDelegates: const [
                               S.delegate,
                               GlobalMaterialLocalizations.delegate,
                               GlobalWidgetsLocalizations.delegate,
@@ -77,9 +75,9 @@ class MyApp extends StatelessWidget {
                               '/': (context) => HomeScreen(
                                   user: snapshot.data!,
                                   appCubit: context.read<AppCubit>()),
-                              '/profile': (context) => ProfileTab(),
-                              '/history': (context) => HistoryTab(),
-                              '/settings': (context) => SettingsScreen(),
+                              '/profile': (context) => const ProfileScreen(),
+                              '/history': (context) => const HistoryScreen(),
+                              '/settings': (context) => const SettingsScreen(),
                             },
                             builder: (context, child) {
                               return Directionality(
@@ -91,7 +89,7 @@ class MyApp extends StatelessWidget {
                         });
                   } else {
                     // If the user is not logged in, navigate to the AuthGate screen
-                    return const myAuthGate();
+                    return const AuthGate();
                   }
                 }
               },

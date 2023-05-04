@@ -6,8 +6,8 @@ import 'package:fluttertest/cubit/app_cubit.dart';
 import '../../../generated/l10n.dart';
 import '../../widgets/MyDrawer.dart';
 
-class ProfileTab extends StatelessWidget {
-  const ProfileTab({Key? key}) : super(key: key);
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,6 @@ class ProfileTab extends StatelessWidget {
       },
       builder: (context, state) {
         var cubit = AppCubit.get(context);
-
         return Scaffold(
           drawer: myDrawer(context),
           appBar: AppBar(
@@ -27,7 +26,7 @@ class ProfileTab extends StatelessWidget {
                   onPressed: () {
                     FirebaseUIAuth.signOut();
                   },
-                  icon: Icon(Icons.power_settings_new_rounded))
+                  icon: const Icon(Icons.power_settings_new_rounded))
             ],
             title: Text(S.of(context).navbar_profile),
           ),

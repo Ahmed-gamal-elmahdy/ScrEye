@@ -9,8 +9,8 @@ import 'package:intl/intl.dart';
 
 import '../../../generated/l10n.dart';
 
-class HistoryTab extends StatelessWidget {
-  const HistoryTab({Key? key}) : super(key: key);
+class HistoryScreen extends StatelessWidget {
+  const HistoryScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
