@@ -42,10 +42,10 @@ class HistoryTab extends StatelessWidget {
                     AsyncSnapshot<DataSnapshot> snapshot) {
                   if (snapshot.hasData) {
                     // Access the data from the DataSnapshot object
-                    if(snapshot.data?.value==null){
+                    if (snapshot.data?.value == null) {
                       return Text(
                         "No data found",
-                        style: TextStyle(fontSize: 15.w,color:Colors.red),
+                        style: TextStyle(fontSize: 15.w, color: Colors.red),
                       );
                     }
                     var data = snapshot.data?.value as Map<dynamic, dynamic>;
@@ -57,25 +57,27 @@ class HistoryTab extends StatelessWidget {
                       itemBuilder: (BuildContext context, int index) {
                         String key = keys[index];
                         var value = data[key];
-                        var color ;
+                        var color;
                         var res = S.of(context).anemic;
-                        DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(value["time"]);
-                        String formattedDate = DateFormat.yMMMMd().format(dateTime);
-                        String formattedTime = DateFormat.jms().format(dateTime);
-                        if (value["result"] == 'Anemic'){
+                        DateTime dateTime =
+                            DateTime.fromMillisecondsSinceEpoch(value["time"]);
+                        String formattedDate =
+                            DateFormat.yMMMMd().format(dateTime);
+                        String formattedTime =
+                            DateFormat.jms().format(dateTime);
+                        if (value["result"] == 'Anemic') {
                           color = Color(0xFFCE772F);
-                        }
-                        else {
+                        } else {
                           color = Color(0xFF29C469);
                           res = S.of(context).not_anemic;
                         }
                         return ListTile(
                           title: Text('$formattedDate $formattedTime'),
-                          subtitle:     Text(
+                          subtitle: Text(
                             res,
-                            style: TextStyle(fontSize: 15.w,color:color),
+                            style: TextStyle(fontSize: 15.w, color: color),
                           ),
-                          trailing:Container(
+                          trailing: Container(
                             width: 100.w,
                             height: 100.h,
                             child: Image.network(

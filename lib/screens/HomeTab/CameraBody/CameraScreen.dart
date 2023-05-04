@@ -14,12 +14,14 @@ import '../../../generated/l10n.dart';
 
 class CameraScreen extends StatefulWidget {
   CameraScreen({Key? key}) : super(key: key);
+
   @override
   State<CameraScreen> createState() => _CameraScreenState();
 }
 
 class _CameraScreenState extends State<CameraScreen> {
   ScreenshotController screenshotController = ScreenshotController();
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppState>(
@@ -41,7 +43,7 @@ class _CameraScreenState extends State<CameraScreen> {
                 children: [
                   SizedBox(
                     height: 517.h,
-                    child:  OverflowBox(
+                    child: OverflowBox(
                       alignment: Alignment.center,
                       child: CameraPreview(cubit.controller),
                     ),

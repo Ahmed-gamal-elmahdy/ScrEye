@@ -1,4 +1,3 @@
-
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flag/flag_widget.dart';
 import 'package:flutter/material.dart';
@@ -20,9 +19,9 @@ class SettingsTab extends StatelessWidget {
         // TODO: implement listener
       },
       builder: (context, state) {
-        var cubit=AppCubit.get(context);
+        var cubit = AppCubit.get(context);
         return Scaffold(
-            drawer: myDrawer(context, cubit),
+          drawer: myDrawer(context, cubit),
           appBar: AppBar(
             actions: [
               IconButton(
@@ -38,41 +37,39 @@ class SettingsTab extends StatelessWidget {
             textDirection: cubit.layoutDirection ?? TextDirection.ltr,
             child: Center(
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(S.of(context).language+":"),
-
-                          DropdownButton<Language>(
-                            hint: Text(S.of(context).lang),
-                            value: cubit.selectedLanguage,
-                            onChanged: (Language? value) {
-                              cubit.languageChanged( newLang: value);
-                            },
-                            items: cubit.languages.map((language) {
-                              return DropdownMenuItem<Language>(
-                                value: language,
-                                // Use a unique identifier as the value
-                                child: Row(
-                                  children: [
-                                    Flag.fromString(language.code,
-                                        height: 25.h, width: 50.w),
-                                    SizedBox(width: 8.w),
-                                    Text(language.name),
-                                  ],
-                                ),
-                              );
-                            }).toList(),
-                          ),
-                        ],
+                      Text(S.of(context).language + ":"),
+                      DropdownButton<Language>(
+                        hint: Text(S.of(context).lang),
+                        value: cubit.selectedLanguage,
+                        onChanged: (Language? value) {
+                          cubit.languageChanged(newLang: value);
+                        },
+                        items: cubit.languages.map((language) {
+                          return DropdownMenuItem<Language>(
+                            value: language,
+                            // Use a unique identifier as the value
+                            child: Row(
+                              children: [
+                                Flag.fromString(language.code,
+                                    height: 25.h, width: 50.w),
+                                SizedBox(width: 8.w),
+                                Text(language.name),
+                              ],
+                            ),
+                          );
+                        }).toList(),
                       ),
                     ],
                   ),
-                )
-            ),
+                ],
+              ),
+            )),
           ),
         );
       },

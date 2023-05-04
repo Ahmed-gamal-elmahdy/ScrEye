@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 // Path to be cropped
 Path clipPath({required double width, required double height}) {
-
   Path path = Path();
   path.moveTo(width * 0.3283333, height * 0.4925000);
   path.cubicTo(width * 0.4100000, height * 0.6243750, width * 0.4116667,
@@ -73,8 +72,9 @@ Widget Guideline_Widget({required double width}) {
 class MyClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
-    return clipPath(width:size.width, height: (size.width * 0.67).toDouble());
+    return clipPath(width: size.width, height: (size.width * 0.67).toDouble());
   }
+
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
