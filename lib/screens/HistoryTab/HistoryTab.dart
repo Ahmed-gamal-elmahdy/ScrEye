@@ -71,14 +71,13 @@ class HistoryTab extends StatelessWidget {
                           color = Color(0xFF29C469);
                           res = S.of(context).not_anemic;
                         }
-                        return ListTile(
-                            trailing: cubit.dropDownIcon,
+                        return ExpansionTile(
                             title: Text('$formattedDate $formattedTime'),
                             subtitle: Text(
                               res,
                               style: TextStyle(fontSize: 15.w, color: color),
                             ),
-                            leading: Container(
+                            trailing: Container(
                               width: 50.w,
                               height: 100.h,
                               child: Image.network(
@@ -86,10 +85,25 @@ class HistoryTab extends StatelessWidget {
                                 fit: BoxFit.cover,
                               ),
                             ),
-                            onTap: () {
-                              print(ScreenUtil().screenWidth);
-                              cubit.pressedRecord();
-                            });
+                          children: [
+                            Image.network(
+                              value["url"],
+                              fit: BoxFit.cover,
+                            ),
+                            OutlinedButton.icon(
+                              label: Text(
+                                S
+                                    .of(context)
+                                    .upload, /*style: TextStyle(color: Color(0xFFF05454),*/
+                              ),
+                              icon: const Icon(
+                                Icons.upload, /*color: Color(0xFFF05454)*/
+                              ),
+                              onPressed: () async {
+                              },
+                            )
+                          ],
+                            );
                       },
                       separatorBuilder: (BuildContext context, int index) {
                         return Divider(
