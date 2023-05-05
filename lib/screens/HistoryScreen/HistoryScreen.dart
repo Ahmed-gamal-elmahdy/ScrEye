@@ -77,7 +77,7 @@ class HistoryScreen extends StatelessWidget {
                               res,
                               style: TextStyle(fontSize: 15.w, color: color),
                             ),
-                            trailing: Container(
+                            leading: Container(
                               width: 50.w,
                               height: 100.h,
                               child: Image.network(
@@ -92,12 +92,10 @@ class HistoryScreen extends StatelessWidget {
                             ),
                             OutlinedButton.icon(
                               label: Text(
-                                S
-                                    .of(context)
-                                    .upload, /*style: TextStyle(color: Color(0xFFF05454),*/
+                                "Download Record", /*style: TextStyle(color: Color(0xFFF05454),*/
                               ),
                               icon: const Icon(
-                                Icons.upload, /*color: Color(0xFFF05454)*/
+                                Icons.download, /*color: Color(0xFFF05454)*/
                               ),
                               onPressed: () async {
                               },
