@@ -12,23 +12,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:sidebarx/sidebarx.dart';
 
 import '../../../generated/l10n.dart';
-import '../widgets/Language.dart';
 
 part 'app_state.dart';
 
 class AppCubit extends Cubit<AppState> {
-  AppCubit() : super(AppInitial()) {
-    if (S.current.lang == "English") {
-      selectedLanguage = languages[0];
-      layoutDirection = TextDirection.ltr;
-    } else {
-      selectedLanguage = languages[1];
-      layoutDirection = TextDirection.rtl;
-    }
-  }
+  AppCubit() : super(AppInitial());
 
   static AppCubit get(context) => BlocProvider.of(context);
   dynamic user;
@@ -42,12 +32,6 @@ class AppCubit extends Cubit<AppState> {
   final String apiHeroku = "https://screye.herokuapp.com/api/v3/";
   final String apiAzure =
       "https://screyeapi.azurewebsites.net/api/screyeapiv1/";
-  List<Language> languages = [
-    const Language(name: "English", code: "US"),
-    const Language(name: "العربية", code: "EG"),
-  ];
-  Language? selectedLanguage;
-  TextDirection? layoutDirection;
   String test_result = "";
   double sliderVal = 1.0;
 
@@ -141,21 +125,22 @@ class AppCubit extends Cubit<AppState> {
                         await ImageGallerySaver.saveImage(outputimg);
                         Navigator.pop(context);
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          backgroundColor: Color(0xFF29C469),
+                          backgroundColor: const Color(0xFF29C469),
                           content: Text(S.of(context).img_saved_later),
                         ));
                       });
                     },
-                    icon: Icon(Icons.save_alt),
+                    icon: const Icon(Icons.save_alt),
                     label: Text(S.of(context).save),
                   ),
                   state is! Uploading
                       ? OutlinedButton.icon(
                           label: Text(S.of(context).upload),
-                          icon: Icon(Icons.upload),
+                          icon: const Icon(Icons.upload),
                           onPressed: () async {
                             _controller.crop();
-                            Future.delayed(Duration(milliseconds: 1000), () {
+                            Future.delayed(const Duration(milliseconds: 1000),
+                                () {
                               uploadImage(image: outputimg).then((data) async {
                                 getTest(
                                     imgname: data[0],
@@ -172,7 +157,7 @@ class AppCubit extends Cubit<AppState> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               LoadingAnimationWidget.threeArchedCircle(
-                                  color: Color(0xFFF05454), size: 20),
+                                  color: const Color(0xFFF05454), size: 20),
                               SizedBox(
                                 width: 10.h,
                               ),
@@ -203,16 +188,6 @@ class AppCubit extends Cubit<AppState> {
 
   void doneUploading() async {
     emit(DoneUploading());
-  }
-
-  int tabIndex = 0;
-  final sideBar_controller =
-      SidebarXController(selectedIndex: 0, extended: true);
-
-  void ChangeTabIndex(idx) {
-    tabIndex = idx;
-    //sideBar_controller.selectIndex(idx);
-    emit(ChangedTabIndex());
   }
 
   Future<List> uploadImage({
@@ -256,7 +231,7 @@ class AppCubit extends Cubit<AppState> {
   Future<dynamic> uploadFileToFirebase(File file, String name) async {
     return await _firebaseStorage
         .ref()
-        .child('images/${user.uid}/${name}')
+        .child('images/${user.uid}/$name')
         .putFile(file);
   }
 
@@ -330,34 +305,7 @@ class AppCubit extends Cubit<AppState> {
       return response.data;
     } on DioError catch (e) {
       print(e.message);
-      throw e;
+      rethrow;
     }
-  }
-
-  void languageChanged({required newLang}) {
-    if (newLang.name == "English") {
-      S.load(const Locale('en', ''));
-      selectedLanguage = languages[0];
-      layoutDirection = TextDirection.ltr;
-    } else {
-      S.load(const Locale('ar', ''));
-      selectedLanguage = languages[1];
-      layoutDirection = TextDirection.rtl;
-    }
-    emit(ChangedLanguage());
-  }
-
-  Icon dropDownIcon = Icon(Icons.arrow_drop_down);
-  bool isDown = true;
-
-  void pressedRecord() {
-    if (isDown) {
-      dropDownIcon = Icon(Icons.arrow_drop_up);
-      isDown = false;
-    } else {
-      isDown = true;
-      dropDownIcon = Icon(Icons.arrow_drop_down);
-    }
-    emit(PressedRecord());
   }
 }

@@ -579,6 +579,26 @@ class S {
       args: [],
     );
   }
+
+  /// `العربية`
+  String get ar {
+    return Intl.message(
+      'العربية',
+      name: 'ar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `English`
+  String get en {
+    return Intl.message(
+      'English',
+      name: 'en',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

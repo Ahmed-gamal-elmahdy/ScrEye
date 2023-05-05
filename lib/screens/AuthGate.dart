@@ -6,11 +6,11 @@ import 'package:fluttertest/app.dart';
 
 import '../generated/l10n.dart';
 import '../themes/MyTheme.dart';
-import 'AuthTab/LoginForm.dart';
-import 'AuthTab/RegisterForm.dart';
+import 'AuthScreen/LoginForm.dart';
+import 'AuthScreen/RegisterForm.dart';
 
-class myAuthGate extends StatelessWidget {
-  const myAuthGate({super.key});
+class AuthGate extends StatelessWidget {
+  const AuthGate({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class myAuthGate extends StatelessWidget {
                 theme: MyTheme.originalTheme(),
               );
             } else {
-              return MyApp();
+              return const MyApp();
             }
           },
         );
