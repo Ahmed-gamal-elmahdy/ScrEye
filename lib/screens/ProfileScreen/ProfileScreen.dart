@@ -1,52 +1,87 @@
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertest/cubit/app_cubit.dart';
 
-import '../../../generated/l10n.dart';
-import '../../widgets/MyDrawer.dart';
+import 'ProfileCubit/profile_cubit.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  final ProfileCubit _cubit = ProfileCubit();
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AppCubit, AppState>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
-      builder: (context, state) {
-        var cubit = AppCubit.get(context);
-        return Scaffold(
-          drawer: myDrawer(context),
-          appBar: AppBar(
-            actions: [
-              IconButton(
-                  tooltip: "Logout",
-                  onPressed: () {
-                    FirebaseUIAuth.signOut();
-                  },
-                  icon: const Icon(Icons.power_settings_new_rounded))
-            ],
-            title: Text(S.of(context).navbar_profile),
-          ),
-          body: Center(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Edit Profile'),
+      ),
+      body: BlocBuilder<ProfileCubit, ProfileState>(
+        bloc: _cubit,
+        builder: (context, state) {
+          if (state is ProfileLoaded) {
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
               child: Column(
-            children: [
-              Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text("Name : "),
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Name'),
+                    onChanged: (value) => _cubit.updateName(value),
+                  ),
+                  SizedBox(height: 16.0),
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Email'),
+                    onChanged: (value) => _cubit.updateEmail(value),
+                  ),
+                  SizedBox(height: 16.0),
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Password'),
+                    obscureText: true,
+                    onChanged: (value) => _cubit.updatePassword(value),
+                  ),
+                  SizedBox(height: 16.0),
+                  DropdownButton<int>(
+                    value: state.age,
+                    hint: Text('Age'),
+                    onChanged: (value) => _cubit.updateAge(value ?? 0),
+                    items: List.generate(
+                      121,
+                      (index) => DropdownMenuItem(
+                        value: index,
+                        child: Text('$index'),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 16.0),
+                  Row(
+                    children: [
+                      Radio<String>(
+                        value: 'Male',
+                        groupValue: state.gender,
+                        onChanged: (value) => _cubit.updateGender(value ?? ''),
+                      ),
+                      Text('Male'),
+                      Radio<String>(
+                        value: 'Female',
+                        groupValue: state.gender,
+                        onChanged: (value) => _cubit.updateGender(value ?? ''),
+                      ),
+                      Text('Female'),
+                    ],
+                  ),
+                  SizedBox(height: 32.0),
+                  ElevatedButton(
+                    onPressed: () => _cubit.saveChanges(context),
+                    child: Text('Save Changes'),
+                  ),
                 ],
               ),
-              Row(
-                children: [
-                  Text("Email : "),
-                ],
-              ),
-            ],
-          )),
-        );
-      },
+            );
+          } else if (state is ProfileLoading) {
+            return LoadingIndicator(size: 10, borderWidth: 3);
+          } else {
+            return Container();
+          }
+        },
+      ),
     );
   }
 }

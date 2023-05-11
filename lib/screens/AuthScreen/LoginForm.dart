@@ -19,7 +19,7 @@ class LoginForm extends StatelessWidget {
           return Scaffold(
             body: Directionality(
               textDirection:
-                  authenticationCubit.layoutDirection ?? TextDirection.ltr,
+              authenticationCubit.layoutDirection ?? TextDirection.ltr,
               child: SingleChildScrollView(
                 child: Column(
                   children: [
@@ -27,8 +27,14 @@ class LoginForm extends StatelessWidget {
                       child: Padding(
                         padding: EdgeInsets.all(8.w),
                         child: Container(
-                            height: MediaQuery.of(context).size.height * 0.25,
-                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery
+                                .of(context)
+                                .size
+                                .height * 0.25,
+                            width: MediaQuery
+                                .of(context)
+                                .size
+                                .width,
                             child: Image.asset('assets/logo_2.png')),
                       ),
                     ),
@@ -55,7 +61,9 @@ class LoginForm extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         DropdownButton<Language>(
-                          hint: Text(S.of(context).lang),
+                          hint: Text(S
+                              .of(context)
+                              .lang),
                           value: authenticationCubit.selectedLanguage,
                           onChanged: (Language? newValue) {
                             authenticationCubit.languageChanged(newValue);
@@ -84,17 +92,21 @@ class LoginForm extends StatelessWidget {
                       padding: EdgeInsets.all(8.w),
                       child: Row(
                         children: [
-                          Text(S.of(context).signInText,
+                          Text(S
+                              .of(context)
+                              .signInText,
                               style: TextStyle(fontSize: 30.sp)),
                         ],
                       ),
                     ),
                     Padding(
                       padding:
-                          EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
+                      EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
                       child: TextFormField(
                         decoration: InputDecoration(
-                          labelText: S.of(context).emailInputLabel,
+                          labelText: S
+                              .of(context)
+                              .emailInputLabel,
                         ),
                         onChanged: (value) {
                           authenticationCubit.emailChangedLogin(value);
@@ -103,10 +115,12 @@ class LoginForm extends StatelessWidget {
                     ),
                     Padding(
                       padding:
-                          EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
+                      EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
                       child: TextFormField(
                         decoration: InputDecoration(
-                            labelText: S.of(context).passwordInputLabel,
+                            labelText: S
+                                .of(context)
+                                .passwordInputLabel,
                             suffixIcon: IconButton(
                                 onPressed: () {
                                   authenticationCubit.visibilityChanged();
@@ -129,13 +143,17 @@ class LoginForm extends StatelessWidget {
                                 left: 10.w, right: 10.w, top: 5.h),
                             child: RichText(
                               text: TextSpan(
-                                text: S.of(context).new_to_screye,
+                                text: S
+                                    .of(context)
+                                    .new_to_screye,
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Color(0xFF3177A3)),
                                 children: [
                                   TextSpan(
-                                    text: S.of(context).registerText,
+                                    text: S
+                                        .of(context)
+                                        .registerText,
                                     style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Color(0xFFF05454),
@@ -159,7 +177,9 @@ class LoginForm extends StatelessWidget {
                         onPressed: () {
                           authenticationCubit.submitLogin(context);
                         },
-                        child: Text(S.of(context).signInText),
+                        child: Text(S
+                            .of(context)
+                            .signInText),
                       ),
                     ),
                     Container(
@@ -173,7 +193,9 @@ class LoginForm extends StatelessWidget {
                                 children: [
                                   TextSpan(
                                     text:
-                                        S.of(context).resetPasswordButtonLabel,
+                                    S
+                                        .of(context)
+                                        .resetPasswordButtonLabel,
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Color(0xFFF05454),

@@ -6,17 +6,15 @@ class AppSettingsState {
   final TextDirection directionality;
   final ThemeMode themeMode;
 
-  const AppSettingsState(
-      {required this.theme,
-      required this.locale,
-      required this.directionality,
-      required this.themeMode});
+  const AppSettingsState({required this.theme,
+    required this.locale,
+    required this.directionality,
+    required this.themeMode});
 
-  AppSettingsState copyWith(
-      {ThemeData? theme,
-      Locale? locale,
-      TextDirection? directionality,
-      ThemeMode? themeMode}) {
+  AppSettingsState copyWith({ThemeData? theme,
+    Locale? locale,
+    TextDirection? directionality,
+    ThemeMode? themeMode}) {
     return AppSettingsState(
         theme: theme ?? this.theme,
         locale: locale ?? this.locale,
@@ -27,12 +25,12 @@ class AppSettingsState {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is AppSettingsState &&
-          runtimeType == other.runtimeType &&
-          theme == other.theme &&
-          locale == other.locale &&
-          directionality == other.directionality &&
-          themeMode == other.themeMode;
+          other is AppSettingsState &&
+              runtimeType == other.runtimeType &&
+              theme == other.theme &&
+              locale == other.locale &&
+              directionality == other.directionality &&
+              themeMode == other.themeMode;
 
   @override
   int get hashCode =>
