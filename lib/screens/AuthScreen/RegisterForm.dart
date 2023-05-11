@@ -19,15 +19,21 @@ class RegistrationForm extends StatelessWidget {
           return Scaffold(
             body: Directionality(
               textDirection:
-                  authenticationCubit.layoutDirection ?? TextDirection.ltr,
+              authenticationCubit.layoutDirection ?? TextDirection.ltr,
               child: SingleChildScrollView(
                 child: Column(
                   children: [
                     Padding(
                       padding: EdgeInsets.all(8.w),
                       child: Container(
-                          height: MediaQuery.of(context).size.height * 0.25,
-                          width: MediaQuery.of(context).size.width * 0.8,
+                          height: MediaQuery
+                              .of(context)
+                              .size
+                              .height * 0.25,
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width * 0.8,
                           child: Image.asset('assets/logo_2.png')),
                     ),
                     BlocBuilder<AuthenticationCubit, AuthenticationState>(
@@ -53,7 +59,9 @@ class RegistrationForm extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         DropdownButton<Language>(
-                          hint: Text(S.of(context).lang),
+                          hint: Text(S
+                              .of(context)
+                              .lang),
                           value: authenticationCubit.selectedLanguage,
                           onChanged: (Language? newValue) {
                             authenticationCubit.languageChanged(newValue);
@@ -79,17 +87,21 @@ class RegistrationForm extends StatelessWidget {
                       padding: EdgeInsets.all(8.w),
                       child: Row(
                         children: [
-                          Text(S.of(context).registerButtonText,
+                          Text(S
+                              .of(context)
+                              .registerButtonText,
                               style: TextStyle(fontSize: 30.sp)),
                         ],
                       ),
                     ),
                     Padding(
                       padding:
-                          EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
+                      EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
                       child: TextFormField(
                         decoration: InputDecoration(
-                          labelText: S.of(context).emailInputLabel,
+                          labelText: S
+                              .of(context)
+                              .emailInputLabel,
                         ),
                         onChanged: (value) {
                           authenticationCubit.emailChangedRegister(value);
@@ -98,10 +110,12 @@ class RegistrationForm extends StatelessWidget {
                     ),
                     Padding(
                       padding:
-                          EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
+                      EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
                       child: TextFormField(
                         decoration: InputDecoration(
-                            labelText: S.of(context).passwordInputLabel,
+                            labelText: S
+                                .of(context)
+                                .passwordInputLabel,
                             suffixIcon: IconButton(
                                 onPressed: () {
                                   authenticationCubit.visibilityChanged();
@@ -117,10 +131,12 @@ class RegistrationForm extends StatelessWidget {
                     ),
                     Padding(
                       padding:
-                          EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
+                      EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
                       child: TextFormField(
                         decoration: InputDecoration(
-                          labelText: S.of(context).confirmPasswordInputLabel,
+                          labelText: S
+                              .of(context)
+                              .confirmPasswordInputLabel,
                         ),
                         obscureText: true,
                         onChanged: (value) {
@@ -130,19 +146,26 @@ class RegistrationForm extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width,
                       child: Padding(
                         padding:
-                            EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
+                        EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
                         child: RichText(
                           text: TextSpan(
-                            text: S.of(context).already_user,
+                            text: S
+                                .of(context)
+                                .already_user,
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Color(0xFF3177A3)),
                             children: [
                               TextSpan(
-                                text: S.of(context).signInText,
+                                text: S
+                                    .of(context)
+                                    .signInText,
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Color(0xFFF05454),
@@ -164,7 +187,9 @@ class RegistrationForm extends StatelessWidget {
                         onPressed: () {
                           authenticationCubit.submitRegistration(context);
                         },
-                        child: Text(S.of(context).registerText),
+                        child: Text(S
+                            .of(context)
+                            .registerText),
                       ),
                     ),
                   ],

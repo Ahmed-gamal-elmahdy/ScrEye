@@ -75,7 +75,7 @@ class MyApp extends StatelessWidget {
                               '/': (context) => HomeScreen(
                                   user: snapshot.data!,
                                   appCubit: context.read<AppCubit>()),
-                              '/profile': (context) => const ProfileScreen(),
+                              '/profile': (context) => ProfileScreen(),
                               '/history': (context) => const HistoryScreen(),
                               '/settings': (context) => const SettingsScreen(),
                             },
