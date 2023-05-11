@@ -6,6 +6,7 @@ import 'package:fluttertest/cubit/AppSettingsCubit/app_settings_cubit.dart';
 import 'package:fluttertest/themes/MyTheme.dart' show ThemeMode;
 
 import '../../generated/l10n.dart';
+import '../../widgets/MyDrawer.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -16,6 +17,7 @@ class SettingsScreen extends StatelessWidget {
     final appLocalizations = S.of(context);
 
     return Scaffold(
+      drawer: myDrawer(context),
       appBar: AppBar(
         title: Text(appLocalizations.navbar_settings),
       ),

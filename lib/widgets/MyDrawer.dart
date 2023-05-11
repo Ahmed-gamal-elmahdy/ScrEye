@@ -13,30 +13,66 @@ Drawer myDrawer(context) {
               width: MediaQuery.of(context).size.width * 0.16,
               child: Image.asset('assets/logo_3.png')),
         ),
-        ListTile(
-            leading: Icon(Icons.home),
-            title: Text(S.of(context).navbar_home),
-            onTap: () {
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(50.0),
+            border: Border.all(
+              color: Colors.white,
+              width: 15.0,
+            ),
+          ),
+          child: ListTile(
+              leading: Icon(Icons.home),
+              title: Text(S.of(context).navbar_home),
+              onTap: () {
               Navigator.popAndPushNamed(context, '/');
             }),
-        ListTile(
-            leading: Icon(Icons.person_sharp),
-            title: Text(S.of(context).navbar_profile),
-            onTap: () {
+        ),
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(50.0),
+            border: Border.all(
+              color: Colors.white,
+              width: 15.0,
+            ),
+          ),
+          child: ListTile(
+              leading: Icon(Icons.person_sharp),
+              title: Text(S.of(context).navbar_profile),
+              onTap: () {
               Navigator.popAndPushNamed(context, '/profile');
             }),
-        ListTile(
-            leading: Icon(Icons.photo_library_outlined),
-            title: Text(S.of(context).navbar_history),
-            onTap: () {
+        ),
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(50.0),
+            border: Border.all(
+              color: Colors.white,
+              width: 15.0,
+            ),
+          ),
+          child: ListTile(
+              leading: Icon(Icons.photo_library_outlined),
+              title: Text(S.of(context).navbar_history),
+              onTap: () {
               Navigator.popAndPushNamed(context, '/history');
             }),
-        ListTile(
-            leading: Icon(Icons.settings),
-            title: Text(S.of(context).navbar_settings),
-            onTap: () {
+        ),
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(50.0),
+            border: Border.all(
+              color: Colors.white,
+              width: 15.0,
+            ),
+          ),
+          child: ListTile(
+              leading: Icon(Icons.settings),
+              title: Text(S.of(context).navbar_settings),
+              onTap: () {
               Navigator.popAndPushNamed(context, '/settings');
             }),
+        ),
       ],
     ),
   );

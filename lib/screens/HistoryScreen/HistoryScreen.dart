@@ -71,27 +71,43 @@ class HistoryScreen extends StatelessWidget {
                           color = Color(0xFF29C469);
                           res = S.of(context).not_anemic;
                         }
-                        return ListTile(
-                          title: Text('$formattedDate $formattedTime'),
-                          subtitle: Text(
-                            res,
-                            style: TextStyle(fontSize: 15.w, color: color),
-                          ),
-                          trailing: Container(
-                            width: 100.w,
-                            height: 100.h,
-                            child: Image.network(
-                              value["url"],
-                              fit: BoxFit.scaleDown,
+                        return ExpansionTile(
+                            title: Text('$formattedDate $formattedTime'),
+                            subtitle: Text(
+                              res,
+                              style: TextStyle(fontSize: 15.w, color: color),
                             ),
-                          ),
-                        );
+                            leading: Container(
+                              width: 50.w,
+                              height: 100.h,
+                              child: Image.network(
+                                value["url"],
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          children: [
+                            Image.network(
+                              value["url"],
+                              fit: BoxFit.cover,
+                            ),
+                            OutlinedButton.icon(
+                              label: Text(
+                                "Download Record", /*style: TextStyle(color: Color(0xFFF05454),*/
+                              ),
+                              icon: const Icon(
+                                Icons.download, /*color: Color(0xFFF05454)*/
+                              ),
+                              onPressed: () async {
+                              },
+                            )
+                          ],
+                            );
                       },
                       separatorBuilder: (BuildContext context, int index) {
                         return Divider(
-                          color: Colors.grey,
+                          color: Colors.white,
                           thickness: 2,
-                          height: 3,
+                          height: 10,
                         );
                       },
                     );
