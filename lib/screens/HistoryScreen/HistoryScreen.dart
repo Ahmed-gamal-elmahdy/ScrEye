@@ -72,19 +72,19 @@ class HistoryScreen extends StatelessWidget {
                           res = S.of(context).not_anemic;
                         }
                         return ExpansionTile(
-                            title: Text('$formattedDate $formattedTime'),
-                            subtitle: Text(
-                              res,
-                              style: TextStyle(fontSize: 15.w, color: color),
+                          title: Text('$formattedDate $formattedTime'),
+                          subtitle: Text(
+                            res,
+                            style: TextStyle(fontSize: 15.w, color: color),
+                          ),
+                          leading: Container(
+                            width: 50.w,
+                            height: 100.h,
+                            child: Image.network(
+                              value["url"],
+                              fit: BoxFit.cover,
                             ),
-                            leading: Container(
-                              width: 50.w,
-                              height: 100.h,
-                              child: Image.network(
-                                value["url"],
-                                fit: BoxFit.cover,
-                              ),
-                            ),
+                          ),
                           children: [
                             Image.network(
                               value["url"],
@@ -97,11 +97,10 @@ class HistoryScreen extends StatelessWidget {
                               icon: const Icon(
                                 Icons.download, /*color: Color(0xFFF05454)*/
                               ),
-                              onPressed: () async {
-                              },
+                              onPressed: () async {},
                             )
                           ],
-                            );
+                        );
                       },
                       separatorBuilder: (BuildContext context, int index) {
                         return Divider(

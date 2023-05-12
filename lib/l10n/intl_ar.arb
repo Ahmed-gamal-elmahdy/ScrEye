@@ -55,5 +55,14 @@
 "already_user":"لديك حساب؟",
 "language":"اللغة",
 "ar":"العربية",
-"en":"English"
+"en":"English",
+"name": "الاسم",
+"age": "العمر",
+"male": "ذكر",
+"female": "أنثى",
+"profile": "الملف الشخصى",
+"authError": "فشلت التحقق. يرجى المحاولة مرة أخرى.",
+"auth": "التحقق",
+"auth_pass_required_hint": "ادخل كلمة السر الحالية لحفظ الاعدادات",
+"confirm_settings": "حفظ الاعدادات"
 }

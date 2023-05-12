@@ -8,9 +8,10 @@ abstract class ProfileState {
   final String password;
   final int age;
   final String gender;
+  final bool visibility;
 
   factory ProfileState.loading() {
-    return ProfileLoading();
+    return const ProfileLoading();
   }
 
   const ProfileState({
@@ -19,6 +20,7 @@ abstract class ProfileState {
     required this.password,
     required this.age,
     required this.gender,
+    required this.visibility,
   });
 
   ProfileState copyWith({
@@ -27,12 +29,19 @@ abstract class ProfileState {
     String? password,
     int? age,
     String? gender,
+    bool? visibility,
   });
 }
 
 class ProfileLoading extends ProfileState {
   const ProfileLoading()
-      : super(name: '', email: '', password: '', age: 0, gender: '');
+      : super(
+            name: '',
+            email: '',
+            password: '',
+            age: 0,
+            gender: '',
+            visibility: false);
 
   @override
   ProfileState copyWith(
@@ -40,7 +49,8 @@ class ProfileLoading extends ProfileState {
       String? email,
       String? password,
       int? age,
-      String? gender}) {
+      String? gender,
+      bool? visibility}) {
     // TODO: implement copyWith
     throw UnimplementedError();
   }
@@ -53,12 +63,14 @@ class ProfileLoaded extends ProfileState {
     required String password,
     required int age,
     required String gender,
+    required bool visibility,
   }) : super(
           name: name,
           email: email,
           password: password,
           age: age,
           gender: gender,
+          visibility: visibility,
         );
 
   @override
@@ -68,6 +80,7 @@ class ProfileLoaded extends ProfileState {
     String? password,
     int? age,
     String? gender,
+    bool? visibility,
   }) {
     return ProfileLoaded(
       name: name ?? this.name,
@@ -75,17 +88,19 @@ class ProfileLoaded extends ProfileState {
       password: password ?? this.password,
       age: age ?? this.age,
       gender: gender ?? this.gender,
+      visibility: visibility ?? this.visibility,
     );
   }
 }
 
 class ProfileSaved extends ProfileState {
-  ProfileSaved(
+  const ProfileSaved(
       {super.name = "",
       super.email = "",
       super.password = "",
       super.age = 0,
-      super.gender = ""});
+      super.gender = "",
+      super.visibility = false});
 
   @override
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);

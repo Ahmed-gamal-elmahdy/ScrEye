@@ -21,15 +21,22 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
+
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accessDisabledErrorText": MessageLookupByLibrary.simpleMessage(
             "Access to this account has been temporarily disabled"),
+        "age": MessageLookupByLibrary.simpleMessage("Age"),
         "align_clipper":
             MessageLookupByLibrary.simpleMessage("Put Clipper on Conjunctiva"),
         "already_user":
             MessageLookupByLibrary.simpleMessage("Already a ScrEye user? "),
         "anemic": MessageLookupByLibrary.simpleMessage("Anemic"),
         "ar": MessageLookupByLibrary.simpleMessage("العربية"),
+        "auth": MessageLookupByLibrary.simpleMessage("Verification"),
+        "authError": MessageLookupByLibrary.simpleMessage(
+            "Verification failed. Please try again."),
+        "auth_pass_required_hint": MessageLookupByLibrary.simpleMessage(
+            "Enter the current password to save changes"),
         "camera": MessageLookupByLibrary.simpleMessage("Camera"),
         "capture": MessageLookupByLibrary.simpleMessage("Capture"),
         "capturing": MessageLookupByLibrary.simpleMessage("Capturing.."),
@@ -40,6 +47,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Confirm Password"),
         "confirmPasswordIsRequiredErrorText":
             MessageLookupByLibrary.simpleMessage("Confirm your password"),
+        "confirm_settings":
+            MessageLookupByLibrary.simpleMessage("Confirm settings"),
         "discard": MessageLookupByLibrary.simpleMessage("Discard"),
         "emailInputLabel": MessageLookupByLibrary.simpleMessage("Email"),
         "emailIsRequiredErrorText":
@@ -47,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "emailTakenErrorText":
             MessageLookupByLibrary.simpleMessage("This email is already used"),
         "en": MessageLookupByLibrary.simpleMessage("English"),
+        "female": MessageLookupByLibrary.simpleMessage("Female"),
         "forgotPasswordButtonLabel":
             MessageLookupByLibrary.simpleMessage("Forgot your password?"),
         "forgotPasswordViewTitle":
@@ -60,6 +70,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lang": MessageLookupByLibrary.simpleMessage("English"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "loading": MessageLookupByLibrary.simpleMessage("Loading..."),
+        "male": MessageLookupByLibrary.simpleMessage("Male"),
+        "name": MessageLookupByLibrary.simpleMessage("Name"),
         "navbar_history": MessageLookupByLibrary.simpleMessage("History"),
         "navbar_home": MessageLookupByLibrary.simpleMessage("Home"),
         "navbar_profile": MessageLookupByLibrary.simpleMessage("Profile"),
@@ -75,6 +87,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordTooWeak": MessageLookupByLibrary.simpleMessage(
             "The password provided is too weak."),
         "pls_wait": MessageLookupByLibrary.simpleMessage("Please Wait.."),
+        "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "registerActionText": MessageLookupByLibrary.simpleMessage("Register"),
         "registerButtonText": MessageLookupByLibrary.simpleMessage("Register"),
         "registerHintText": MessageLookupByLibrary.simpleMessage(

@@ -55,5 +55,14 @@
 "already_user":"Already a ScrEye user? ",
 "language":"Language",
 "ar":"العربية",
-"en": "English"
+"en": "English",
+"name": "Name",
+"age": "Age",
+"male": "Male",
+"female": "Female",
+"profile": "Profile",
+"authError": "Verification failed. Please try again.",
+"auth": "Verification",
+"auth_pass_required_hint": "Enter the current password to save changes",
+"confirm_settings": "Confirm settings"
 }
