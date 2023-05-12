@@ -78,118 +78,99 @@ class AppCubit extends Cubit<AppState> {
     user = User;
   }
 
-  Future<dynamic> ShowCropWidget(BuildContext context,
-      Uint8List capturedImage) {
+  Future<dynamic> ShowCropWidget(
+      BuildContext context, Uint8List capturedImage) {
     final _controller = CropController();
     Uint8List outputimg = capturedImage;
     notLoading();
     return showDialog(
       useSafeArea: false,
       context: context,
-      builder: (context) =>
-          Scaffold(
-            appBar: AppBar(
-              title: Text(S
-                  .of(context)
-                  .your_img),
-            ),
-            body: Stack(
-              children: [
-                Crop(
-                    fixArea: true,
-                    baseColor: const Color(0xFF90CBF0),
-                    initialAreaBuilder: (rect) =>
-                        Rect.fromLTRB(rect.left + 110.w,
-                            rect.top + 160.h, rect.right - 110.w,
-                            rect.bottom - 370.h),
-                    controller: _controller,
-                    image: capturedImage,
-                    onCropped: (crop) {
-                      outputimg = crop;
-                    }),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      OutlinedButton.icon(
-                        onPressed: () async {
-                          Navigator.pop(context);
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            backgroundColor: const Color(0xFFCE772F),
-                            content: Text(S
-                                .of(context)
-                                .img_discarded),
-                          ));
-                        },
-                        icon: const Icon(Icons.delete),
-                        label: Text(S
-                            .of(context)
-                            .discard),
-                      ),
-                      OutlinedButton.icon(
-                        onPressed: () async {
-                          _controller.crop();
-                          Future.delayed(
-                              Duration(milliseconds: 1500), () async {
-                            await ImageGallerySaver.saveImage(outputimg);
-                            Navigator.pop(context);
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              backgroundColor: const Color(0xFF29C469),
-                              content: Text(S
-                                  .of(context)
-                                  .img_saved_later),
-                            ));
-                          });
-                        },
-                        icon: const Icon(Icons.save_alt),
-                        label: Text(S
-                            .of(context)
-                            .save),
-                      ),
-                      state is! Uploading
-                          ? OutlinedButton.icon(
-                        label: Text(S
-                            .of(context)
-                            .upload),
-                        icon: const Icon(Icons.upload),
-                        onPressed: () async {
-                          _controller.crop();
-                          Future.delayed(const Duration(milliseconds: 1000),
-                                  () {
-                                uploadImage(image: outputimg).then((
-                                    data) async {
-                                  getTest(
-                                      imgname: data[0],
-                                      token: data[1],
-                                      url: data[2]);
-                                  Navigator.pop(context);
-                                });
-                              });
-                        },
-                      )
-                          : OutlinedButton(
-                        onPressed: null,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            LoadingAnimationWidget.threeArchedCircle(
-                                color: const Color(0xFFF05454), size: 20),
-                            SizedBox(
-                              width: 10.h,
-                            ),
-                            Text(S
-                                .of(context)
-                                .loading)
-                          ],
-                        ),
-                      ),
-                    ],
+      builder: (context) => Scaffold(
+        appBar: AppBar(
+          title: Text(S.of(context).your_img),
+        ),
+        body: Stack(
+          children: [
+            Crop(
+                fixArea: true,
+                baseColor: const Color(0xFF90CBF0),
+                initialAreaBuilder: (rect) => Rect.fromLTRB(rect.left + 110.w,
+                    rect.top + 160.h, rect.right - 110.w, rect.bottom - 370.h),
+                controller: _controller,
+                image: capturedImage,
+                onCropped: (crop) {
+                  outputimg = crop;
+                }),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  OutlinedButton.icon(
+                    onPressed: () async {
+                      Navigator.pop(context);
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        backgroundColor: const Color(0xFFCE772F),
+                        content: Text(S.of(context).img_discarded),
+                      ));
+                    },
+                    icon: const Icon(Icons.delete),
+                    label: Text(S.of(context).discard),
                   ),
-                )
-              ],
-            ),
-          ),
+                  OutlinedButton.icon(
+                    onPressed: () async {
+                      _controller.crop();
+                      Future.delayed(Duration(milliseconds: 1500), () async {
+                        await ImageGallerySaver.saveImage(outputimg);
+                        Navigator.pop(context);
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          backgroundColor: const Color(0xFF29C469),
+                          content: Text(S.of(context).img_saved_later),
+                        ));
+                      });
+                    },
+                    icon: const Icon(Icons.save_alt),
+                    label: Text(S.of(context).save),
+                  ),
+                  state is! Uploading
+                      ? OutlinedButton.icon(
+                          label: Text(S.of(context).upload),
+                          icon: const Icon(Icons.upload),
+                          onPressed: () async {
+                            _controller.crop();
+                            Future.delayed(const Duration(milliseconds: 1000),
+                                () {
+                              uploadImage(image: outputimg).then((data) async {
+                                getTest(
+                                    imgname: data[0],
+                                    token: data[1],
+                                    url: data[2]);
+                                Navigator.pop(context);
+                              });
+                            });
+                          },
+                        )
+                      : OutlinedButton(
+                          onPressed: null,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              LoadingAnimationWidget.threeArchedCircle(
+                                  color: const Color(0xFFF05454), size: 20),
+                              SizedBox(
+                                width: 10.h,
+                              ),
+                              Text(S.of(context).loading)
+                            ],
+                          ),
+                        ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 
@@ -219,8 +200,7 @@ class AppCubit extends Cubit<AppState> {
       final tempDir = await getTemporaryDirectory();
       final now = DateTime.now();
       final name =
-          '${now.day}-${now.month}-${now.year}-${now.hour}-${now.minute}-${now
-          .second}';
+          '${now.day}-${now.month}-${now.year}-${now.hour}-${now.minute}-${now.second}';
       File file = await File('${tempDir.path}/image.jpg').create();
 
       if (image.runtimeType == XFile) {
@@ -277,9 +257,7 @@ class AppCubit extends Cubit<AppState> {
     try {
       final res = await getApiRequest(imgname: imgname, token: token);
       test_result = res;
-      final now = DateTime
-          .now()
-          .millisecondsSinceEpoch;
+      final now = DateTime.now().millisecondsSinceEpoch;
 
       final imageData = {
         'name': imgname,
@@ -296,8 +274,8 @@ class AppCubit extends Cubit<AppState> {
     }
   }
 
-  Future<void> writeImageDataToDatabase(Map<String, dynamic> imageData,
-      String key) async {
+  Future<void> writeImageDataToDatabase(
+      Map<String, dynamic> imageData, String key) async {
     await dbRef.child(user.uid).child("images").child(key).set(imageData);
   }
 

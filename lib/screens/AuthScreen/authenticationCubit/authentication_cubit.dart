@@ -67,24 +67,18 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
   void submitRegistration(context) async {
     if (_email.isEmpty || !EmailValidator.validate(_email)) {
-      emit(AuthenticationFailure(S
-          .of(context)
-          .isNotAValidEmailErrorText));
+      emit(AuthenticationFailure(S.of(context).isNotAValidEmailErrorText));
       return;
     }
 
     if (_password.isEmpty || _password.length < 6) {
-      emit(AuthenticationFailure(S
-          .of(context)
-          .passwordTooShort));
+      emit(AuthenticationFailure(S.of(context).passwordTooShort));
       return;
     }
 
     if (_password != _passwordConfirm) {
       emit(AuthenticationFailure(
-          S
-              .of(context)
-              .confirmPasswordDoesNotMatchErrorText));
+          S.of(context).confirmPasswordDoesNotMatchErrorText));
       return;
     }
 
@@ -111,18 +105,12 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       // Navigate to the home screen
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        emit(AuthenticationFailure(S
-            .of(context)
-            .passwordTooWeak));
+        emit(AuthenticationFailure(S.of(context).passwordTooWeak));
       } else if (e.code == 'email-already-in-use') {
-        emit(AuthenticationFailure(S
-            .of(context)
-            .emailTakenErrorText));
+        emit(AuthenticationFailure(S.of(context).emailTakenErrorText));
       }
     } catch (e) {
-      emit(AuthenticationFailure(S
-          .of(context)
-          .unknownError));
+      emit(AuthenticationFailure(S.of(context).unknownError));
     }
   }
 
@@ -139,16 +127,12 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
   void submitLogin(context) async {
     if (_email.isEmpty || !EmailValidator.validate(_email)) {
-      emit(AuthenticationFailure(S
-          .of(context)
-          .isNotAValidEmailErrorText));
+      emit(AuthenticationFailure(S.of(context).isNotAValidEmailErrorText));
       return;
     }
 
     if (_password.isEmpty || _password.length < 6) {
-      emit(AuthenticationFailure(S
-          .of(context)
-          .wrongOrNoPasswordErrorText));
+      emit(AuthenticationFailure(S.of(context).wrongOrNoPasswordErrorText));
       return;
     }
 
@@ -163,18 +147,12 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       // Navigate to the home screen
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        emit(AuthenticationFailure(S
-            .of(context)
-            .userNotFoundErrorText));
+        emit(AuthenticationFailure(S.of(context).userNotFoundErrorText));
       } else if (e.code == 'wrong-password') {
-        emit(AuthenticationFailure(S
-            .of(context)
-            .wrongOrNoPasswordErrorText));
+        emit(AuthenticationFailure(S.of(context).wrongOrNoPasswordErrorText));
       }
     } catch (e) {
-      emit(AuthenticationFailure(S
-          .of(context)
-          .unknownError));
+      emit(AuthenticationFailure(S.of(context).unknownError));
     }
   }
 }

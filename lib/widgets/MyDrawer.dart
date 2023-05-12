@@ -25,8 +25,8 @@ Drawer myDrawer(context) {
               leading: Icon(Icons.home),
               title: Text(S.of(context).navbar_home),
               onTap: () {
-              Navigator.popAndPushNamed(context, '/');
-            }),
+                Navigator.popAndPushNamed(context, '/');
+              }),
         ),
         Container(
           decoration: BoxDecoration(
@@ -40,8 +40,8 @@ Drawer myDrawer(context) {
               leading: Icon(Icons.person_sharp),
               title: Text(S.of(context).navbar_profile),
               onTap: () {
-              Navigator.popAndPushNamed(context, '/profile');
-            }),
+                Navigator.popAndPushNamed(context, '/profile');
+              }),
         ),
         Container(
           decoration: BoxDecoration(
@@ -55,8 +55,8 @@ Drawer myDrawer(context) {
               leading: Icon(Icons.photo_library_outlined),
               title: Text(S.of(context).navbar_history),
               onTap: () {
-              Navigator.popAndPushNamed(context, '/history');
-            }),
+                Navigator.popAndPushNamed(context, '/history');
+              }),
         ),
         Container(
           decoration: BoxDecoration(
@@ -70,8 +70,8 @@ Drawer myDrawer(context) {
               leading: Icon(Icons.settings),
               title: Text(S.of(context).navbar_settings),
               onTap: () {
-              Navigator.popAndPushNamed(context, '/settings');
-            }),
+                Navigator.popAndPushNamed(context, '/settings');
+              }),
         ),
       ],
     ),

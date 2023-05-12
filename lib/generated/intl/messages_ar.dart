@@ -21,14 +21,21 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
+
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accessDisabledErrorText": MessageLookupByLibrary.simpleMessage(
             "تم تعطيل الوصول إلى هذا الحساب مؤقتًا"),
+        "age": MessageLookupByLibrary.simpleMessage("العمر"),
         "align_clipper":
             MessageLookupByLibrary.simpleMessage("محاذاة الشكل مع الملتحمة"),
         "already_user": MessageLookupByLibrary.simpleMessage("لديك حساب؟"),
         "anemic": MessageLookupByLibrary.simpleMessage("لديك انيميا"),
         "ar": MessageLookupByLibrary.simpleMessage("العربية"),
+        "auth": MessageLookupByLibrary.simpleMessage("التحقق"),
+        "authError": MessageLookupByLibrary.simpleMessage(
+            "فشلت التحقق. يرجى المحاولة مرة أخرى."),
+        "auth_pass_required_hint": MessageLookupByLibrary.simpleMessage(
+            "ادخل كلمة السر الحالية لحفظ الاعدادات"),
         "camera": MessageLookupByLibrary.simpleMessage("كاميرا"),
         "capture": MessageLookupByLibrary.simpleMessage("التقاط"),
         "capturing": MessageLookupByLibrary.simpleMessage("انتظر"),
@@ -39,6 +46,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
         "confirmPasswordIsRequiredErrorText":
             MessageLookupByLibrary.simpleMessage("قم بتأكيد كلمة مرورك"),
+        "confirm_settings":
+            MessageLookupByLibrary.simpleMessage("حفظ الاعدادات"),
         "discard": MessageLookupByLibrary.simpleMessage("حذف"),
         "emailInputLabel":
             MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
@@ -47,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "emailTakenErrorText": MessageLookupByLibrary.simpleMessage(
             "هذا البريد الإلكتروني مستخدم مسبقاً"),
         "en": MessageLookupByLibrary.simpleMessage("English"),
+        "female": MessageLookupByLibrary.simpleMessage("أنثى"),
         "forgotPasswordButtonLabel":
             MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
         "forgotPasswordViewTitle":
@@ -59,6 +69,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lang": MessageLookupByLibrary.simpleMessage("العربية"),
         "language": MessageLookupByLibrary.simpleMessage("اللغة"),
         "loading": MessageLookupByLibrary.simpleMessage("جارى التحميل"),
+        "male": MessageLookupByLibrary.simpleMessage("ذكر"),
+        "name": MessageLookupByLibrary.simpleMessage("الاسم"),
         "navbar_history": MessageLookupByLibrary.simpleMessage("السجلات"),
         "navbar_home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
         "navbar_profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
@@ -74,6 +86,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordTooWeak":
             MessageLookupByLibrary.simpleMessage("كلمة السر ضعيفة جدا"),
         "pls_wait": MessageLookupByLibrary.simpleMessage("انتظر قليلا"),
+        "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصى"),
         "registerActionText":
             MessageLookupByLibrary.simpleMessage("تسجيل جديد"),
         "registerButtonText":
