@@ -140,7 +140,10 @@ class ProfileCubit extends Cubit<ProfileState> {
       });
       // Show a success message
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Profile saved')),
+        const SnackBar(
+          content: Text('Profile saved'),
+          backgroundColor: Color(0xFF29C469),
+        ),
       );
       Navigator.of(context).pop();
       // Emit the ProfileSaved state
@@ -149,7 +152,10 @@ class ProfileCubit extends Cubit<ProfileState> {
       print('error');
       // Show an error message
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Failed to save profile')),
+        const SnackBar(
+          content: Text('Failed to save profile'),
+          backgroundColor: Color(0xFFCE772F),
+        ),
       );
     }
   }

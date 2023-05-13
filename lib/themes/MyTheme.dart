@@ -54,6 +54,10 @@ class MyTheme {
       ),
       textTheme: TextTheme(
         bodyText2: TextStyle(color: Color(0xFF225270)),
+        headline6: TextStyle(color: Color(0xFF225270)),
+        headline1: TextStyle(color: Color(0xFF225270)),
+        subtitle1: TextStyle(color: Color(0xFF3177A3)),
+        subtitle2: TextStyle(color: Color(0xFFF05454)),
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: Color(0xFF3177A3),
@@ -71,7 +75,8 @@ class MyTheme {
           shape: MaterialStateProperty.all(RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0))),
           foregroundColor: MaterialStateProperty.all<Color>(Color(0xFF225270)),
-          backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+          backgroundColor: MaterialStateProperty.all<Color>(Color(0xFFC7E4FA)),
+          shadowColor: MaterialStateProperty.all<Color>(Colors.white),
           side: MaterialStateProperty.all(BorderSide(
             color: Color(0xFF225270),
           )),
@@ -84,6 +89,38 @@ class MyTheme {
         iconColor: Color(0xFF3177A3),
         textColor: Color(0xFF3177A3),
         tileColor: Color(0xFFC7E4FA),
+      ),
+      expansionTileTheme: ExpansionTileThemeData(
+        iconColor: Color(0xFFF05454),
+        textColor: Color(0xFF3177A3),
+        collapsedTextColor: Color(0xFF3177A3),
+        collapsedIconColor: Color(0xFF3177A3),
+      ),
+      radioTheme: RadioThemeData(
+        fillColor: MaterialStateProperty.all<Color>(Color(0xFFF05454)),
+      ),
+      dividerTheme: DividerThemeData(
+        color: Color(0xFFC7E4FA),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        labelStyle: TextStyle(
+          color: Color(0xFF225270),
+        ),
+        hintStyle: TextStyle(
+          color: Color(0xFF3177A3),
+        ),
+        floatingLabelStyle: TextStyle(color: Color(0xFFF05454)),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Color(0xFFF05454)),
+        ),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Color(0xFF3177A3)),
+        ),
+        disabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Color(0xFFC7E4FA)),
+        ),
+        suffixIconColor: Color(0xFFF05454),
+        iconColor: Color(0xFF3177A3),
       ),
     );
   }

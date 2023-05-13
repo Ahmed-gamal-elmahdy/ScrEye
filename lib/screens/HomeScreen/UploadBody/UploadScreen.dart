@@ -38,6 +38,11 @@ class UploadScreen extends StatelessWidget {
                   ),
                   state is! Loading
                       ? OutlinedButton.icon(
+                          style: ButtonStyle(
+                              backgroundColor: Theme.of(context)
+                                  .outlinedButtonTheme
+                                  .style
+                                  ?.shadowColor),
                           label: Text(
                             S
                                 .of(context)
@@ -59,6 +64,11 @@ class UploadScreen extends StatelessWidget {
                           },
                         )
                       : OutlinedButton(
+                          style: ButtonStyle(
+                              backgroundColor: Theme.of(context)
+                                  .outlinedButtonTheme
+                                  .style
+                                  ?.shadowColor),
                           onPressed: null,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,

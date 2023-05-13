@@ -1,6 +1,9 @@
-import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../generated/l10n.dart';
 import '../../widgets/Debouncer.dart';
@@ -20,7 +23,7 @@ class ProfileScreen extends StatelessWidget {
           IconButton(
               tooltip: "Logout",
               onPressed: () {
-                FirebaseUIAuth.signOut();
+                FirebaseAuth.instance.signOut();
               },
               icon: const Icon(Icons.power_settings_new_rounded))
         ],
@@ -64,20 +67,21 @@ class ProfileScreen extends StatelessWidget {
                       onChanged: (value) => _cubit.updatePassword(value),
                     ),
                     SizedBox(height: 16.0),
-                    DropdownButton<int>(
-                      value: state.age,
-                      hint: Text(S.of(context).age),
-                      onChanged: (value) => _cubit.updateAge(value ?? 0),
-                      items: List.generate(
-                        70,
-                        (index) => DropdownMenuItem(
-                          value: index,
-                          child: Text('$index'),
-                        ),
-                      ),
+                    TextField(
+                      keyboardType: TextInputType.number,
+                      // show numeric keyboard
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly
+                        // only allow digits
+                      ],
+                      decoration: InputDecoration(
+                          labelText: S.of(context).age,
+                          hintText: state.age.toString()),
+                      onChanged: (value) => _cubit.updateAge(int.parse(value)),
                     ),
                     SizedBox(height: 16.0),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Radio<String>(
                           value: 'Male',
@@ -96,16 +100,39 @@ class ProfileScreen extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: 32.0),
-                    ElevatedButton(
+                    OutlinedButton(
                       onPressed: () => {_cubit.askConfirmation(context)},
-                      child: Text(S.of(context).save),
+                      child: Text("Update Profile"),
+                      style: ButtonStyle(
+                        backgroundColor: Theme.of(context)
+                            .outlinedButtonTheme
+                            .style
+                            ?.backgroundColor,
+                      ),
                     ),
                   ],
                 ),
               ),
             );
           } else if (state is ProfileLoading) {
-            return LoadingIndicator(size: 10, borderWidth: 3);
+            return Center(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                LoadingAnimationWidget.threeArchedCircle(
+                    color: Color(0xFFF05454), size: 50),
+                SizedBox(
+                  height: 4.h,
+                ),
+                Text(
+                  S.of(context).pls_wait,
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Color(0xFF3177A3),
+                  ),
+                ),
+              ],
+            ));
           } else {
             return Container();
           }

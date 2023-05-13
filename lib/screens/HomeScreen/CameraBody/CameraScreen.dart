@@ -76,6 +76,11 @@ class _CameraScreenState extends State<CameraScreen> {
                             width: 120.h,
                             child: state is! Loading
                                 ? OutlinedButton(
+                                    style: ButtonStyle(
+                                        backgroundColor: Theme.of(context)
+                                            .outlinedButtonTheme
+                                            .style
+                                            ?.shadowColor),
                                     onPressed: () async {
                                       cubit.loading();
                                       XFile picture =
@@ -114,6 +119,11 @@ class _CameraScreenState extends State<CameraScreen> {
                                       ],
                                     ))
                                 : OutlinedButton(
+                                    style: ButtonStyle(
+                                        backgroundColor: Theme.of(context)
+                                            .outlinedButtonTheme
+                                            .style
+                                            ?.shadowColor),
                                     onPressed: null,
                                     child: Row(
                                       mainAxisAlignment:
