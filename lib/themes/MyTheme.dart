@@ -2,83 +2,61 @@ import 'package:flutter/material.dart';
 
 enum ThemeMode {
   whiteTheme,
-  originalTheme,
+  darkTheme,
+  monochromacyTheme,
 }
 
 class MyTheme {
-  static ThemeData originalTheme() {
-    return ThemeData(
-      canvasColor: Color(0xFF90CBF0),
-      textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(
-          foregroundColor: Color(0xFFF05454), // Text Color
-        ),
-      ),
-      outlinedButtonTheme: OutlinedButtonThemeData(
-        style: ButtonStyle(
-          shape: MaterialStateProperty.all(RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0))),
-          foregroundColor: MaterialStateProperty.all<Color>(Color(0xFF3177A3)),
-          side: MaterialStateProperty.all(BorderSide(
-            color: Color(0xFF3177A3),
-          )),
-        ),
-      ),
-      inputDecorationTheme: InputDecorationTheme(
-        focusColor: Color(0xFFF05454),
-        labelStyle: TextStyle(color: const Color(0xFF3177A3)),
-        enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: const Color(0xFF3177A3)),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Color(0xFFF05454), width: 0.8),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-      ),
-    );
-  }
-
   static ThemeData whiteTheme() {
+    Color primary = const Color(0xFF225270);
+    Color primaryVariant1 = const Color(0xFF3177A3);
+    Color primaryVariant2 = const Color(0xFFC7E4FA);
+
+    Color secondary = const Color(0xFFF05454);
+    // Color secondaryVariant1 = const Color(0xFFFFFFFF);
+    // Color secondaryVariant2 = const Color(0xFFFFFFFF);
+
+    Color tertiary = const Color(0xFFFFFFFF);
+    Color tertiaryVariant1 = const Color(0xFFFFFFFF);
+    // Color tertiaryVariant2 = const Color(0xFFFFFFFF);
+
     return ThemeData(
       appBarTheme: AppBarTheme(
-        foregroundColor: Colors.white,
-        backgroundColor: Color(0xFF3177A3),
+        foregroundColor: tertiary,
+        backgroundColor: primaryVariant1,
         iconTheme: IconThemeData(
-          color: Color(0xFFF05454),
+          color: secondary,
         ),
         elevation: 0,
       ),
       textTheme: TextTheme(
-        bodyText2: TextStyle(color: Color(0xFF225270)),
-        headline6: TextStyle(color: Color(0xFF225270)),
-        headline1: TextStyle(color: Color(0xFF225270)),
-        subtitle1: TextStyle(color: Color(0xFF3177A3)),
-        subtitle2: TextStyle(color: Color(0xFFF05454)),
+        bodyText2: TextStyle(color: primary),
+        headline6: TextStyle(color: primary),
+        headline3: TextStyle(color: tertiaryVariant1),
+        headline1: TextStyle(color: primary),
+        subtitle1: TextStyle(color: primaryVariant1),
+        subtitle2: TextStyle(color: secondary),
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: Color(0xFF3177A3),
-        unselectedItemColor: Colors.white,
-        selectedItemColor: Color(0xFFF05454),
+        backgroundColor: primaryVariant1,
+        unselectedItemColor: tertiary,
+        selectedItemColor: secondary,
       ),
-      canvasColor: Colors.white,
+      canvasColor: tertiary,
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-          foregroundColor: Color(0xFF225270), // Text Color
+          foregroundColor: primary, // Text Color
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: ButtonStyle(
           shape: MaterialStateProperty.all(RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0))),
-          foregroundColor: MaterialStateProperty.all<Color>(Color(0xFF225270)),
-          backgroundColor: MaterialStateProperty.all<Color>(Color(0xFFC7E4FA)),
-          shadowColor: MaterialStateProperty.all<Color>(Colors.white),
+          foregroundColor: MaterialStateProperty.all<Color>(primary),
+          backgroundColor: MaterialStateProperty.all<Color>(primaryVariant2),
+          shadowColor: MaterialStateProperty.all<Color>(tertiary),
           side: MaterialStateProperty.all(BorderSide(
-            color: Color(0xFF225270),
+            color: primary,
           )),
         ),
       ),
@@ -86,51 +64,245 @@ class MyTheme {
         scrimColor: Colors.blue.withOpacity(0.25),
       ),
       listTileTheme: ListTileThemeData(
-        iconColor: Color(0xFF3177A3),
-        textColor: Color(0xFF3177A3),
-        tileColor: Color(0xFFC7E4FA),
+        iconColor: primaryVariant1,
+        textColor: primaryVariant1,
+        tileColor: primaryVariant2,
       ),
       expansionTileTheme: ExpansionTileThemeData(
-        iconColor: Color(0xFFF05454),
-        textColor: Color(0xFF3177A3),
-        collapsedTextColor: Color(0xFF3177A3),
-        collapsedIconColor: Color(0xFF3177A3),
+        iconColor: secondary,
+        textColor: primary,
+        collapsedTextColor: primary,
+        collapsedIconColor: primary,
       ),
       radioTheme: RadioThemeData(
-        fillColor: MaterialStateProperty.all<Color>(Color(0xFFF05454)),
+        fillColor: MaterialStateProperty.all<Color>(secondary),
       ),
       dividerTheme: DividerThemeData(
-        color: Color(0xFFC7E4FA),
+        color: primaryVariant2,
       ),
       inputDecorationTheme: InputDecorationTheme(
         labelStyle: TextStyle(
-          color: Color(0xFF225270),
+          color: primary,
         ),
         hintStyle: TextStyle(
-          color: Color(0xFF3177A3),
+          color: primaryVariant1,
         ),
-        floatingLabelStyle: TextStyle(color: Color(0xFFF05454)),
+        floatingLabelStyle: TextStyle(color: secondary),
         focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Color(0xFFF05454)),
+          borderSide: BorderSide(color: secondary),
         ),
         enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Color(0xFF3177A3)),
+          borderSide: BorderSide(color: primaryVariant1),
         ),
         disabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Color(0xFFC7E4FA)),
+          borderSide: BorderSide(color: primaryVariant2),
         ),
-        suffixIconColor: Color(0xFFF05454),
-        iconColor: Color(0xFF3177A3),
+        suffixIconColor: secondary,
+        iconColor: primaryVariant1,
+      ),
+    );
+  }
+
+  static ThemeData darkTheme() {
+    Color primary = const Color(0xFF225270);
+    Color primaryVariant1 = const Color(0xFF3177A3);
+    Color primaryVariant2 = const Color(0xFFC7E4FA);
+
+    Color secondary = const Color(0xFFF05454);
+    // Color secondaryVariant1 = const Color(0xFFFFFFFF);
+    // Color secondaryVariant2 = const Color(0xFFFFFFFF);
+
+    Color tertiary = const Color(0xFFFFFFFF);
+    Color tertiaryVariant1 = const Color(0xFFFFFFFF);
+    // Color tertiaryVariant2 = const Color(0xFFFFFFFF);
+
+    return ThemeData(
+      appBarTheme: AppBarTheme(
+        foregroundColor: tertiary,
+        backgroundColor: primaryVariant1,
+        iconTheme: IconThemeData(
+          color: secondary,
+        ),
+        elevation: 0,
+      ),
+      textTheme: TextTheme(
+        bodyText2: TextStyle(color: primary),
+        headline6: TextStyle(color: primary),
+        headline3: TextStyle(color: tertiaryVariant1),
+        headline1: TextStyle(color: primary),
+        subtitle1: TextStyle(color: primaryVariant1),
+        subtitle2: TextStyle(color: secondary),
+      ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: primaryVariant1,
+        unselectedItemColor: tertiary,
+        selectedItemColor: secondary,
+      ),
+      canvasColor: tertiary,
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor: primary, // Text Color
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0))),
+          foregroundColor: MaterialStateProperty.all<Color>(primary),
+          backgroundColor: MaterialStateProperty.all<Color>(primaryVariant2),
+          shadowColor: MaterialStateProperty.all<Color>(tertiary),
+          side: MaterialStateProperty.all(BorderSide(
+            color: primary,
+          )),
+        ),
+      ),
+      drawerTheme: DrawerThemeData(
+        scrimColor: Colors.blue.withOpacity(0.25),
+      ),
+      listTileTheme: ListTileThemeData(
+        iconColor: primaryVariant1,
+        textColor: primaryVariant1,
+        tileColor: primaryVariant2,
+      ),
+      expansionTileTheme: ExpansionTileThemeData(
+        iconColor: secondary,
+        textColor: primary,
+        collapsedTextColor: primary,
+        collapsedIconColor: primary,
+      ),
+      radioTheme: RadioThemeData(
+        fillColor: MaterialStateProperty.all<Color>(secondary),
+      ),
+      dividerTheme: DividerThemeData(
+        color: primaryVariant2,
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        labelStyle: TextStyle(
+          color: primary,
+        ),
+        hintStyle: TextStyle(
+          color: primaryVariant1,
+        ),
+        floatingLabelStyle: TextStyle(color: secondary),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: secondary),
+        ),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: primaryVariant1),
+        ),
+        disabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: primaryVariant2),
+        ),
+        suffixIconColor: secondary,
+        iconColor: primaryVariant1,
+      ),
+    );
+  }
+
+  static ThemeData monochromacyTheme() {
+    Color primary = const Color(0xFF225270);
+    Color primaryVariant1 = const Color(0xFF3177A3);
+    Color primaryVariant2 = const Color(0xFFC7E4FA);
+
+    Color secondary = const Color(0xFFF05454);
+    // Color secondaryVariant1 = const Color(0xFFFFFFFF);
+    // Color secondaryVariant2 = const Color(0xFFFFFFFF);
+
+    Color tertiary = const Color(0xFFFFFFFF);
+    Color tertiaryVariant1 = const Color(0xFFFFFFFF);
+    // Color tertiaryVariant2 = const Color(0xFFFFFFFF);
+
+    return ThemeData(
+      appBarTheme: AppBarTheme(
+        foregroundColor: tertiary,
+        backgroundColor: primaryVariant1,
+        iconTheme: IconThemeData(
+          color: secondary,
+        ),
+        elevation: 0,
+      ),
+      textTheme: TextTheme(
+        bodyText2: TextStyle(color: primary),
+        headline6: TextStyle(color: primary),
+        headline3: TextStyle(color: tertiaryVariant1),
+        headline1: TextStyle(color: primary),
+        subtitle1: TextStyle(color: primaryVariant1),
+        subtitle2: TextStyle(color: secondary),
+      ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: primaryVariant1,
+        unselectedItemColor: tertiary,
+        selectedItemColor: secondary,
+      ),
+      canvasColor: tertiary,
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor: primary, // Text Color
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0))),
+          foregroundColor: MaterialStateProperty.all<Color>(primary),
+          backgroundColor: MaterialStateProperty.all<Color>(primaryVariant2),
+          shadowColor: MaterialStateProperty.all<Color>(tertiary),
+          side: MaterialStateProperty.all(BorderSide(
+            color: primary,
+          )),
+        ),
+      ),
+      drawerTheme: DrawerThemeData(
+        scrimColor: Colors.blue.withOpacity(0.25),
+      ),
+      listTileTheme: ListTileThemeData(
+        iconColor: primaryVariant1,
+        textColor: primaryVariant1,
+        tileColor: primaryVariant2,
+      ),
+      expansionTileTheme: ExpansionTileThemeData(
+        iconColor: secondary,
+        textColor: primary,
+        collapsedTextColor: primary,
+        collapsedIconColor: primary,
+      ),
+      radioTheme: RadioThemeData(
+        fillColor: MaterialStateProperty.all<Color>(secondary),
+      ),
+      dividerTheme: DividerThemeData(
+        color: primaryVariant2,
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        labelStyle: TextStyle(
+          color: primary,
+        ),
+        hintStyle: TextStyle(
+          color: primaryVariant1,
+        ),
+        floatingLabelStyle: TextStyle(color: secondary),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: secondary),
+        ),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: primaryVariant1),
+        ),
+        disabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: primaryVariant2),
+        ),
+        suffixIconColor: secondary,
+        iconColor: primaryVariant1,
       ),
     );
   }
 
   static ThemeData getTheme(ThemeMode themeMode) {
     switch (themeMode) {
-      case ThemeMode.originalTheme:
-        return MyTheme.originalTheme();
+      case ThemeMode.darkTheme:
+        return MyTheme.darkTheme();
       case ThemeMode.whiteTheme:
         return MyTheme.whiteTheme();
+      case ThemeMode.monochromacyTheme:
+        return MyTheme.monochromacyTheme();
       default:
         return MyTheme.whiteTheme();
     }

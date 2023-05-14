@@ -32,7 +32,7 @@ class SettingsScreen extends StatelessWidget {
             ),
           ),
           Container(
-            color: Colors.white,
+            color: Theme.of(context).textTheme.headline3!.color!,
             child: RadioListTile<ThemeMode>(
               title: Text("White theme"),
               value: ThemeMode.whiteTheme,
@@ -43,10 +43,21 @@ class SettingsScreen extends StatelessWidget {
             ),
           ),
           Container(
-            color: Colors.white,
+            color: Theme.of(context).textTheme.headline3!.color!,
             child: RadioListTile<ThemeMode>(
-              title: Text("Original Theme"),
-              value: ThemeMode.originalTheme,
+              title: Text("Dark Theme"),
+              value: ThemeMode.darkTheme,
+              groupValue: settingsCubit.state.themeMode,
+              onChanged: (value) {
+                settingsCubit.updateTheme(value!);
+              },
+            ),
+          ),
+          Container(
+            color: Theme.of(context).textTheme.headline3!.color!,
+            child: RadioListTile<ThemeMode>(
+              title: Text("Color Blindness mode"),
+              value: ThemeMode.monochromacyTheme,
               groupValue: settingsCubit.state.themeMode,
               onChanged: (value) {
                 settingsCubit.updateTheme(value!);

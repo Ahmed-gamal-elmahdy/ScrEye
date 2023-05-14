@@ -1,3 +1,4 @@
+import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,19 +40,49 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _buildBottomNavigationBar(BuildContext context, AppCubit cubit) {
-    return BottomNavigationBar(
-      currentIndex: cubit.bodyIndex,
-      onTap: (index) => cubit.ChangeBodyIndex(index),
+    return ConvexAppBar(
+      backgroundColor:
+          Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+      color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+      activeColor: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
+      curveSize: 75,
+      top: -20,
       items: [
-        BottomNavigationBarItem(
-            label: S.of(context).upload, icon: const Icon(Icons.upload)),
-        BottomNavigationBarItem(
-            label: S.of(context).camera,
-            icon: const Icon(Icons.camera_alt_outlined)),
-        BottomNavigationBarItem(
-            label: S.of(context).result,
-            icon: const Icon(Icons.insert_drive_file_outlined)),
+        TabItem(
+          title: S.of(context).upload,
+          icon: Icon(
+            Icons.upload,
+            color:
+                Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+          ),
+          activeIcon: Icon(
+            Icons.upload,
+            color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
+          ),
+        ),
+        TabItem(
+          title: S.of(context).camera,
+          icon: Icon(
+            Icons.camera_alt_outlined,
+            color: Theme.of(context).textTheme.headline1!.color!,
+          ),
+        ),
+        TabItem(
+          title: S.of(context).result,
+          icon: Icon(
+            Icons.insert_drive_file_outlined,
+            color:
+                Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+          ),
+          activeIcon: Icon(
+            Icons.insert_drive_file_outlined,
+            color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
+          ),
+        ),
       ],
+      initialActiveIndex: cubit.bodyIndex,
+      onTap: (index) => cubit.ChangeBodyIndex(index),
+      style: TabStyle.fixedCircle,
     );
   }
 

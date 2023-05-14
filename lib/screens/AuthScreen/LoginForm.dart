@@ -42,7 +42,11 @@ class LoginForm extends StatelessWidget {
                             child: Column(
                               children: [
                                 LoadingAnimationWidget.threeArchedCircle(
-                                    color: Color(0xFFF05454), size: 40),
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .subtitle2!
+                                        .color!,
+                                    size: 40),
                                 Text('Signing In..')
                               ],
                             ),
@@ -141,15 +145,21 @@ class LoginForm extends StatelessWidget {
                             child: RichText(
                               text: TextSpan(
                                 text: S.of(context).new_to_screye,
-                                style: const TextStyle(
+                                style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    color: Color(0xFF3177A3)),
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .subtitle1!
+                                        .color!),
                                 children: [
                                   TextSpan(
                                     text: S.of(context).registerText,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      color: Color(0xFFF05454),
+                                      color: Theme.of(context)
+                                          .textTheme
+                                          .subtitle2!
+                                          .color!,
                                     ),
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
@@ -187,7 +197,10 @@ class LoginForm extends StatelessWidget {
                                         S.of(context).resetPasswordButtonLabel,
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      color: Color(0xFFF05454),
+                                      color: Theme.of(context)
+                                          .textTheme
+                                          .subtitle2!
+                                          .color!,
                                     ),
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {

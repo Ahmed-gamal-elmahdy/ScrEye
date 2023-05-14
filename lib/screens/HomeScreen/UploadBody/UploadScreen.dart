@@ -74,7 +74,11 @@ class UploadScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               LoadingAnimationWidget.threeArchedCircle(
-                                  color: Color(0xFFF05454), size: 20),
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .subtitle2!
+                                      .color!,
+                                  size: 20),
                               SizedBox(
                                 width: 10.h,
                               ),

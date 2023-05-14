@@ -104,7 +104,7 @@ class HistoryScreen extends StatelessWidget {
                       },
                       separatorBuilder: (BuildContext context, int index) {
                         return Divider(
-                          color: Colors.white,
+                          color: Theme.of(context).textTheme.headline3!.color!,
                           thickness: 2,
                           height: 10,
                         );

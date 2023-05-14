@@ -120,7 +120,8 @@ class ProfileScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 LoadingAnimationWidget.threeArchedCircle(
-                    color: Color(0xFFF05454), size: 50),
+                    color: Theme.of(context).textTheme.subtitle2!.color!,
+                    size: 50),
                 SizedBox(
                   height: 4.h,
                 ),
@@ -128,7 +129,7 @@ class ProfileScreen extends StatelessWidget {
                   S.of(context).pls_wait,
                   style: TextStyle(
                     fontSize: 20,
-                    color: Color(0xFF3177A3),
+                    color: Theme.of(context).textTheme.subtitle1!.color!,
                   ),
                 ),
               ],

@@ -55,18 +55,31 @@ class _CameraScreenState extends State<CameraScreen> {
                     left: 0,
                     child: Container(
                       height: 51.9.h,
-                      color: Color(0xFF3177A3).withOpacity(0.5),
+                      color: Theme.of(context)
+                          .textTheme
+                          .subtitle1!
+                          .color!
+                          .withOpacity(0.5),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Icon(Icons.zoom_in_outlined,
-                              color: Color(0xFFF05454)),
+                          Icon(Icons.zoom_in_outlined,
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .subtitle2!
+                                  .color!),
                           cubit.cameraInitiated
                               ? Slider.adaptive(
                                   min: cubit.minZoom,
                                   max: cubit.maxZoom,
-                                  inactiveColor: Color(0xFF3177A3),
-                                  activeColor: Color(0xFFF05454),
+                                  inactiveColor: Theme.of(context)
+                                      .textTheme
+                                      .subtitle1!
+                                      .color!,
+                                  activeColor: Theme.of(context)
+                                      .textTheme
+                                      .subtitle2!
+                                      .color!,
                                   value: cubit.sliderVal,
                                   onChanged: (value) {
                                     cubit.updateZoomLevel(value);
@@ -131,7 +144,10 @@ class _CameraScreenState extends State<CameraScreen> {
                                       children: [
                                         LoadingAnimationWidget
                                             .threeArchedCircle(
-                                                color: Color(0xFFF05454),
+                                                color: Theme.of(context)
+                                                    .textTheme
+                                                    .subtitle2!
+                                                    .color!,
                                                 size: 10),
                                         SizedBox(
                                           width: 10.h,

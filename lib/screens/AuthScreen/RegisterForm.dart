@@ -36,7 +36,9 @@ class RegistrationForm extends StatelessWidget {
                       builder: (context, state) {
                         if (state is RegistrationLoading) {
                           return LoadingAnimationWidget.threeArchedCircle(
-                              color: Color(0xFFF05454), size: 40);
+                              color:
+                                  Theme.of(context).textTheme.subtitle2!.color!,
+                              size: 40);
                         } else if (state is AuthenticationFailure) {
                           return Text(
                             state.errorMessage,
@@ -140,15 +142,21 @@ class RegistrationForm extends StatelessWidget {
                         child: RichText(
                           text: TextSpan(
                             text: S.of(context).already_user,
-                            style: const TextStyle(
+                            style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: Color(0xFF3177A3)),
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .subtitle1!
+                                    .color!),
                             children: [
                               TextSpan(
                                 text: S.of(context).signInText,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  color: Color(0xFFF05454),
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .subtitle2!
+                                      .color!,
                                 ),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
