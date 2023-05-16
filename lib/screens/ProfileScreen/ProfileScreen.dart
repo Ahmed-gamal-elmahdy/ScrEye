@@ -1,4 +1,4 @@
-import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,7 +20,7 @@ class ProfileScreen extends StatelessWidget {
           IconButton(
               tooltip: "Logout",
               onPressed: () {
-                FirebaseUIAuth.signOut();
+                FirebaseAuth.instance.signOut();
               },
               icon: const Icon(Icons.power_settings_new_rounded))
         ],
@@ -105,7 +105,7 @@ class ProfileScreen extends StatelessWidget {
               ),
             );
           } else if (state is ProfileLoading) {
-            return LoadingIndicator(size: 10, borderWidth: 3);
+            return Container();
           } else {
             return Container();
           }
