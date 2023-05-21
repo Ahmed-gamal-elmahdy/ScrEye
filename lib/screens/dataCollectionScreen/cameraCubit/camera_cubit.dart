@@ -3,8 +3,9 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:path_provider/path_provider.dart';
+
+import '../capturedCubit/captured_cubit.dart';
 
 part 'camera_state.dart';
 
@@ -17,15 +18,20 @@ class CameraCubit extends Cubit<CameraState> {
   Future<void> initializeCamera() async {
     final cameras = await availableCameras();
     final camera = cameras.first;
+
     _controller = CameraController(
       camera,
       ResolutionPreset.max,
       enableAudio: false,
     );
-    final focusPoint =
-        Offset(ScreenUtil().screenWidth / 2, ScreenUtil().screenHeight / 2);
-    _controller.setFocusPoint(focusPoint);
+
+    const focusPoint = Offset(0.5, 0.5);
+
+
     _initializeControllerFuture = _controller.initialize();
+    //await _controller.setFocusPoint(focusPoint);
+     _controller.setFlashMode(FlashMode.off);
+
     emit(CameraInitialized());
   }
 
@@ -33,16 +39,20 @@ class CameraCubit extends Cubit<CameraState> {
     if (!_controller.value.isInitialized) {
       return;
     }
-
     await _controller.setZoomLevel(zoomLevel);
   }
+
+
+
 
   Future<String?> takePicture() async {
     if (!_controller.value.isInitialized) {
       return null;
     }
     try {
+
       XFile picture = await _controller.takePicture();
+
       String? finalPath = await copyImage(picture.path);
       return finalPath;
     } catch (e) {

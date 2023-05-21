@@ -5,11 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'capturedCubit/captured_cubit.dart';
 
-class CapturedScreen extends StatelessWidget {
+class CollectionCapturedScreen extends StatelessWidget {
   final CapturedCubit capturedCubit;
   final String? imagePath;
 
-  CapturedScreen({required this.capturedCubit, required this.imagePath});
+  CollectionCapturedScreen({required this.capturedCubit, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -30,64 +30,103 @@ class CapturedScreen extends StatelessWidget {
                       File(imagePath!),
                       fit: BoxFit.cover,
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
+
                     TextField(
                       onChanged: (name) {
                         capturedCubit.updateName(name);
                       },
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Name',
                         border: OutlineInputBorder(),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     TextField(
                       onChanged: (age) {
                         capturedCubit.updateAge(int.parse(age));
                       },
                       keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Age',
                         border: OutlineInputBorder(),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Row(
                       children: [
                         Radio(
-                          value: 'male',
+                          value: 'Male',
                           groupValue: state.gender,
                           onChanged: (value) {
                             capturedCubit.updateGender(value);
                           },
                         ),
-                        Text('Male'),
-                        SizedBox(width: 20),
+                        const Text('Male'),
+                        const SizedBox(width: 20),
                         Radio(
-                          value: 'female',
+                          value: 'Female',
                           groupValue: state.gender,
                           onChanged: (value) {
                             capturedCubit.updateGender(value);
                           },
                         ),
-                        Text('Female'),
+                        const Text('Female'),
                       ],
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
+                    Row(
+                      children: [
+                        Radio(
+                          value: 'Anemic',
+                          groupValue: state.anemic,
+                          onChanged: (value) {
+                            capturedCubit.updateAnemic(value);
+                          },
+                        ),
+                        const Text('Anemic'),
+                        const SizedBox(width: 10),
+                        Radio(
+                          value: 'Non Anemic',
+                          groupValue: state.anemic,
+                          onChanged: (value) {
+                            capturedCubit.updateAnemic(value);
+                          },
+                        ),
+                        const Text('Non Anemic'),
+                        const SizedBox(width: 10),
+                        Radio(
+                          value: '',
+                          groupValue: state.anemic,
+                          onChanged: (value) {
+                            capturedCubit.updateAnemic(value);
+                          },
+                        ),
+                        const Text('Not sure'),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
                     TextField(
                       onChanged: (additionalInfo) {
                         capturedCubit.updateAdditionalInfo(additionalInfo);
                       },
                       maxLines: 4,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Additional Info',
                         border: OutlineInputBorder(),
                       ),
                     ),
-                    SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: () {
-                        capturedCubit.saveCaptured();
+                        capturedCubit.chooseFiles();
+                      },
+                      child: Text('Upload Files'),
+                    ),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () {
+                        //capturedCubit.saveCaptured();//user firestore
+                        capturedCubit.saveCapturedRealtimeDB();//uses realtime
                       },
                       child: Text('Save'),
                     ),

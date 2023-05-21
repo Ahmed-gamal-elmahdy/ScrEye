@@ -5,4 +5,6 @@ abstract class CameraState {}
 
 class CameraInitial extends CameraState {}
 
+class CameraCapturing extends CameraState {}
+
 class CameraInitialized extends CameraState {}

@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertest/cubit/app_cubit.dart';
-import 'package:fluttertest/screens/HomeScreen/CameraBody/camera_screen_new.dart';
+import 'package:fluttertest/screens/HomeScreen/CameraBody/CameraScreen.dart';
 
 import '../../generated/l10n.dart';
 import '../../widgets/MyDrawer.dart';
@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
       case 0:
         return const UploadScreen();
       case 1:
-        return CameraScreenNew();
+        return CameraScreen();
       case 2:
         return const ResultScreen();
       default:
