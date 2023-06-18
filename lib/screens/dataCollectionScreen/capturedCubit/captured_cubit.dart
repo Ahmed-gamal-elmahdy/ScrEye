@@ -53,17 +53,15 @@ class CapturedCubit extends Cubit<CapturedState> {
 
 
 
-
-
   Future<void> saveCaptured() async {
     try {
       final String timestamp = DateTime.now().millisecondsSinceEpoch.toString();
       final userStorageRef = FirebaseStorage.instance.ref('dataset/${_user!.uid}');
       final userDatasetRef = FirebaseFirestore.instance.collection('users').doc(_user!.uid);
-
+      final userDatasetRefRealTime = FirebaseDatabase.instance.ref('dataset/${_user!.uid}/');
 
       final imageUrl = await uploadImage(userStorageRef.child(timestamp), state.imagePath);
-      final filesUrls = await uploadFiles(userStorageRef.child(timestamp));
+      final filesUrls = await uploadFilesNew(userStorageRef.child(timestamp));
 
       final data = {
         'name': state.name,
@@ -76,10 +74,11 @@ class CapturedCubit extends Cubit<CapturedState> {
       };
 
       await userDatasetRef.collection('data').doc(timestamp).set(data);
+      await userDatasetRefRealTime.child(timestamp).set(data);
 
       emit(CapturedState.initial());
     } catch (error) {
-      print(error);
+      print(error.toString());
       emit(state.copyWith(errorMessage: error.toString()));
     }
   }
@@ -88,7 +87,7 @@ class CapturedCubit extends Cubit<CapturedState> {
     try {
       final String timestamp = DateTime.now().millisecondsSinceEpoch.toString();
       final userStorageRef = FirebaseStorage.instance.ref('dataset/${_user!.uid}');
-      final userDatasetRef = FirebaseDatabase.instance.ref('dataset/${_user!.uid}/');
+      final userDatasetRefRealTime = FirebaseDatabase.instance.ref('dataset/${_user!.uid}/');
 
 
       final imageUrl = await uploadImage(userStorageRef.child(timestamp), state.imagePath);
@@ -103,7 +102,7 @@ class CapturedCubit extends Cubit<CapturedState> {
         'imageUrl': imageUrl,
         'filesUrls': filesUrls,
       };
-      await userDatasetRef.child(timestamp).set(data);
+      await userDatasetRefRealTime.child(timestamp).set(data);
 
       emit(CapturedState.initial());
     } catch (error) {
@@ -123,6 +122,23 @@ class CapturedCubit extends Cubit<CapturedState> {
         .toList();
     final snapshots = await Future.wait(tasks);
     return snapshots.map((s) => s.ref.getDownloadURL()).toList();
+  }
+  Future<List<String>> uploadFilesNew(Reference ref) async {
+    try {
+      List<String> downloadUrls = [];
+      for (final file in state.files.files) {
+        final fileName = path.basename(file.path!);
+        final task = ref.child('files/').child(fileName).putFile(File(file.path!));
+        final snapshot = await task;
+        final downloadUrl = await snapshot.ref.getDownloadURL();
+        downloadUrls.add(downloadUrl);
+      }
+      return downloadUrls;
+    } catch (error) {
+      // Handle any errors that may occur during the upload process
+      print('Error uploading files: $error');
+      return [];
+    }
   }
 
 

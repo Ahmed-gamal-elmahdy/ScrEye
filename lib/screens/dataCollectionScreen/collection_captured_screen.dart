@@ -125,8 +125,7 @@ class CollectionCapturedScreen extends StatelessWidget {
                     const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: () {
-                        //capturedCubit.saveCaptured();//user firestore
-                        capturedCubit.saveCapturedRealtimeDB();//uses realtime
+                        capturedCubit.saveCaptured();
                       },
                       child: Text('Save'),
                     ),
