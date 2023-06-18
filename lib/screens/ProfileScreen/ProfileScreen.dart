@@ -115,6 +115,7 @@ class ProfileScreen extends StatelessWidget {
               ),
             );
           } else if (state is ProfileLoading) {
+
             return Center(
                 child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

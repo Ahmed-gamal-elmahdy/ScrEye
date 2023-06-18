@@ -1,7 +1,6 @@
 part of 'profile_cubit.dart';
 
 @immutable
-@immutable
 abstract class ProfileState {
   final String name;
   final String email;
