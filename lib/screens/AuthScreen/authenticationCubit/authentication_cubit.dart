@@ -90,9 +90,9 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         email: _email,
         password: _password,
       );
-      Map<String, String?> user = {
+      Map<dynamic, dynamic?> user = {
         'name': "",
-        "age": "",
+        "age": 0,
         'gender': "Male",
         'email': userCredential.user?.email,
         'uid': userCredential.user?.uid,
@@ -136,7 +136,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       return;
     }
 
-    emit(RegistrationLoading());
+    emit(LoginLoading());
     try {
       final auth = FirebaseAuth.instance;
       final userCredential = await auth.signInWithEmailAndPassword(

@@ -27,27 +27,38 @@ class SettingsScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-              "THEME",
+              "Themes",
               style: Theme.of(context).textTheme.headline6,
             ),
           ),
-          RadioListTile<ThemeMode>(
-            title: Text("White theme"),
-            value: ThemeMode.whiteTheme,
-            groupValue: settingsCubit.state.themeMode,
-            onChanged: (value) {
-              settingsCubit.updateTheme(value!);
-            },
+          Container(
+            color: Colors.white,
+            child: RadioListTile<ThemeMode>(
+              title: Text("White theme"),
+              value: ThemeMode.whiteTheme,
+              groupValue: settingsCubit.state.themeMode,
+              onChanged: (value) {
+                settingsCubit.updateTheme(value!);
+              },
+            ),
           ),
-          RadioListTile<ThemeMode>(
-            title: Text("Original Theme"),
-            value: ThemeMode.originalTheme,
-            groupValue: settingsCubit.state.themeMode,
-            onChanged: (value) {
-              settingsCubit.updateTheme(value!);
-            },
+          Container(
+            color: Colors.white,
+            child: RadioListTile<ThemeMode>(
+              title: Text("Original Theme"),
+              value: ThemeMode.originalTheme,
+              groupValue: settingsCubit.state.themeMode,
+              onChanged: (value) {
+                settingsCubit.updateTheme(value!);
+              },
+            ),
           ),
-          Divider(),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+            child: Divider(
+              thickness: 2,
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(

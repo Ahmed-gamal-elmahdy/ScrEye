@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../generated/l10n.dart';
 
@@ -20,6 +21,7 @@ class _ReauthenticationDialogState extends State<ReauthenticationDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      backgroundColor: Theme.of(context).listTileTheme.tileColor,
       title: Text(S.of(context).confirm_settings),
       content: Column(
         mainAxisSize: MainAxisSize.min,
@@ -31,6 +33,7 @@ class _ReauthenticationDialogState extends State<ReauthenticationDialog> {
             obscureText: true,
             decoration: InputDecoration(
               hintText: S.of(context).confirmPasswordInputLabel,
+              hintStyle: Theme.of(context).textTheme.subtitle2,
             ),
           ),
         ],
@@ -40,9 +43,11 @@ class _ReauthenticationDialogState extends State<ReauthenticationDialog> {
           child: Text(S.of(context).discard),
           onPressed: () => Navigator.of(context).pop(false),
         ),
-        ElevatedButton(
+        OutlinedButton(
           child: _isLoading
-              ? CircularProgressIndicator()
+              ? Container(
+                  child: LoadingAnimationWidget.threeArchedCircle(
+                      color: Color(0xFFF05454), size: 20))
               : Text(S.of(context).auth),
           onPressed: _isLoading
               ? null
@@ -62,6 +67,7 @@ class _ReauthenticationDialogState extends State<ReauthenticationDialog> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(S.of(context).authError),
+                        backgroundColor: Color(0xFFCE772F),
                       ),
                     );
                   } finally {

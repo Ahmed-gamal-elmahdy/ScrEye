@@ -38,7 +38,7 @@ class AuthGate extends StatelessWidget {
                   '/register': (context) => RegistrationForm(),
                   '/login': (context) => LoginForm(),
                 },
-                theme: MyTheme.originalTheme(),
+                theme: MyTheme.whiteTheme(),
               );
             } else {
               return const MyApp();

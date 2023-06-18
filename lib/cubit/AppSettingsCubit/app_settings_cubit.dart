@@ -10,7 +10,7 @@ class AppSettingsCubit extends Cubit<AppSettingsState> {
             theme: MyTheme.whiteTheme(),
             locale: Locale('en'),
             directionality: TextDirection.ltr,
-            themeMode: ThemeMode.originalTheme));
+            themeMode: ThemeMode.whiteTheme));
 
   void updateTheme(ThemeMode themeMode) {
     emit(state.copyWith(

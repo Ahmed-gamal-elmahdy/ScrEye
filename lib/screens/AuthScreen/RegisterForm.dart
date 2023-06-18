@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertest/screens/AuthScreen/authenticationCubit/authentication_cubit.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../../generated/l10n.dart';
 import '../../widgets/Language.dart';
@@ -17,6 +18,7 @@ class RegistrationForm extends StatelessWidget {
         builder: (context) {
           final authenticationCubit = context.watch<AuthenticationCubit>();
           return Scaffold(
+            backgroundColor: Theme.of(context).listTileTheme.tileColor,
             body: Directionality(
               textDirection:
                   authenticationCubit.layoutDirection ?? TextDirection.ltr,
@@ -33,7 +35,8 @@ class RegistrationForm extends StatelessWidget {
                     BlocBuilder<AuthenticationCubit, AuthenticationState>(
                       builder: (context, state) {
                         if (state is RegistrationLoading) {
-                          return const CircularProgressIndicator();
+                          return LoadingAnimationWidget.threeArchedCircle(
+                              color: Color(0xFFF05454), size: 40);
                         } else if (state is AuthenticationFailure) {
                           return Text(
                             state.errorMessage,
@@ -50,7 +53,7 @@ class RegistrationForm extends StatelessWidget {
                       },
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         DropdownButton<Language>(
                           hint: Text(S.of(context).lang),
