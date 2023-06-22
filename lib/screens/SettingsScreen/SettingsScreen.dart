@@ -27,7 +27,7 @@ class SettingsScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-             S.of(context).themes,
+              S.of(context).themes,
               style: Theme.of(context).textTheme.headline6,
             ),
           ),

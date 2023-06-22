@@ -92,7 +92,9 @@ class HistoryScreen extends StatelessWidget {
                             ),
                             OutlinedButton.icon(
                               label: Text(
-                                S.of(context).save, /*style: TextStyle(color: Color(0xFFF05454),*/
+                                S
+                                    .of(context)
+                                    .save, /*style: TextStyle(color: Color(0xFFF05454),*/
                               ),
                               icon: const Icon(
                                 Icons.download, /*color: Color(0xFFF05454)*/

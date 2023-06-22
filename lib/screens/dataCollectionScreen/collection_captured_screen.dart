@@ -9,7 +9,8 @@ class CollectionCapturedScreen extends StatelessWidget {
   final CapturedCubit capturedCubit;
   final String? imagePath;
 
-  CollectionCapturedScreen({required this.capturedCubit, required this.imagePath});
+  CollectionCapturedScreen(
+      {required this.capturedCubit, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,6 @@ class CollectionCapturedScreen extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                     const SizedBox(height: 20),
-
                     TextField(
                       onChanged: (name) {
                         capturedCubit.updateName(name);

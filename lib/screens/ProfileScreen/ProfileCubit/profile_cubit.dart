@@ -140,7 +140,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       });
       // Show a success message
       ScaffoldMessenger.of(context).showSnackBar(
-         SnackBar(
+        SnackBar(
           content: Text(S.of(context).profile_saved_success),
           backgroundColor: Color(0xFF29C469),
         ),
@@ -152,7 +152,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       print('error');
       // Show an error message
       ScaffoldMessenger.of(context).showSnackBar(
-         SnackBar(
+        SnackBar(
           content: Text(S.of(context).profile_saved_fail),
           backgroundColor: Color(0xFFCE772F),
         ),

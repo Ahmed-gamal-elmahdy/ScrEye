@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../capturedCubit/captured_cubit.dart';
-
 part 'camera_state.dart';
 
 class CameraCubit extends Cubit<CameraState> {
@@ -27,10 +25,9 @@ class CameraCubit extends Cubit<CameraState> {
 
     const focusPoint = Offset(0.5, 0.5);
 
-
     _initializeControllerFuture = _controller.initialize();
     //await _controller.setFocusPoint(focusPoint);
-     _controller.setFlashMode(FlashMode.off);
+    _controller.setFlashMode(FlashMode.off);
 
     emit(CameraInitialized());
   }
@@ -42,15 +39,11 @@ class CameraCubit extends Cubit<CameraState> {
     await _controller.setZoomLevel(zoomLevel);
   }
 
-
-
-
   Future<String?> takePicture() async {
     if (!_controller.value.isInitialized) {
       return null;
     }
     try {
-
       XFile picture = await _controller.takePicture();
 
       String? finalPath = await copyImage(picture.path);
