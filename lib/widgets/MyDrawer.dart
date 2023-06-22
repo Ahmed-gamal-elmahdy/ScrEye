@@ -73,6 +73,21 @@ Drawer myDrawer(context) {
                 Navigator.popAndPushNamed(context, '/settings');
               }),
         ),
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(50.0),
+            border: Border.all(
+              color: Colors.white,
+              width: 15.0,
+            ),
+          ),
+          child: ListTile(
+              leading: Icon(Icons.camera_alt_outlined),
+              title: Text("Collect Data"),
+              onTap: () {
+                Navigator.popAndPushNamed(context, '/capture');
+              }),
+        ),
       ],
     ),
   );

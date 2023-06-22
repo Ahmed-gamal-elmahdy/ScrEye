@@ -3,10 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertest/cubit/app_cubit.dart';
+import 'package:fluttertest/screens/HomeScreen/CameraBody/CameraScreen.dart';
 
 import '../../generated/l10n.dart';
 import '../../widgets/MyDrawer.dart';
-import 'CameraBody/CameraScreen.dart';
 import 'ResultBody/ResultScreen.dart';
 import 'UploadBody/UploadScreen.dart';
 
