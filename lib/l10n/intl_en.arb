@@ -64,5 +64,13 @@
   "authError": "Verification failed. Please try again.",
   "auth": "Verification",
   "auth_pass_required_hint": "Enter the current password to save changes",
-  "confirm_settings": "Confirm settings"
+  "confirm_settings": "Confirm settings",
+  "update_profile": "Update Profile",
+  "profile_saved_success": "Profile updated successfully",
+  "profile_saved_fail": "Failed to update profile",
+  "history_empty_error": "No data found",
+  "themes": "Themes",
+  "white_theme": "White Theme",
+  "dark_theme": "Dark Theme",
+  "colorblind_theme": "Color Blind Theme"
 }

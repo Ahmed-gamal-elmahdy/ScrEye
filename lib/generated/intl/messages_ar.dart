@@ -38,6 +38,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "camera": MessageLookupByLibrary.simpleMessage("كاميرا"),
         "capture": MessageLookupByLibrary.simpleMessage("التقاط"),
         "capturing": MessageLookupByLibrary.simpleMessage("انتظر"),
+        "colorblind_theme":
+            MessageLookupByLibrary.simpleMessage("وضع عمى الألوان"),
         "confirmPasswordDoesNotMatchErrorText":
             MessageLookupByLibrary.simpleMessage(
                 "كلمات المرور المدخلة غير متطابقة"),
@@ -47,6 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("قم بتأكيد كلمة مرورك"),
         "confirm_settings":
             MessageLookupByLibrary.simpleMessage("حفظ الاعدادات"),
+        "dark_theme": MessageLookupByLibrary.simpleMessage("وضع داكن"),
         "discard": MessageLookupByLibrary.simpleMessage("حذف"),
         "emailInputLabel":
             MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
@@ -60,6 +63,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
         "forgotPasswordViewTitle":
             MessageLookupByLibrary.simpleMessage("استرجاع كلمة المرور المنسية"),
+        "history_empty_error":
+            MessageLookupByLibrary.simpleMessage("لا يوجد بيانات"),
         "img_discarded": MessageLookupByLibrary.simpleMessage("تم حذف الصورة"),
         "img_saved_later":
             MessageLookupByLibrary.simpleMessage("تم حفظ الصورة على الجهاز"),
@@ -86,6 +91,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("كلمة السر ضعيفة جدا"),
         "pls_wait": MessageLookupByLibrary.simpleMessage("انتظر قليلا"),
         "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصى"),
+        "profile_saved_fail":
+            MessageLookupByLibrary.simpleMessage("فشل تحديث الملف"),
+        "profile_saved_success":
+            MessageLookupByLibrary.simpleMessage("تم التحديث بنجاح"),
         "registerActionText":
             MessageLookupByLibrary.simpleMessage("تسجيل جديد"),
         "registerButtonText":
@@ -110,10 +119,13 @@ class MessageLookup extends MessageLookupByLibrary {
             "قم بعمل اختبار اولا لتظهر النتيجة"),
         "taken_photo_upload":
             MessageLookupByLibrary.simpleMessage("ارفق صورة من الجهاز"),
+        "themes": MessageLookupByLibrary.simpleMessage("المظاهر"),
         "unknownError": MessageLookupByLibrary.simpleMessage("خطأ غير معروف"),
+        "update_profile": MessageLookupByLibrary.simpleMessage("تحديث الملف"),
         "upload": MessageLookupByLibrary.simpleMessage("أرفاق"),
         "userNotFoundErrorText":
             MessageLookupByLibrary.simpleMessage("هذا الحساب غير موجود"),
+        "white_theme": MessageLookupByLibrary.simpleMessage("وضع فاتح"),
         "wrongOrNoPasswordErrorText": MessageLookupByLibrary.simpleMessage(
             "كلمة المرور غير صالحة أو أن هذا المستخدم ليس لديه كلمة مرور"),
         "you_are": MessageLookupByLibrary.simpleMessage("النتيجة :"),

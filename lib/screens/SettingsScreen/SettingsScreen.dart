@@ -27,14 +27,14 @@ class SettingsScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-              "Themes",
+             S.of(context).themes,
               style: Theme.of(context).textTheme.headline6,
             ),
           ),
           Container(
             color: Colors.white,
             child: RadioListTile<ThemeMode>(
-              title: Text("White theme"),
+              title: Text(S.of(context).white_theme),
               value: ThemeMode.whiteTheme,
               groupValue: settingsCubit.state.themeMode,
               onChanged: (value) {
@@ -42,10 +42,11 @@ class SettingsScreen extends StatelessWidget {
               },
             ),
           ),
+          /*
           Container(
             color: Colors.white,
             child: RadioListTile<ThemeMode>(
-              title: Text("Original Theme"),
+              title: Text(S.of(context).dark_theme),
               value: ThemeMode.originalTheme,
               groupValue: settingsCubit.state.themeMode,
               onChanged: (value) {
@@ -59,6 +60,7 @@ class SettingsScreen extends StatelessWidget {
               thickness: 2,
             ),
           ),
+           */
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
