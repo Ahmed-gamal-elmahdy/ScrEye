@@ -47,7 +47,8 @@ class _ReauthenticationDialogState extends State<ReauthenticationDialog> {
           child: _isLoading
               ? Container(
                   child: LoadingAnimationWidget.threeArchedCircle(
-                      color: Color(0xFFF05454), size: 20))
+                      color: Theme.of(context).textTheme.subtitle2!.color!,
+                      size: 20))
               : Text(S.of(context).auth),
           onPressed: _isLoading
               ? null

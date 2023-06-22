@@ -94,7 +94,7 @@ class AppCubit extends Cubit<AppState> {
           children: [
             Crop(
                 fixArea: true,
-                baseColor: const Color(0xFF90CBF0),
+                baseColor: Theme.of(context).listTileTheme.tileColor!,
                 initialAreaBuilder: (rect) => Rect.fromLTRB(rect.left + 110.w,
                     rect.top + 160.h, rect.right - 110.w, rect.bottom - 370.h),
                 controller: _controller,
@@ -157,7 +157,11 @@ class AppCubit extends Cubit<AppState> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               LoadingAnimationWidget.threeArchedCircle(
-                                  color: const Color(0xFFF05454), size: 20),
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .subtitle2!
+                                      .color!,
+                                  size: 20),
                               SizedBox(
                                 width: 10.h,
                               ),

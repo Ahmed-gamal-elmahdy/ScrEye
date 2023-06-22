@@ -17,7 +17,7 @@ Drawer myDrawer(context) {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50.0),
             border: Border.all(
-              color: Colors.white,
+              color: Theme.of(context).textTheme.headline3!.color!,
               width: 15.0,
             ),
           ),
@@ -32,7 +32,7 @@ Drawer myDrawer(context) {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50.0),
             border: Border.all(
-              color: Colors.white,
+              color: Theme.of(context).textTheme.headline3!.color!,
               width: 15.0,
             ),
           ),
@@ -47,7 +47,7 @@ Drawer myDrawer(context) {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50.0),
             border: Border.all(
-              color: Colors.white,
+              color: Theme.of(context).textTheme.headline3!.color!,
               width: 15.0,
             ),
           ),
@@ -62,7 +62,7 @@ Drawer myDrawer(context) {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50.0),
             border: Border.all(
-              color: Colors.white,
+              color: Theme.of(context).textTheme.headline3!.color!,
               width: 15.0,
             ),
           ),

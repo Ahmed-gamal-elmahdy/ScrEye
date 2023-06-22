@@ -57,7 +57,8 @@ class ResultScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               LoadingAnimationWidget.threeArchedCircle(
-                  color: Color(0xFFF05454), size: 75),
+                  color: Theme.of(context).textTheme.subtitle2!.color!,
+                  size: 75),
               SizedBox(
                 height: 5.h,
               ),
@@ -65,7 +66,7 @@ class ResultScreen extends StatelessWidget {
                 S.of(context).pls_wait,
                 style: TextStyle(
                   fontSize: 35,
-                  color: Color(0xFF3177A3),
+                  color: Theme.of(context).textTheme.subtitle1!.color!,
                 ),
               ),
             ],
