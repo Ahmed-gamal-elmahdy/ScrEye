@@ -1,12 +1,13 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:path/path.dart' as path;
+
 part 'captured_state.dart';
 
 class CapturedCubit extends Cubit<CapturedState> {
@@ -25,6 +26,7 @@ class CapturedCubit extends Cubit<CapturedState> {
   void updateGender(String? gender) {
     emit(state.copyWith(gender: gender));
   }
+
   void updateAnemic(String? anemic) {
     emit(state.copyWith(anemic: anemic));
   }
@@ -36,31 +38,32 @@ class CapturedCubit extends Cubit<CapturedState> {
   void updateImage(String imagePath) {
     emit(state.copyWith(imagePath: imagePath));
   }
+
   void updateFiles(FilePickerResult files) {
     emit(state.copyWith(files: files));
   }
 
   Future<void> chooseFiles() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-        allowMultiple: true);
+    FilePickerResult? result =
+        await FilePicker.platform.pickFiles(allowMultiple: true);
 
     if (result != null) {
       updateFiles(result);
-    } else {
-
-    }
+    } else {}
   }
-
-
 
   Future<void> saveCaptured() async {
     try {
       final String timestamp = DateTime.now().millisecondsSinceEpoch.toString();
-      final userStorageRef = FirebaseStorage.instance.ref('dataset/${_user!.uid}');
-      final userDatasetRef = FirebaseFirestore.instance.collection('users').doc(_user!.uid);
-      final userDatasetRefRealTime = FirebaseDatabase.instance.ref('dataset/${_user!.uid}/');
+      final userStorageRef =
+          FirebaseStorage.instance.ref('dataset/${_user!.uid}');
+      final userDatasetRef =
+          FirebaseFirestore.instance.collection('users').doc(_user!.uid);
+      final userDatasetRefRealTime =
+          FirebaseDatabase.instance.ref('dataset/${_user!.uid}/');
 
-      final imageUrl = await uploadImage(userStorageRef.child(timestamp), state.imagePath);
+      final imageUrl =
+          await uploadImage(userStorageRef.child(timestamp), state.imagePath);
       final filesUrls = await uploadFilesNew(userStorageRef.child(timestamp));
 
       final data = {
@@ -86,11 +89,13 @@ class CapturedCubit extends Cubit<CapturedState> {
   Future<void> saveCapturedRealtimeDB() async {
     try {
       final String timestamp = DateTime.now().millisecondsSinceEpoch.toString();
-      final userStorageRef = FirebaseStorage.instance.ref('dataset/${_user!.uid}');
-      final userDatasetRefRealTime = FirebaseDatabase.instance.ref('dataset/${_user!.uid}/');
+      final userStorageRef =
+          FirebaseStorage.instance.ref('dataset/${_user!.uid}');
+      final userDatasetRefRealTime =
+          FirebaseDatabase.instance.ref('dataset/${_user!.uid}/');
 
-
-      final imageUrl = await uploadImage(userStorageRef.child(timestamp), state.imagePath);
+      final imageUrl =
+          await uploadImage(userStorageRef.child(timestamp), state.imagePath);
       final filesUrls = await uploadFiles(userStorageRef.child(timestamp));
 
       final data = {
@@ -118,17 +123,22 @@ class CapturedCubit extends Cubit<CapturedState> {
 
   Future<List<Future<String>>> uploadFiles(Reference ref) async {
     final tasks = state.files.files
-        .map((file) => ref.child('files/').child(path.basename(file.path!)).putFile(File(file.path!)))
+        .map((file) => ref
+            .child('files/')
+            .child(path.basename(file.path!))
+            .putFile(File(file.path!)))
         .toList();
     final snapshots = await Future.wait(tasks);
     return snapshots.map((s) => s.ref.getDownloadURL()).toList();
   }
+
   Future<List<String>> uploadFilesNew(Reference ref) async {
     try {
       List<String> downloadUrls = [];
       for (final file in state.files.files) {
         final fileName = path.basename(file.path!);
-        final task = ref.child('files/').child(fileName).putFile(File(file.path!));
+        final task =
+            ref.child('files/').child(fileName).putFile(File(file.path!));
         final snapshot = await task;
         final downloadUrl = await snapshot.ref.getDownloadURL();
         downloadUrls.add(downloadUrl);
@@ -140,6 +150,4 @@ class CapturedCubit extends Cubit<CapturedState> {
       return [];
     }
   }
-
-
 }

@@ -44,7 +44,7 @@ class HistoryScreen extends StatelessWidget {
                     // Access the data from the DataSnapshot object
                     if (snapshot.data?.value == null) {
                       return Text(
-                        "No data found",
+                        S.of(context).history_empty_error,
                         style: TextStyle(fontSize: 15.w, color: Colors.red),
                       );
                     }
@@ -92,7 +92,9 @@ class HistoryScreen extends StatelessWidget {
                             ),
                             OutlinedButton.icon(
                               label: Text(
-                                "Download Record", /*style: TextStyle(color: Color(0xFFF05454),*/
+                                S
+                                    .of(context)
+                                    .save, /*style: TextStyle(color: Color(0xFFF05454),*/
                               ),
                               icon: const Icon(
                                 Icons.download, /*color: Color(0xFFF05454)*/

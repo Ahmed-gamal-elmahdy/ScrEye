@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertest/screens/dataCollectionScreen/collection_captured_screen.dart';
 import 'package:fluttertest/widgets/MyDrawer.dart';
-import '../../generated/l10n.dart';
 
+import '../../generated/l10n.dart';
 import 'cameraCubit/camera_cubit.dart';
 import 'capturedCubit/captured_cubit.dart';
 
@@ -112,12 +112,15 @@ class _CameraViewState extends State<CameraView> {
                                   onChanged: _onSliderChanged,
                                 ),
                                 ElevatedButton.icon(
-                                  onPressed: ()  async {
-                                    String? imagePath = await  context.read<CameraCubit>().takePicture();
+                                  onPressed: () async {
+                                    String? imagePath = await context
+                                        .read<CameraCubit>()
+                                        .takePicture();
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => CollectionCapturedScreen(
+                                        builder: (context) =>
+                                            CollectionCapturedScreen(
                                           capturedCubit: CapturedCubit(),
                                           imagePath: imagePath,
                                         ),

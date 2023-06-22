@@ -64,5 +64,14 @@
   "authError": "فشلت التحقق. يرجى المحاولة مرة أخرى.",
   "auth": "التحقق",
   "auth_pass_required_hint": "ادخل كلمة السر الحالية لحفظ الاعدادات",
-  "confirm_settings": "حفظ الاعدادات"
+  "confirm_settings": "حفظ الاعدادات",
+  "update_profile": "تحديث الملف",
+  "profile_saved_success": "تم التحديث بنجاح",
+  "profile_saved_fail": "فشل تحديث الملف",
+  "history_empty_error": "لا يوجد بيانات",
+  "themes": "المظاهر",
+  "white_theme": "وضع فاتح",
+  "dark_theme": "وضع داكن",
+  "colorblind_theme": "وضع عمى الألوان"
+
 }

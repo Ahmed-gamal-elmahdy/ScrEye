@@ -30,9 +30,10 @@ class CapturedState {
       anemic: '',
       additionalInfo: '',
       files: FilePickerResult([]),
-      errorMessage: '',// Set the initial value to an empty string
+      errorMessage: '', // Set the initial value to an empty string
     );
   }
+
   CapturedState copyWith({
     String? name,
     int? age,
@@ -49,9 +50,9 @@ class CapturedState {
       gender: gender ?? this.gender,
       additionalInfo: additionalInfo ?? this.additionalInfo,
       imagePath: imagePath ?? this.imagePath,
-      anemic:  anemic ?? this.anemic,
-      errorMessage: errorMessage?? this.errorMessage,
-      files:  files?? this.files,
+      anemic: anemic ?? this.anemic,
+      errorMessage: errorMessage ?? this.errorMessage,
+      files: files ?? this.files,
     );
   }
 }

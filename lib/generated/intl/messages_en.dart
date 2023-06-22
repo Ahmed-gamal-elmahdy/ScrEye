@@ -21,7 +21,6 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accessDisabledErrorText": MessageLookupByLibrary.simpleMessage(
             "Access to this account has been temporarily disabled"),
@@ -40,6 +39,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "camera": MessageLookupByLibrary.simpleMessage("Camera"),
         "capture": MessageLookupByLibrary.simpleMessage("Capture"),
         "capturing": MessageLookupByLibrary.simpleMessage("Capturing.."),
+        "colorblind_theme":
+            MessageLookupByLibrary.simpleMessage("Color Blind Theme"),
         "confirmPasswordDoesNotMatchErrorText":
             MessageLookupByLibrary.simpleMessage(
                 "The entered passwords do not match"),
@@ -49,6 +50,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Confirm your password"),
         "confirm_settings":
             MessageLookupByLibrary.simpleMessage("Confirm settings"),
+        "dark_theme": MessageLookupByLibrary.simpleMessage("Dark Theme"),
         "discard": MessageLookupByLibrary.simpleMessage("Discard"),
         "emailInputLabel": MessageLookupByLibrary.simpleMessage("Email"),
         "emailIsRequiredErrorText":
@@ -61,6 +63,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Forgot your password?"),
         "forgotPasswordViewTitle":
             MessageLookupByLibrary.simpleMessage("Forgotten password recovery"),
+        "history_empty_error":
+            MessageLookupByLibrary.simpleMessage("No data found"),
         "img_discarded":
             MessageLookupByLibrary.simpleMessage("Image Discarded"),
         "img_saved_later":
@@ -88,6 +92,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "The password provided is too weak."),
         "pls_wait": MessageLookupByLibrary.simpleMessage("Please Wait.."),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+        "profile_saved_fail":
+            MessageLookupByLibrary.simpleMessage("Failed to update profile"),
+        "profile_saved_success": MessageLookupByLibrary.simpleMessage(
+            "Profile updated successfully"),
         "registerActionText": MessageLookupByLibrary.simpleMessage("Register"),
         "registerButtonText": MessageLookupByLibrary.simpleMessage("Register"),
         "registerHintText": MessageLookupByLibrary.simpleMessage(
@@ -108,11 +116,15 @@ class MessageLookup extends MessageLookupByLibrary {
             "Take a test first to see your result!"),
         "taken_photo_upload":
             MessageLookupByLibrary.simpleMessage("Upload A Taken Image"),
+        "themes": MessageLookupByLibrary.simpleMessage("Themes"),
         "unknownError":
             MessageLookupByLibrary.simpleMessage("An unknown error occurred"),
+        "update_profile":
+            MessageLookupByLibrary.simpleMessage("Update Profile"),
         "upload": MessageLookupByLibrary.simpleMessage("Upload"),
         "userNotFoundErrorText":
             MessageLookupByLibrary.simpleMessage("This account does not exist"),
+        "white_theme": MessageLookupByLibrary.simpleMessage("White Theme"),
         "wrongOrNoPasswordErrorText": MessageLookupByLibrary.simpleMessage(
             "The password is invalid or this user does not have a password"),
         "you_are": MessageLookupByLibrary.simpleMessage("You are:"),

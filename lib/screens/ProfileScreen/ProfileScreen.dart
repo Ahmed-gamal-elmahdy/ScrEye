@@ -52,6 +52,7 @@ class ProfileScreen extends StatelessWidget {
                       onChanged: (value) => _cubit.updateEmail(value),
                     ),
                     SizedBox(height: 16.0),
+                    /*
                     TextField(
                       enabled: false,
                       decoration: InputDecoration(
@@ -67,6 +68,8 @@ class ProfileScreen extends StatelessWidget {
                       onChanged: (value) => _cubit.updatePassword(value),
                     ),
                     SizedBox(height: 16.0),
+
+                     */
                     TextField(
                       keyboardType: TextInputType.number,
                       // show numeric keyboard
@@ -102,20 +105,19 @@ class ProfileScreen extends StatelessWidget {
                     SizedBox(height: 32.0),
                     OutlinedButton(
                       onPressed: () => {_cubit.askConfirmation(context)},
-                      child: Text("Update Profile"),
                       style: ButtonStyle(
                         backgroundColor: Theme.of(context)
                             .outlinedButtonTheme
                             .style
                             ?.backgroundColor,
                       ),
+                      child: Text(S.of(context).update_profile),
                     ),
                   ],
                 ),
               ),
             );
           } else if (state is ProfileLoading) {
-
             return Center(
                 child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

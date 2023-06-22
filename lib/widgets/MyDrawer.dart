@@ -73,6 +73,7 @@ Drawer myDrawer(context) {
                 Navigator.popAndPushNamed(context, '/settings');
               }),
         ),
+        /*
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50.0),
@@ -88,6 +89,8 @@ Drawer myDrawer(context) {
                 Navigator.popAndPushNamed(context, '/capture');
               }),
         ),
+
+         */
       ],
     ),
   );

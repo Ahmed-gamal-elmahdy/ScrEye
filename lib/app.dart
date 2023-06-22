@@ -79,7 +79,8 @@ class MyApp extends StatelessWidget {
                               '/profile': (context) => ProfileScreen(),
                               '/history': (context) => const HistoryScreen(),
                               '/settings': (context) => const SettingsScreen(),
-                              '/capture': (context) => const CollectionCameraScreen(),
+                              '/capture': (context) =>
+                                  const CollectionCameraScreen(),
                             },
                             builder: (context, child) {
                               return Directionality(

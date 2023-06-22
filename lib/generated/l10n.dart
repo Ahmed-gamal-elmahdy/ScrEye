@@ -1,7 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import 'intl/messages_all.dart';
 
 // **************************************************************************
@@ -690,6 +689,86 @@ class S {
       args: [],
     );
   }
+
+  /// `Update Profile`
+  String get update_profile {
+    return Intl.message(
+      'Update Profile',
+      name: 'update_profile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile updated successfully`
+  String get profile_saved_success {
+    return Intl.message(
+      'Profile updated successfully',
+      name: 'profile_saved_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to update profile`
+  String get profile_saved_fail {
+    return Intl.message(
+      'Failed to update profile',
+      name: 'profile_saved_fail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No data found`
+  String get history_empty_error {
+    return Intl.message(
+      'No data found',
+      name: 'history_empty_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Themes`
+  String get themes {
+    return Intl.message(
+      'Themes',
+      name: 'themes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `White Theme`
+  String get white_theme {
+    return Intl.message(
+      'White Theme',
+      name: 'white_theme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dark Theme`
+  String get dark_theme {
+    return Intl.message(
+      'Dark Theme',
+      name: 'dark_theme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Color Blind Theme`
+  String get colorblind_theme {
+    return Intl.message(
+      'Color Blind Theme',
+      name: 'colorblind_theme',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
@@ -704,10 +783,8 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
 
   @override
   bool isSupported(Locale locale) => _isSupported(locale);
-
   @override
   Future<S> load(Locale locale) => S.load(locale);
-
   @override
   bool shouldReload(AppLocalizationDelegate old) => false;
 
