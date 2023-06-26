@@ -123,7 +123,7 @@ class ProfileScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 LoadingAnimationWidget.threeArchedCircle(
-                    color: Theme.of(context).textTheme.subtitle2!.color!,
+                    color: Theme.of(context).textTheme.headline5!.color!,
                     size: 50),
                 SizedBox(
                   height: 4.h,

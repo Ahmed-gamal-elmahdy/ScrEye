@@ -1,8 +1,21 @@
-import 'package:flutter/material.dart';
-
+import 'package:flutter/material.dart' hide ThemeMode;
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../themes/MyTheme.dart';
+import '../cubit/AppSettingsCubit/app_settings_cubit.dart';
 import '../generated/l10n.dart';
 
 Drawer myDrawer(context) {
+  var settingCubit = BlocProvider.of<AppSettingsCubit>(context);
+  var bg = 'assets/logo_3_dark.png';
+  if(settingCubit.state.themeMode == ThemeMode.whiteTheme){
+    bg = 'assets/logo_3.png';
+  }
+  else if (settingCubit.state.themeMode == ThemeMode.darkTheme){
+    bg = 'assets/logo_3_dark.png';
+  }
+  else {
+    bg = 'assets/logo_3_cb.png';
+  }
   return Drawer(
     child: ListView(
       children: <Widget>[
@@ -11,7 +24,7 @@ Drawer myDrawer(context) {
           child: Container(
               height: MediaQuery.of(context).size.height * 0.16,
               width: MediaQuery.of(context).size.width * 0.16,
-              child: Image.asset('assets/logo_3.png')),
+              child: Image.asset(bg)),
         ),
         Container(
           decoration: BoxDecoration(

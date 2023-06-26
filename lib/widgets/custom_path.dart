@@ -40,7 +40,7 @@ class Guideline_Painter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint0 = Paint()
-      ..color = const Color.fromARGB(255, 33, 150, 243)
+      ..color = const Color(0xFF03DAC6)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3;
 

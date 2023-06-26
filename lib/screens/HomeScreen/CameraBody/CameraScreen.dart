@@ -57,7 +57,7 @@ class _CameraScreenState extends State<CameraScreen> {
                       height: 51.9.h,
                       color: Theme.of(context)
                           .textTheme
-                          .subtitle1!
+                          .headline2!
                           .color!
                           .withOpacity(0.5),
                       child: Row(
@@ -74,7 +74,7 @@ class _CameraScreenState extends State<CameraScreen> {
                                   max: cubit.maxZoom,
                                   inactiveColor: Theme.of(context)
                                       .textTheme
-                                      .subtitle1!
+                                      .headline5!
                                       .color!,
                                   activeColor: Theme.of(context)
                                       .textTheme
@@ -146,7 +146,7 @@ class _CameraScreenState extends State<CameraScreen> {
                                             .threeArchedCircle(
                                                 color: Theme.of(context)
                                                     .textTheme
-                                                    .subtitle2!
+                                                    .headline5!
                                                     .color!,
                                                 size: 10),
                                         SizedBox(

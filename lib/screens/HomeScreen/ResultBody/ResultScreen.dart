@@ -1,9 +1,10 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide ThemeMode;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertest/cubit/app_cubit.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-
+import '../../../themes/MyTheme.dart';
+import '../../../cubit/AppSettingsCubit/app_settings_cubit.dart';
 import '../../../generated/l10n.dart';
 
 class ResultScreen extends StatelessWidget {
@@ -11,6 +12,17 @@ class ResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var settingCubit = BlocProvider.of<AppSettingsCubit>(context);
+    var bg = 'assets/resultc_dark.png';
+    if(settingCubit.state.themeMode == ThemeMode.whiteTheme){
+      bg = 'assets/resultc.png';
+    }
+    else if (settingCubit.state.themeMode == ThemeMode.darkTheme){
+      bg = 'assets/resultc_dark.png';
+    }
+    else {
+      bg = 'assets/resultc_cb.png';
+    }
     return BlocConsumer<AppCubit, AppState>(
       listener: (context, state) {
         // TODO: implement listener
@@ -57,7 +69,7 @@ class ResultScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               LoadingAnimationWidget.threeArchedCircle(
-                  color: Theme.of(context).textTheme.subtitle2!.color!,
+                  color: Theme.of(context).textTheme.headline5!.color!,
                   size: 75),
               SizedBox(
                 height: 5.h,
@@ -75,7 +87,7 @@ class ResultScreen extends StatelessWidget {
           return Container(
             decoration: BoxDecoration(
                 image: DecorationImage(
-              image: AssetImage('assets/resultc.png'),
+              image: AssetImage(bg),
             )),
             child: Center(
               child: Text(

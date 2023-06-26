@@ -17,6 +17,10 @@ class AppSettingsCubit extends Cubit<AppSettingsState> {
         theme: MyTheme.getTheme(themeMode), themeMode: themeMode));
   }
 
+  ThemeMode currentTheme(){
+    return state.themeMode;
+  }
+
   void updateLocale(Locale locale) {
     final directionality = _getDirectionality(locale);
     emit(state.copyWith(locale: locale, directionality: directionality));

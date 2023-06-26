@@ -66,7 +66,7 @@ class HomeScreen extends StatelessWidget {
           title: S.of(context).camera,
           icon: Icon(
             Icons.camera_alt_outlined,
-            color: Theme.of(context).textTheme.headline1!.color!,
+            color: Theme.of(context).textTheme.headline2!.color!,
           ),
         ),
         TabItem(

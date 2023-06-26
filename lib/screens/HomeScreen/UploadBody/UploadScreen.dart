@@ -1,9 +1,11 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide ThemeMode;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertest/cubit/app_cubit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import '../../../cubit/AppSettingsCubit/app_settings_cubit.dart';
+import '../../../themes/MyTheme.dart';
 
 import '../../../generated/l10n.dart';
 
@@ -18,11 +20,22 @@ class UploadScreen extends StatelessWidget {
       },
       builder: (context, state) {
         var cubit = AppCubit.get(context);
+        var settingCubit = BlocProvider.of<AppSettingsCubit>(context);
+        var bg = 'assets/homec_dark.png';
+        if(settingCubit.state.themeMode == ThemeMode.whiteTheme){
+          bg = 'assets/homec.png';
+        }
+        else if (settingCubit.state.themeMode == ThemeMode.darkTheme){
+          bg = 'assets/homec_dark.png';
+        }
+        else {
+          bg = 'assets/homec.png';
+        }
         return Center(
           child: Container(
               decoration: BoxDecoration(
                   image: DecorationImage(
-                image: AssetImage('assets/homec.png'),
+                image: AssetImage(bg),
               )),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
