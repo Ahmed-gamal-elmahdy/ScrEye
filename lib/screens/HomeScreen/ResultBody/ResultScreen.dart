@@ -3,9 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertest/cubit/app_cubit.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import '../../../themes/MyTheme.dart';
+
 import '../../../cubit/AppSettingsCubit/app_settings_cubit.dart';
 import '../../../generated/l10n.dart';
+import '../../../themes/MyTheme.dart';
 
 class ResultScreen extends StatelessWidget {
   const ResultScreen({Key? key}) : super(key: key);
@@ -14,13 +15,11 @@ class ResultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var settingCubit = BlocProvider.of<AppSettingsCubit>(context);
     var bg = 'assets/resultc_dark.png';
-    if(settingCubit.state.themeMode == ThemeMode.whiteTheme){
+    if (settingCubit.state.themeMode == ThemeMode.whiteTheme) {
       bg = 'assets/resultc.png';
-    }
-    else if (settingCubit.state.themeMode == ThemeMode.darkTheme){
+    } else if (settingCubit.state.themeMode == ThemeMode.darkTheme) {
       bg = 'assets/resultc_dark.png';
-    }
-    else {
+    } else {
       bg = 'assets/resultc_cb.png';
     }
     return BlocConsumer<AppCubit, AppState>(

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../generated/l10n.dart';
 import 'capturedCubit/captured_cubit.dart';
 
 class CollectionCapturedScreen extends StatelessWidget {
@@ -18,9 +19,7 @@ class CollectionCapturedScreen extends StatelessWidget {
     return BlocProvider.value(
       value: capturedCubit,
       child: Scaffold(
-        appBar: AppBar(
-          title: Text('Captured Screen'),
-        ),
+        appBar: AppBar(),
         body: SingleChildScrollView(
           child: BlocBuilder<CapturedCubit, CapturedState>(
             builder: (context, state) {
@@ -36,8 +35,8 @@ class CollectionCapturedScreen extends StatelessWidget {
                       onChanged: (name) {
                         capturedCubit.updateName(name);
                       },
-                      decoration: const InputDecoration(
-                        labelText: 'Name',
+                      decoration: InputDecoration(
+                        labelText: S.of(context).name,
                         border: OutlineInputBorder(),
                       ),
                     ),
@@ -47,8 +46,8 @@ class CollectionCapturedScreen extends StatelessWidget {
                         capturedCubit.updateAge(int.parse(age));
                       },
                       keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
-                        labelText: 'Age',
+                      decoration: InputDecoration(
+                        labelText: S.of(context).age,
                         border: OutlineInputBorder(),
                       ),
                     ),
@@ -62,7 +61,7 @@ class CollectionCapturedScreen extends StatelessWidget {
                             capturedCubit.updateGender(value);
                           },
                         ),
-                        const Text('Male'),
+                        Text(S.of(context).male),
                         const SizedBox(width: 20),
                         Radio(
                           value: 'Female',
@@ -71,7 +70,7 @@ class CollectionCapturedScreen extends StatelessWidget {
                             capturedCubit.updateGender(value);
                           },
                         ),
-                        const Text('Female'),
+                        Text(S.of(context).female),
                       ],
                     ),
                     const SizedBox(height: 20),
@@ -84,7 +83,7 @@ class CollectionCapturedScreen extends StatelessWidget {
                             capturedCubit.updateAnemic(value);
                           },
                         ),
-                        const Text('Anemic'),
+                        Text(S.of(context).anemic),
                         const SizedBox(width: 10),
                         Radio(
                           value: 'Non Anemic',
@@ -93,7 +92,7 @@ class CollectionCapturedScreen extends StatelessWidget {
                             capturedCubit.updateAnemic(value);
                           },
                         ),
-                        const Text('Non Anemic'),
+                        Text(S.of(context).not_anemic),
                         const SizedBox(width: 10),
                         Radio(
                           value: '',
@@ -102,7 +101,7 @@ class CollectionCapturedScreen extends StatelessWidget {
                             capturedCubit.updateAnemic(value);
                           },
                         ),
-                        const Text('Not sure'),
+                        Text(S.of(context).undefined),
                       ],
                     ),
                     const SizedBox(height: 20),
@@ -111,8 +110,8 @@ class CollectionCapturedScreen extends StatelessWidget {
                         capturedCubit.updateAdditionalInfo(additionalInfo);
                       },
                       maxLines: 4,
-                      decoration: const InputDecoration(
-                        labelText: 'Additional Info',
+                      decoration: InputDecoration(
+                        labelText: S.of(context).additional_info,
                         border: OutlineInputBorder(),
                       ),
                     ),
@@ -120,14 +119,14 @@ class CollectionCapturedScreen extends StatelessWidget {
                       onPressed: () {
                         capturedCubit.chooseFiles();
                       },
-                      child: Text('Upload Files'),
+                      child: Text(S.of(context).choose_files),
                     ),
                     const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: () {
                         capturedCubit.saveCaptured();
                       },
-                      child: Text('Save'),
+                      child: Text(S.of(context).save),
                     ),
                   ],
                 ),

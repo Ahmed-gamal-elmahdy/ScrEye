@@ -1,7 +1,9 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:camera/camera.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:crop_your_image/crop_your_image.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -9,7 +11,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -46,6 +48,49 @@ class AppCubit extends Cubit<AppState> {
     emit(ZoomLevelChanged());
   }
 
+  bool isOnline = false;
+
+  Future<void> saveImage(String imageName, String imageUrl, context) async {
+    try {
+      // Download the image
+      Response response = await Dio()
+          .get(imageUrl, options: Options(responseType: ResponseType.bytes));
+
+      // Get the local storage directory
+      Directory? appDocDir = await getApplicationDocumentsDirectory();
+
+      if (appDocDir != null) {
+        // Save the image to local storage
+
+        final name = imageName.replaceAll("-", "_");
+
+        File file = File('${appDocDir.path}/IMG_${name}.jpg');
+        await file.writeAsBytes(response.data);
+        await GallerySaver.saveImage(file.path, albumName: "ScrEye");
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(S.of(context).img_saved_later),
+            backgroundColor: Colors.green,
+          ),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(S.of(context).unknownError),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
+  Future<bool> checkInternetConnectivity() async {
+    var connectivityResult = await Connectivity().checkConnectivity();
+    isOnline = connectivityResult == ConnectivityResult.wifi ||
+        connectivityResult == ConnectivityResult.mobile;
+    return isOnline;
+  }
+
   void startCamera() async {
     cameras = await availableCameras();
     controller =
@@ -78,21 +123,23 @@ class AppCubit extends Cubit<AppState> {
     user = User;
   }
 
-  Future<dynamic> ShowCropWidget(
-      BuildContext context, Uint8List capturedImage) {
+  Future<void> ShowCropWidget(
+      BuildContext context, Uint8List capturedImage) async {
     final _controller = CropController();
     Uint8List outputimg = capturedImage;
     notLoading();
-    return showDialog(
+
+    await showDialog(
       useSafeArea: false,
       context: context,
-      builder: (context) => Scaffold(
-        appBar: AppBar(
-          title: Text(S.of(context).your_img),
-        ),
-        body: Stack(
-          children: [
-            Crop(
+      builder: (context) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(S.of(context).your_img),
+          ),
+          body: Stack(
+            children: [
+              Crop(
                 fixArea: true,
                 baseColor: Theme.of(context).listTileTheme.tileColor!,
                 initialAreaBuilder: (rect) => Rect.fromLTRB(rect.left + 110.w,
@@ -101,46 +148,65 @@ class AppCubit extends Cubit<AppState> {
                 image: capturedImage,
                 onCropped: (crop) {
                   outputimg = crop;
-                }),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  OutlinedButton.icon(
-                    onPressed: () async {
-                      Navigator.pop(context);
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        backgroundColor: const Color(0xFFCE772F),
-                        content: Text(S.of(context).img_discarded),
-                      ));
-                    },
-                    icon: const Icon(Icons.delete),
-                    label: Text(S.of(context).discard),
-                  ),
-                  OutlinedButton.icon(
-                    onPressed: () async {
-                      _controller.crop();
-                      Future.delayed(Duration(milliseconds: 1500), () async {
-                        await ImageGallerySaver.saveImage(outputimg);
+                },
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    OutlinedButton.icon(
+                      onPressed: () async {
+                        Navigator.pop(context);
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          backgroundColor: const Color(0xFFCE772F),
+                          content: Text(S.of(context).img_discarded),
+                        ));
+                      },
+                      icon: const Icon(Icons.delete),
+                      label: Text(S.of(context).discard),
+                    ),
+                    OutlinedButton.icon(
+                      onPressed: () async {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          backgroundColor: const Color(0xFFCE772F),
+                          content: Text(S.of(context).loading),
+                        ));
+
+                        _controller.crop();
+
+                        await Future.delayed(
+                            const Duration(milliseconds: 1500));
+                        final tempDir = await getTemporaryDirectory();
+                        final now = DateTime.now();
+                        final name =
+                            '${now.day}-${now.month}-${now.year}-${now.hour}-${now.minute}-${now.second}';
+                        final file = await File('${tempDir.path}/${name}.jpg')
+                            .writeAsBytes(outputimg);
+                        await GallerySaver.saveImage(file.path,
+                            albumName: "ScrEye");
                         Navigator.pop(context);
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           backgroundColor: const Color(0xFF29C469),
                           content: Text(S.of(context).img_saved_later),
                         ));
-                      });
-                    },
-                    icon: const Icon(Icons.save_alt),
-                    label: Text(S.of(context).save),
-                  ),
-                  state is! Uploading
-                      ? OutlinedButton.icon(
-                          label: Text(S.of(context).upload),
-                          icon: const Icon(Icons.upload),
-                          onPressed: () async {
-                            _controller.crop();
-                            Future.delayed(const Duration(milliseconds: 1000),
-                                () {
+                      },
+                      icon: const Icon(Icons.save_alt),
+                      label: Text(S.of(context).save),
+                    ),
+                    state is! Uploading
+                        ? OutlinedButton.icon(
+                            label: Text(S.of(context).upload),
+                            icon: const Icon(Icons.upload),
+                            onPressed: () async {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                backgroundColor: const Color(0xFFCE772F),
+                                content: Text(S.of(context).loading),
+                              ));
+                              _controller.crop();
+                              await Future.delayed(
+                                  const Duration(milliseconds: 1500));
                               uploadImage(image: outputimg).then((data) async {
                                 getTest(
                                     imgname: data[0],
@@ -148,34 +214,48 @@ class AppCubit extends Cubit<AppState> {
                                     url: data[2]);
                                 Navigator.pop(context);
                               });
-                            });
-                          },
-                        )
-                      : OutlinedButton(
-                          onPressed: null,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              LoadingAnimationWidget.threeArchedCircle(
-                                  color: Theme.of(context)
-                                      .textTheme
-                                      .subtitle2!
-                                      .color!,
-                                  size: 20),
-                              SizedBox(
-                                width: 10.h,
-                              ),
-                              Text(S.of(context).loading)
-                            ],
+                            },
+                          )
+                        : OutlinedButton(
+                            onPressed: null,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                LoadingAnimationWidget.threeArchedCircle(
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .subtitle2!
+                                        .color!,
+                                    size: 20),
+                                SizedBox(width: 10.h),
+                                Text(S.of(context).loading)
+                              ],
+                            ),
                           ),
-                        ),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        );
+      },
     );
+
+    // stop periodic internet connectivity checks
+  }
+
+  void startConnectivityTimer() {
+    connectivityTimer = Timer.periodic(Duration(seconds: 3), (timer) async {
+      var connectivityResult = await Connectivity().checkConnectivity();
+      isOnline = connectivityResult == ConnectivityResult.wifi ||
+          connectivityResult == ConnectivityResult.mobile;
+    });
+  }
+
+  late Timer connectivityTimer;
+
+  void stopConnectivityTimer() {
+    connectivityTimer.cancel();
   }
 
   void loading() async {
@@ -212,21 +292,22 @@ class AppCubit extends Cubit<AppState> {
       } else {
         file.writeAsBytesSync(image);
       }
+      if (await checkInternetConnectivity()) {
+        if (image != null) {
+          final snapshot = await uploadFileToFirebase(file, name);
+          final downloadUrl = await getDownloadUrl(snapshot);
+          final token = parseTokenFromUrl(downloadUrl);
 
-      if (image != null) {
-        final snapshot = await uploadFileToFirebase(file, name);
-        final downloadUrl = await getDownloadUrl(snapshot);
-        final token = parseTokenFromUrl(downloadUrl);
-
-        print('url= $downloadUrl');
-        doneUploading();
-        return [name, token, downloadUrl];
+          print('url= $downloadUrl');
+          doneUploading();
+          return [name, token, downloadUrl];
+        }
       }
 
       doneUploading();
       return ["name", "token"];
     } catch (e) {
-      print(e.toString());
+      //debugPrint("**"+e.toString());
       doneUploading();
       return ["name", "token"];
     }

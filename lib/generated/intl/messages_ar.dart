@@ -21,9 +21,12 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
+
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accessDisabledErrorText": MessageLookupByLibrary.simpleMessage(
             "تم تعطيل الوصول إلى هذا الحساب مؤقتًا"),
+        "additional_info":
+            MessageLookupByLibrary.simpleMessage("معلومات اضافية"),
         "age": MessageLookupByLibrary.simpleMessage("العمر"),
         "align_clipper":
             MessageLookupByLibrary.simpleMessage("محاذاة الشكل مع الملتحمة"),
@@ -38,6 +41,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "camera": MessageLookupByLibrary.simpleMessage("كاميرا"),
         "capture": MessageLookupByLibrary.simpleMessage("التقاط"),
         "capturing": MessageLookupByLibrary.simpleMessage("انتظر"),
+        "choose_files": MessageLookupByLibrary.simpleMessage("اختيار ملفات.."),
+        "collect_data": MessageLookupByLibrary.simpleMessage("جمع بيانات"),
         "colorblind_theme":
             MessageLookupByLibrary.simpleMessage("وضع عمى الألوان"),
         "confirmPasswordDoesNotMatchErrorText":
@@ -68,6 +73,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "img_discarded": MessageLookupByLibrary.simpleMessage("تم حذف الصورة"),
         "img_saved_later":
             MessageLookupByLibrary.simpleMessage("تم حفظ الصورة على الجهاز"),
+        "internet_error":
+            MessageLookupByLibrary.simpleMessage("غير متصل بالانترنت"),
         "isNotAValidEmailErrorText": MessageLookupByLibrary.simpleMessage(
             "رجاء قم بإدخال بريد إلكتروني صالح"),
         "lang": MessageLookupByLibrary.simpleMessage("العربية"),
@@ -120,6 +127,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "taken_photo_upload":
             MessageLookupByLibrary.simpleMessage("ارفق صورة من الجهاز"),
         "themes": MessageLookupByLibrary.simpleMessage("المظاهر"),
+        "undefined": MessageLookupByLibrary.simpleMessage("غير محدد"),
         "unknownError": MessageLookupByLibrary.simpleMessage("خطأ غير معروف"),
         "update_profile": MessageLookupByLibrary.simpleMessage("تحديث الملف"),
         "upload": MessageLookupByLibrary.simpleMessage("أرفاق"),

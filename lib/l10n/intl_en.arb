@@ -72,5 +72,10 @@
   "themes": "Themes",
   "white_theme": "White Theme",
   "dark_theme": "Dark Theme",
-  "colorblind_theme": "Color Blind Theme"
+  "colorblind_theme": "Color Blind Theme",
+  "internet_error": "Not connected to internet",
+  "collect_data": "Collect Data",
+  "undefined": "undefined",
+  "additional_info": "Additional Info",
+  "choose_files": "Choose Files.."
 }

@@ -1,5 +1,4 @@
 import 'package:camera/camera.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertest/screens/dataCollectionScreen/collection_captured_screen.dart';
@@ -21,9 +20,9 @@ class CollectionCameraScreen extends StatelessWidget {
           builder: (context, state) {
             if (state is CameraInitial) {
               context.read<CameraCubit>().initializeCamera();
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (state is CameraInitialized) {
-              return CameraView();
+              return const CameraView();
             } else {
               return Container();
             }
@@ -58,19 +57,18 @@ class _CameraViewState extends State<CameraView> {
   }
 
   @override
+  void dispose() {
+    context.read<CameraCubit>().close();
+    debugPrint("Dispossssssed");
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: myDrawer(context),
       appBar: AppBar(
-        actions: [
-          IconButton(
-              tooltip: "Logout",
-              onPressed: () {
-                FirebaseAuth.instance.signOut();
-              },
-              icon: const Icon(Icons.power_settings_new_rounded))
-        ],
-        title: Text("Capture"),
+        title: Text(S.of(context).capture),
       ),
       body: BlocBuilder<CameraCubit, CameraState>(
         builder: (context, state) {

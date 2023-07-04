@@ -72,6 +72,10 @@
   "themes": "المظاهر",
   "white_theme": "وضع فاتح",
   "dark_theme": "وضع داكن",
-  "colorblind_theme": "وضع عمى الألوان"
-
+  "colorblind_theme": "وضع عمى الألوان",
+  "internet_error": "غير متصل بالانترنت",
+  "collect_data": "جمع بيانات",
+  "undefined": "غير محدد",
+  "additional_info": "معلومات اضافية",
+  "choose_files": "اختيار ملفات.."
 }

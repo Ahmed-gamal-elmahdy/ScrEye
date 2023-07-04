@@ -4,10 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertest/cubit/app_cubit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import '../../../cubit/AppSettingsCubit/app_settings_cubit.dart';
-import '../../../themes/MyTheme.dart';
 
+import '../../../cubit/AppSettingsCubit/app_settings_cubit.dart';
 import '../../../generated/l10n.dart';
+import '../../../themes/MyTheme.dart';
 
 class UploadScreen extends StatelessWidget {
   const UploadScreen({Key? key}) : super(key: key);
@@ -22,13 +22,11 @@ class UploadScreen extends StatelessWidget {
         var cubit = AppCubit.get(context);
         var settingCubit = BlocProvider.of<AppSettingsCubit>(context);
         var bg = 'assets/homec_dark.png';
-        if(settingCubit.state.themeMode == ThemeMode.whiteTheme){
+        if (settingCubit.state.themeMode == ThemeMode.whiteTheme) {
           bg = 'assets/homec.png';
-        }
-        else if (settingCubit.state.themeMode == ThemeMode.darkTheme){
+        } else if (settingCubit.state.themeMode == ThemeMode.darkTheme) {
           bg = 'assets/homec_dark.png';
-        }
-        else {
+        } else {
           bg = 'assets/homec.png';
         }
         return Center(
@@ -69,10 +67,18 @@ class UploadScreen extends StatelessWidget {
                             var image = (await _imagePicker.pickImage(
                                 source: ImageSource.gallery))!;
                             cubit.uploadImage(image: image).then((value) {
-                              cubit.getTest(
-                                  imgname: value[0],
-                                  token: value[1],
-                                  url: value[2]);
+                              if (!cubit.isOnline) {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  backgroundColor: Colors.red,
+                                  content: Text(S.of(context).internet_error),
+                                ));
+                              } else {
+                                cubit.getTest(
+                                    imgname: value[0],
+                                    token: value[1],
+                                    url: value[2]);
+                              }
                             });
                           },
                         )

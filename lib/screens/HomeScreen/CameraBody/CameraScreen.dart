@@ -42,7 +42,7 @@ class _CameraScreenState extends State<CameraScreen> {
               Stack(
                 children: [
                   SizedBox(
-                    height: 517.h,
+                    height: 520.h,
                     child: OverflowBox(
                       alignment: Alignment.center,
                       child: CameraPreview(cubit.controller),
@@ -54,7 +54,7 @@ class _CameraScreenState extends State<CameraScreen> {
                     right: 0,
                     left: 0,
                     child: Container(
-                      height: 51.9.h,
+                      //height: 80.h,
                       color: Theme.of(context)
                           .textTheme
                           .headline2!
