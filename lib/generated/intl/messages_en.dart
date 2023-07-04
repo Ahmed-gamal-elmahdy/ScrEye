@@ -21,9 +21,12 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
+
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accessDisabledErrorText": MessageLookupByLibrary.simpleMessage(
             "Access to this account has been temporarily disabled"),
+        "additional_info":
+            MessageLookupByLibrary.simpleMessage("Additional Info"),
         "age": MessageLookupByLibrary.simpleMessage("Age"),
         "align_clipper":
             MessageLookupByLibrary.simpleMessage("Put Clipper on Conjunctiva"),
@@ -39,6 +42,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "camera": MessageLookupByLibrary.simpleMessage("Camera"),
         "capture": MessageLookupByLibrary.simpleMessage("Capture"),
         "capturing": MessageLookupByLibrary.simpleMessage("Capturing.."),
+        "choose_files": MessageLookupByLibrary.simpleMessage("Choose Files.."),
+        "collect_data": MessageLookupByLibrary.simpleMessage("Collect Data"),
         "colorblind_theme":
             MessageLookupByLibrary.simpleMessage("Color Blind Theme"),
         "confirmPasswordDoesNotMatchErrorText":
@@ -69,6 +74,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Image Discarded"),
         "img_saved_later":
             MessageLookupByLibrary.simpleMessage("Image saved for later use"),
+        "internet_error":
+            MessageLookupByLibrary.simpleMessage("Not connected to internet"),
         "isNotAValidEmailErrorText":
             MessageLookupByLibrary.simpleMessage("Please enter a valid email"),
         "lang": MessageLookupByLibrary.simpleMessage("English"),
@@ -117,6 +124,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "taken_photo_upload":
             MessageLookupByLibrary.simpleMessage("Upload A Taken Image"),
         "themes": MessageLookupByLibrary.simpleMessage("Themes"),
+        "undefined": MessageLookupByLibrary.simpleMessage("undefined"),
         "unknownError":
             MessageLookupByLibrary.simpleMessage("An unknown error occurred"),
         "update_profile":

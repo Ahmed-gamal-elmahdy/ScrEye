@@ -1,6 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 import 'intl/messages_all.dart';
 
 // **************************************************************************
@@ -769,6 +770,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Not connected to internet`
+  String get internet_error {
+    return Intl.message(
+      'Not connected to internet',
+      name: 'internet_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Collect Data`
+  String get collect_data {
+    return Intl.message(
+      'Collect Data',
+      name: 'collect_data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `undefined`
+  String get undefined {
+    return Intl.message(
+      'undefined',
+      name: 'undefined',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Additional Info`
+  String get additional_info {
+    return Intl.message(
+      'Additional Info',
+      name: 'additional_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose Files..`
+  String get choose_files {
+    return Intl.message(
+      'Choose Files..',
+      name: 'choose_files',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
@@ -783,8 +834,10 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
 
   @override
   bool isSupported(Locale locale) => _isSupported(locale);
+
   @override
   Future<S> load(Locale locale) => S.load(locale);
+
   @override
   bool shouldReload(AppLocalizationDelegate old) => false;
 

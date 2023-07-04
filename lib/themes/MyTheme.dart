@@ -13,7 +13,7 @@ class MyTheme {
     Color primaryVariant2 = const Color(0xFFC7E4FA);
 
     Color secondary = const Color(0xFFF05454);
-    Color secondaryVariant1 = const  Color(0xFFF05454);
+    Color secondaryVariant1 = const Color(0xFFF05454);
     // Color secondaryVariant2 = const Color(0xFFFFFFFF);
 
     Color tertiary = const Color(0xFFFFFFFF);
@@ -128,11 +128,14 @@ class MyTheme {
         elevation: 0,
       ),
       textTheme: TextTheme(
-        bodyText2: TextStyle(color: primaryVariant1), //
-        headline6: TextStyle(color: primaryVariant1), //
+        bodyText2: TextStyle(color: primaryVariant1),
+        //
+        headline6: TextStyle(color: primaryVariant1),
+        //
         headline3: TextStyle(color: tertiary),
         headline2: TextStyle(color: tertiaryVariant1),
-        headline1: TextStyle(color: primaryVariant1), //
+        headline1: TextStyle(color: primaryVariant1),
+        //
         subtitle1: TextStyle(color: primaryVariant1),
         subtitle2: TextStyle(color: secondary),
         headline5: TextStyle(color: secondaryVariant1),
@@ -210,7 +213,7 @@ class MyTheme {
     Color primaryVariant2 = const Color(0xFFC7E4FA);
 
     Color secondary = const Color(0xFF946C13);
-    Color secondaryVariant1 = const  Color(0xFF946C13);
+    Color secondaryVariant1 = const Color(0xFF946C13);
     // Color secondaryVariant2 = const Color(0xFFFFFFFF);
 
     Color tertiary = const Color(0xFFFFFFFF);

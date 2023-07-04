@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart' hide ThemeMode;
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../themes/MyTheme.dart';
 import '../cubit/AppSettingsCubit/app_settings_cubit.dart';
 import '../generated/l10n.dart';
@@ -7,13 +8,11 @@ import '../generated/l10n.dart';
 Drawer myDrawer(context) {
   var settingCubit = BlocProvider.of<AppSettingsCubit>(context);
   var bg = 'assets/logo_3_dark.png';
-  if(settingCubit.state.themeMode == ThemeMode.whiteTheme){
+  if (settingCubit.state.themeMode == ThemeMode.whiteTheme) {
     bg = 'assets/logo_3.png';
-  }
-  else if (settingCubit.state.themeMode == ThemeMode.darkTheme){
+  } else if (settingCubit.state.themeMode == ThemeMode.darkTheme) {
     bg = 'assets/logo_3_dark.png';
-  }
-  else {
+  } else {
     bg = 'assets/logo_3_cb.png';
   }
   return Drawer(
@@ -86,7 +85,6 @@ Drawer myDrawer(context) {
                 Navigator.popAndPushNamed(context, '/settings');
               }),
         ),
-        /*
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50.0),
@@ -97,13 +95,11 @@ Drawer myDrawer(context) {
           ),
           child: ListTile(
               leading: Icon(Icons.camera_alt_outlined),
-              title: Text("Collect Data"),
+              title: Text(S.of(context).collect_data),
               onTap: () {
                 Navigator.popAndPushNamed(context, '/capture');
               }),
         ),
-
-         */
       ],
     ),
   );
