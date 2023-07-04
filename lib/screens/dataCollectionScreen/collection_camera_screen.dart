@@ -1,8 +1,10 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertest/screens/dataCollectionScreen/collection_captured_screen.dart';
 import 'package:fluttertest/widgets/MyDrawer.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../generated/l10n.dart';
 import 'cameraCubit/camera_cubit.dart';
@@ -105,29 +107,55 @@ class _CameraViewState extends State<CameraView> {
                                 const SizedBox(height: 16.0),
                                 Slider(
                                   value: _calculateSliderValue(_zoomLevel),
+                                  inactiveColor: Theme.of(context)
+                                      .textTheme
+                                      .headline5!
+                                      .color!,
+                                  activeColor: Theme.of(context)
+                                      .textTheme
+                                      .subtitle2!
+                                      .color!,
                                   min: 0.0,
                                   max: 30.0,
                                   onChanged: _onSliderChanged,
                                 ),
-                                ElevatedButton.icon(
-                                  onPressed: () async {
-                                    String? imagePath = await context
-                                        .read<CameraCubit>()
-                                        .takePicture();
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            CollectionCapturedScreen(
-                                          capturedCubit: CapturedCubit(),
-                                          imagePath: imagePath,
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  icon: const Icon(Icons.camera_alt),
-                                  label: Text(S.of(context).capture),
-                                )
+                                    SizedBox(
+                                        width: 120.h,
+                                        child: OutlinedButton(
+                                            style: ButtonStyle(
+                                                backgroundColor:
+                                                    Theme.of(context)
+                                                        .outlinedButtonTheme
+                                                        .style
+                                                        ?.shadowColor),
+                                            onPressed: () async {
+                                              String? imagePath = await context
+                                                  .read<CameraCubit>()
+                                                  .takePicture();
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      CollectionCapturedScreen(
+                                                    capturedCubit:
+                                                        CapturedCubit(),
+                                                    imagePath: imagePath,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Icon(Icons.camera),
+                                                SizedBox(
+                                                  width: 10.h,
+                                                ),
+                                                Text(S.of(context).capture)
+                                              ],
+                                            )),
+                                      )
                               ],
                             ),
                           ),
@@ -136,7 +164,25 @@ class _CameraViewState extends State<CameraView> {
                     ),
                   );
                 } else {
-                  return const Center(child: CircularProgressIndicator());
+                  return Center(
+                      child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      LoadingAnimationWidget.threeArchedCircle(
+                          color: Theme.of(context).textTheme.headline5!.color!,
+                          size: 50),
+                      SizedBox(
+                        height: 4.h,
+                      ),
+                      Text(
+                        S.of(context).pls_wait,
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Theme.of(context).textTheme.subtitle1!.color!,
+                        ),
+                      ),
+                    ],
+                  ));
                 }
               },
             );

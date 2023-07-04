@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertest/cubit/app_cubit.dart';
 import 'package:fluttertest/widgets/MyDrawer.dart';
 import 'package:intl/intl.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../../generated/l10n.dart';
 import '../../cubit/AppSettingsCubit/app_settings_cubit.dart';
@@ -124,7 +125,27 @@ class HistoryScreen extends StatelessWidget {
                         },
                       );
                     } else {
-                      return CircularProgressIndicator();
+                      return Center(
+                          child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          LoadingAnimationWidget.threeArchedCircle(
+                              color:
+                                  Theme.of(context).textTheme.headline5!.color!,
+                              size: 50),
+                          SizedBox(
+                            height: 4.h,
+                          ),
+                          Text(
+                            S.of(context).pls_wait,
+                            style: TextStyle(
+                              fontSize: 20,
+                              color:
+                                  Theme.of(context).textTheme.subtitle1!.color!,
+                            ),
+                          ),
+                        ],
+                      ));
                     }
                   },
                 ),
