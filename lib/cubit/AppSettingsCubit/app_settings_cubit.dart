@@ -17,6 +17,7 @@ class AppSettingsCubit extends Cubit<AppSettingsState> {
             directionality: TextDirection.ltr,
             themeMode: ThemeMode.whiteTheme)) {
     _init();
+    checkInternetConnectivity();
   }
 
   Future<bool> checkInternetConnectivity() async {
