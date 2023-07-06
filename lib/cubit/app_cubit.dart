@@ -169,7 +169,9 @@ class AppCubit extends Cubit<AppState> {
                     OutlinedButton.icon(
                       onPressed: () async {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          backgroundColor: const Color(0xFFCE772F),
+                          backgroundColor: Theme.of(context)
+                              .appBarTheme
+                              .backgroundColor!,
                           content: Text(S.of(context).loading),
                         ));
 
@@ -187,6 +189,7 @@ class AppCubit extends Cubit<AppState> {
                             albumName: "ScrEye");
                         Navigator.pop(context);
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          behavior: SnackBarBehavior.floating,
                           backgroundColor: const Color(0xFF29C469),
                           content: Text(S.of(context).img_saved_later),
                         ));
@@ -201,7 +204,9 @@ class AppCubit extends Cubit<AppState> {
                             onPressed: () async {
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(SnackBar(
-                                backgroundColor: const Color(0xFFCE772F),
+                                backgroundColor: Theme.of(context)
+                                    .appBarTheme
+                                    .backgroundColor!,
                                 content: Text(S.of(context).loading),
                               ));
                               _controller.crop();

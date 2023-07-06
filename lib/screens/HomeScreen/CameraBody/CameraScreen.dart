@@ -48,7 +48,7 @@ class _CameraScreenState extends State<CameraScreen> {
                       child: CameraPreview(cubit.controller),
                     ),
                   ),
-                  Guideline_Widget(width: size.width.w),
+                  //Guideline_Widget(width: size.width.w),
                   Positioned(
                     bottom: 0,
                     right: 0,

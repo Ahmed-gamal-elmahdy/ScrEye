@@ -9,6 +9,8 @@ import 'package:fluttertest/screens/HomeScreen/HomeScreen.dart';
 import 'package:fluttertest/screens/ProfileScreen/ProfileScreen.dart';
 import 'package:fluttertest/screens/SettingsScreen/SettingsScreen.dart';
 import 'package:fluttertest/screens/dataCollectionScreen/collection_camera_screen.dart';
+import 'package:fluttertest/screens/newHomeScreen/result/result_screen.dart';
+import 'package:fluttertest/screens/newHomeScreen/upload/upload_screen.dart';
 
 import 'cubit/AppSettingsCubit/app_settings_cubit.dart';
 import 'cubit/app_cubit.dart';
@@ -81,6 +83,8 @@ class MyApp extends StatelessWidget {
                               '/settings': (context) => const SettingsScreen(),
                               '/capture': (context) =>
                                   const CollectionCameraScreen(),
+                              '/upload': (context) =>   UploadScreen(),
+                              '/result': (context) =>   ResultScreen()
                             },
                             builder: (context, child) {
                               return Directionality(

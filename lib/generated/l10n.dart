@@ -1,7 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import 'intl/messages_all.dart';
 
 // **************************************************************************
@@ -791,10 +790,10 @@ class S {
     );
   }
 
-  /// `undefined`
+  /// `N/A`
   String get undefined {
     return Intl.message(
-      'undefined',
+      'N/A',
       name: 'undefined',
       desc: '',
       args: [],
@@ -820,6 +819,96 @@ class S {
       args: [],
     );
   }
+
+  /// `Anemic`
+  String get anemic_data {
+    return Intl.message(
+      'Anemic',
+      name: 'anemic_data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Non Anemic`
+  String get not_anemic_data {
+    return Intl.message(
+      'Non Anemic',
+      name: 'not_anemic_data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Uploading..`
+  String get uploading {
+    return Intl.message(
+      'Uploading..',
+      name: 'uploading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload form segmented folder only`
+  String get upload_folder_error {
+    return Intl.message(
+      'Upload form segmented folder only',
+      name: 'upload_folder_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Normal`
+  String get normal_mode_lbl {
+    return Intl.message(
+      'Normal',
+      name: 'normal_mode_lbl',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Collect`
+  String get collect_mode_lbl {
+    return Intl.message(
+      'Collect',
+      name: 'collect_mode_lbl',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose an image`
+  String get choose_img {
+    return Intl.message(
+      'Choose an image',
+      name: 'choose_img',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gender`
+  String get gender {
+    return Intl.message(
+      'Gender',
+      name: 'gender',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Case`
+  String get case_lbl {
+    return Intl.message(
+      'Case',
+      name: 'case_lbl',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
@@ -834,10 +923,8 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
 
   @override
   bool isSupported(Locale locale) => _isSupported(locale);
-
   @override
   Future<S> load(Locale locale) => S.load(locale);
-
   @override
   bool shouldReload(AppLocalizationDelegate old) => false;
 

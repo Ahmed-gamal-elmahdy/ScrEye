@@ -21,7 +21,6 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accessDisabledErrorText": MessageLookupByLibrary.simpleMessage(
             "تم تعطيل الوصول إلى هذا الحساب مؤقتًا"),
@@ -32,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("محاذاة الشكل مع الملتحمة"),
         "already_user": MessageLookupByLibrary.simpleMessage("لديك حساب؟"),
         "anemic": MessageLookupByLibrary.simpleMessage("لديك انيميا"),
+        "anemic_data": MessageLookupByLibrary.simpleMessage("مصاب"),
         "ar": MessageLookupByLibrary.simpleMessage("العربية"),
         "auth": MessageLookupByLibrary.simpleMessage("التحقق"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -41,8 +41,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "camera": MessageLookupByLibrary.simpleMessage("كاميرا"),
         "capture": MessageLookupByLibrary.simpleMessage("التقاط"),
         "capturing": MessageLookupByLibrary.simpleMessage("انتظر"),
+        "case_lbl": MessageLookupByLibrary.simpleMessage("الحالة"),
         "choose_files": MessageLookupByLibrary.simpleMessage("اختيار ملفات.."),
+        "choose_img": MessageLookupByLibrary.simpleMessage("اختار صورة"),
         "collect_data": MessageLookupByLibrary.simpleMessage("جمع بيانات"),
+        "collect_mode_lbl": MessageLookupByLibrary.simpleMessage("تجميع"),
         "colorblind_theme":
             MessageLookupByLibrary.simpleMessage("وضع عمى الألوان"),
         "confirmPasswordDoesNotMatchErrorText":
@@ -68,6 +71,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
         "forgotPasswordViewTitle":
             MessageLookupByLibrary.simpleMessage("استرجاع كلمة المرور المنسية"),
+        "gender": MessageLookupByLibrary.simpleMessage("النوع"),
         "history_empty_error":
             MessageLookupByLibrary.simpleMessage("لا يوجد بيانات"),
         "img_discarded": MessageLookupByLibrary.simpleMessage("تم حذف الصورة"),
@@ -87,7 +91,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "navbar_profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
         "navbar_settings": MessageLookupByLibrary.simpleMessage("الاعدادات"),
         "new_to_screye": MessageLookupByLibrary.simpleMessage("مستخدم جديد؟"),
+        "normal_mode_lbl": MessageLookupByLibrary.simpleMessage("عادى"),
         "not_anemic": MessageLookupByLibrary.simpleMessage("ليس لديك انيميا"),
+        "not_anemic_data": MessageLookupByLibrary.simpleMessage("صحي"),
         "passwordInputLabel":
             MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "passwordIsRequiredErrorText":
@@ -127,10 +133,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "taken_photo_upload":
             MessageLookupByLibrary.simpleMessage("ارفق صورة من الجهاز"),
         "themes": MessageLookupByLibrary.simpleMessage("المظاهر"),
-        "undefined": MessageLookupByLibrary.simpleMessage("غير محدد"),
+        "undefined": MessageLookupByLibrary.simpleMessage("غ/م"),
         "unknownError": MessageLookupByLibrary.simpleMessage("خطأ غير معروف"),
         "update_profile": MessageLookupByLibrary.simpleMessage("تحديث الملف"),
         "upload": MessageLookupByLibrary.simpleMessage("أرفاق"),
+        "upload_folder_error": MessageLookupByLibrary.simpleMessage(
+            "ارفع من ملف الصور المجزأة فقط"),
+        "uploading": MessageLookupByLibrary.simpleMessage("جارى الرفع"),
         "userNotFoundErrorText":
             MessageLookupByLibrary.simpleMessage("هذا الحساب غير موجود"),
         "white_theme": MessageLookupByLibrary.simpleMessage("وضع فاتح"),

@@ -21,7 +21,6 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accessDisabledErrorText": MessageLookupByLibrary.simpleMessage(
             "Access to this account has been temporarily disabled"),
@@ -33,6 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "already_user":
             MessageLookupByLibrary.simpleMessage("Already a ScrEye user? "),
         "anemic": MessageLookupByLibrary.simpleMessage("Anemic"),
+        "anemic_data": MessageLookupByLibrary.simpleMessage("Anemic"),
         "ar": MessageLookupByLibrary.simpleMessage("العربية"),
         "auth": MessageLookupByLibrary.simpleMessage("Verification"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -42,8 +42,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "camera": MessageLookupByLibrary.simpleMessage("Camera"),
         "capture": MessageLookupByLibrary.simpleMessage("Capture"),
         "capturing": MessageLookupByLibrary.simpleMessage("Capturing.."),
+        "case_lbl": MessageLookupByLibrary.simpleMessage("Case"),
         "choose_files": MessageLookupByLibrary.simpleMessage("Choose Files.."),
+        "choose_img": MessageLookupByLibrary.simpleMessage("Choose an image"),
         "collect_data": MessageLookupByLibrary.simpleMessage("Collect Data"),
+        "collect_mode_lbl": MessageLookupByLibrary.simpleMessage("Collect"),
         "colorblind_theme":
             MessageLookupByLibrary.simpleMessage("Color Blind Theme"),
         "confirmPasswordDoesNotMatchErrorText":
@@ -68,6 +71,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Forgot your password?"),
         "forgotPasswordViewTitle":
             MessageLookupByLibrary.simpleMessage("Forgotten password recovery"),
+        "gender": MessageLookupByLibrary.simpleMessage("Gender"),
         "history_empty_error":
             MessageLookupByLibrary.simpleMessage("No data found"),
         "img_discarded":
@@ -89,7 +93,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "navbar_settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "new_to_screye":
             MessageLookupByLibrary.simpleMessage("New to ScrEye? "),
+        "normal_mode_lbl": MessageLookupByLibrary.simpleMessage("Normal"),
         "not_anemic": MessageLookupByLibrary.simpleMessage("Not Anemic"),
+        "not_anemic_data": MessageLookupByLibrary.simpleMessage("Non Anemic"),
         "passwordInputLabel": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordIsRequiredErrorText":
             MessageLookupByLibrary.simpleMessage("Password is required"),
@@ -124,12 +130,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "taken_photo_upload":
             MessageLookupByLibrary.simpleMessage("Upload A Taken Image"),
         "themes": MessageLookupByLibrary.simpleMessage("Themes"),
-        "undefined": MessageLookupByLibrary.simpleMessage("undefined"),
+        "undefined": MessageLookupByLibrary.simpleMessage("N/A"),
         "unknownError":
             MessageLookupByLibrary.simpleMessage("An unknown error occurred"),
         "update_profile":
             MessageLookupByLibrary.simpleMessage("Update Profile"),
         "upload": MessageLookupByLibrary.simpleMessage("Upload"),
+        "upload_folder_error": MessageLookupByLibrary.simpleMessage(
+            "Upload form segmented folder only"),
+        "uploading": MessageLookupByLibrary.simpleMessage("Uploading.."),
         "userNotFoundErrorText":
             MessageLookupByLibrary.simpleMessage("This account does not exist"),
         "white_theme": MessageLookupByLibrary.simpleMessage("White Theme"),
