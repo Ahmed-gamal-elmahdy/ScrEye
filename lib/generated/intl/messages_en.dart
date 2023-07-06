@@ -42,8 +42,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "camera": MessageLookupByLibrary.simpleMessage("Camera"),
         "capture": MessageLookupByLibrary.simpleMessage("Capture"),
         "capturing": MessageLookupByLibrary.simpleMessage("Capturing.."),
+        "case_lbl": MessageLookupByLibrary.simpleMessage("Case"),
         "choose_files": MessageLookupByLibrary.simpleMessage("Choose Files.."),
+        "choose_img": MessageLookupByLibrary.simpleMessage("Choose an image"),
         "collect_data": MessageLookupByLibrary.simpleMessage("Collect Data"),
+        "collect_mode_lbl": MessageLookupByLibrary.simpleMessage("Collect"),
         "colorblind_theme":
             MessageLookupByLibrary.simpleMessage("Color Blind Theme"),
         "confirmPasswordDoesNotMatchErrorText":
@@ -68,6 +71,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Forgot your password?"),
         "forgotPasswordViewTitle":
             MessageLookupByLibrary.simpleMessage("Forgotten password recovery"),
+        "gender": MessageLookupByLibrary.simpleMessage("Gender"),
         "history_empty_error":
             MessageLookupByLibrary.simpleMessage("No data found"),
         "img_discarded":
@@ -89,6 +93,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "navbar_settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "new_to_screye":
             MessageLookupByLibrary.simpleMessage("New to ScrEye? "),
+        "normal_mode_lbl": MessageLookupByLibrary.simpleMessage("Normal"),
         "not_anemic": MessageLookupByLibrary.simpleMessage("Not Anemic"),
         "not_anemic_data": MessageLookupByLibrary.simpleMessage("Non Anemic"),
         "passwordInputLabel": MessageLookupByLibrary.simpleMessage("Password"),

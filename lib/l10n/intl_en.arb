@@ -82,4 +82,9 @@
   "not_anemic_data": "Non Anemic",
   "uploading": "Uploading..",
   "upload_folder_error": "Upload form segmented folder only",
+  "normal_mode_lbl": "Normal",
+  "collect_mode_lbl": "Collect",
+  "choose_img": "Choose an image",
+  "gender": "Gender",
+  "case_lbl": "Case"
 }

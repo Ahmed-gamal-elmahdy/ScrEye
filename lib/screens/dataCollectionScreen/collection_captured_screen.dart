@@ -56,7 +56,7 @@ class CollectionCapturedScreen extends StatelessWidget {
                       const SizedBox(height: 20),
                       Row(
                         children: [
-                          Text('Gender',style: TextStyle(fontSize: 17),),
+                          Text(S.of(context).gender,style: TextStyle(fontSize: 17),),
                         ],
                       ),
                       const SizedBox(height: 20),
@@ -90,7 +90,7 @@ class CollectionCapturedScreen extends StatelessWidget {
                       const SizedBox(height: 20),
                       Row(
                         children: [
-                          Text('Case', style: TextStyle(fontSize: 17)),
+                          Text(S.of(context).case_lbl, style: TextStyle(fontSize: 17)),
                         ],
                       ),
                       const SizedBox(height: 20),
@@ -122,7 +122,7 @@ class CollectionCapturedScreen extends StatelessWidget {
                               capturedCubit.updateAnemic(value);
                             },
                           ),
-                          Text('N/A'),
+                          Text(S.of(context).undefined),
                         ],
                       ),
                       const SizedBox(height: 20),

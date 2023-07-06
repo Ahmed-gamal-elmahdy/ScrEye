@@ -114,7 +114,7 @@ class _CameraViewState extends State<CameraView> {
                                     width: 3.0,
                                   ),
                                 ],
-                                labels: ['Normal', 'Collect'],
+                                labels: [S.of(context).normal_mode_lbl,S.of(context).collect_mode_lbl],
                                 onToggle: (index) {
                                   context.read<CameraCubit>().toggleMode(index!);
                                   setState(() {});

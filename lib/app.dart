@@ -73,7 +73,7 @@ class MyApp extends StatelessWidget {
                             locale: state.locale,
                             theme: state.theme,
                             debugShowCheckedModeBanner: false,
-                            initialRoute: '/result',
+                            initialRoute: '/',
                             routes: {
                               '/': (context) => HomeScreen(
                                   user: snapshot.data!,
@@ -84,7 +84,7 @@ class MyApp extends StatelessWidget {
                               '/capture': (context) =>
                                   const CollectionCameraScreen(),
                               '/upload': (context) =>   UploadScreen(),
-                              '/result': (context) =>  ResultScreen()
+                              '/result': (context) =>   ResultScreen()
                             },
                             builder: (context, child) {
                               return Directionality(

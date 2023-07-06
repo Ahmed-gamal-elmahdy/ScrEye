@@ -859,6 +859,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Normal`
+  String get normal_mode_lbl {
+    return Intl.message(
+      'Normal',
+      name: 'normal_mode_lbl',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Collect`
+  String get collect_mode_lbl {
+    return Intl.message(
+      'Collect',
+      name: 'collect_mode_lbl',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose an image`
+  String get choose_img {
+    return Intl.message(
+      'Choose an image',
+      name: 'choose_img',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gender`
+  String get gender {
+    return Intl.message(
+      'Gender',
+      name: 'gender',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Case`
+  String get case_lbl {
+    return Intl.message(
+      'Case',
+      name: 'case_lbl',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

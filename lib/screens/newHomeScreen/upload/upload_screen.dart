@@ -151,7 +151,7 @@ class UploadScreen extends StatelessWidget {
                             label: Text(
                               S
                                   .of(context)
-                                  .upload, /*style: TextStyle(color: Color(0xFFF05454),*/
+                                  .choose_img, /*style: TextStyle(color: Color(0xFFF05454),*/
                             ),
                             icon: const Icon(
                               Icons.upload, /*color: Color(0xFFF05454)*/
