@@ -75,7 +75,11 @@
   "colorblind_theme": "Color Blind Theme",
   "internet_error": "Not connected to internet",
   "collect_data": "Collect Data",
-  "undefined": "undefined",
+  "undefined": "N/A",
   "additional_info": "Additional Info",
-  "choose_files": "Choose Files.."
+  "choose_files": "Choose Files..",
+  "anemic_data": "Anemic",
+  "not_anemic_data": "Non Anemic",
+  "uploading": "Uploading..",
+  "upload_folder_error": "Upload form segmented folder only",
 }

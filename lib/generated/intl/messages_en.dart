@@ -21,7 +21,6 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accessDisabledErrorText": MessageLookupByLibrary.simpleMessage(
             "Access to this account has been temporarily disabled"),
@@ -33,6 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "already_user":
             MessageLookupByLibrary.simpleMessage("Already a ScrEye user? "),
         "anemic": MessageLookupByLibrary.simpleMessage("Anemic"),
+        "anemic_data": MessageLookupByLibrary.simpleMessage("Anemic"),
         "ar": MessageLookupByLibrary.simpleMessage("العربية"),
         "auth": MessageLookupByLibrary.simpleMessage("Verification"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -90,6 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "new_to_screye":
             MessageLookupByLibrary.simpleMessage("New to ScrEye? "),
         "not_anemic": MessageLookupByLibrary.simpleMessage("Not Anemic"),
+        "not_anemic_data": MessageLookupByLibrary.simpleMessage("Non Anemic"),
         "passwordInputLabel": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordIsRequiredErrorText":
             MessageLookupByLibrary.simpleMessage("Password is required"),
@@ -124,12 +125,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "taken_photo_upload":
             MessageLookupByLibrary.simpleMessage("Upload A Taken Image"),
         "themes": MessageLookupByLibrary.simpleMessage("Themes"),
-        "undefined": MessageLookupByLibrary.simpleMessage("undefined"),
+        "undefined": MessageLookupByLibrary.simpleMessage("N/A"),
         "unknownError":
             MessageLookupByLibrary.simpleMessage("An unknown error occurred"),
         "update_profile":
             MessageLookupByLibrary.simpleMessage("Update Profile"),
         "upload": MessageLookupByLibrary.simpleMessage("Upload"),
+        "upload_folder_error": MessageLookupByLibrary.simpleMessage(
+            "Upload form segmented folder only"),
+        "uploading": MessageLookupByLibrary.simpleMessage("Uploading.."),
         "userNotFoundErrorText":
             MessageLookupByLibrary.simpleMessage("This account does not exist"),
         "white_theme": MessageLookupByLibrary.simpleMessage("White Theme"),

@@ -21,7 +21,6 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accessDisabledErrorText": MessageLookupByLibrary.simpleMessage(
             "تم تعطيل الوصول إلى هذا الحساب مؤقتًا"),
@@ -32,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("محاذاة الشكل مع الملتحمة"),
         "already_user": MessageLookupByLibrary.simpleMessage("لديك حساب؟"),
         "anemic": MessageLookupByLibrary.simpleMessage("لديك انيميا"),
+        "anemic_data": MessageLookupByLibrary.simpleMessage("مصاب"),
         "ar": MessageLookupByLibrary.simpleMessage("العربية"),
         "auth": MessageLookupByLibrary.simpleMessage("التحقق"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -88,6 +88,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "navbar_settings": MessageLookupByLibrary.simpleMessage("الاعدادات"),
         "new_to_screye": MessageLookupByLibrary.simpleMessage("مستخدم جديد؟"),
         "not_anemic": MessageLookupByLibrary.simpleMessage("ليس لديك انيميا"),
+        "not_anemic_data": MessageLookupByLibrary.simpleMessage("صحي"),
         "passwordInputLabel":
             MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "passwordIsRequiredErrorText":
@@ -131,6 +132,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "unknownError": MessageLookupByLibrary.simpleMessage("خطأ غير معروف"),
         "update_profile": MessageLookupByLibrary.simpleMessage("تحديث الملف"),
         "upload": MessageLookupByLibrary.simpleMessage("أرفاق"),
+        "upload_folder_error": MessageLookupByLibrary.simpleMessage(
+            "ارفع من ملف الصور المجزأة فقط"),
+        "uploading": MessageLookupByLibrary.simpleMessage("جارى الرفع"),
         "userNotFoundErrorText":
             MessageLookupByLibrary.simpleMessage("هذا الحساب غير موجود"),
         "white_theme": MessageLookupByLibrary.simpleMessage("وضع فاتح"),

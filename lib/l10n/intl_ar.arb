@@ -77,5 +77,9 @@
   "collect_data": "جمع بيانات",
   "undefined": "غير محدد",
   "additional_info": "معلومات اضافية",
-  "choose_files": "اختيار ملفات.."
+  "choose_files": "اختيار ملفات..",
+  "anemic_data": "مصاب",
+  "not_anemic_data": "صحي",
+  "uploading": "جارى الرفع",
+  "upload_folder_error": "ارفع من ملف الصور المجزأة فقط"
 }

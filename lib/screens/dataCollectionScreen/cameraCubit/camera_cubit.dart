@@ -9,7 +9,8 @@ part 'camera_state.dart';
 
 class CameraCubit extends Cubit<CameraState> {
   CameraCubit() : super(CameraInitial());
-
+  bool _dataCollectionModeIsOn = false;
+  int _currentIndex=0;
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
 
@@ -26,9 +27,7 @@ class CameraCubit extends Cubit<CameraState> {
     const focusPoint = Offset(0.5, 0.5);
 
     _initializeControllerFuture = _controller.initialize();
-    //await _controller.setFocusPoint(focusPoint);
     _controller.setFlashMode(FlashMode.off);
-
     emit(CameraInitialized());
   }
 
@@ -67,15 +66,29 @@ class CameraCubit extends Cubit<CameraState> {
       await File(imagePath).copy(newFile.path);
       return newFile.path;
     } catch (e) {
-      print('Error copying image: $e');
+      debugPrint('Error copying image: $e');
       return null;
     }
   }
 
   Future<void> get initializeControllerFuture => _initializeControllerFuture;
-
+  int get    currentIndex=>_currentIndex;
   CameraController get controller => _controller;
+  bool get dataCollectionModeIsOn => _dataCollectionModeIsOn;
 
+  void toggleMode(int index){
+    if(index==_currentIndex){
+      return;
+    }
+    if(index==0){
+      _dataCollectionModeIsOn = false;
+
+    }
+    else{
+      _dataCollectionModeIsOn = true;
+    }
+    _currentIndex=index;
+  }
   @override
   Future<void> close() {
     _controller.dispose();
