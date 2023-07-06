@@ -1,5 +1,4 @@
 import 'package:camera/camera.dart';
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,6 +7,8 @@ import 'package:fluttertest/widgets/MyDrawer.dart';
 import 'package:fluttertest/widgets/custom_path.dart';
 import 'package:fluttertest/widgets/myBottomNavBar.dart';
 import 'package:toggle_switch/toggle_switch.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+
 import '../../generated/l10n.dart';
 import 'cameraCubit/camera_cubit.dart';
 import 'capturedCubit/captured_cubit.dart';
@@ -193,6 +194,7 @@ class _CameraViewState extends State<CameraView> {
                                   ],
                                 )
 
+
                               ],
                             ),
                           ),
@@ -201,7 +203,25 @@ class _CameraViewState extends State<CameraView> {
                     ),
                   );
                 } else {
-                  return const Center(child: CircularProgressIndicator());
+                  return Center(
+                      child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      LoadingAnimationWidget.threeArchedCircle(
+                          color: Theme.of(context).textTheme.headline5!.color!,
+                          size: 50),
+                      SizedBox(
+                        height: 4.h,
+                      ),
+                      Text(
+                        S.of(context).pls_wait,
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Theme.of(context).textTheme.subtitle1!.color!,
+                        ),
+                      ),
+                    ],
+                  ));
                 }
               },
             );

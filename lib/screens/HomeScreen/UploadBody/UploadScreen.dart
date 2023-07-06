@@ -70,6 +70,7 @@ class UploadScreen extends StatelessWidget {
                               if (!cubit.isOnline) {
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(SnackBar(
+                                  behavior: SnackBarBehavior.floating,
                                   backgroundColor: Colors.red,
                                   content: Text(S.of(context).internet_error),
                                 ));

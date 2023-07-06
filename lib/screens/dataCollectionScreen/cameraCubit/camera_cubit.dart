@@ -14,6 +14,7 @@ class CameraCubit extends Cubit<CameraState> {
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
 
+
   Future<void> initializeCamera() async {
     final cameras = await availableCameras();
     final camera = cameras.first;
@@ -30,6 +31,7 @@ class CameraCubit extends Cubit<CameraState> {
     _controller.setFlashMode(FlashMode.off);
     emit(CameraInitialized());
   }
+
 
   Future<void> setZoomLevel(double zoomLevel) async {
     if (!_controller.value.isInitialized) {
