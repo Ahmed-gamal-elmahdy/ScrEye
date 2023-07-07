@@ -169,9 +169,8 @@ class AppCubit extends Cubit<AppState> {
                     OutlinedButton.icon(
                       onPressed: () async {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          backgroundColor: Theme.of(context)
-                              .appBarTheme
-                              .backgroundColor!,
+                          backgroundColor:
+                              Theme.of(context).appBarTheme.backgroundColor!,
                           content: Text(S.of(context).loading),
                         ));
 

@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart' hide ThemeMode;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,16 +13,17 @@ import '../../../generated/l10n.dart';
 import '../../../themes/MyTheme.dart';
 
 class UploadScreen extends StatelessWidget {
-   String imagePath;
+  String imagePath;
 
-    UploadScreen({Key? key, this.imagePath = ''}) : super(key: key);
+  UploadScreen({Key? key, this.imagePath = ''}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final Map<String, dynamic>? arguments =
-    ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
-    final String? pathFromArguments  = arguments?['imagePath'];
-    if(pathFromArguments!=null){
-      imagePath=pathFromArguments;
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+    final String? pathFromArguments = arguments?['imagePath'];
+    if (pathFromArguments != null) {
+      imagePath = pathFromArguments;
     }
     return BlocProvider(
       create: (context) =>
@@ -45,7 +45,7 @@ class UploadScreen extends StatelessWidget {
             appBar: AppBar(
               title: Text(S.of(context).upload),
             ),
-            bottomNavigationBar: myBottomNavBar(context,0),
+            bottomNavigationBar: myBottomNavBar(context, 0),
             drawer: myDrawer(context),
             body: Center(
               child: state is UploadImageLoaded
@@ -170,5 +170,3 @@ class UploadScreen extends StatelessWidget {
     );
   }
 }
-
-

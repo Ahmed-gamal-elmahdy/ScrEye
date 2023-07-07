@@ -19,10 +19,11 @@ class UploadCubit extends Cubit<UploadState> {
   final String _apiHeroku = "https://screye.herokuapp.com/api/v3/";
   final String _apiAzure =
       "https://screyeapi.azurewebsites.net/api/screyeapiv1/";
+
   UploadCubit({String? imagePath})
       : super(imagePath != null
-      ? UploadImageLoaded(imagePath)
-      : const UploadInitial());
+            ? UploadImageLoaded(imagePath)
+            : const UploadInitial());
 
   bool get uploadInProgress => _uploadInProgress;
 
@@ -51,7 +52,6 @@ class UploadCubit extends Cubit<UploadState> {
         final downloadUrl = await getDownloadUrl(snapshot);
         final token = parseTokenFromUrl(downloadUrl);
         debugPrint('url= $downloadUrl');
-
       } catch (e) {
         debugPrint(e.toString());
       }
@@ -59,31 +59,27 @@ class UploadCubit extends Cubit<UploadState> {
     }
   }
 
+  Future<dynamic> uploadFileToFirebase(File file, String name) async {
+    return await _firebaseStorage
+        .ref()
+        .child('images/${FirebaseAuth.instance.currentUser?.uid}/$name')
+        .putFile(file);
+  }
 
+  Future<String> getDownloadUrl(dynamic snapshot) async {
+    return await snapshot.ref.getDownloadURL();
+  }
 
-Future<dynamic> uploadFileToFirebase(File file, String name) async {
-  return await _firebaseStorage
-      .ref()
-      .child('images/${FirebaseAuth.instance.currentUser?.uid}/$name')
-      .putFile(file);
-}
-
-Future<String> getDownloadUrl(dynamic snapshot) async {
-  return await snapshot.ref.getDownloadURL();
-}
-
-String parseTokenFromUrl(String downloadUrl) {
-  const startWord = "token=";
-  final startIndex = downloadUrl.indexOf(startWord);
-  final endIndex = downloadUrl.length;
-  return downloadUrl.substring(startIndex + startWord.length, endIndex);
-}
+  String parseTokenFromUrl(String downloadUrl) {
+    const startWord = "token=";
+    final startIndex = downloadUrl.indexOf(startWord);
+    final endIndex = downloadUrl.length;
+    return downloadUrl.substring(startIndex + startWord.length, endIndex);
+  }
 
   void cancelUpload() {
-
-      _uploadInProgress = false;
-      _imagePath = null;
-      emit(const UploadInitial());
-
+    _uploadInProgress = false;
+    _imagePath = null;
+    emit(const UploadInitial());
   }
 }

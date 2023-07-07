@@ -6,8 +6,8 @@ import 'package:fluttertest/screens/dataCollectionScreen/collection_captured_scr
 import 'package:fluttertest/widgets/MyDrawer.dart';
 import 'package:fluttertest/widgets/custom_path.dart';
 import 'package:fluttertest/widgets/myBottomNavBar.dart';
-import 'package:toggle_switch/toggle_switch.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 import '../../generated/l10n.dart';
 import 'cameraCubit/camera_cubit.dart';
@@ -83,7 +83,6 @@ class _CameraViewState extends State<CameraView> {
                     onDoubleTap: _onDoubleTap,
                     child: Stack(
                       children: [
-
                         Center(
                           child: CameraPreview(
                               context.read<CameraCubit>().controller),
@@ -97,7 +96,8 @@ class _CameraViewState extends State<CameraView> {
                                 child: ToggleSwitch(
                                   cornerRadius: 20.0,
                                   minWidth: 200.w,
-                                  initialLabelIndex: context.read<CameraCubit>().currentIndex,
+                                  initialLabelIndex:
+                                      context.read<CameraCubit>().currentIndex,
                                   animate: true,
                                   totalSwitches: 2,
                                   inactiveBgColor: Theme.of(context)
@@ -109,14 +109,18 @@ class _CameraViewState extends State<CameraView> {
                                       .bodyText2!
                                       .color!,
                                   activeBgColors: [
-                                    [Theme.of(context)
-                                        .textTheme
-                                        .headline2!
-                                        .color!],
-                                    [Theme.of(context)
-                                        .textTheme
-                                        .headline2!
-                                        .color!]
+                                    [
+                                      Theme.of(context)
+                                          .textTheme
+                                          .headline2!
+                                          .color!
+                                    ],
+                                    [
+                                      Theme.of(context)
+                                          .textTheme
+                                          .headline2!
+                                          .color!
+                                    ]
                                   ],
                                   icons: const [
                                     Icons.search,
@@ -138,15 +142,23 @@ class _CameraViewState extends State<CameraView> {
                                       width: 1.0,
                                     ),
                                   ],
-                                  labels: [S.of(context).test_mode_lbl,S.of(context).collection_mode_lbl],
+                                  labels: [
+                                    S.of(context).test_mode_lbl,
+                                    S.of(context).collection_mode_lbl
+                                  ],
                                   onToggle: (index) {
-                                    context.read<CameraCubit>().toggleMode(index!);
+                                    context
+                                        .read<CameraCubit>()
+                                        .toggleMode(index!);
                                     setState(() {});
                                   },
                                 ),
                               ),
                             ),
-                            context.read<CameraCubit>().dataCollectionModeIsOn?Container():Guideline_Widget(width: MediaQuery.of(context).size.width.w),
+                            context.read<CameraCubit>().dataCollectionModeIsOn
+                                ? Container()
+                                : Guideline_Widget(
+                                    width: MediaQuery.of(context).size.width.w),
                           ],
                         ),
                         Align(
@@ -165,7 +177,8 @@ class _CameraViewState extends State<CameraView> {
                                 ),
                                 const SizedBox(height: 16.0),
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
                                   children: [
                                     Slider.adaptive(
                                       value: _calculateSliderValue(_zoomLevel),
@@ -181,45 +194,51 @@ class _CameraViewState extends State<CameraView> {
                                           .color!,
                                       onChanged: _onSliderChanged,
                                     ),
-                                    OutlinedButton(onPressed: () async {
-                                      String? imagePath = await context
-                                          .read<CameraCubit>()
-                                          .takePicture();
-                                      context.read<CameraCubit>().dataCollectionModeIsOn?Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              CollectionCapturedScreen(
-                                                capturedCubit: CapturedCubit(),
-                                                imagePath: imagePath,
-                                              ),
-                                        ),
-                                      ):Navigator.popAndPushNamed(
-                                        context,
-                                        "/upload",
-                                        arguments: {'imagePath': imagePath},
-                                      );
-
-
-                                    }, style: ButtonStyle(
-                                        backgroundColor: Theme.of(context)
-                                            .outlinedButtonTheme
-                                            .style
-                                            ?.shadowColor),child: Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.center,
-                                      children: [
-                                        Icon(Icons.camera),
-                                        SizedBox(
-                                          width: 10.h,
-                                        ),
-                                        Text(S.of(context).capture)
-                                      ],
-                                    ))
+                                    OutlinedButton(
+                                        onPressed: () async {
+                                          String? imagePath = await context
+                                              .read<CameraCubit>()
+                                              .takePicture();
+                                          context
+                                                  .read<CameraCubit>()
+                                                  .dataCollectionModeIsOn
+                                              ? Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        CollectionCapturedScreen(
+                                                      capturedCubit:
+                                                          CapturedCubit(),
+                                                      imagePath: imagePath,
+                                                    ),
+                                                  ),
+                                                )
+                                              : Navigator.popAndPushNamed(
+                                                  context,
+                                                  "/upload",
+                                                  arguments: {
+                                                    'imagePath': imagePath
+                                                  },
+                                                );
+                                        },
+                                        style: ButtonStyle(
+                                            backgroundColor: Theme.of(context)
+                                                .outlinedButtonTheme
+                                                .style
+                                                ?.shadowColor),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Icon(Icons.camera),
+                                            SizedBox(
+                                              width: 10.h,
+                                            ),
+                                            Text(S.of(context).capture)
+                                          ],
+                                        ))
                                   ],
                                 )
-
-
                               ],
                             ),
                           ),
@@ -255,7 +274,6 @@ class _CameraViewState extends State<CameraView> {
           }
         },
       ),
-
     );
   }
 

@@ -58,7 +58,10 @@ class CollectionCapturedScreen extends StatelessWidget {
                       const SizedBox(height: 20),
                       Row(
                         children: [
-                          Text(S.of(context).gender,style: TextStyle(fontSize: 17),),
+                          Text(
+                            S.of(context).gender,
+                            style: TextStyle(fontSize: 17),
+                          ),
                         ],
                       ),
                       const SizedBox(height: 20),
@@ -83,16 +86,28 @@ class CollectionCapturedScreen extends StatelessWidget {
                           ),
                           Text(S.of(context).female),
                           const SizedBox(width: 20),
-                          Radio(value: null, groupValue: null, onChanged: (Null? value) { },
-                            activeColor: Theme.of(context).textTheme.headline3!.color!,
+                          Radio(
+                            value: null,
+                            groupValue: null,
+                            onChanged: (Null? value) {},
+                            activeColor:
+                                Theme.of(context).textTheme.headline3!.color!,
                           ),
-                          Text("empty",style: TextStyle(color: Theme.of(context).textTheme.headline3!.color!),),
+                          Text(
+                            "empty",
+                            style: TextStyle(
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .headline3!
+                                    .color!),
+                          ),
                         ],
                       ),
                       const SizedBox(height: 20),
                       Row(
                         children: [
-                          Text(S.of(context).case_lbl, style: TextStyle(fontSize: 17)),
+                          Text(S.of(context).case_lbl,
+                              style: TextStyle(fontSize: 17)),
                         ],
                       ),
                       const SizedBox(height: 20),

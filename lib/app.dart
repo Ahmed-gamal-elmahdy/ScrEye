@@ -83,8 +83,8 @@ class MyApp extends StatelessWidget {
                               '/settings': (context) => const SettingsScreen(),
                               '/capture': (context) =>
                                   const CollectionCameraScreen(),
-                              '/upload': (context) =>   UploadScreen(),
-                              '/result': (context) =>   ResultScreen()
+                              '/upload': (context) => UploadScreen(),
+                              '/result': (context) => ResultScreen()
                             },
                             builder: (context, child) {
                               return Directionality(

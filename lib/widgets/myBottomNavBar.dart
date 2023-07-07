@@ -1,21 +1,12 @@
-
-
-
-
-
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../generated/l10n.dart';
 
-
-
-
 Widget myBottomNavBar(BuildContext context, int selectedIndex) {
   return ConvexAppBar(
-    backgroundColor:
-    Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+    backgroundColor: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
     color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
     activeColor: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
     curveSize: 90,
@@ -26,8 +17,7 @@ Widget myBottomNavBar(BuildContext context, int selectedIndex) {
         title: S.of(context).upload,
         icon: Icon(
           Icons.upload,
-          color:
-          Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+          color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
         ),
         activeIcon: Icon(
           Icons.upload,
@@ -45,8 +35,7 @@ Widget myBottomNavBar(BuildContext context, int selectedIndex) {
         title: S.of(context).result,
         icon: Icon(
           Icons.insert_drive_file_outlined,
-          color:
-          Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+          color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
         ),
         activeIcon: Icon(
           Icons.insert_drive_file_outlined,

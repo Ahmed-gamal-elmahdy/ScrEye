@@ -10,10 +10,9 @@ part 'camera_state.dart';
 class CameraCubit extends Cubit<CameraState> {
   CameraCubit() : super(CameraInitial());
   bool _dataCollectionModeIsOn = false;
-  int _currentIndex=0;
+  int _currentIndex = 0;
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
-
 
   Future<void> initializeCamera() async {
     final cameras = await availableCameras();
@@ -31,7 +30,6 @@ class CameraCubit extends Cubit<CameraState> {
     _controller.setFlashMode(FlashMode.off);
     emit(CameraInitialized());
   }
-
 
   Future<void> setZoomLevel(double zoomLevel) async {
     if (!_controller.value.isInitialized) {
@@ -74,23 +72,25 @@ class CameraCubit extends Cubit<CameraState> {
   }
 
   Future<void> get initializeControllerFuture => _initializeControllerFuture;
-  int get    currentIndex=>_currentIndex;
+
+  int get currentIndex => _currentIndex;
+
   CameraController get controller => _controller;
+
   bool get dataCollectionModeIsOn => _dataCollectionModeIsOn;
 
-  void toggleMode(int index){
-    if(index==_currentIndex){
+  void toggleMode(int index) {
+    if (index == _currentIndex) {
       return;
     }
-    if(index==0){
+    if (index == 0) {
       _dataCollectionModeIsOn = false;
-
-    }
-    else{
+    } else {
       _dataCollectionModeIsOn = true;
     }
-    _currentIndex=index;
+    _currentIndex = index;
   }
+
   @override
   Future<void> close() {
     _controller.dispose();
