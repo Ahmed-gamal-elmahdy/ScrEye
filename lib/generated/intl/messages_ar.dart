@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accessDisabledErrorText": MessageLookupByLibrary.simpleMessage(
             "تم تعطيل الوصول إلى هذا الحساب مؤقتًا"),
+        "add_info": MessageLookupByLibrary.simpleMessage("ارفاق البيانات"),
         "additional_info":
             MessageLookupByLibrary.simpleMessage("معلومات اضافية"),
         "age": MessageLookupByLibrary.simpleMessage("العمر"),
@@ -45,7 +46,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "choose_files": MessageLookupByLibrary.simpleMessage("اختيار ملفات.."),
         "choose_img": MessageLookupByLibrary.simpleMessage("اختار صورة"),
         "collect_data": MessageLookupByLibrary.simpleMessage("جمع بيانات"),
-        "collect_mode_lbl": MessageLookupByLibrary.simpleMessage("تجميع"),
+        "collection_mode_lbl":
+            MessageLookupByLibrary.simpleMessage("نمط جمع بيانات"),
         "colorblind_theme":
             MessageLookupByLibrary.simpleMessage("وضع عمى الألوان"),
         "confirmPasswordDoesNotMatchErrorText":
@@ -91,7 +93,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "navbar_profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
         "navbar_settings": MessageLookupByLibrary.simpleMessage("الاعدادات"),
         "new_to_screye": MessageLookupByLibrary.simpleMessage("مستخدم جديد؟"),
-        "normal_mode_lbl": MessageLookupByLibrary.simpleMessage("عادى"),
         "not_anemic": MessageLookupByLibrary.simpleMessage("ليس لديك انيميا"),
         "not_anemic_data": MessageLookupByLibrary.simpleMessage("صحي"),
         "passwordInputLabel":
@@ -132,6 +133,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "قم بعمل اختبار اولا لتظهر النتيجة"),
         "taken_photo_upload":
             MessageLookupByLibrary.simpleMessage("ارفق صورة من الجهاز"),
+        "test_mode_lbl": MessageLookupByLibrary.simpleMessage("النمط العادى"),
         "themes": MessageLookupByLibrary.simpleMessage("المظاهر"),
         "undefined": MessageLookupByLibrary.simpleMessage("غ/م"),
         "unknownError": MessageLookupByLibrary.simpleMessage("خطأ غير معروف"),

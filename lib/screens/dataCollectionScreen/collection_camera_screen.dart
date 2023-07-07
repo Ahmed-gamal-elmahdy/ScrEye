@@ -92,33 +92,58 @@ class _CameraViewState extends State<CameraView> {
                           children: [
                             Align(
                               alignment: Alignment.topCenter,
-                              child: ToggleSwitch(
-                                initialLabelIndex: context.read<CameraCubit>().currentIndex,
-                                animate: true,
-                                totalSwitches: 2,
-                                activeBorders: [
-                                  Border.all(
-                                    color: Colors.purple,
-                                    width: 3.0,
-                                  ),
-                                  Border.all(
-                                    color: Colors.yellow.shade700,
-                                    width: 3.0,
-                                  ),
-                                  Border.all(
-                                    color: Colors.deepOrangeAccent,
-                                    width: 3.0,
-                                  ),
-                                  Border.all(
-                                    color: Colors.blue.shade500,
-                                    width: 3.0,
-                                  ),
-                                ],
-                                labels: [S.of(context).normal_mode_lbl,S.of(context).collect_mode_lbl],
-                                onToggle: (index) {
-                                  context.read<CameraCubit>().toggleMode(index!);
-                                  setState(() {});
-                                },
+                              child: Directionality(
+                                textDirection: TextDirection.ltr,
+                                child: ToggleSwitch(
+                                  cornerRadius: 20.0,
+                                  minWidth: 200.w,
+                                  initialLabelIndex: context.read<CameraCubit>().currentIndex,
+                                  animate: true,
+                                  totalSwitches: 2,
+                                  inactiveBgColor: Theme.of(context)
+                                      .textTheme
+                                      .headline3!
+                                      .color!,
+                                  inactiveFgColor: Theme.of(context)
+                                      .textTheme
+                                      .bodyText2!
+                                      .color!,
+                                  activeBgColors: [
+                                    [Theme.of(context)
+                                        .textTheme
+                                        .headline2!
+                                        .color!],
+                                    [Theme.of(context)
+                                        .textTheme
+                                        .headline2!
+                                        .color!]
+                                  ],
+                                  icons: const [
+                                    Icons.search,
+                                    Icons.text_snippet_rounded,
+                                  ],
+                                  activeBorders: [
+                                    Border.all(
+                                      color: Theme.of(context)
+                                          .textTheme
+                                          .headline5!
+                                          .color!,
+                                      width: 1.0,
+                                    ),
+                                    Border.all(
+                                      color: Theme.of(context)
+                                          .textTheme
+                                          .headline5!
+                                          .color!,
+                                      width: 1.0,
+                                    ),
+                                  ],
+                                  labels: [S.of(context).test_mode_lbl,S.of(context).collection_mode_lbl],
+                                  onToggle: (index) {
+                                    context.read<CameraCubit>().toggleMode(index!);
+                                    setState(() {});
+                                  },
+                                ),
                               ),
                             ),
                             context.read<CameraCubit>().dataCollectionModeIsOn?Container():Guideline_Widget(width: MediaQuery.of(context).size.width.w),

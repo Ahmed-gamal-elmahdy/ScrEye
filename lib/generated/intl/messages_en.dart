@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accessDisabledErrorText": MessageLookupByLibrary.simpleMessage(
             "Access to this account has been temporarily disabled"),
+        "add_info": MessageLookupByLibrary.simpleMessage("Add info"),
         "additional_info":
             MessageLookupByLibrary.simpleMessage("Additional Info"),
         "age": MessageLookupByLibrary.simpleMessage("Age"),
@@ -46,7 +47,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "choose_files": MessageLookupByLibrary.simpleMessage("Choose Files.."),
         "choose_img": MessageLookupByLibrary.simpleMessage("Choose an image"),
         "collect_data": MessageLookupByLibrary.simpleMessage("Collect Data"),
-        "collect_mode_lbl": MessageLookupByLibrary.simpleMessage("Collect"),
+        "collection_mode_lbl":
+            MessageLookupByLibrary.simpleMessage("Collection"),
         "colorblind_theme":
             MessageLookupByLibrary.simpleMessage("Color Blind Theme"),
         "confirmPasswordDoesNotMatchErrorText":
@@ -93,7 +95,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "navbar_settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "new_to_screye":
             MessageLookupByLibrary.simpleMessage("New to ScrEye? "),
-        "normal_mode_lbl": MessageLookupByLibrary.simpleMessage("Normal"),
         "not_anemic": MessageLookupByLibrary.simpleMessage("Not Anemic"),
         "not_anemic_data": MessageLookupByLibrary.simpleMessage("Non Anemic"),
         "passwordInputLabel": MessageLookupByLibrary.simpleMessage("Password"),
@@ -129,6 +130,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Take a test first to see your result!"),
         "taken_photo_upload":
             MessageLookupByLibrary.simpleMessage("Upload A Taken Image"),
+        "test_mode_lbl": MessageLookupByLibrary.simpleMessage("Test Mode"),
         "themes": MessageLookupByLibrary.simpleMessage("Themes"),
         "undefined": MessageLookupByLibrary.simpleMessage("N/A"),
         "unknownError":

@@ -19,7 +19,9 @@ class CollectionCapturedScreen extends StatelessWidget {
     return BlocProvider.value(
       value: capturedCubit,
       child: Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          title: Text(S.of(context).add_info),
+        ),
         body: Padding(
           padding: const EdgeInsets.all(10.0),
           child: SingleChildScrollView(

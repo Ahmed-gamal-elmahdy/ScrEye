@@ -76,13 +76,13 @@ class UploadScreen extends StatelessWidget {
                                       LoadingAnimationWidget.threeArchedCircle(
                                           color: Theme.of(context)
                                               .textTheme
-                                              .subtitle2!
+                                              .headline5!
                                               .color!,
                                           size: 20),
                                       SizedBox(
                                         width: 10.h,
                                       ),
-                                      Text(S.of(context).loading)
+                                      Text(S.of(context).uploading)
                                     ],
                                   ),
                                 ),

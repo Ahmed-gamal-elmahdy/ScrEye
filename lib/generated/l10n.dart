@@ -860,21 +860,21 @@ class S {
     );
   }
 
-  /// `Normal`
-  String get normal_mode_lbl {
+  /// `Test Mode`
+  String get test_mode_lbl {
     return Intl.message(
-      'Normal',
-      name: 'normal_mode_lbl',
+      'Test Mode',
+      name: 'test_mode_lbl',
       desc: '',
       args: [],
     );
   }
 
-  /// `Collect`
-  String get collect_mode_lbl {
+  /// `Collection`
+  String get collection_mode_lbl {
     return Intl.message(
-      'Collect',
-      name: 'collect_mode_lbl',
+      'Collection',
+      name: 'collection_mode_lbl',
       desc: '',
       args: [],
     );
@@ -905,6 +905,16 @@ class S {
     return Intl.message(
       'Case',
       name: 'case_lbl',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add info`
+  String get add_info {
+    return Intl.message(
+      'Add info',
+      name: 'add_info',
       desc: '',
       args: [],
     );

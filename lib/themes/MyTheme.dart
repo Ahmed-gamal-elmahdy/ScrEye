@@ -233,6 +233,7 @@ class MyTheme {
         bodyText2: TextStyle(color: primary),
         headline6: TextStyle(color: primary),
         headline3: TextStyle(color: tertiaryVariant1),
+        headline2: TextStyle(color: primary),
         headline1: TextStyle(color: primary),
         headline5: TextStyle(color: secondary),
         subtitle1: TextStyle(color: primaryVariant1),

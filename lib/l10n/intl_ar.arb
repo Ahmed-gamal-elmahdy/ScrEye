@@ -82,9 +82,10 @@
   "not_anemic_data": "صحي",
   "uploading": "جارى الرفع",
   "upload_folder_error": "ارفع من ملف الصور المجزأة فقط",
-  "normal_mode_lbl": "عادى",
-  "collect_mode_lbl": "تجميع",
+  "test_mode_lbl": "النمط العادى",
+  "collection_mode_lbl": "نمط جمع بيانات",
   "choose_img": "اختار صورة",
   "gender": "النوع",
-  "case_lbl": "الحالة"
+  "case_lbl": "الحالة",
+  "add_info": "ارفاق البيانات"
 }
