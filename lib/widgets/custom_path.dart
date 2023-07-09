@@ -46,14 +46,6 @@ class Guideline_Painter extends CustomPainter {
 
     Path path0 = clipPath(width: size.width, height: size.height);
     canvas.drawPath(path0, paint0);
-
-    // Paint paint1 = Paint()
-    //   ..color = const Color.fromARGB(255, 33, 150, 243)
-    //   ..style = PaintingStyle.stroke
-    //   ..strokeWidth = 1;
-    //
-    // Path path1 = circlePath(width: size.width, height: size.height);
-    // canvas.drawPath(path1, paint1);
   }
 
   @override
@@ -64,7 +56,7 @@ class Guideline_Painter extends CustomPainter {
 
 Widget Guideline_Widget({required double width}) {
   return CustomPaint(
-    size: Size(width, (width * 0.67).toDouble()),
+    size: Size(360, (360 * 0.67).toDouble()),
     painter: Guideline_Painter(),
   );
 }

@@ -21,6 +21,7 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
+
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accessDisabledErrorText": MessageLookupByLibrary.simpleMessage(
             "Access to this account has been temporarily disabled"),
@@ -48,7 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "choose_img": MessageLookupByLibrary.simpleMessage("Choose an image"),
         "collect_data": MessageLookupByLibrary.simpleMessage("Collect Data"),
         "collection_mode_lbl":
-            MessageLookupByLibrary.simpleMessage("Collection"),
+            MessageLookupByLibrary.simpleMessage("Collection Mode"),
         "colorblind_theme":
             MessageLookupByLibrary.simpleMessage("Color Blind Theme"),
         "confirmPasswordDoesNotMatchErrorText":

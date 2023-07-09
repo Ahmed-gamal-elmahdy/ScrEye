@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertest/cubit/app_cubit.dart';
 import 'package:fluttertest/widgets/custom_path.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:screenshot/screenshot.dart';
 
@@ -98,6 +97,7 @@ class _CameraScreenState extends State<CameraScreen> {
                                       cubit.loading();
                                       XFile picture =
                                           await cubit.controller.takePicture();
+
                                       screenshotController
                                           .captureFromWidget(Center(
                                         child: ClipPath(

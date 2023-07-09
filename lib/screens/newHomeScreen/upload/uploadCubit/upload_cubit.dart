@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -19,6 +20,7 @@ class UploadCubit extends Cubit<UploadState> {
   final String _apiHeroku = "https://screye.herokuapp.com/api/v3/";
   final String _apiAzure =
       "https://screyeapi.azurewebsites.net/api/screyeapiv1/";
+  final User? _user = FirebaseAuth.instance.currentUser;
 
   UploadCubit({String? imagePath})
       : super(imagePath != null
@@ -35,9 +37,10 @@ class UploadCubit extends Cubit<UploadState> {
     }
   }
 
-  Future<void> uploadImage() async {
+  Future<void> uploadImage(context) async {
     if (state is UploadImageLoaded && !_uploadInProgress) {
       _uploadInProgress = true;
+      _imagePath = (state as UploadImageLoaded).imagePath;
       emit(UploadImageLoaded((state as UploadImageLoaded).imagePath));
       try {
         final tempDir = await getTemporaryDirectory();
@@ -52,17 +55,32 @@ class UploadCubit extends Cubit<UploadState> {
         final downloadUrl = await getDownloadUrl(snapshot);
         final token = parseTokenFromUrl(downloadUrl);
         debugPrint('url= $downloadUrl');
+        final result = await getResultAndUpdateDB(
+            name: name, token: token, url: downloadUrl);
+        if (_uploadInProgress) {
+          _uploadInProgress = false;
+          Navigator.popAndPushNamed(
+            context,
+            "/result",
+            arguments: {'result': result},
+          );
+        } else {
+          cancelUpload();
+        }
       } catch (e) {
         debugPrint(e.toString());
       }
-      cancelUpload();
     }
+  }
+
+  void _showResult(context, String result) {
+    if (_uploadInProgress && result != '') {}
   }
 
   Future<dynamic> uploadFileToFirebase(File file, String name) async {
     return await _firebaseStorage
         .ref()
-        .child('images/${FirebaseAuth.instance.currentUser?.uid}/$name')
+        .child('images/${_user?.uid}/$name')
         .putFile(file);
   }
 
@@ -77,9 +95,71 @@ class UploadCubit extends Cubit<UploadState> {
     return downloadUrl.substring(startIndex + startWord.length, endIndex);
   }
 
+  Future<String> getResultAndUpdateDB({
+    required String name,
+    required String token,
+    required String url,
+  }) async {
+    if ((state is UploadImageLoaded && _uploadInProgress)) {
+      try {
+        final res = await getApiRequest(name: name, token: token);
+        final now = DateTime.now().millisecondsSinceEpoch;
+        final imageData = {
+          'name': name,
+          'url': url,
+          'result': res,
+          'time': now,
+        };
+        await writeImageDataToDatabase(imageData, now.toString());
+        return res;
+      } catch (e) {
+        debugPrint(e.toString());
+        return 'failed';
+      }
+    }
+    return 'error';
+  }
+
+  Future<void> writeImageDataToDatabase(
+      Map<String, dynamic> imageData, String key) async {
+    await dbRef.child(_user!.uid).child("images").child(key).set(imageData);
+  }
+
+  Future<String> getApiRequest({
+    required String name,
+    required String token,
+  }) async {
+    final String url = buildUrl(
+      baseUrl: _apiHeroku,
+      imgname: name,
+      token: token,
+      uid: _user!.uid,
+    );
+    debugPrint("api url=:$url");
+    final dio = Dio();
+    if ((state is UploadImageLoaded && _uploadInProgress)) {
+      try {
+        final response = await dio.get(url);
+        debugPrint(response.data);
+        return response.data;
+      } on DioException catch (e) {
+        debugPrint(e.message);
+        rethrow;
+      }
+    }
+    return 'error';
+  }
+
+  String buildUrl({
+    required String baseUrl,
+    required String imgname,
+    required String token,
+    required String uid,
+  }) =>
+      "$baseUrl?id=$imgname&token=$token&uid=$uid";
+
   void cancelUpload() {
     _uploadInProgress = false;
-    _imagePath = null;
-    emit(const UploadInitial());
+    emit((UploadImageLoaded(_imagePath!)));
   }
 }

@@ -102,7 +102,7 @@ class UploadScreen extends StatelessWidget {
                                   Icons.upload, /*color: Color(0xFFF05454)*/
                                 ),
                                 onPressed: () {
-                                  uploadCubit.uploadImage();
+                                  uploadCubit.uploadImage(context);
                                 },
                               ),
                         OutlinedButton.icon(

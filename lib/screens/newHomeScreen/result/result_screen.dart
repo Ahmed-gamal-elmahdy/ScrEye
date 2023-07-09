@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide ThemeMode;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertest/widgets/MyDrawer.dart';
@@ -55,7 +54,7 @@ class ResultScreen extends StatelessWidget {
                         children: [
                           Text(
                             S.of(context).you_are,
-                            style: TextStyle(fontSize: 35),
+                            style: const TextStyle(fontSize: 35),
                           ),
                           Text(
                             res,
