@@ -52,7 +52,7 @@ class UploadScreen extends StatelessWidget {
                   ? Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
+                        SizedBox(
                           height: 300.h,
                           width: 300.w,
                           child: Image.file(
@@ -120,7 +120,9 @@ class UploadScreen extends StatelessWidget {
                             Icons.delete_forever, /*color: Color(0xFFF05454)*/
                           ),
                           onPressed: () {
-                            uploadCubit.cancelUpload();
+                            uploadInProgress
+                                ? uploadCubit.cancelUpload()
+                                : uploadCubit.discard();
                           },
                         )
                       ],

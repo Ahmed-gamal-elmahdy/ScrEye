@@ -30,7 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("معلومات اضافية"),
         "age": MessageLookupByLibrary.simpleMessage("العمر"),
         "align_clipper":
-            MessageLookupByLibrary.simpleMessage("محاذاة الشكل مع الملتحمة"),
+            MessageLookupByLibrary.simpleMessage("محاذاة مع الملتحمة"),
         "already_user": MessageLookupByLibrary.simpleMessage("لديك حساب؟"),
         "anemic": MessageLookupByLibrary.simpleMessage("لديك انيميا"),
         "anemic_data": MessageLookupByLibrary.simpleMessage("مصاب"),
@@ -62,6 +62,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("حفظ الاعدادات"),
         "dark_theme": MessageLookupByLibrary.simpleMessage("وضع داكن"),
         "discard": MessageLookupByLibrary.simpleMessage("حذف"),
+        "edit": MessageLookupByLibrary.simpleMessage("تعديل"),
         "emailInputLabel":
             MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
         "emailIsRequiredErrorText":
@@ -87,6 +88,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lang": MessageLookupByLibrary.simpleMessage("العربية"),
         "language": MessageLookupByLibrary.simpleMessage("اللغة"),
         "loading": MessageLookupByLibrary.simpleMessage("جارى التحميل"),
+        "login_progress":
+            MessageLookupByLibrary.simpleMessage("جارى تسجيل الدخول"),
         "male": MessageLookupByLibrary.simpleMessage("ذكر"),
         "name": MessageLookupByLibrary.simpleMessage("الاسم"),
         "navbar_history": MessageLookupByLibrary.simpleMessage("السجلات"),
@@ -117,6 +120,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "registerHintText":
             MessageLookupByLibrary.simpleMessage("ليس لديك حساب مسبقا؟"),
         "registerText": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
+        "register_progress":
+            MessageLookupByLibrary.simpleMessage("جارى التسجيل"),
         "resetPasswordButtonLabel":
             MessageLookupByLibrary.simpleMessage("إعادة تعيين كلمة المرور"),
         "result": MessageLookupByLibrary.simpleMessage("النتيجة"),

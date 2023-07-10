@@ -27,7 +27,7 @@ class RegistrationForm extends StatelessWidget {
                   children: [
                     Padding(
                       padding: EdgeInsets.all(8.w),
-                      child: Container(
+                      child: SizedBox(
                           height: MediaQuery.of(context).size.height * 0.25,
                           width: MediaQuery.of(context).size.width * 0.8,
                           child: Image.asset('assets/logo_2.png')),
@@ -35,10 +35,20 @@ class RegistrationForm extends StatelessWidget {
                     BlocBuilder<AuthenticationCubit, AuthenticationState>(
                       builder: (context, state) {
                         if (state is RegistrationLoading) {
-                          return LoadingAnimationWidget.threeArchedCircle(
-                              color:
-                                  Theme.of(context).textTheme.subtitle2!.color!,
-                              size: 40);
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                LoadingAnimationWidget.threeArchedCircle(
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .subtitle2!
+                                        .color!,
+                                    size: 40),
+                                Text(S.of(context).register_progress)
+                              ],
+                            ),
+                          );
                         } else if (state is AuthenticationFailure) {
                           return Text(
                             state.errorMessage,
@@ -134,7 +144,7 @@ class RegistrationForm extends StatelessWidget {
                         },
                       ),
                     ),
-                    Container(
+                    SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Padding(
                         padding:

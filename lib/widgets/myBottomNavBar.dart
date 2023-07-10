@@ -45,18 +45,20 @@ Widget myBottomNavBar(BuildContext context, int selectedIndex) {
     ],
     initialActiveIndex: selectedIndex,
     onTap: (int index) {
-      switch (index) {
-        case 0:
-          Navigator.popAndPushNamed(context, '/upload');
-          break;
-        case 1:
-          Navigator.popAndPushNamed(context, '/capture');
-          break;
-        case 2:
-          Navigator.popAndPushNamed(context, '/result');
-          break;
-        default:
-          throw Exception("Invalid tab index: $index");
+      if (index != selectedIndex) {
+        switch (index) {
+          case 0:
+            Navigator.popAndPushNamed(context, '/upload');
+            break;
+          case 1:
+            Navigator.popAndPushNamed(context, '/capture');
+            break;
+          case 2:
+            Navigator.popAndPushNamed(context, '/result');
+            break;
+          default:
+            throw Exception("Invalid tab index: $index");
+        }
       }
     },
     style: TabStyle.fixedCircle,

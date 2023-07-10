@@ -56,7 +56,8 @@ class CustomCropper extends StatelessWidget {
     return DefaultMaterialCroppableImageController(
       imageProvider: imageProvider,
       initialData: initialData,
-      cropShapeFn: starCropShapeFn,
+      cropShapeFn: aabbCropShapeFn,
+      allowedAspectRatios: const [CropAspectRatio(width: 4, height: 3)],
       enabledTransformations: const [
         Transformation.panAndScale,
         Transformation.resize
@@ -68,32 +69,47 @@ class CustomCropper extends StatelessWidget {
           builder: (context, overlayOpacityAnimation) {
             return Scaffold(
               appBar: AppBar(
+                title: Text(S.of(context).align_clipper),
                 actions: [
                   Builder(
-                    builder: (context) => TextButton(
-                      child: Text(S.of(context).save),
-                      onPressed: () async {
-                        CroppableImagePageAnimator.of(context)
-                            ?.setHeroesEnabled(true);
+                      builder: (context) => Container(
+                          padding: const EdgeInsets.all(10),
+                          child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(15)),
+                                border: Border.all(
+                                  color: Theme.of(context)
+                                      .appBarTheme
+                                      .iconTheme!
+                                      .color!,
+                                  width: 1,
+                                ),
+                              ),
+                              child: IconButton(
+                                icon: const Icon(Icons.save_alt),
+                                onPressed: () async {
+                                  CroppableImagePageAnimator.of(context)
+                                      ?.setHeroesEnabled(true);
 
-                        final result = await controller.crop();
+                                  final result = await controller.crop();
 
-                        if (onCropped != null) {
-                          await onCropped!(result);
-                        }
+                                  if (onCropped != null) {
+                                    await onCropped!(result);
+                                  }
 
-                        if (context.mounted) {
-                          Navigator.of(context).pop(result);
-                        }
-                      },
-                    ),
-                  ),
+                                  if (context.mounted) {
+                                    Navigator.of(context).pop(result);
+                                  }
+                                },
+                              )))),
                 ],
               ),
               body: Center(
                 child: Padding(
                   padding: const EdgeInsets.all(32.0),
                   child: AnimatedCroppableImageViewport(
+                    minBackgroundOpacity: 0.45,
                     controller: controller,
                     cropHandlesBuilder: (context) =>
                         MaterialImageCropperHandles(

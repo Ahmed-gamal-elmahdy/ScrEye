@@ -33,7 +33,7 @@
   "camera": "Camera",
   "result": "Result",
   "capture": "Capture",
-  "align_clipper": "Put Clipper on Conjunctiva",
+  "align_clipper": "Aligh with Conjunctiva",
   "result": "Result",
   "take_test_first": "Take a test first to see your result!",
   "navbar_home": "Home",
@@ -87,5 +87,8 @@
   "choose_img": "Choose an image",
   "gender": "Gender",
   "case_lbl": "Case",
-  "add_info": "Add info"
+  "add_info": "Add info",
+  "edit": "Edit",
+  "login_progress": "Signing in...",
+  "register_progress": "Registering..."
 }

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart' hide ThemeMode;
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -6,8 +7,8 @@ import '../cubit/AppSettingsCubit/app_settings_cubit.dart';
 import '../generated/l10n.dart';
 
 Drawer myDrawer(context) {
-  var settingCubit = BlocProvider.of<AppSettingsCubit>(context);
-  var bg = 'assets/logo_3_dark.png';
+  final settingCubit = BlocProvider.of<AppSettingsCubit>(context);
+  String bg = 'assets/logo_3_dark.png';
   if (settingCubit.state.themeMode == ThemeMode.whiteTheme) {
     bg = 'assets/logo_3.png';
   } else if (settingCubit.state.themeMode == ThemeMode.darkTheme) {
@@ -20,7 +21,7 @@ Drawer myDrawer(context) {
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.all(16),
-          child: Container(
+          child: SizedBox(
               height: MediaQuery.of(context).size.height * 0.16,
               width: MediaQuery.of(context).size.width * 0.16,
               child: Image.asset(bg)),
@@ -34,7 +35,7 @@ Drawer myDrawer(context) {
             ),
           ),
           child: ListTile(
-              leading: Icon(Icons.home),
+              leading: const Icon(Icons.home),
               title: Text(S.of(context).navbar_home),
               onTap: () {
                 Navigator.popAndPushNamed(context, '/');
@@ -49,7 +50,7 @@ Drawer myDrawer(context) {
             ),
           ),
           child: ListTile(
-              leading: Icon(Icons.person_sharp),
+              leading: const Icon(Icons.person_sharp),
               title: Text(S.of(context).navbar_profile),
               onTap: () {
                 Navigator.popAndPushNamed(context, '/profile');
@@ -64,7 +65,7 @@ Drawer myDrawer(context) {
             ),
           ),
           child: ListTile(
-              leading: Icon(Icons.photo_library_outlined),
+              leading: const Icon(Icons.photo_library_outlined),
               title: Text(S.of(context).navbar_history),
               onTap: () {
                 Navigator.popAndPushNamed(context, '/history');
@@ -79,7 +80,7 @@ Drawer myDrawer(context) {
             ),
           ),
           child: ListTile(
-              leading: Icon(Icons.settings),
+              leading: const Icon(Icons.settings),
               title: Text(S.of(context).navbar_settings),
               onTap: () {
                 Navigator.popAndPushNamed(context, '/settings');
@@ -94,10 +95,10 @@ Drawer myDrawer(context) {
             ),
           ),
           child: ListTile(
-              leading: Icon(Icons.text_snippet_rounded),
-              title: Text(S.of(context).collect_data),
+              leading: const Icon(Icons.logout_rounded),
+              title: Text(S.of(context).signOutButtonText),
               onTap: () {
-                Navigator.popAndPushNamed(context, '/capture');
+                FirebaseAuth.instance.signOut();
               }),
         ),
       ],

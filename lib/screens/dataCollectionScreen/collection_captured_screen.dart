@@ -41,7 +41,7 @@ class CollectionCapturedScreen extends StatelessWidget {
                         },
                         decoration: InputDecoration(
                           labelText: S.of(context).name,
-                          border: OutlineInputBorder(),
+                          border: const OutlineInputBorder(),
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -52,7 +52,7 @@ class CollectionCapturedScreen extends StatelessWidget {
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           labelText: S.of(context).age,
-                          border: OutlineInputBorder(),
+                          border: const OutlineInputBorder(),
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -60,7 +60,7 @@ class CollectionCapturedScreen extends StatelessWidget {
                         children: [
                           Text(
                             S.of(context).gender,
-                            style: TextStyle(fontSize: 17),
+                            style: const TextStyle(fontSize: 17),
                           ),
                         ],
                       ),
@@ -107,7 +107,7 @@ class CollectionCapturedScreen extends StatelessWidget {
                       Row(
                         children: [
                           Text(S.of(context).case_lbl,
-                              style: TextStyle(fontSize: 17)),
+                              style: const TextStyle(fontSize: 17)),
                         ],
                       ),
                       const SizedBox(height: 20),
@@ -150,7 +150,7 @@ class CollectionCapturedScreen extends StatelessWidget {
                         maxLines: 4,
                         decoration: InputDecoration(
                           labelText: S.of(context).additional_info,
-                          border: OutlineInputBorder(),
+                          border: const OutlineInputBorder(),
                         ),
                       ),
                       OutlinedButton(

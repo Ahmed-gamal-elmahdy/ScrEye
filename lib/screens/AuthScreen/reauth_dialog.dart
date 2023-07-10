@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertest/widgets/mySnackBar.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../generated/l10n.dart';
@@ -27,7 +28,7 @@ class _ReauthenticationDialogState extends State<ReauthenticationDialog> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(widget.message),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           TextField(
             controller: _passwordController,
             obscureText: true,
@@ -44,12 +45,6 @@ class _ReauthenticationDialogState extends State<ReauthenticationDialog> {
           onPressed: () => Navigator.of(context).pop(false),
         ),
         OutlinedButton(
-          child: _isLoading
-              ? Container(
-                  child: LoadingAnimationWidget.threeArchedCircle(
-                      color: Theme.of(context).textTheme.subtitle2!.color!,
-                      size: 20))
-              : Text(S.of(context).auth),
           onPressed: _isLoading
               ? null
               : () async {
@@ -65,18 +60,20 @@ class _ReauthenticationDialogState extends State<ReauthenticationDialog> {
                     await user.reauthenticateWithCredential(credential);
                     Navigator.of(context).pop(true);
                   } on FirebaseAuthException catch (e) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(S.of(context).authError),
-                        backgroundColor: Color(0xFFCE772F),
-                      ),
-                    );
+                    showSnackBar(
+                        context, S.of(context).authError, SnackBarType.error);
                   } finally {
                     setState(() {
                       _isLoading = false;
                     });
                   }
                 },
+          child: _isLoading
+              ? Container(
+                  child: LoadingAnimationWidget.threeArchedCircle(
+                      color: Theme.of(context).textTheme.subtitle2!.color!,
+                      size: 20))
+              : Text(S.of(context).auth),
         ),
       ],
     );

@@ -5,7 +5,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertest/screens/AuthGate.dart';
 import 'package:fluttertest/screens/HistoryScreen/HistoryScreen.dart';
-import 'package:fluttertest/screens/HomeScreen/HomeScreen.dart';
 import 'package:fluttertest/screens/ProfileScreen/ProfileScreen.dart';
 import 'package:fluttertest/screens/SettingsScreen/SettingsScreen.dart';
 import 'package:fluttertest/screens/dataCollectionScreen/collection_camera_screen.dart';
@@ -73,11 +72,9 @@ class MyApp extends StatelessWidget {
                             locale: state.locale,
                             theme: state.theme,
                             debugShowCheckedModeBanner: false,
-                            initialRoute: '/capture',
+                            initialRoute: '/',
                             routes: {
-                              '/': (context) => HomeScreen(
-                                  user: snapshot.data!,
-                                  appCubit: context.read<AppCubit>()),
+                              '/': (context) => UploadScreen(),
                               '/profile': (context) => ProfileScreen(),
                               '/history': (context) => const HistoryScreen(),
                               '/settings': (context) => const SettingsScreen(),

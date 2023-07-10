@@ -6,6 +6,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:fluttertest/widgets/mySnackBar.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../../widgets/CustomCropper.dart';
@@ -20,6 +21,7 @@ class CameraCubit extends Cubit<CameraState> {
   int _currentIndex = 0;
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
+  bool captureInProgress = false;
 
   Future<void> initializeCamera() async {
     final cameras = await availableCameras();
@@ -45,7 +47,7 @@ class CameraCubit extends Cubit<CameraState> {
     await _controller.setZoomLevel(zoomLevel);
   }
 
-  Future<String?> takePicture() async {
+  Future<String?> takePicture(context) async {
     if (!_controller.value.isInitialized) {
       return null;
     }
@@ -55,7 +57,7 @@ class CameraCubit extends Cubit<CameraState> {
       String? finalPath = await copyImage(picture.path);
       return finalPath;
     } catch (e) {
-      print('Error taking picture: $e');
+      showSnackBar(context, 'Error taking picture: $e', SnackBarType.error);
       return null;
     }
   }

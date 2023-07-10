@@ -13,7 +13,7 @@ class AppSettingsCubit extends Cubit<AppSettingsState> {
   AppSettingsCubit()
       : super(AppSettingsState(
             theme: MyTheme.whiteTheme(),
-            locale: Locale('en'),
+            locale: const Locale('en'),
             directionality: TextDirection.ltr,
             themeMode: ThemeMode.whiteTheme)) {
     _init();

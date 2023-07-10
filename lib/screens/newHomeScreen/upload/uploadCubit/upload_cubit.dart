@@ -162,4 +162,9 @@ class UploadCubit extends Cubit<UploadState> {
     _uploadInProgress = false;
     emit((UploadImageLoaded(_imagePath!)));
   }
+
+  void discard() {
+    _uploadInProgress = false;
+    emit(const UploadInitial());
+  }
 }

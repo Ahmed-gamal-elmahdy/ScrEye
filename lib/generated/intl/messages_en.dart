@@ -30,7 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Additional Info"),
         "age": MessageLookupByLibrary.simpleMessage("Age"),
         "align_clipper":
-            MessageLookupByLibrary.simpleMessage("Put Clipper on Conjunctiva"),
+            MessageLookupByLibrary.simpleMessage("Aligh with Conjunctiva"),
         "already_user":
             MessageLookupByLibrary.simpleMessage("Already a ScrEye user? "),
         "anemic": MessageLookupByLibrary.simpleMessage("Anemic"),
@@ -63,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Confirm settings"),
         "dark_theme": MessageLookupByLibrary.simpleMessage("Dark Theme"),
         "discard": MessageLookupByLibrary.simpleMessage("Discard"),
+        "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "emailInputLabel": MessageLookupByLibrary.simpleMessage("Email"),
         "emailIsRequiredErrorText":
             MessageLookupByLibrary.simpleMessage("Email is required"),
@@ -88,6 +89,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lang": MessageLookupByLibrary.simpleMessage("English"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "loading": MessageLookupByLibrary.simpleMessage("Loading..."),
+        "login_progress": MessageLookupByLibrary.simpleMessage("Signing in..."),
         "male": MessageLookupByLibrary.simpleMessage("Male"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "navbar_history": MessageLookupByLibrary.simpleMessage("History"),
@@ -117,6 +119,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "You don\'t already have an account?"),
         "registerText":
             MessageLookupByLibrary.simpleMessage("Create an account"),
+        "register_progress":
+            MessageLookupByLibrary.simpleMessage("Registering..."),
         "resetPasswordButtonLabel":
             MessageLookupByLibrary.simpleMessage("Reset Password"),
         "result": MessageLookupByLibrary.simpleMessage("Result"),

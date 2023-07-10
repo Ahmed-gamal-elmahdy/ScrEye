@@ -381,10 +381,10 @@ class S {
     );
   }
 
-  /// `Put Clipper on Conjunctiva`
+  /// `Aligh with Conjunctiva`
   String get align_clipper {
     return Intl.message(
-      'Put Clipper on Conjunctiva',
+      'Aligh with Conjunctiva',
       name: 'align_clipper',
       desc: '',
       args: [],
@@ -916,6 +916,36 @@ class S {
     return Intl.message(
       'Add info',
       name: 'add_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit`
+  String get edit {
+    return Intl.message(
+      'Edit',
+      name: 'edit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Signing in...`
+  String get login_progress {
+    return Intl.message(
+      'Signing in...',
+      name: 'login_progress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Registering...`
+  String get register_progress {
+    return Intl.message(
+      'Registering...',
+      name: 'register_progress',
       desc: '',
       args: [],
     );
