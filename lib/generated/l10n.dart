@@ -380,10 +380,10 @@ class S {
     );
   }
 
-  /// `Put Clipper on Conjunctiva`
+  /// `Aligh with Conjunctiva`
   String get align_clipper {
     return Intl.message(
-      'Put Clipper on Conjunctiva',
+      'Aligh with Conjunctiva',
       name: 'align_clipper',
       desc: '',
       args: [],
@@ -870,10 +870,10 @@ class S {
     );
   }
 
-  /// `Collection`
+  /// `Collection Mode`
   String get collection_mode_lbl {
     return Intl.message(
-      'Collection',
+      'Collection Mode',
       name: 'collection_mode_lbl',
       desc: '',
       args: [],
@@ -915,6 +915,56 @@ class S {
     return Intl.message(
       'Add info',
       name: 'add_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit`
+  String get edit {
+    return Intl.message(
+      'Edit',
+      name: 'edit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Signing in...`
+  String get login_progress {
+    return Intl.message(
+      'Signing in...',
+      name: 'login_progress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Registering...`
+  String get register_progress {
+    return Intl.message(
+      'Registering...',
+      name: 'register_progress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Segment`
+  String get segment {
+    return Intl.message(
+      'Segment',
+      name: 'segment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Test`
+  String get analyze {
+    return Intl.message(
+      'Test',
+      name: 'analyze',
       desc: '',
       args: [],
     );

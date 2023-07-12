@@ -20,6 +20,8 @@ class DefaultFirebaseOptions {
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
+      default:
+        break;
     }
 
     throw UnsupportedError(

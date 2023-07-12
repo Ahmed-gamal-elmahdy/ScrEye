@@ -33,7 +33,7 @@
   "camera": "كاميرا",
   "result": "النتيجة",
   "capture": "التقاط",
-  "align_clipper": "محاذاة الشكل مع الملتحمة",
+  "align_clipper": "محاذاة مع الملتحمة",
   "result": "النتيجة",
   "take_test_first": "قم بعمل اختبار اولا لتظهر النتيجة",
   "navbar_home": "الرئيسية",
@@ -87,5 +87,10 @@
   "choose_img": "اختار صورة",
   "gender": "النوع",
   "case_lbl": "الحالة",
-  "add_info": "ارفاق البيانات"
+  "add_info": "ارفاق البيانات",
+  "edit": "تعديل",
+  "login_progress": "جارى تسجيل الدخول",
+  "register_progress": "جارى التسجيل",
+  "segment": "استخراج الصوره",
+  "analyze": "تحليل"
 }

@@ -1,9 +1,17 @@
 import 'dart:io';
+import 'dart:typed_data';
+import 'dart:ui' as ui;
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:fluttertest/widgets/mySnackBar.dart';
 import 'package:path_provider/path_provider.dart';
+
+import '../../../widgets/CustomCropper.dart';
+import '../capturedCubit/captured_cubit.dart';
+import '../collection_captured_screen.dart';
 
 part 'camera_state.dart';
 
@@ -13,6 +21,7 @@ class CameraCubit extends Cubit<CameraState> {
   int _currentIndex = 0;
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
+  bool captureInProgress = false;
 
   Future<void> initializeCamera() async {
     final cameras = await availableCameras();
@@ -38,7 +47,7 @@ class CameraCubit extends Cubit<CameraState> {
     await _controller.setZoomLevel(zoomLevel);
   }
 
-  Future<String?> takePicture() async {
+  Future<String?> takePicture(context) async {
     if (!_controller.value.isInitialized) {
       return null;
     }
@@ -48,7 +57,7 @@ class CameraCubit extends Cubit<CameraState> {
       String? finalPath = await copyImage(picture.path);
       return finalPath;
     } catch (e) {
-      print('Error taking picture: $e');
+      showSnackBar(context, 'Error taking picture: $e', SnackBarType.error);
       return null;
     }
   }
@@ -89,6 +98,59 @@ class CameraCubit extends Cubit<CameraState> {
       _dataCollectionModeIsOn = true;
     }
     _currentIndex = index;
+  }
+
+  Future<void> router(context, String? imagePath) async {
+    if (imagePath == null) {
+      return;
+    }
+    if (_dataCollectionModeIsOn) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CollectionCapturedScreen(
+            capturedCubit: CapturedCubit(),
+            imagePath: imagePath,
+          ),
+        ),
+      );
+    } else {
+      final cropResult = await showCustomCropper(context, imagePath);
+
+      final cropPath = await _saveImage(cropResult!.uiImage);
+
+      Navigator.popAndPushNamed(
+        context,
+        "/upload",
+        arguments: {'imagePath': cropPath},
+      );
+    }
+  }
+
+  Future<String> _saveImage(ui.Image image) async {
+    final Uint8List bytes = await _exportImage(image);
+    final String dirPath = (await getTemporaryDirectory()).path;
+    final String filePath =
+        '$dirPath/${DateTime.now().millisecondsSinceEpoch}.jpg';
+    final File file = File(filePath);
+    await file.writeAsBytes(bytes);
+    return filePath;
+  }
+
+  Future<Uint8List> _exportImage(ui.Image image) async {
+    final ByteData? byteData =
+        await image.toByteData(format: ui.ImageByteFormat.png);
+    if (byteData == null) {
+      throw Exception('Failed to export image');
+    }
+    final Uint8List bytes = byteData.buffer.asUint8List();
+    final Uint8List compressedBytes =
+        await FlutterImageCompress.compressWithList(
+      bytes,
+      format: CompressFormat.jpeg,
+      quality: 80,
+    );
+    return compressedBytes;
   }
 
   @override

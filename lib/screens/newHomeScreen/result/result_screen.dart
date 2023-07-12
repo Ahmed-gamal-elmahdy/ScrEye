@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide ThemeMode;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertest/widgets/MyDrawer.dart';
@@ -20,7 +19,7 @@ class ResultScreen extends StatelessWidget {
     String res = S.of(context).anemic;
     Color color;
     var settingCubit = BlocProvider.of<AppSettingsCubit>(context);
-    var bg = 'assets/resultc_dark.png';
+    String bg = 'assets/resultc_dark.png';
     if (settingCubit.state.themeMode == ThemeMode.whiteTheme) {
       bg = 'assets/resultc.png';
     } else if (settingCubit.state.themeMode == ThemeMode.darkTheme) {
@@ -29,9 +28,9 @@ class ResultScreen extends StatelessWidget {
       bg = 'assets/resultc_cb.png';
     }
     if (resultFromArguments == 'Anemic') {
-      color = Color(0xFFCE772F);
+      color = const Color(0xFFCE772F);
     } else {
-      color = Color(0xFF29C469);
+      color = const Color(0xFF29C469);
       res = S.of(context).not_anemic;
     }
     return Scaffold(
@@ -55,7 +54,7 @@ class ResultScreen extends StatelessWidget {
                         children: [
                           Text(
                             S.of(context).you_are,
-                            style: TextStyle(fontSize: 35),
+                            style: const TextStyle(fontSize: 35),
                           ),
                           Text(
                             res,

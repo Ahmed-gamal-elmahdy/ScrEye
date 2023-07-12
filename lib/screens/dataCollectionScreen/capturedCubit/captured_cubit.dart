@@ -5,6 +5,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path/path.dart' as path;
 
@@ -81,7 +82,7 @@ class CapturedCubit extends Cubit<CapturedState> {
 
       emit(CapturedState.initial());
     } catch (error) {
-      print(error.toString());
+      debugPrint(error.toString());
       emit(state.copyWith(errorMessage: error.toString()));
     }
   }
@@ -111,7 +112,7 @@ class CapturedCubit extends Cubit<CapturedState> {
 
       emit(CapturedState.initial());
     } catch (error) {
-      print(error);
+      debugPrint(error.toString());
       emit(state.copyWith(errorMessage: error.toString()));
     }
   }
@@ -146,7 +147,7 @@ class CapturedCubit extends Cubit<CapturedState> {
       return downloadUrls;
     } catch (error) {
       // Handle any errors that may occur during the upload process
-      print('Error uploading files: $error');
+      debugPrint('Error uploading files: $error');
       return [];
     }
   }

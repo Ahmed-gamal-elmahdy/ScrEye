@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,14 +18,6 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       drawer: myDrawer(context),
       appBar: AppBar(
-        actions: [
-          IconButton(
-              tooltip: "Logout",
-              onPressed: () {
-                FirebaseAuth.instance.signOut();
-              },
-              icon: const Icon(Icons.power_settings_new_rounded))
-        ],
         title: Text(S.of(context).profile),
       ),
       body: BlocBuilder<ProfileCubit, ProfileState>(
@@ -42,34 +33,16 @@ class ProfileScreen extends StatelessWidget {
                     TextField(
                       decoration: InputDecoration(
                           labelText: S.of(context).name, hintText: state.name),
-                      onChanged: (value) => {_cubit.updateName(value)},
+                      onChanged: (value) => {_cubit.updateName(context, value)},
                     ),
-                    SizedBox(height: 16.0),
+                    const SizedBox(height: 16.0),
                     TextField(
                       decoration: InputDecoration(
                           labelText: S.of(context).emailInputLabel,
                           hintText: state.email),
-                      onChanged: (value) => _cubit.updateEmail(value),
+                      onChanged: (value) => _cubit.updateEmail(context, value),
                     ),
-                    SizedBox(height: 16.0),
-                    /*
-                    TextField(
-                      enabled: false,
-                      decoration: InputDecoration(
-                          labelText: S.of(context).passwordInputLabel,
-                          suffixIcon: IconButton(
-                              onPressed: () {
-                                _cubit.updateVisibility(!state.visibility);
-                              },
-                              icon: Icon(state.visibility
-                                  ? Icons.visibility_rounded
-                                  : Icons.visibility_off_rounded))),
-                      obscureText: state.visibility,
-                      onChanged: (value) => _cubit.updatePassword(value),
-                    ),
-                    SizedBox(height: 16.0),
-
-                     */
+                    const SizedBox(height: 16.0),
                     TextField(
                       keyboardType: TextInputType.number,
                       // show numeric keyboard
@@ -80,9 +53,10 @@ class ProfileScreen extends StatelessWidget {
                       decoration: InputDecoration(
                           labelText: S.of(context).age,
                           hintText: state.age.toString()),
-                      onChanged: (value) => _cubit.updateAge(int.parse(value)),
+                      onChanged: (value) =>
+                          _cubit.updateAge(context, int.parse(value)),
                     ),
-                    SizedBox(height: 16.0),
+                    const SizedBox(height: 16.0),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
@@ -90,19 +64,19 @@ class ProfileScreen extends StatelessWidget {
                           value: 'Male',
                           groupValue: state.gender,
                           onChanged: (value) =>
-                              _cubit.updateGender(value ?? ''),
+                              _cubit.updateGender(context, value ?? ''),
                         ),
                         Text(S.of(context).male),
                         Radio<String>(
                           value: 'Female',
                           groupValue: state.gender,
                           onChanged: (value) =>
-                              _cubit.updateGender(value ?? ''),
+                              _cubit.updateGender(context, value ?? ''),
                         ),
                         Text(S.of(context).female),
                       ],
                     ),
-                    SizedBox(height: 32.0),
+                    const SizedBox(height: 32.0),
                     OutlinedButton(
                       onPressed: () => {_cubit.askConfirmation(context)},
                       style: ButtonStyle(

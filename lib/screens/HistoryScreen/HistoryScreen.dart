@@ -1,11 +1,18 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertest/cubit/app_cubit.dart';
 import 'package:fluttertest/widgets/MyDrawer.dart';
+import 'package:fluttertest/widgets/mySnackBar.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 import 'package:intl/intl.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../../generated/l10n.dart';
 import '../../cubit/AppSettingsCubit/app_settings_cubit.dart';
@@ -20,11 +27,12 @@ class HistoryScreen extends StatelessWidget {
         // TODO: implement listener
       },
       builder: (context, state) {
-        var cubit = AppCubit.get(context);
+        //var cubit = AppCubit.get(context);
         var settingsCubit = BlocProvider.of<AppSettingsCubit>(context);
         settingsCubit.checkInternetConnectivity();
-        final DatabaseReference _database =
-            cubit.dbRef.child(cubit.user.uid).child("images");
+        final dbRef = FirebaseDatabase.instance.ref().child('users');
+        final DatabaseReference database =
+            dbRef.child(FirebaseAuth.instance.currentUser!.uid).child("images");
         if (!settingsCubit.isOnline) {
           return Scaffold(
             drawer: myDrawer(context),
@@ -46,7 +54,7 @@ class HistoryScreen extends StatelessWidget {
               ),
               body: Center(
                 child: FutureBuilder<DataSnapshot>(
-                  future: _database.get(),
+                  future: database.get(),
                   builder: (BuildContext context,
                       AsyncSnapshot<DataSnapshot> snapshot) {
                     if (snapshot.hasData) {
@@ -61,12 +69,12 @@ class HistoryScreen extends StatelessWidget {
                       List keys = data.keys.toList();
                       keys.sort((a, b) => b.compareTo(a));
                       return ListView.separated(
-                        padding: EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(5),
                         itemCount: data.length,
                         itemBuilder: (BuildContext context, int index) {
                           String key = keys[index];
                           var value = data[key];
-                          var color;
+                          Color color;
                           var res = S.of(context).anemic;
                           DateTime dateTime =
                               DateTime.fromMillisecondsSinceEpoch(
@@ -76,9 +84,9 @@ class HistoryScreen extends StatelessWidget {
                           String formattedTime =
                               DateFormat.jms().format(dateTime);
                           if (value["result"] == 'Anemic') {
-                            color = Color(0xFFCE772F);
+                            color = const Color(0xFFCE772F);
                           } else {
-                            color = Color(0xFF29C469);
+                            color = const Color(0xFF29C469);
                             res = S.of(context).not_anemic;
                           }
                           return ExpansionTile(
@@ -87,7 +95,7 @@ class HistoryScreen extends StatelessWidget {
                               res,
                               style: TextStyle(fontSize: 15.w, color: color),
                             ),
-                            leading: Container(
+                            leading: SizedBox(
                               width: 50.w,
                               height: 100.h,
                               child: Image.network(
@@ -108,7 +116,7 @@ class HistoryScreen extends StatelessWidget {
                                   Icons.download,
                                 ),
                                 onPressed: () {
-                                  cubit.saveImage(
+                                  _saveImage(
                                       value["name"], value["url"], context);
                                 },
                               )
@@ -153,5 +161,25 @@ class HistoryScreen extends StatelessWidget {
         }
       },
     );
+  }
+}
+
+Future<void> _saveImage(String imageName, String imageUrl, context) async {
+  try {
+    // Download the image
+    Response response = await Dio()
+        .get(imageUrl, options: Options(responseType: ResponseType.bytes));
+
+    // Get the local storage directory
+    Directory? appDocDir = await getApplicationDocumentsDirectory();
+
+    final name = imageName.replaceAll("-", "_");
+
+    File file = File('${appDocDir.path}/IMG_$name.jpg');
+    await file.writeAsBytes(response.data);
+    await GallerySaver.saveImage(file.path, albumName: "ScrEye");
+    showSnackBar(context, S.of(context).img_saved_later, SnackBarType.success);
+  } catch (e) {
+    showSnackBar(context, S.of(context).unknownError, SnackBarType.error);
   }
 }

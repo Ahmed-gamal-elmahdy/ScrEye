@@ -25,14 +25,12 @@ class LoginForm extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Container(
-                      child: Padding(
-                        padding: EdgeInsets.all(8.w),
-                        child: Container(
-                            height: MediaQuery.of(context).size.height * 0.25,
-                            width: MediaQuery.of(context).size.width,
-                            child: Image.asset('assets/logo_2.png')),
-                      ),
+                    Padding(
+                      padding: EdgeInsets.all(8.w),
+                      child: SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.25,
+                          width: MediaQuery.of(context).size.width,
+                          child: Image.asset('assets/logo_2.png')),
                     ),
                     BlocBuilder<AuthenticationCubit, AuthenticationState>(
                       builder: (context, state) {
@@ -47,7 +45,7 @@ class LoginForm extends StatelessWidget {
                                         .subtitle2!
                                         .color!,
                                     size: 40),
-                                Text('Signing In..')
+                                Text(S.of(context).login_progress)
                               ],
                             ),
                           );
@@ -135,44 +133,42 @@ class LoginForm extends StatelessWidget {
                         },
                       ),
                     ),
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(
-                                left: 10.w, right: 10.w, top: 5.h),
-                            child: RichText(
-                              text: TextSpan(
-                                text: S.of(context).new_to_screye,
-                                style: TextStyle(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: 10.w, right: 10.w, top: 5.h),
+                          child: RichText(
+                            text: TextSpan(
+                              text: S.of(context).new_to_screye,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .subtitle1!
+                                      .color!),
+                              children: [
+                                TextSpan(
+                                  text: S.of(context).registerText,
+                                  style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Theme.of(context)
                                         .textTheme
-                                        .subtitle1!
-                                        .color!),
-                                children: [
-                                  TextSpan(
-                                    text: S.of(context).registerText,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Theme.of(context)
-                                          .textTheme
-                                          .subtitle2!
-                                          .color!,
-                                    ),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        Navigator.of(context)
-                                            .popAndPushNamed('/register');
-                                      },
+                                        .subtitle2!
+                                        .color!,
                                   ),
-                                ],
-                              ),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      Navigator.of(context)
+                                          .popAndPushNamed('/register');
+                                    },
+                                ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                     Padding(
                       padding: EdgeInsets.all(0.w),
@@ -183,36 +179,33 @@ class LoginForm extends StatelessWidget {
                         child: Text(S.of(context).signInText),
                       ),
                     ),
-                    Container(
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            RichText(
-                              text: TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text:
-                                        S.of(context).resetPasswordButtonLabel,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Theme.of(context)
-                                          .textTheme
-                                          .subtitle2!
-                                          .color!,
-                                    ),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        //TODO forgot password
-                                        // Navigator.of(context).popAndPushNamed('/forgot-password');
-                                      },
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: S.of(context).resetPasswordButtonLabel,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .subtitle2!
+                                        .color!,
                                   ),
-                                ],
-                              ),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      //TODO forgot password
+                                      // Navigator.of(context).popAndPushNamed('/forgot-password');
+                                    },
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ],

@@ -64,8 +64,8 @@ class SettingsScreen extends StatelessWidget {
               },
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: Divider(
               thickness: 2,
             ),

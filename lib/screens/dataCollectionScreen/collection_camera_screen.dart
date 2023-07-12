@@ -2,16 +2,13 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertest/screens/dataCollectionScreen/collection_captured_screen.dart';
 import 'package:fluttertest/widgets/MyDrawer.dart';
-import 'package:fluttertest/widgets/custom_path.dart';
 import 'package:fluttertest/widgets/myBottomNavBar.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 import '../../generated/l10n.dart';
 import 'cameraCubit/camera_cubit.dart';
-import 'capturedCubit/captured_cubit.dart';
 
 class CollectionCameraScreen extends StatelessWidget {
   const CollectionCameraScreen({Key? key}) : super(key: key);
@@ -54,6 +51,7 @@ class _CameraViewState extends State<CameraView> {
   double _zoomLevel = 1.0;
   double _baseZoomLevel = 1.0;
   Offset _dragOffset = Offset.zero;
+  bool captureInProgress = false;
 
   @override
   void initState() {
@@ -155,10 +153,6 @@ class _CameraViewState extends State<CameraView> {
                                 ),
                               ),
                             ),
-                            context.read<CameraCubit>().dataCollectionModeIsOn
-                                ? Container()
-                                : Guideline_Widget(
-                                    width: MediaQuery.of(context).size.width.w),
                           ],
                         ),
                         Align(
@@ -194,49 +188,65 @@ class _CameraViewState extends State<CameraView> {
                                           .color!,
                                       onChanged: _onSliderChanged,
                                     ),
-                                    OutlinedButton(
-                                        onPressed: () async {
-                                          String? imagePath = await context
-                                              .read<CameraCubit>()
-                                              .takePicture();
-                                          context
-                                                  .read<CameraCubit>()
-                                                  .dataCollectionModeIsOn
-                                              ? Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        CollectionCapturedScreen(
-                                                      capturedCubit:
-                                                          CapturedCubit(),
-                                                      imagePath: imagePath,
-                                                    ),
-                                                  ),
-                                                )
-                                              : Navigator.popAndPushNamed(
-                                                  context,
-                                                  "/upload",
-                                                  arguments: {
-                                                    'imagePath': imagePath
-                                                  },
-                                                );
-                                        },
-                                        style: ButtonStyle(
-                                            backgroundColor: Theme.of(context)
-                                                .outlinedButtonTheme
-                                                .style
-                                                ?.shadowColor),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Icon(Icons.camera),
-                                            SizedBox(
-                                              width: 10.h,
+                                    captureInProgress
+                                        ? OutlinedButton(
+                                            style: ButtonStyle(
+                                                backgroundColor:
+                                                    Theme.of(context)
+                                                        .outlinedButtonTheme
+                                                        .style
+                                                        ?.shadowColor),
+                                            onPressed: null,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                LoadingAnimationWidget
+                                                    .threeArchedCircle(
+                                                        color: Theme.of(context)
+                                                            .textTheme
+                                                            .headline5!
+                                                            .color!,
+                                                        size: 10),
+                                                SizedBox(
+                                                  width: 10.h,
+                                                ),
+                                                Text(S.of(context).capturing)
+                                              ],
                                             ),
-                                            Text(S.of(context).capture)
-                                          ],
-                                        ))
+                                          )
+                                        : OutlinedButton(
+                                            onPressed: () async {
+                                              setState(() {
+                                                captureInProgress = true;
+                                              });
+                                              String? imagePath = await context
+                                                  .read<CameraCubit>()
+                                                  .takePicture(context);
+                                              setState(() {
+                                                captureInProgress = false;
+                                                context
+                                                    .read<CameraCubit>()
+                                                    .router(context, imagePath);
+                                              });
+                                            },
+                                            style: ButtonStyle(
+                                                backgroundColor:
+                                                    Theme.of(context)
+                                                        .outlinedButtonTheme
+                                                        .style
+                                                        ?.shadowColor),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                const Icon(Icons.camera),
+                                                SizedBox(
+                                                  width: 10.h,
+                                                ),
+                                                Text(S.of(context).capture)
+                                              ],
+                                            ))
                                   ],
                                 )
                               ],

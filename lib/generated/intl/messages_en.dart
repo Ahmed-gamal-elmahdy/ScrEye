@@ -29,9 +29,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Additional Info"),
         "age": MessageLookupByLibrary.simpleMessage("Age"),
         "align_clipper":
-            MessageLookupByLibrary.simpleMessage("Put Clipper on Conjunctiva"),
+            MessageLookupByLibrary.simpleMessage("Aligh with Conjunctiva"),
         "already_user":
             MessageLookupByLibrary.simpleMessage("Already a ScrEye user? "),
+        "analyze": MessageLookupByLibrary.simpleMessage("Test"),
         "anemic": MessageLookupByLibrary.simpleMessage("Anemic"),
         "anemic_data": MessageLookupByLibrary.simpleMessage("Anemic"),
         "ar": MessageLookupByLibrary.simpleMessage("العربية"),
@@ -48,7 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "choose_img": MessageLookupByLibrary.simpleMessage("Choose an image"),
         "collect_data": MessageLookupByLibrary.simpleMessage("Collect Data"),
         "collection_mode_lbl":
-            MessageLookupByLibrary.simpleMessage("Collection"),
+            MessageLookupByLibrary.simpleMessage("Collection Mode"),
         "colorblind_theme":
             MessageLookupByLibrary.simpleMessage("Color Blind Theme"),
         "confirmPasswordDoesNotMatchErrorText":
@@ -62,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Confirm settings"),
         "dark_theme": MessageLookupByLibrary.simpleMessage("Dark Theme"),
         "discard": MessageLookupByLibrary.simpleMessage("Discard"),
+        "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "emailInputLabel": MessageLookupByLibrary.simpleMessage("Email"),
         "emailIsRequiredErrorText":
             MessageLookupByLibrary.simpleMessage("Email is required"),
@@ -87,6 +89,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lang": MessageLookupByLibrary.simpleMessage("English"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "loading": MessageLookupByLibrary.simpleMessage("Loading..."),
+        "login_progress": MessageLookupByLibrary.simpleMessage("Signing in..."),
         "male": MessageLookupByLibrary.simpleMessage("Male"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "navbar_history": MessageLookupByLibrary.simpleMessage("History"),
@@ -116,10 +119,13 @@ class MessageLookup extends MessageLookupByLibrary {
             "You don\'t already have an account?"),
         "registerText":
             MessageLookupByLibrary.simpleMessage("Create an account"),
+        "register_progress":
+            MessageLookupByLibrary.simpleMessage("Registering..."),
         "resetPasswordButtonLabel":
             MessageLookupByLibrary.simpleMessage("Reset Password"),
         "result": MessageLookupByLibrary.simpleMessage("Result"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
+        "segment": MessageLookupByLibrary.simpleMessage("Segment"),
         "signInActionText": MessageLookupByLibrary.simpleMessage("Sign in"),
         "signInButtonText": MessageLookupByLibrary.simpleMessage("Sign in"),
         "signInHintText":

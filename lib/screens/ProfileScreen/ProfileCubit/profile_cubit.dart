@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertest/widgets/mySnackBar.dart';
 
 import '../../../generated/l10n.dart';
 import '../../AuthScreen/reauth_dialog.dart';
@@ -39,64 +39,66 @@ class ProfileCubit extends Cubit<ProfileState> {
     ));
   }
 
-  void updateVisibility(bool visibility) {
+  void updateVisibility(context, bool visibility) {
     try {
       emit(state.copyWith(visibility: visibility));
     } catch (error) {
       emit(state); // Revert back to the previous state
       // Handle the error by showing a message or logging it
-      print('Error updating visibility: $error');
+      showSnackBar(
+          context, 'Error updating visibility: $error', SnackBarType.error);
     }
   }
 
-  void updateName(String name) {
-    print(name);
+  void updateName(context, String name) {
     try {
       emit(state.copyWith(name: name));
     } catch (error) {
       emit(state); // Revert back to the previous state
       // Handle the error by showing a message or logging it
-      print('Error updating name: $error');
+      showSnackBar(context, 'Error updating name: $error', SnackBarType.error);
     }
   }
 
-  void updateEmail(String email) {
+  void updateEmail(context, String email) {
     try {
       emit(state.copyWith(email: email));
     } catch (error) {
       emit(state); // Revert back to the previous state
       // Handle the error by showing a message or logging it
-      print('Error updating email: $error');
+      showSnackBar(context, 'Error updating email: $error', SnackBarType.error);
     }
   }
 
-  void updatePassword(String password) {
+  void updatePassword(context, String password) {
     try {
       emit(state.copyWith(password: password));
     } catch (error) {
       emit(state); // Revert back to the previous state
       // Handle the error by showing a message or logging it
-      print('Error updating password: $error');
+      showSnackBar(
+          context, 'Error updating password: $error', SnackBarType.error);
     }
   }
 
-  void updateAge(int age) {
+  void updateAge(context, int age) {
     try {
       emit(state.copyWith(age: age));
     } catch (error) {
       emit(state); // Revert back to the previous state
       // Handle the error by showing a message or logging it
-      print('Error updating age: $error');
+      showSnackBar(context, 'Error updating age: $error', SnackBarType.error);
     }
   }
 
-  void updateGender(String gender) {
+  void updateGender(context, String gender) {
     try {
       emit(state.copyWith(gender: gender));
     } catch (error) {
       emit(state); // Revert back to the previous state
       // Handle the error by showing a message or logging it
-      print('Error updating gender: $error');
+      showSnackBar(
+          context, 'Error updating gender: $error', SnackBarType.error);
     }
   }
 
@@ -139,24 +141,15 @@ class ProfileCubit extends Cubit<ProfileState> {
         'gender': state.gender,
       });
       // Show a success message
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(S.of(context).profile_saved_success),
-          backgroundColor: Color(0xFF29C469),
-        ),
-      );
+      showSnackBar(
+          context, S.of(context).profile_saved_success, SnackBarType.success);
       Navigator.of(context).pop();
       // Emit the ProfileSaved state
       emit(const ProfileSaved());
     } catch (error) {
-      print('error');
       // Show an error message
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(S.of(context).profile_saved_fail),
-          backgroundColor: Color(0xFFCE772F),
-        ),
-      );
+      showSnackBar(
+          context, S.of(context).profile_saved_fail, SnackBarType.error);
     }
   }
 }
