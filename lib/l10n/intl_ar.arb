@@ -90,5 +90,7 @@
   "add_info": "ارفاق البيانات",
   "edit": "تعديل",
   "login_progress": "جارى تسجيل الدخول",
-  "register_progress": "جارى التسجيل"
+  "register_progress": "جارى التسجيل",
+  "segment": "استخراج الصوره",
+  "analyze": "تحليل"
 }

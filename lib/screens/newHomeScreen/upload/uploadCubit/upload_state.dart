@@ -25,3 +25,7 @@ class UploadImageLoaded extends UploadState {
 class UploadInProgress extends UploadImageLoaded {
   const UploadInProgress(String imagePath) : super(imagePath);
 }
+
+class SegmentationInProgress extends UploadImageLoaded {
+  const SegmentationInProgress(String imagePath) : super(imagePath);
+}

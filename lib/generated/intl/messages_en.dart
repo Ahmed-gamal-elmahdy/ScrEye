@@ -21,7 +21,6 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accessDisabledErrorText": MessageLookupByLibrary.simpleMessage(
             "Access to this account has been temporarily disabled"),
@@ -33,6 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Aligh with Conjunctiva"),
         "already_user":
             MessageLookupByLibrary.simpleMessage("Already a ScrEye user? "),
+        "analyze": MessageLookupByLibrary.simpleMessage("Test"),
         "anemic": MessageLookupByLibrary.simpleMessage("Anemic"),
         "anemic_data": MessageLookupByLibrary.simpleMessage("Anemic"),
         "ar": MessageLookupByLibrary.simpleMessage("العربية"),
@@ -125,6 +125,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Reset Password"),
         "result": MessageLookupByLibrary.simpleMessage("Result"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
+        "segment": MessageLookupByLibrary.simpleMessage("Segment"),
         "signInActionText": MessageLookupByLibrary.simpleMessage("Sign in"),
         "signInButtonText": MessageLookupByLibrary.simpleMessage("Sign in"),
         "signInHintText":

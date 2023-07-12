@@ -90,5 +90,7 @@
   "add_info": "Add info",
   "edit": "Edit",
   "login_progress": "Signing in...",
-  "register_progress": "Registering..."
+  "register_progress": "Registering...",
+  "segment": "Segment",
+  "analyze": "Test"
 }
