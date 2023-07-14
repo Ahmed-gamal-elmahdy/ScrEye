@@ -132,6 +132,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Already have an account?"),
         "signInText": MessageLookupByLibrary.simpleMessage("Sign In"),
         "signOutButtonText": MessageLookupByLibrary.simpleMessage("Sign Out"),
+        "switch_camera": MessageLookupByLibrary.simpleMessage("Switch"),
         "take_test_first": MessageLookupByLibrary.simpleMessage(
             "Take a test first to see your result!"),
         "taken_photo_upload":

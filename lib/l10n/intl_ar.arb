@@ -92,5 +92,6 @@
   "login_progress": "جارى تسجيل الدخول",
   "register_progress": "جارى التسجيل",
   "segment": "استخراج الصوره",
-  "analyze": "تحليل"
+  "analyze": "تحليل",
+  "switch_camera": "تغيير"
 }

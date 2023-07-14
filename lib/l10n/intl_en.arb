@@ -92,5 +92,6 @@
   "login_progress": "Signing in...",
   "register_progress": "Registering...",
   "segment": "Segment",
-  "analyze": "Test"
+  "analyze": "Test",
+  "switch_camera": "Switch"
 }

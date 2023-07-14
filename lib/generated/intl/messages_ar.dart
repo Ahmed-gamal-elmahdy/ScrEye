@@ -136,6 +136,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "signInText": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "signOutButtonText":
             MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
+        "switch_camera": MessageLookupByLibrary.simpleMessage("تغيير"),
         "take_test_first": MessageLookupByLibrary.simpleMessage(
             "قم بعمل اختبار اولا لتظهر النتيجة"),
         "taken_photo_upload":

@@ -4,6 +4,7 @@ import 'dart:ui' as ui;
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:fluttertest/widgets/mySnackBar.dart';
@@ -22,23 +23,44 @@ class CameraCubit extends Cubit<CameraState> {
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
   bool captureInProgress = false;
-
-  Future<void> initializeCamera() async {
-    final cameras = await availableCameras();
-    final camera = cameras.first;
-
+  bool _isFrontCameraChosen = false;
+  late List<CameraDescription> _cameras = [];
+  Future<void> initializeFrontCamera() async {
+    if(_cameras.isEmpty){
+      _cameras = await availableCameras();
+    }
+    final camera = _cameras.last;
     _controller = CameraController(
       camera,
       ResolutionPreset.max,
       enableAudio: false,
     );
-
-    const focusPoint = Offset(0.5, 0.5);
-
     _initializeControllerFuture = _controller.initialize();
-    _controller.setFlashMode(FlashMode.off);
     emit(CameraInitialized());
   }
+
+  Future<void> initializeBackCamera() async {
+    if(_cameras.isEmpty){
+      _cameras = await availableCameras();
+    }
+    final camera = _cameras.first;
+    _controller = CameraController(
+      camera,
+      ResolutionPreset.max,
+      enableAudio: false,
+    );
+    _initializeControllerFuture = _controller.initialize();
+    try{
+      _controller.setFlashMode(FlashMode.off);
+    } catch (e){
+      debugPrint(e.toString());
+    }
+
+    emit(CameraInitialized());
+  }
+
+
+
 
   Future<void> setZoomLevel(double zoomLevel) async {
     if (!_controller.value.isInitialized) {
@@ -100,6 +122,12 @@ class CameraCubit extends Cubit<CameraState> {
     _currentIndex = index;
   }
 
+  void switchCamera(){
+    _isFrontCameraChosen =!_isFrontCameraChosen;
+    _isFrontCameraChosen? initializeFrontCamera():initializeBackCamera();
+  }
+
+
   Future<void> router(context, String? imagePath) async {
     if (imagePath == null) {
       return;
@@ -116,9 +144,10 @@ class CameraCubit extends Cubit<CameraState> {
       );
     } else {
       final cropResult = await showCustomCropper(context, imagePath);
-
-      final cropPath = await _saveImage(cropResult!.uiImage);
-
+      if(cropResult == null){
+        return;
+      }
+      final cropPath = await _saveImage(cropResult.uiImage);
       Navigator.popAndPushNamed(
         context,
         "/upload",
