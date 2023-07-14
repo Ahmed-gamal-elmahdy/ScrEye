@@ -52,6 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Collection Mode"),
         "colorblind_theme":
             MessageLookupByLibrary.simpleMessage("Color Blind Theme"),
+        "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "confirmPasswordDoesNotMatchErrorText":
             MessageLookupByLibrary.simpleMessage(
                 "The entered passwords do not match"),
@@ -69,7 +70,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Email is required"),
         "emailTakenErrorText":
             MessageLookupByLibrary.simpleMessage("This email is already used"),
+        "email_password_title": MessageLookupByLibrary.simpleMessage(
+            "Enter your email address to reset your password:"),
         "en": MessageLookupByLibrary.simpleMessage("English"),
+        "failed_reset_password": MessageLookupByLibrary.simpleMessage(
+            "Failed to send password reset email"),
         "female": MessageLookupByLibrary.simpleMessage("Female"),
         "forgotPasswordButtonLabel":
             MessageLookupByLibrary.simpleMessage("Forgot your password?"),
@@ -132,6 +137,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Already have an account?"),
         "signInText": MessageLookupByLibrary.simpleMessage("Sign In"),
         "signOutButtonText": MessageLookupByLibrary.simpleMessage("Sign Out"),
+        "success_reset_password":
+            MessageLookupByLibrary.simpleMessage("Please, check your email"),
         "switch_camera": MessageLookupByLibrary.simpleMessage("Switch"),
         "take_test_first": MessageLookupByLibrary.simpleMessage(
             "Take a test first to see your result!"),

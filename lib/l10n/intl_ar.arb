@@ -93,5 +93,9 @@
   "register_progress": "جارى التسجيل",
   "segment": "استخراج الصوره",
   "analyze": "تحليل",
-  "switch_camera": "تغيير"
+  "switch_camera": "تغيير",
+  "confirm": "تاكيد",
+  "failed_reset_password": "حدث خطأ,فشل الارسال",
+  "success_reset_password": "تم ارسال رابط تغيير كلمة السر",
+  "email_password_title": "ادخل بريدك لارسال رابط تغيير كلمة السر:"
 }

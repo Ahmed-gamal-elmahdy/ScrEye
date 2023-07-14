@@ -93,5 +93,9 @@
   "register_progress": "Registering...",
   "segment": "Segment",
   "analyze": "Test",
-  "switch_camera": "Switch"
+  "switch_camera": "Switch",
+  "confirm": "Confirm",
+  "failed_reset_password": "Failed to send password reset email",
+  "success_reset_password": "Please, check your email",
+  "email_password_title": "Enter your email address to reset your password:"
 }
