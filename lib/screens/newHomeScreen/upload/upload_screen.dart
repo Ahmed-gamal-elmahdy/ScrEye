@@ -109,7 +109,7 @@ class UploadScreen extends StatelessWidget {
                           .image_search_rounded, /*color: Color(0xFFF05454)*/
                     ),
                     onPressed: () {
-                      uploadCubit.getSegmented();
+                      uploadCubit.getSegmented(context);
                     },
                   ),
                   Padding(
@@ -190,7 +190,7 @@ class UploadScreen extends StatelessWidget {
                           .save_alt_outlined
                     ),
                     onPressed: () {
-                      uploadCubit.saveImage();
+                      uploadCubit.saveImage(context);
                     },
                   ),
                   Padding(

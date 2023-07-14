@@ -175,6 +175,7 @@ class LoginForm extends StatelessWidget {
                       padding: EdgeInsets.all(0.w),
                       child: OutlinedButton(
                         onPressed: () {
+                          FocusScope.of(context).unfocus();
                           authenticationCubit.submitLogin(context);
                         },
                         child: Text(S.of(context).signInText),
@@ -208,6 +209,9 @@ class LoginForm extends StatelessWidget {
                         ],
                       ),
                     ),
+                    const SizedBox(
+                      height: 300,
+                    )
                   ],
                 ),
               ),

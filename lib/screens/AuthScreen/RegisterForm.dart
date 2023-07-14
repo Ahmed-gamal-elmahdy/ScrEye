@@ -50,9 +50,14 @@ class RegistrationForm extends StatelessWidget {
                             ),
                           );
                         } else if (state is AuthenticationFailure) {
-                          return Text(
-                            state.errorMessage,
-                            style: const TextStyle(color: Colors.red),
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Center(
+                              child: Text(
+                                state.errorMessage,
+                                style: const TextStyle(color: Colors.red),
+                              ),
+                            ),
                           );
                         } else if (state is RegistrationSuccess) {
                           return const Text(
@@ -64,135 +69,133 @@ class RegistrationForm extends StatelessWidget {
                         }
                       },
                     ),
-                    SingleChildScrollView(
-                      child: Column(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        DropdownButton<Language>(
+                          hint: Text(S.of(context).lang),
+                          value: authenticationCubit.selectedLanguage,
+                          onChanged: (Language? newValue) {
+                            authenticationCubit.languageChanged(newValue);
+                          },
+                          items: authenticationCubit.languages.map((language) {
+                            return DropdownMenuItem<Language>(
+                              value: language,
+                              // Use a unique identifier as the value
+                              child: Row(
+                                children: [
+                                  Flag.fromString(language.code,
+                                      height: 25.h, width: 50.w),
+                                  SizedBox(width: 8.w),
+                                  Text(language.name),
+                                ],
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.w),
+                      child: Row(
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              DropdownButton<Language>(
-                                hint: Text(S.of(context).lang),
-                                value: authenticationCubit.selectedLanguage,
-                                onChanged: (Language? newValue) {
-                                  authenticationCubit.languageChanged(newValue);
+                          Text(S.of(context).registerButtonText,
+                              style: TextStyle(fontSize: 30.sp)),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                      EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          labelText: S.of(context).emailInputLabel,
+                        ),
+                        onChanged: (value) {
+                          authenticationCubit.emailChangedRegister(value);
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                      EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                            labelText: S.of(context).passwordInputLabel,
+                            suffixIcon: IconButton(
+                                onPressed: () {
+                                  authenticationCubit.visibilityChanged();
                                 },
-                                items: authenticationCubit.languages.map((language) {
-                                  return DropdownMenuItem<Language>(
-                                    value: language,
-                                    // Use a unique identifier as the value
-                                    child: Row(
-                                      children: [
-                                        Flag.fromString(language.code,
-                                            height: 25.h, width: 50.w),
-                                        SizedBox(width: 8.w),
-                                        Text(language.name),
-                                      ],
-                                    ),
-                                  );
-                                }).toList(),
+                                icon: Icon(authenticationCubit.isVisible
+                                    ? Icons.visibility_rounded
+                                    : Icons.visibility_off_rounded))),
+                        obscureText: !authenticationCubit.isVisible,
+                        onChanged: (value) {
+                          authenticationCubit.passwordChangedRegister(value);
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                      EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          labelText: S.of(context).confirmPasswordInputLabel,
+                        ),
+                        obscureText: true,
+                        onChanged: (value) {
+                          authenticationCubit
+                              .passwordConfirmChangedRegister(value);
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: Padding(
+                        padding:
+                        EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
+                        child: RichText(
+                          text: TextSpan(
+                            text: S.of(context).already_user,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .subtitle1!
+                                    .color!),
+                            children: [
+                              TextSpan(
+                                text: S.of(context).signInText,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .subtitle2!
+                                      .color!,
+                                ),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    Navigator.of(context)
+                                        .popAndPushNamed('/login');
+                                  },
                               ),
                             ],
                           ),
-                          Padding(
-                            padding: EdgeInsets.all(8.w),
-                            child: Row(
-                              children: [
-                                Text(S.of(context).registerButtonText,
-                                    style: TextStyle(fontSize: 30.sp)),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                            EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                labelText: S.of(context).emailInputLabel,
-                              ),
-                              onChanged: (value) {
-                                authenticationCubit.emailChangedRegister(value);
-                              },
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                            EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                  labelText: S.of(context).passwordInputLabel,
-                                  suffixIcon: IconButton(
-                                      onPressed: () {
-                                        authenticationCubit.visibilityChanged();
-                                      },
-                                      icon: Icon(authenticationCubit.isVisible
-                                          ? Icons.visibility_rounded
-                                          : Icons.visibility_off_rounded))),
-                              obscureText: !authenticationCubit.isVisible,
-                              onChanged: (value) {
-                                authenticationCubit.passwordChangedRegister(value);
-                              },
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                            EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                labelText: S.of(context).confirmPasswordInputLabel,
-                              ),
-                              obscureText: true,
-                              onChanged: (value) {
-                                authenticationCubit
-                                    .passwordConfirmChangedRegister(value);
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            child: Padding(
-                              padding:
-                              EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
-                              child: RichText(
-                                text: TextSpan(
-                                  text: S.of(context).already_user,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Theme.of(context)
-                                          .textTheme
-                                          .subtitle1!
-                                          .color!),
-                                  children: [
-                                    TextSpan(
-                                      text: S.of(context).signInText,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Theme.of(context)
-                                            .textTheme
-                                            .subtitle2!
-                                            .color!,
-                                      ),
-                                      recognizer: TapGestureRecognizer()
-                                        ..onTap = () {
-                                          Navigator.of(context)
-                                              .popAndPushNamed('/login');
-                                        },
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(20.w),
-                            child: OutlinedButton(
-                              onPressed: () {
-                                authenticationCubit.submitRegistration(context);
-                              },
-                              child: Text(S.of(context).registerText),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(20.w),
+                      child: OutlinedButton(
+                        onPressed: () {
+                          FocusScope.of(context).unfocus();
+                          authenticationCubit.submitRegistration(context);
+                        },
+                        child: Text(S.of(context).registerText),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 300,
                     )
 
                   ],
