@@ -51,6 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("نمط جمع بيانات"),
         "colorblind_theme":
             MessageLookupByLibrary.simpleMessage("وضع عمى الألوان"),
+        "confirm": MessageLookupByLibrary.simpleMessage("تاكيد"),
         "confirmPasswordDoesNotMatchErrorText":
             MessageLookupByLibrary.simpleMessage(
                 "كلمات المرور المدخلة غير متطابقة"),
@@ -69,7 +70,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("البريد الإلكتروني مطلوب"),
         "emailTakenErrorText": MessageLookupByLibrary.simpleMessage(
             "هذا البريد الإلكتروني مستخدم مسبقاً"),
+        "email_password_title": MessageLookupByLibrary.simpleMessage(
+            "ادخل بريدك لارسال رابط تغيير كلمة السر:"),
         "en": MessageLookupByLibrary.simpleMessage("English"),
+        "failed_reset_password":
+            MessageLookupByLibrary.simpleMessage("حدث خطأ,فشل الارسال"),
         "female": MessageLookupByLibrary.simpleMessage("أنثى"),
         "forgotPasswordButtonLabel":
             MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
@@ -136,6 +141,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "signInText": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "signOutButtonText":
             MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
+        "success_reset_password": MessageLookupByLibrary.simpleMessage(
+            "تم ارسال رابط تغيير كلمة السر"),
+        "switch_camera": MessageLookupByLibrary.simpleMessage("تغيير"),
         "take_test_first": MessageLookupByLibrary.simpleMessage(
             "قم بعمل اختبار اولا لتظهر النتيجة"),
         "taken_photo_upload":

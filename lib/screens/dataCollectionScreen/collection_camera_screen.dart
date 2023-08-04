@@ -21,7 +21,7 @@ class CollectionCameraScreen extends StatelessWidget {
         body: BlocBuilder<CameraCubit, CameraState>(
           builder: (context, state) {
             if (state is CameraInitial) {
-              context.read<CameraCubit>().initializeCamera();
+              context.read<CameraCubit>().initializeBackCamera();
               return const Center(child: CircularProgressIndicator());
             } else if (state is CameraInitialized) {
               return const CameraView();
@@ -66,6 +66,16 @@ class _CameraViewState extends State<CameraView> {
       bottomNavigationBar: myBottomNavBar(context, 1),
       appBar: AppBar(
         title: Text(S.of(context).capture),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+                onPressed: () {
+                  context.read<CameraCubit>().switchCamera();
+                },
+                icon: const Icon(Icons.cameraswitch_rounded)),
+          )
+        ],
       ),
       body: BlocBuilder<CameraCubit, CameraState>(
         builder: (context, state) {

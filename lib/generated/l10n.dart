@@ -969,6 +969,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Switch`
+  String get switch_camera {
+    return Intl.message(
+      'Switch',
+      name: 'switch_camera',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm`
+  String get confirm {
+    return Intl.message(
+      'Confirm',
+      name: 'confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to send password reset email`
+  String get failed_reset_password {
+    return Intl.message(
+      'Failed to send password reset email',
+      name: 'failed_reset_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please, check your email`
+  String get success_reset_password {
+    return Intl.message(
+      'Please, check your email',
+      name: 'success_reset_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your email address to reset your password:`
+  String get email_password_title {
+    return Intl.message(
+      'Enter your email address to reset your password:',
+      name: 'email_password_title',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

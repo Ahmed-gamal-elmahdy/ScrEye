@@ -50,9 +50,14 @@ class RegistrationForm extends StatelessWidget {
                             ),
                           );
                         } else if (state is AuthenticationFailure) {
-                          return Text(
-                            state.errorMessage,
-                            style: const TextStyle(color: Colors.red),
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Center(
+                              child: Text(
+                                state.errorMessage,
+                                style: const TextStyle(color: Colors.red),
+                              ),
+                            ),
                           );
                         } else if (state is RegistrationSuccess) {
                           return const Text(
@@ -183,11 +188,15 @@ class RegistrationForm extends StatelessWidget {
                       padding: EdgeInsets.all(20.w),
                       child: OutlinedButton(
                         onPressed: () {
+                          FocusScope.of(context).unfocus();
                           authenticationCubit.submitRegistration(context);
                         },
                         child: Text(S.of(context).registerText),
                       ),
                     ),
+                    const SizedBox(
+                      height: 300,
+                    )
                   ],
                 ),
               ),

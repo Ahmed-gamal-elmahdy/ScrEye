@@ -7,9 +7,13 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertest/widgets/myApiService.dart';
+import 'package:fluttertest/widgets/mySnackBar.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+
+import '../../../../generated/l10n.dart';
 
 part 'upload_state.dart';
 
@@ -66,7 +70,7 @@ class UploadCubit extends Cubit<UploadState> {
         final downloadUrl = await _getDownloadUrl(snapshot);
         final token = _parseTokenFromUrl(downloadUrl);
         debugPrint('url= $downloadUrl');
-        final result = await _getResultAndUpdateDB(
+        final result = await _getResultAndUpdateDB(context,
             name: name, token: token, url: downloadUrl);
         if (_uploadInProgress) {
           _uploadInProgress = false;
@@ -79,6 +83,8 @@ class UploadCubit extends Cubit<UploadState> {
           cancelUpload();
         }
       } catch (e) {
+        cancelUpload();
+        showSnackBar(context, S.of(context).unknownError, SnackBarType.error);
         debugPrint(e.toString());
       }
     }
@@ -102,14 +108,15 @@ class UploadCubit extends Cubit<UploadState> {
     return downloadUrl.substring(startIndex + startWord.length, endIndex);
   }
 
-  Future<String> _getResultAndUpdateDB({
+  Future<String> _getResultAndUpdateDB(
+    context, {
     required String name,
     required String token,
     required String url,
   }) async {
     if ((state is UploadImageLoaded && _uploadInProgress)) {
       try {
-        final res = await _getApiRequest(name: name, token: token);
+        final res = await _getApiRequest(context, name: name, token: token);
         final now = DateTime.now().millisecondsSinceEpoch;
         final imageData = {
           'name': name,
@@ -121,6 +128,7 @@ class UploadCubit extends Cubit<UploadState> {
         return res;
       } catch (e) {
         debugPrint(e.toString());
+        showSnackBar(context, S.of(context).unknownError, SnackBarType.error);
         return 'failed';
       }
     }
@@ -132,7 +140,8 @@ class UploadCubit extends Cubit<UploadState> {
     await dbRef.child(_user!.uid).child("images").child(key).set(imageData);
   }
 
-  Future<String> _getApiRequest({
+  Future<String> _getApiRequest(
+    context, {
     required String name,
     required String token,
   }) async {
@@ -143,7 +152,7 @@ class UploadCubit extends Cubit<UploadState> {
       uid: _user!.uid,
     );
     debugPrint("api url=:$url");
-    final dio = Dio();
+    final dio = ApiService();
     if ((state is UploadImageLoaded && _uploadInProgress)) {
       try {
         final response = await dio.get(url);
@@ -151,13 +160,15 @@ class UploadCubit extends Cubit<UploadState> {
         return response.data;
       } on DioException catch (e) {
         debugPrint(e.message);
+        cancelUpload();
+        showSnackBar(context, S.of(context).unknownError, SnackBarType.error);
         rethrow;
       }
     }
     return 'error';
   }
 
-  Future<void> getSegmented() async {
+  Future<void> getSegmented(context) async {
     if (state is UploadImageLoaded &&
         !_segmentationInProgress &&
         !_isSegmented) {
@@ -175,7 +186,7 @@ class UploadCubit extends Cubit<UploadState> {
 
       final snapshot = await _uploadFileToFirebase(file, name);
       final downloadUrl = await _getDownloadUrl(snapshot);
-      final token =  _parseTokenFromUrl(downloadUrl);
+      final token = _parseTokenFromUrl(downloadUrl);
       debugPrint('url= $downloadUrl');
 
       final String url = _buildUrl(
@@ -185,33 +196,30 @@ class UploadCubit extends Cubit<UploadState> {
         uid: _user!.uid,
       );
       debugPrint('Api url= $url');
-      var dio = Dio();
+      var dio = ApiService();
       try {
         await dio.get(url).then((_) => {
-        Future.delayed(const Duration(seconds: 0),() async {
-        var result = await  FirebaseStorage.instance
-            .ref()
-            .child('${_user?.uid}segmeneted.jpg')
-            .getDownloadURL();
-        final tempDir = await getTemporaryDirectory();
-        final now = DateTime.now().millisecondsSinceEpoch;
-        File tempFile = await File('${tempDir.path}/$now.jpg').create();
-        await dio.download(result, tempFile.path);
-        _imagePath = tempFile.path;
-        _isSegmented = true;
+              Future.delayed(const Duration(seconds: 0), () async {
+                var result = await FirebaseStorage.instance
+                    .ref()
+                    .child('${_user?.uid}segmeneted.jpg')
+                    .getDownloadURL();
+                final tempDir = await getTemporaryDirectory();
+                final now = DateTime.now().millisecondsSinceEpoch;
+                File tempFile = await File('${tempDir.path}/$now.jpg').create();
+                await dio.download(result, tempFile.path);
+                _imagePath = tempFile.path;
+                _isSegmented = true;
 
-        if (_segmentationInProgress) {
-        cancelSegmentation();
-        }
-        })
-        });
-
-
-
-
-
+                if (_segmentationInProgress) {
+                  cancelSegmentation();
+                }
+              })
+            });
       } catch (e) {
         debugPrint('Error uploading image: $e');
+        showSnackBar(context, S.of(context).unknownError, SnackBarType.error);
+        cancelSegmentation();
       }
     }
   }
@@ -254,19 +262,20 @@ class UploadCubit extends Cubit<UploadState> {
     emit((UploadImageLoaded(_imagePath!)));
   }
 
-  Future<void> saveImage() async {
+  Future<void> saveImage(context) async {
     final imagePath = _imagePath = (state as UploadImageLoaded).imagePath;
     final tempDir = await getTemporaryDirectory();
     final now = DateTime.now();
     final name =
         '${now.day}-${now.month}-${now.year}-${now.hour}-${now.minute}-${now.second}';
     final file = await File('${tempDir.path}/$name.jpg').create();
-    await file.writeAsBytes(await File(imagePath!).readAsBytes());
+    await file.writeAsBytes(await File(imagePath).readAsBytes());
     final result = await GallerySaver.saveImage(file.path, albumName: "ScrEye");
     if (result == true) {
-      debugPrint('Image saved to gallery.');
+      showSnackBar(
+          context, S.of(context).img_saved_later, SnackBarType.success);
     } else {
-      debugPrint('Error saving image: ');
+      showSnackBar(context, S.of(context).unknownError, SnackBarType.error);
     }
   }
 
