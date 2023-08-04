@@ -1,12 +1,9 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
-
-import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
-
 
 class ApiService {
   final Dio _dio = Dio();
@@ -33,8 +30,9 @@ class ApiService {
       });
 
       try {
-        final response =
-        await _dio.get(url, cancelToken: _cancelToken).timeout(const Duration(seconds: 30));
+        final response = await _dio
+            .get(url, cancelToken: _cancelToken)
+            .timeout(const Duration(seconds: 30));
         return response;
       } on DioException catch (e) {
         if (e.type == DioExceptionType.cancel) {
@@ -46,7 +44,6 @@ class ApiService {
       }
     }
   }
-
 
   Future<File> download(String url, String filePath) async {
     final connectivityResult = await Connectivity().checkConnectivity();
@@ -69,7 +66,9 @@ class ApiService {
       });
 
       try {
-        final response = await _dio.download(url, filePath, cancelToken: _cancelToken).timeout(const Duration(seconds: 30));
+        final response = await _dio
+            .download(url, filePath, cancelToken: _cancelToken)
+            .timeout(const Duration(seconds: 30));
         return File(filePath);
       } on DioException catch (e) {
         if (e.type == DioExceptionType.cancel) {

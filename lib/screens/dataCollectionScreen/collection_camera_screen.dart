@@ -66,13 +66,16 @@ class _CameraViewState extends State<CameraView> {
       bottomNavigationBar: myBottomNavBar(context, 1),
       appBar: AppBar(
         title: Text(S.of(context).capture),
-
-        actions: [Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: IconButton(onPressed: (){context.read<CameraCubit>().switchCamera();}, icon: const Icon(Icons.cameraswitch_rounded)),
-        )],
-
-
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+                onPressed: () {
+                  context.read<CameraCubit>().switchCamera();
+                },
+                icon: const Icon(Icons.cameraswitch_rounded)),
+          )
+        ],
       ),
       body: BlocBuilder<CameraCubit, CameraState>(
         builder: (context, state) {

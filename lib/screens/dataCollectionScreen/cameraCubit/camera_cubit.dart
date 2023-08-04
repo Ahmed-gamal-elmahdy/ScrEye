@@ -4,7 +4,6 @@ import 'dart:ui' as ui;
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:fluttertest/widgets/mySnackBar.dart';
@@ -25,8 +24,9 @@ class CameraCubit extends Cubit<CameraState> {
   bool captureInProgress = false;
   bool _isFrontCameraChosen = false;
   late List<CameraDescription> _cameras = [];
+
   Future<void> initializeFrontCamera() async {
-    if(_cameras.isEmpty){
+    if (_cameras.isEmpty) {
       _cameras = await availableCameras();
     }
     final camera = _cameras.last;
@@ -40,7 +40,7 @@ class CameraCubit extends Cubit<CameraState> {
   }
 
   Future<void> initializeBackCamera() async {
-    if(_cameras.isEmpty){
+    if (_cameras.isEmpty) {
       _cameras = await availableCameras();
     }
     final camera = _cameras.first;
@@ -50,17 +50,14 @@ class CameraCubit extends Cubit<CameraState> {
       enableAudio: false,
     );
     _initializeControllerFuture = _controller.initialize();
-    try{
+    try {
       _controller.setFlashMode(FlashMode.off);
-    } catch (e){
+    } catch (e) {
       debugPrint(e.toString());
     }
 
     emit(CameraInitialized());
   }
-
-
-
 
   Future<void> setZoomLevel(double zoomLevel) async {
     if (!_controller.value.isInitialized) {
@@ -122,11 +119,10 @@ class CameraCubit extends Cubit<CameraState> {
     _currentIndex = index;
   }
 
-  void switchCamera(){
-    _isFrontCameraChosen =!_isFrontCameraChosen;
-    _isFrontCameraChosen? initializeFrontCamera():initializeBackCamera();
+  void switchCamera() {
+    _isFrontCameraChosen = !_isFrontCameraChosen;
+    _isFrontCameraChosen ? initializeFrontCamera() : initializeBackCamera();
   }
-
 
   Future<void> router(context, String? imagePath) async {
     if (imagePath == null) {
@@ -144,7 +140,7 @@ class CameraCubit extends Cubit<CameraState> {
       );
     } else {
       final cropResult = await showCustomCropper(context, imagePath);
-      if(cropResult == null){
+      if (cropResult == null) {
         return;
       }
       final cropPath = await _saveImage(cropResult.uiImage);

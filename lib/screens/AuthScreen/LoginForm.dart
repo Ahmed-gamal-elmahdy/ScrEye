@@ -200,7 +200,10 @@ class LoginForm extends StatelessWidget {
                                   ),
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
-                                      showPasswordResetDialog(context,authenticationCubit.layoutDirection ?? TextDirection.ltr);
+                                      showPasswordResetDialog(
+                                          context,
+                                          authenticationCubit.layoutDirection ??
+                                              TextDirection.ltr);
                                     },
                                 ),
                               ],
@@ -222,4 +225,3 @@ class LoginForm extends StatelessWidget {
     );
   }
 }
-

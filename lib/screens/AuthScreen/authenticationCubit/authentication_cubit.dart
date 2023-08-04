@@ -101,9 +101,9 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       if (userCredential.user?.uid != null) {
         var uid = userCredential.user?.uid;
         FirebaseDatabase.instance.ref().child('users').child(uid!).set(user);
-        try{
+        try {
           await FirebaseAuth.instance.currentUser?.sendEmailVerification();
-        } catch (e){
+        } catch (e) {
           debugPrint(e.toString());
         }
       }

@@ -106,7 +106,7 @@ class RegistrationForm extends StatelessWidget {
                     ),
                     Padding(
                       padding:
-                      EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
+                          EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
                       child: TextFormField(
                         decoration: InputDecoration(
                           labelText: S.of(context).emailInputLabel,
@@ -118,7 +118,7 @@ class RegistrationForm extends StatelessWidget {
                     ),
                     Padding(
                       padding:
-                      EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
+                          EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
                       child: TextFormField(
                         decoration: InputDecoration(
                             labelText: S.of(context).passwordInputLabel,
@@ -137,7 +137,7 @@ class RegistrationForm extends StatelessWidget {
                     ),
                     Padding(
                       padding:
-                      EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
+                          EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
                       child: TextFormField(
                         decoration: InputDecoration(
                           labelText: S.of(context).confirmPasswordInputLabel,
@@ -153,7 +153,7 @@ class RegistrationForm extends StatelessWidget {
                       width: MediaQuery.of(context).size.width,
                       child: Padding(
                         padding:
-                        EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
+                            EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
                         child: RichText(
                           text: TextSpan(
                             text: S.of(context).already_user,
@@ -197,7 +197,6 @@ class RegistrationForm extends StatelessWidget {
                     const SizedBox(
                       height: 300,
                     )
-
                   ],
                 ),
               ),
