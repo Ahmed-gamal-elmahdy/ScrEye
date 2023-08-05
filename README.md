@@ -4,6 +4,11 @@ A Mobile app powered by Artificial intelligence to screen anemia.
 - ### [Watch Promotional Video Here!](https://youtu.be/fMulzrbFoP8)
 
 
+## Paper
+- ### [S. H.Elgohary, Z. A. Mohamed, O. A. Mohamed, A. O. Ismail, A. G. Elmahdy and M. I. Basheer, "A Machine Learning Method to Screen Anemia From Conjunctiva Images Taken by Smartphone," 2022 10th International Japan-Africa Conference on Electronics, Communications, and Computations (JAC-ECC), Alexandria, Egypt, 2022, pp. 125-128, doi: 10.1109/JAC-ECC56395.2022.10043861.]([https://youtu.be/fMulzrbFoP8](https://ieeexplore.ieee.org/document/10043861))
+
+
+
 ## Features
 
 * ### Save images for later use or when offline and test from the gallery.
@@ -43,13 +48,13 @@ A Mobile app powered by Artificial intelligence to screen anemia.
     </tr>
   </thead>
   <tbody>
+     <tr>
+      <td>Ahmed Gamal Abbas</td>
+      <td><a href="https://github.com/Ahmed-gamal-elmahdy"><b>GitHub Link</b></a></td>
+    </tr>
     <tr>
       <td>Mostafa Ibraheem Basheer</td>
       <td><a href="https://github.com/Mostafa-Ibraheem-basheer"><b>GitHub Link</b></a></td>
-    </tr>
-    <tr>
-      <td>Ahmed Gamal Abbas</td>
-      <td><a href="https://github.com/Ahmed-gamal-elmahdy"><b>GitHub Link</b></a></td>
     </tr>
     <tr>
       <td>Ahmed Osama Ismail</td>
